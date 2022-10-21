@@ -24,7 +24,7 @@
 		"yup": "^0.32.11"
 	},
 	"scripts": {
-		"prepare": "husky install",
+		"prepare": "cd .. && husky install client/.husky",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test --watchAll=false --passWithNoTests",
