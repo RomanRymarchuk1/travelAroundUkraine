@@ -5,7 +5,9 @@ import styles from './LogoHeader.module.scss'
 
 const LogoHeader = () =>
 (
-    <NavLink to='/' className={styles.logoLink} >
+    <NavLink
+        to='/'
+        className={styles.logoLink} >
         <TravelExploreOutlinedIcon fontSize='large' />
     </NavLink>
 );
