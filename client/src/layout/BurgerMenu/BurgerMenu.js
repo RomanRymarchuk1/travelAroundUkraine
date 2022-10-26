@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -7,31 +7,72 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
 import styles from './BurgerMenu.module.scss'
 
-const pages = ['Home', 'Catalogue'];
+const pages = [{
+    name: 'Home',
+    link: '/',
+    innerContent: 'Home'
+},
+{
+    name: 'Catalogue',
+    link: '/catalogue',
+    innerContent: 'Catalogue'
+},
+{
+    name: 'Cart',
+    link: '/cart',
+    innerContent: 'Cart'
+},
+];
 
 
 const BurgerMenu = () => {
 
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-
+    const [anchorElNav, setAnchorElNav] = useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
 
-
-
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
+    const boxSX = {
+        flexGrow: 1,
+        display: { xs: 'flex', md: 'none' },
+        justifyContent: 'flex-end'
+    }
+
+    const menuIconSX = {
+        '&:hover': {
+            color: 'yellow',
+            transition: '0.5s'
+        }
+    }
+
+    const menuSX = {
+        display: { xs: 'flex', md: 'none', },
+    }
+
+    const menuItemSX = {
+        padding: 0,
+        width: '40vw',
+        maxWidth: '200px',
+        height: '50px'
+    }
+
+    const anchorOrigin = {
+        vertical: 'bottom',
+        horizontal: 'left',
+    }
+
+    const transformOrigin = {
+        vertical: 'top',
+        horizontal: 'left',
+    }
+
     return (
-        <Box sx={{
-            flexGrow: 1,
-            display: { xs: 'flex', md: 'none' },
-            justifyContent: 'flex-end'
-        }}>
+        <Box sx={boxSX}>
             <IconButton
                 size="large"
                 aria-label="appbar"
@@ -39,68 +80,36 @@ const BurgerMenu = () => {
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
                 color="inherit"
-                sx={{
-                    padding: 0
-                }}
+                sx={{ padding: 0 }}
             >
-                <MenuIcon sx={
-                    {
-                        '&:hover': {
-                            color: 'yellow',
-                            transition: '0.5s'
-                        }
-                    }} />
+                <MenuIcon sx={menuIconSX} />
             </IconButton>
 
             <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
+                anchorOrigin={anchorOrigin}
                 keepMounted
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
+                transformOrigin={transformOrigin}
+                open={!!anchorElNav}
                 onClose={handleCloseNavMenu}
-                sx={{
-                    display: { xs: 'flex', md: 'none', },
-                }}
+                sx={menuSX}
             >
-                {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu} sx={{
-                        padding: 0,
-                        width: '40vw',
-                        maxWidth: '200px',
-                        height: '50px'
-                    }} >
+                {pages.map(({ name, link, innerContent }) => (
+                    <MenuItem
+                        key={name}
+                        onClick={handleCloseNavMenu}
+                        sx={menuItemSX} >
                         <NavLink
-                            to={page === 'Home' ? '/' : `/${page.toLowerCase()}`}
-                            key={page}
+                            to={link}
+                            key={name}
                             onClick={handleCloseNavMenu}
                             className={styles.menuItemLink}
                         >
-                            {page}
+                            {innerContent}
                         </NavLink>
                     </MenuItem>
                 ))}
-                <MenuItem key='cart' onClick={handleCloseNavMenu} sx={{
-                    padding: 0,
-                    width: '40vw',
-                    maxWidth: '200px',
-                    height: '50px'
-                }} >
-                    <NavLink
-                        to='/cart'
-                        key='cart'
-                        onClick={handleCloseNavMenu}
-                        className={styles.menuItemLink}>
-                        Cart
-                    </NavLink>
-                </MenuItem>
             </Menu>
         </Box>
     );
