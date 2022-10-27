@@ -14,13 +14,24 @@
 .image {
     width: 250px;
     margin-top: 30px;
+    padding-bottom: 40px;
 }
 
-.contacts {
+.ourAwards {
+    & > h3 {
+        padding-bottom: 30px;
+    }
+    & > p {
+        padding-bottom: 20px;
+    }
+}
+
+.contactsData {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
+    padding-top: 30px;
     & > div {
         display: flex;
         & > a {
@@ -28,7 +39,7 @@
             color: inherit;
             margin-left: 10px;
         }
-        & > span {
+        & > p {
             margin-left: 10px;
             margin-bottom: 20px;
         }
@@ -40,6 +51,8 @@
     display: flex;
     justify-content: left;
     gap: 15px;
+    padding-top: 20px;
+    padding-bottom: 40px;
     & > div {
         & > svg {
             width: 40px;
@@ -55,6 +68,7 @@
     gap: 10px;
     grid-template-columns: repeat(3, 1fr);
     margin-bottom: 30px;
+    padding-top: 30px;
     & > a >  img {
         width: 100%;
         border-radius: 5px;
@@ -73,6 +87,7 @@
         justify-content: left;
         align-items: center;
         gap: 20px ;
+        padding-bottom: 20px;
         & > a {
             text-decoration: none;
             color: white;
@@ -84,7 +99,7 @@
 .container {
      & > * {
         display: flex;
-        gap: 20px;
+        gap: 50px;
      }
 }
 
