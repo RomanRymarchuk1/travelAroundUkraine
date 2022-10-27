@@ -5,114 +5,105 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
-import styles from './BurgerMenu.module.scss'
+import styles from './BurgerMenu.module.scss';
 
-const pages = [{
+const pages = [
+  {
     name: 'Home',
     link: '/',
-    innerContent: 'Home'
-},
-{
+    innerContent: 'Home',
+  },
+  {
     name: 'Catalogue',
     link: '/catalogue',
-    innerContent: 'Catalogue'
-},
-{
+    innerContent: 'Catalogue',
+  },
+  {
     name: 'Cart',
     link: '/cart',
-    innerContent: 'Cart'
-},
+    innerContent: 'Cart',
+  },
 ];
 
-
 const BurgerMenu = () => {
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
-    const [anchorElNav, setAnchorElNav] = useState(null);
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
 
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+  const boxSX = {
+    flexGrow: 1,
+    display: { xs: 'flex', md: 'none' },
+    justifyContent: 'flex-end',
+  };
 
-    const boxSX = {
-        flexGrow: 1,
-        display: { xs: 'flex', md: 'none' },
-        justifyContent: 'flex-end'
-    }
+  const menuIconSX = {
+    '&:hover': {
+      color: 'yellow',
+      transition: '0.5s',
+    },
+  };
 
-    const menuIconSX = {
-        '&:hover': {
-            color: 'yellow',
-            transition: '0.5s'
-        }
-    }
+  const menuSX = {
+    display: { xs: 'flex', md: 'none' },
+  };
 
-    const menuSX = {
-        display: { xs: 'flex', md: 'none', },
-    }
+  const menuItemSX = {
+    padding: 0,
+    width: '40vw',
+    maxWidth: '200px',
+    height: '50px',
+  };
 
-    const menuItemSX = {
-        padding: 0,
-        width: '40vw',
-        maxWidth: '200px',
-        height: '50px'
-    }
+  const anchorOrigin = {
+    vertical: 'bottom',
+    horizontal: 'left',
+  };
 
-    const anchorOrigin = {
-        vertical: 'bottom',
-        horizontal: 'left',
-    }
+  const transformOrigin = {
+    vertical: 'top',
+    horizontal: 'left',
+  };
 
-    const transformOrigin = {
-        vertical: 'top',
-        horizontal: 'left',
-    }
+  return (
+    <Box sx={boxSX}>
+      <IconButton
+        size="large"
+        aria-label="appbar"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        onClick={handleOpenNavMenu}
+        color="inherit"
+        sx={{ padding: 0 }}
+      >
+        <MenuIcon sx={menuIconSX} />
+      </IconButton>
 
-    return (
-        <Box sx={boxSX}>
-            <IconButton
-                size="large"
-                aria-label="appbar"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-                sx={{ padding: 0 }}
-            >
-                <MenuIcon sx={menuIconSX} />
-            </IconButton>
-
-            <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={anchorOrigin}
-                keepMounted
-                transformOrigin={transformOrigin}
-                open={!!anchorElNav}
-                onClose={handleCloseNavMenu}
-                sx={menuSX}
-            >
-                {pages.map(({ name, link, innerContent }) => (
-                    <MenuItem
-                        key={name}
-                        onClick={handleCloseNavMenu}
-                        sx={menuItemSX} >
-                        <NavLink
-                            to={link}
-                            key={name}
-                            onClick={handleCloseNavMenu}
-                            className={styles.menuItemLink}
-                        >
-                            {innerContent}
-                        </NavLink>
-                    </MenuItem>
-                ))}
-            </Menu>
-        </Box>
-    );
-}
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorElNav}
+        anchorOrigin={anchorOrigin}
+        keepMounted
+        transformOrigin={transformOrigin}
+        open={!!anchorElNav}
+        onClose={handleCloseNavMenu}
+        sx={menuSX}
+      >
+        {pages.map(({ name, link, innerContent }) => (
+          <MenuItem key={name} onClick={handleCloseNavMenu} sx={menuItemSX}>
+            <NavLink to={link} key={name} onClick={handleCloseNavMenu} className={styles.menuItemLink}>
+              {innerContent}
+            </NavLink>
+          </MenuItem>
+        ))}
+      </Menu>
+    </Box>
+  );
+};
 
 export default BurgerMenu;
