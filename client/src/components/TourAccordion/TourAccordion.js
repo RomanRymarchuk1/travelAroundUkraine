@@ -8,7 +8,7 @@ import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 
 // eslint-disable-next-line react/jsx-props-no-spreading
-const AccordionSummary = styled((props) => <MuiAccordionSummary {...props} />)(({ theme }) => ({
+const AccordionSummary = styled(MuiAccordionSummary)(({ theme }) => ({
   position: 'relative',
   padding: 0,
 
@@ -39,8 +39,7 @@ const AccordionSummary = styled((props) => <MuiAccordionSummary {...props} />)((
   },
 }));
 
-// eslint-disable-next-line react/jsx-props-no-spreading
-const AccordionDetails = styled((props) => <MuiAccordionDetails {...props} />)({
+const AccordionDetails = styled(MuiAccordionDetails)({
   padding: '0 0 30px',
 });
 
