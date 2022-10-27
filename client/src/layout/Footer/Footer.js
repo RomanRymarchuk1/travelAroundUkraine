@@ -10,7 +10,23 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Box, Typography, Link as MUILink } from '@mui/material';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import scrollToTop from '../../utils/scrollToTop/scrollToTop';
 import styles from './Footer.module.scss';
+
+const navigationMenu = [
+  {
+    name: 'Home',
+    path: '/',
+  },
+  {
+    name: 'Catalogue',
+    path: '/catalogue',
+  },
+  {
+    name: 'Cart',
+    path: '/cart',
+  },
+];
 
 const Footer = () => {
   const { footer, container, image, contactsData, socialIcons, recentTrips, navigationBar, ourAwards, navigationList } =
@@ -103,15 +119,13 @@ const Footer = () => {
         <Box>
           <Typography component="nav">
             <Typography className={navigationList} component="ul">
-              <Typography component="li">
-                <Link to="/">Home</Link>
-              </Typography>
-              <Typography component="li">
-                <Link to="/catalogue">Catalogue</Link>
-              </Typography>
-              <Typography component="li">
-                <Link to="/cart">Cart</Link>
-              </Typography>
+              {navigationMenu.map((el) => (
+                <Typography key={el.name} component="li">
+                  <Link onClick={() => scrollToTop('smooth')} to={el.path}>
+                    {el.name}
+                  </Link>
+                </Typography>
+              ))}
             </Typography>
           </Typography>
         </Box>
