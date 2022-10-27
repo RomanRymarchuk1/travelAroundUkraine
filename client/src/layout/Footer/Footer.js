@@ -13,7 +13,8 @@ import classNames from 'classnames';
 import styles from './Footer.module.scss';
 
 const Footer = () => {
-  const { footer, container, image, contactsData, socialIcons, recentTrips, navigationBar, ourAwards } = styles;
+  const { footer, container, image, contactsData, socialIcons, recentTrips, navigationBar, ourAwards, navigationList } =
+    styles;
   return (
     <Box component="footer" className={footer}>
       <Box className={container}>
@@ -101,7 +102,7 @@ const Footer = () => {
       <Box className={classNames(navigationBar, container)}>
         <Box>
           <Typography component="nav">
-            <Typography component="ul">
+            <Typography className={navigationList} component="ul">
               <Typography component="li">
                 <Link to="/">Home</Link>
               </Typography>
