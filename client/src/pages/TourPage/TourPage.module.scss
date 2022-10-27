@@ -1,0 +1,13 @@
+.content {
+  display: flex;
+  gap: 20px;
+}
+
+.aside {
+  max-width: 370px;
+  width: 100%;
+
+	@media (max-width: '990px') {
+		display: none;
+	}
+}
