@@ -100,10 +100,19 @@ const Footer = () => {
 
       <Box className={classNames(navigationBar, container)}>
         <Box>
-          <Link to="/">Home</Link>
-          <Link to="/catalogue">Catalogue</Link>
-          <Link to="/cart">Cart</Link>
-          <Link to="/tour">Tour</Link>
+          <Typography component="nav">
+            <Typography component="ul">
+              <Typography component="li">
+                <Link to="/">Home</Link>
+              </Typography>
+              <Typography component="li">
+                <Link to="/catalogue">Catalogue</Link>
+              </Typography>
+              <Typography component="li">
+                <Link to="/cart">Cart</Link>
+              </Typography>
+            </Typography>
+          </Typography>
         </Box>
         <Typography paragraph="true" variant="subtitle1">
           © Copyright travel around ukraine project team
