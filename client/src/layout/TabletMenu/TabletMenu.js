@@ -25,12 +25,12 @@ const pages = [
 const TubletMenu = () => {
   const boxSX = {
     flexGrow: 1,
-    display: { xs: 'none', md: 'flex' },
+    display: { sx: 'none', laptop: 'flex' },
     justifyContent: 'flex-end',
   };
 
   return (
-    <Box sx={boxSX}>
+    <Box component="nav" sx={boxSX}>
       {pages.map(({ name, link, innerContent }) => (
         <NavLink
           to={link}

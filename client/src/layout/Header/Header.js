@@ -15,13 +15,9 @@ const Header = () => {
   const appBarSX =
     scrollY > 400 ? { background: 'gray', transition: '0.3s' } : { background: 'none', transition: '0.3s' };
 
-  const containerSX = {
-    px: { xs: 4, sm: 7, md: 10, lg: 20 }, //    TODO: change to Ahmed's values!
-  };
-
   return (
     <AppBar position="fixed" sx={appBarSX}>
-      <Container maxWidth="xl" sx={containerSX}>
+      <Container>
         <Toolbar disableGutters>
           <LogoHeader />
           <HeaderSearchField />

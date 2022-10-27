@@ -38,7 +38,7 @@ const BurgerMenu = () => {
 
   const boxSX = {
     flexGrow: 1,
-    display: { xs: 'flex', md: 'none' },
+    display: { sx: 'flex', laptop: 'none' },
     justifyContent: 'flex-end',
   };
 
@@ -50,7 +50,7 @@ const BurgerMenu = () => {
   };
 
   const menuSX = {
-    display: { xs: 'flex', md: 'none' },
+    display: { sx: 'flex', laptop: 'none' },
   };
 
   const menuItemSX = {
