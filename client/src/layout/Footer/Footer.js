@@ -28,6 +28,33 @@ const navigationMenu = [
   },
 ];
 
+const footerGallery = [
+  {
+    imagePath: './assets/images/footer/CARPATHIANS.jpg',
+    altDescription: 'recent_trips_image',
+  },
+  {
+    imagePath: './assets/images/footer/CHERNIVTSI.jpg',
+    altDescription: 'recent_trips_image',
+  },
+  {
+    imagePath: './assets/images/footer/IVANOFRANKIVSK.jpg',
+    altDescription: 'recent_trips_image',
+  },
+  {
+    imagePath: './assets/images/footer/KYIV.jpg',
+    altDescription: 'recent_trips_image',
+  },
+  {
+    imagePath: './assets/images/footer/KYIVCENTER.jpg',
+    altDescription: 'recent_trips_image',
+  },
+  {
+    imagePath: './assets/images/footer/PRYKARPATTIA.png',
+    altDescription: 'recent_trips_image',
+  },
+];
+
 const Footer = () => {
   const { footer, container, image, contactsData, socialIcons, recentTrips, navigationBar, ourAwards, navigationList } =
     styles;
@@ -88,33 +115,15 @@ const Footer = () => {
           <Box>
             <Typography variant="h3">Recent Trips</Typography>
             <Box className={recentTrips}>
-              <Link to="/catalogue">
-                <Typography component="img" src="./assets/images/footer/CARPATHIANS.jpg" alt="recent__trips__image" />
-              </Link>
-              <Link to="/catalogue">
-                <Typography component="img" src="./assets/images/footer/CHERNIVTSI.jpg" alt="recent__trips__image" />
-              </Link>
-              <Link to="/catalogue">
-                <Typography
-                  component="img"
-                  src="./assets/images/footer/IVANOFRANKIVSK.jpg"
-                  alt="recent__trips__image"
-                />
-              </Link>
-              <Link to="/catalogue">
-                <Typography component="img" src="./assets/images/footer/KYIV.jpg" alt="recent__trips__image" />
-              </Link>
-              <Link to="/catalogue">
-                <Typography component="img" src="./assets/images/footer/KYIVCENTER.jpg" alt="recent__trips__image" />
-              </Link>
-              <Link to="/catalogue">
-                <Typography component="img" src="./assets/images/footer/PRYKARPATTIA.png" alt="recent__trips__image" />
-              </Link>
+              {footerGallery.map((el) => (
+                <Link to="/catalogue">
+                  <Typography component="img" src={el.imagePath} alt={el.altDescription} />
+                </Link>
+              ))}
             </Box>
           </Box>
         </Box>
       </Box>
-
       <Box className={classNames(navigationBar, container)}>
         <Box>
           <Typography component="nav">
