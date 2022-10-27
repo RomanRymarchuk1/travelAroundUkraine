@@ -2,48 +2,47 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { NavLink } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import styles from './TabletMenu.module.scss'
+import styles from './TabletMenu.module.scss';
 
-const pages = [{
+const pages = [
+  {
     name: 'Home',
     link: '/',
-    innerContent: 'Home'
-},
-{
+    innerContent: 'Home',
+  },
+  {
     name: 'Catalogue',
     link: '/catalogue',
-    innerContent: 'Catalogue'
-},
-{
+    innerContent: 'Catalogue',
+  },
+  {
     name: 'Cart',
     link: '/cart',
-    innerContent: (<ShoppingCartIcon fontSize='medium' />)
-}];
+    innerContent: <ShoppingCartIcon fontSize="medium" />,
+  },
+];
 
 const TubletMenu = () => {
+  const boxSX = {
+    flexGrow: 1,
+    display: { xs: 'none', md: 'flex' },
+    justifyContent: 'flex-end',
+  };
 
-    const boxSX = {
-        flexGrow: 1,
-        display: { xs: 'none', md: 'flex' },
-        justifyContent: 'flex-end'
-    }
-
-    return (
-        <Box sx={boxSX}>
-
-            {pages.map(({ name, link, innerContent }) => (
-                <NavLink
-                    to={link}
-                    key={name}
-                    className={styles.menuItem}
-                >
-                    {innerContent}
-                </NavLink>
-            ))}
-
-        </Box>
-    );
-}
-
+  return (
+    <Box sx={boxSX}>
+      {pages.map(({ name, link, innerContent }) => (
+        <NavLink
+          to={link}
+          key={name}
+          className={({ isActive }) => (isActive ? `${styles.actveMenuItem} ${styles.menuItem}` : styles.menuItem)}
+          end
+        >
+          {innerContent}
+        </NavLink>
+      ))}
+    </Box>
+  );
+};
 
 export default TubletMenu;
