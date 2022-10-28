@@ -74,7 +74,7 @@ const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
   },
 }));
 
-const DetailsText = styled((props) => <Typography gutterBottom={false} fontWeight={700} {...props} />)();
+const DetailsText = styled((props) => <Typography gutterBottom={false} {...props} />)();
 
 const TourSidebar = ({ included, cost, dates, details }) => {
   const [costCurrency, setCostCurrency] = useState('eur');
@@ -87,9 +87,7 @@ const TourSidebar = ({ included, cost, dates, details }) => {
           {included?.map(({ icon, service }) => (
             <Stack key={service} direction="row" gap="5px" alignItems="center">
               {icon}
-              <Typography gutterBottom={false} fontWeight={700}>
-                {service}
-              </Typography>
+              <Typography gutterBottom={false}>{service}</Typography>
             </Stack>
           ))}
         </Stack>
@@ -98,7 +96,7 @@ const TourSidebar = ({ included, cost, dates, details }) => {
         <Title>Dates</Title>
         <Stack direction="row" gap="5px" alignItems="center">
           <CalendarMonthIcon color="primary" />
-          <Typography gutterBottom={false} fontWeight={700}>
+          <Typography gutterBottom={false}>
             {formatTourDate(dates.beginDate)} - {formatTourDate(dates.endDate)}
           </Typography>
         </Stack>

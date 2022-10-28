@@ -71,9 +71,7 @@ const TourPage = () => (
             {included.map(({ icon, service }) => (
               <Stack key={service} direction="row" gap="5px" alignItems="center" flexWrap="wrap">
                 {icon}
-                <Typography gutterBottom={false} fontWeight={700}>
-                  {service}
-                </Typography>
+                <Typography gutterBottom={false}>{service}</Typography>
               </Stack>
             ))}
           </Stack>
