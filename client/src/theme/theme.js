@@ -1,19 +1,6 @@
 import { createTheme } from '@mui/material';
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#0499DD',
-    },
-    secondary: {
-      main: '#FFC700',
-    },
-
-    text: {
-      primary: '#282828',
-    },
-  },
-
   breakpoints: {
     values: {
       xs: 0,
@@ -25,17 +12,23 @@ const theme = createTheme({
   },
 });
 
+const colors = {
+  primaryMain: '#0499DD',
+  secondaryMain: '#FFC700',
+  textPrimary: '#282828',
+};
+
 const appliedTheme = createTheme({
   palette: {
     primary: {
-      main: theme.palette.primary.main,
+      main: colors.primaryMain,
     },
     secondary: {
-      main: theme.palette.secondary.main,
+      main: colors.secondaryMain,
     },
 
     text: {
-      primary: theme.palette.text.primary,
+      primary: colors.textPrimary,
     },
   },
 
@@ -54,15 +47,15 @@ const appliedTheme = createTheme({
 
     h2: {
       fontWeight: 700,
-      fontSize: '18px',
-      lineHeight: '22px',
+      fontSize: '24px',
+      lineHeight: '29px',
       color: theme.palette.primary.main,
     },
 
     h3: {
       fontWeight: 700,
-      fontSize: '24px',
-      lineHeight: '29px',
+      fontSize: '18px',
+      lineHeight: '22px',
       color: theme.palette.primary.main,
     },
 
@@ -113,7 +106,7 @@ const appliedTheme = createTheme({
         root: {
           minWidth: '380px',
 
-          [theme.breakpoints.up('mobile')]: {
+          [theme.breakpoints.up('xs')]: {
             padding: '0 24px',
           },
 
