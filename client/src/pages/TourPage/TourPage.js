@@ -4,7 +4,7 @@ import { Box, Container, Typography, Stack } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import BedIcon from '@mui/icons-material/Bed';
 
-import { TourAccordion, TourReasonToChoose, TourSidebar } from '../../components';
+import { TourAccordion, TourReasonToChoose, TourInfoDialog } from '../../components';
 import styles from './TourPage.module.scss';
 
 const included = [
@@ -28,7 +28,7 @@ const TourPage = () => (
   <Container>
     <div className={styles.content}>
       <Box component="aside" className={styles.aside}>
-        <TourSidebar included={included} cost={cost} dates={dates} details={details} />
+        <TourInfoDialog included={included} cost={cost} dates={dates} details={details} />
       </Box>
       <Box sx={{ flex: 1 }}>
         <Typography variant="h2">About us</Typography>

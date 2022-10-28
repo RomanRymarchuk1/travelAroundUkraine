@@ -76,7 +76,7 @@ const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
 
 const DetailsText = styled((props) => <Typography gutterBottom={false} {...props} />)({});
 
-const TourSidebar = ({ included, cost, dates, details }) => {
+const TourInfoDialog = ({ included, cost, dates, details }) => {
   const [costCurrency, setCostCurrency] = useState('eur');
 
   return (
@@ -152,11 +152,11 @@ const TourSidebar = ({ included, cost, dates, details }) => {
   );
 };
 
-TourSidebar.propTypes = {
+TourInfoDialog.propTypes = {
   included: PropTypes.arrayOf(PropTypes.object).isRequired,
   cost: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   dates: PropTypes.objectOf(PropTypes.instanceOf(Date)).isRequired,
   details: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default TourSidebar;
+export default TourInfoDialog;
