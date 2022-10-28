@@ -1,5 +1,7 @@
-import React from 'react';
 
-const HomePage = () => <div>HOME</div>;
+import React from 'react';
+import AboutUkraine from '../../components/AboutUkraine/AboutUkraine'
+
+const HomePage = () => <><div>HOME</div> <AboutUkraine /> </>;
 
 export default HomePage;
