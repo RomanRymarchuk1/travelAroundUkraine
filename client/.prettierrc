@@ -16,6 +16,7 @@
 	"jsxBracketSameLine": false,
 	"proseWrap": "preserve",
 	"requirePragma": false,
-	"semi": true,
-	"parser": "babel"
+	"semi": true
+	
 }
+
