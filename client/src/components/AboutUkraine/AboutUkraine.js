@@ -2,7 +2,6 @@ import React from 'react'
 import { Typography, Box } from '@mui/material';
 import styles from './AboutUkraine.module.scss';
 
-
 function AboutUkraine() {
     return (
         <Box className={styles.wrapper}>
