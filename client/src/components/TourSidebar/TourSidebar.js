@@ -74,7 +74,7 @@ const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
   },
 }));
 
-const DetailsText = styled((props) => <Typography gutterBottom={false} {...props} />)();
+const DetailsText = styled((props) => <Typography gutterBottom={false} {...props} />)({});
 
 const TourSidebar = ({ included, cost, dates, details }) => {
   const [costCurrency, setCostCurrency] = useState('eur');
