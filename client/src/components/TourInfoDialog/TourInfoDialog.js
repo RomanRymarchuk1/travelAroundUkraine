@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import { styled, alpha } from '@mui/material/styles';
 import MuiBox from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Button, MenuItem as MuiMenuItem, Select as MuiSelect, Stack } from '@mui/material';
+import { Button, IconButton, MenuItem as MuiMenuItem, Select as MuiSelect, Stack } from '@mui/material';
 // Icons
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import CloseIcon from '@mui/icons-material/Close';
 
 import formatTourDate from '../../utils/formatTourDate';
 
@@ -24,8 +25,11 @@ const BoxWrapper = styled(MuiBox)(({ theme }) => ({
   position: 'sticky',
   top: 20,
   padding: '20px 20px 30px',
-  border: `1px solid ${theme.palette.divider}`,
   borderRadius: 5,
+
+  [theme.breakpoints.up('laptop')]: {
+    border: `1px solid ${theme.palette.divider}`,
+  },
 }));
 
 const Section = styled(MuiBox)(({ theme }) => ({
@@ -76,14 +80,25 @@ const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
 
 const DetailsText = styled((props) => <Typography gutterBottom={false} {...props} />)({});
 
-const TourInfoDialog = ({ included, cost, dates, details }) => {
+const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClose }) => {
   const [costCurrency, setCostCurrency] = useState('eur');
 
   return (
     <BoxWrapper>
       <Section>
         <Title>Included</Title>
-        <Stack direction="row" justifyContent="space-between" flexWrap="wrap" gap="12px">
+        {closeButton && (
+          <IconButton sx={{ position: 'absolute', right: '10px', top: '10px' }} onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+        )}
+
+        <Stack
+          direction="row"
+          flexWrap="wrap"
+          gap="12px"
+          sx={{ justifyContent: { laptop: 'space-between', tablet: 'flex-start' } }}
+        >
           {included?.map(({ icon, service }) => (
             <Stack key={service} direction="row" gap="5px" alignItems="center">
               {icon}
@@ -157,6 +172,13 @@ TourInfoDialog.propTypes = {
   cost: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   dates: PropTypes.objectOf(PropTypes.instanceOf(Date)).isRequired,
   details: PropTypes.objectOf(PropTypes.string).isRequired,
+  closeButton: PropTypes.bool,
+  handleClose: PropTypes.func,
+};
+
+TourInfoDialog.defaultProps = {
+  closeButton: false,
+  handleClose: () => {},
 };
 
 export default TourInfoDialog;
