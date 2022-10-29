@@ -49,21 +49,21 @@ const appliedTheme = createTheme({
       fontWeight: 700,
       fontSize: '24px',
       lineHeight: '29px',
-      color: theme.palette.primary.main,
+      color: colors.primaryMain,
     },
 
     h3: {
       fontWeight: 700,
       fontSize: '18px',
       lineHeight: '22px',
-      color: theme.palette.primary.main,
+      color: colors.primaryMain,
     },
 
     body1: {
       fontWeight: 500,
       fontSize: '14px',
       lineHeight: '17px',
-      color: theme.palette.text.primary,
+      color: colors.textPrimary,
     },
   },
 
@@ -83,7 +83,7 @@ const appliedTheme = createTheme({
           fontWeight: 700,
           lineHeight: '17px',
           '&:hover': {
-            color: theme.palette.secondary.main,
+            color: colors.secondaryMain,
             background: 'linear-gradient(92.71deg, #0685bf 0%, #15a19d 100%)',
           },
         },
