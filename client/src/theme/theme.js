@@ -16,6 +16,8 @@ const colors = {
   primaryMain: '#0499DD',
   secondaryMain: '#FFC700',
   textPrimary: '#282828',
+  bttnBgColorMain: 'linear-gradient(92.71deg, #0499DD 0%, #17C1BC 100%)',
+  bttnBgColorDark: 'linear-gradient(92.71deg, #0685bf 0%, #15a19d 100%)',
 };
 
 const appliedTheme = createTheme({
@@ -76,7 +78,7 @@ const appliedTheme = createTheme({
 
       styleOverrides: {
         root: {
-          background: 'linear-gradient(92.71deg, #0499DD 0%, #17C1BC 100%)',
+          background: colors.bttnBgColorMain,
           padding: '16px 53px',
           borderRadius: '60px',
           fontSize: '14px',
@@ -84,7 +86,7 @@ const appliedTheme = createTheme({
           lineHeight: '17px',
           '&:hover': {
             color: colors.secondaryMain,
-            background: 'linear-gradient(92.71deg, #0685bf 0%, #15a19d 100%)',
+            background: colors.bttnBgColorDark,
           },
         },
       },
