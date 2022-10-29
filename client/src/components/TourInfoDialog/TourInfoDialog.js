@@ -66,6 +66,8 @@ const Select = styled(MuiSelect)(({ theme }) => ({
   fontWeight: 700,
   '.MuiOutlinedInput-notchedOutline': {
     borderColor: `${theme.palette.divider}`,
+
+    transition: theme.transitions.create('border-color'),
   },
   '&:hover .MuiOutlinedInput-notchedOutline': {
     borderColor: `${theme.palette.primary.main}`,
@@ -76,6 +78,8 @@ const Select = styled(MuiSelect)(({ theme }) => ({
 }));
 
 const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
+  transition: theme.transitions.create(['color', 'background-color']),
+
   '&:hover': {
     backgroundColor: alpha(theme.palette.primary.main, 0.15),
     color: theme.palette.primary.main,
