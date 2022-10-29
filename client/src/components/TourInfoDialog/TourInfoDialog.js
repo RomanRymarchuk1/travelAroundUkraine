@@ -71,7 +71,7 @@ const Select = styled(MuiSelect)(({ theme }) => ({
     borderColor: `${theme.palette.primary.main}`,
   },
   '.MuiSelect-icon': {
-    transition: 'transform .2s',
+    transition: theme.transitions.create('transform'),
   },
 }));
 
