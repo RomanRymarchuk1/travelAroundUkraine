@@ -1,5 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Box, Container, Typography, Stack, styled, Button, useMediaQuery, Dialog, Slide, Link } from '@mui/material';
+import {
+  Box,
+  Container,
+  Typography,
+  Stack,
+  styled,
+  alpha,
+  Button,
+  useMediaQuery,
+  Dialog,
+  Slide,
+  Link,
+} from '@mui/material';
 // Icons
 import PersonIcon from '@mui/icons-material/Person';
 import BedIcon from '@mui/icons-material/Bed';
