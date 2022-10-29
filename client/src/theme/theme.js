@@ -84,6 +84,8 @@ const appliedTheme = createTheme({
           fontSize: '14px',
           fontWeight: 700,
           lineHeight: '17px',
+          transition: '0.5s',
+
           '&:hover': {
             color: colors.secondaryMain,
             background: colors.bttnBgColorDark,
