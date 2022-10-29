@@ -1,28 +1,44 @@
 import { createTheme } from '@mui/material';
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#0499DD',
-    },
-    secondary: {
-      main: '#FFC700',
-    },
-
-    text: {
-      primary: '#282828',
+  breakpoints: {
+    values: {
+      xs: 0,
+      mobile: 428,
+      tablet: 768,
+      laptop: 1024,
+      desktop: 1360,
     },
   },
 });
 
+const colors = {
+  primaryMain: '#0499DD',
+  secondaryMain: '#FFC700',
+  textPrimary: '#282828',
+};
+
 const appliedTheme = createTheme({
+  palette: {
+    primary: {
+      main: colors.primaryMain,
+    },
+    secondary: {
+      main: colors.secondaryMain,
+    },
+
+    text: {
+      primary: colors.textPrimary,
+    },
+  },
+
   breakpoints: {
     values: {
-      sx: 0,
-      mobile: 380,
-      tablet: 610,
-      laptop: 1024,
-      desktop: 1200,
+      xs: theme.breakpoints.values.xs,
+      mobile: theme.breakpoints.values.mobile,
+      tablet: theme.breakpoints.values.tablet,
+      laptop: theme.breakpoints.values.laptop,
+      desktop: theme.breakpoints.values.desktop,
     },
   },
 
@@ -31,15 +47,15 @@ const appliedTheme = createTheme({
 
     h2: {
       fontWeight: 700,
-      fontSize: '18px',
-      lineHeight: '22px',
+      fontSize: '24px',
+      lineHeight: '29px',
       color: theme.palette.primary.main,
     },
 
     h3: {
       fontWeight: 700,
-      fontSize: '24px',
-      lineHeight: '29px',
+      fontSize: '18px',
+      lineHeight: '22px',
       color: theme.palette.primary.main,
     },
 
@@ -84,6 +100,24 @@ const appliedTheme = createTheme({
       defaultProps: {
         disableGutters: true,
         fixed: true,
+      },
+
+      styleOverrides: {
+        root: {
+          minWidth: '380px',
+
+          [theme.breakpoints.up('xs')]: {
+            padding: '0 24px',
+          },
+
+          [theme.breakpoints.up('tablet')]: {
+            padding: '0 79px',
+          },
+
+          [theme.breakpoints.up('desktop')]: {
+            padding: '0 80px',
+          },
+        },
       },
     },
   },
