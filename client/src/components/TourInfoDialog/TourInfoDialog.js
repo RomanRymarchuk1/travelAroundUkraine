@@ -102,19 +102,14 @@ const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClo
           </IconButton>
         )}
 
-        <Stack
-          direction="row"
-          flexWrap="wrap"
-          gap="12px"
-          sx={{ justifyContent: { laptop: 'space-between', tablet: 'flex-start' } }}
-        >
+        <IncludedContentWrapper>
           {included?.map(({ icon, service }) => (
             <Stack key={service} direction="row" gap="5px" alignItems="center">
               {icon}
               <Typography gutterBottom={false}>{service}</Typography>
             </Stack>
           ))}
-        </Stack>
+        </IncludedContentWrapper>
       </Section>
       <Section>
         <Title>Dates</Title>
