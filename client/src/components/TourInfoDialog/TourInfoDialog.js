@@ -44,6 +44,15 @@ const Title = styled((props) => <Typography variant="h3" color="black" component
   marginBottom: 20,
 });
 
+const IncludedContentWrapper = styled((props) => <Stack direction="row" {...props} />)({
+  flexWrap: 'wrap',
+  gap: '12px',
+
+  '@media (min-width: 1051px)': {
+    justifyContent: 'space-between',
+  },
+});
+
 const Cost = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   marginBottom: 0,
