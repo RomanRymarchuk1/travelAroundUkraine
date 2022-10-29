@@ -97,3 +97,11 @@
 .thumbsSwiper {
     margin-top: 10px;
 }
+.thumbsSwiper .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.7;
+}
+.thumbsSwiper .swiper-slide-thumb-active {
+    opacity: 1;
+}

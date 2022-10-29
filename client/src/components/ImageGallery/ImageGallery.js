@@ -77,6 +77,8 @@ export default function ImageGallery() {
         style={{
           height: '70px',
           width: 'auto',
+          '--swiper-navigation-color': '#fff',
+          '--swiper-pagination-color': '#fff',
         }}
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
