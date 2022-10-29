@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {Pagination, Navigation} from 'swiper'
+import { Navigation} from 'swiper'
 import CardItem from '../CardItem/CardItem';
 import styles from './CardContainer.module.scss';
 
@@ -32,11 +32,9 @@ const CardContainer = () =>
             <h2 className={styles.header}>Popular tours</h2>
             <NavLink className={styles.allTours} to="/catalogue">View All</NavLink>
         </div>
-        <ul className={styles.list}>
-            <li>
                 <Swiper
                     slidesPerView={4}
-                    spaceBetween={0}
+                    spaceBetween={30}
                     slidesPerGroup={1}
                     loop={true}
                     loopFillGroupWithBlank={true}
@@ -44,16 +42,13 @@ const CardContainer = () =>
                         clickable: true,
                     }}
                     navigation={true}
-                    modules={[Pagination, Navigation]}
+                    modules={[Navigation]}
                     className="mySwiper">
                     {cards.map(card => (
                         <SwiperSlide
                         >{card}</SwiperSlide>
                     ))}
                 </Swiper>
-            </li>
-        </ul>
-
     </div>
 
 export default CardContainer;
