@@ -27,7 +27,7 @@ const BoxWrapper = styled(MuiBox)(({ theme }) => ({
   padding: '20px 20px 30px',
   borderRadius: 5,
 
-  [theme.breakpoints.up('laptop')]: {
+  '@media (min-width: 1051px)': {
     border: `1px solid ${theme.palette.divider}`,
   },
 }));
