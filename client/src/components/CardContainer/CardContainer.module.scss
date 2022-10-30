@@ -20,6 +20,18 @@
   }
 }
 
+.btnPrev {
+  background-color: red;
+  height: 60px;
+  width: 60px;
+  border-radius: 50px;
+  position: relative;
+
+  &::after {
+    content: url("../../../src/svg/hotDeals/btn-prev.svg");
+  }
+}
+
 //@media only screen and (max-width: 993px) {
 //
 //}
@@ -75,6 +87,3 @@
 //  height: 100%;
 //  object-fit: cover;
 //}
-
-
-
