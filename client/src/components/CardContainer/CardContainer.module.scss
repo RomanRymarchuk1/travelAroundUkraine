@@ -1,6 +1,7 @@
 .cardContainer {
-  max-width:1150px;
+  max-width: 1150px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .headerContainer {
@@ -20,70 +21,80 @@
   }
 }
 
-.btnPrev {
-  background-color: red;
-  height: 60px;
-  width: 60px;
-  border-radius: 50px;
+.swiperContainer {
   position: relative;
+  margin: 70px auto 0 auto;
 
-  &::after {
-    content: url("../../../src/svg/hotDeals/btn-prev.svg");
+  .btnPrev {
+    background-color: white;
+    height: 60px;
+    width: 60px;
+    border-radius: 50px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    top: 50%;
+    margin-top: -30px;
+    margin-left: -30px;
+
+    &::after {
+      content: url("../../../src/svg/hotDeals/btn-prev.svg");
+      position: absolute;
+      width: 10px;
+      top: 50%;
+      left: 50%;
+      margin-left: -2px;
+      margin-top: -9px;
+      transform: scaleX(-1);
+    }
+  }
+
+  .btnNext {
+    background-color: white;
+    height: 60px;
+    width: 60px;
+    border-radius: 50px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    top: 50%;
+    right: -30px;
+    margin-top: -30px;
+    margin-left: 100%;
+
+    &::after {
+      content: url("../../../src/svg/hotDeals/btn-prev.svg");
+      position: absolute;
+      width: 10px;
+      top: 50%;
+      left: 50%;
+      margin-left: -6px;
+      margin-top: -9px;
+    }
   }
 }
 
-//@media only screen and (max-width: 993px) {
-//
-//}
-//
-//@media only screen and (max-width: 481px) {
-//
-//}
+@media only screen and (min-width: 300px) {
+  .swiperContainer {
+    width: 265px;
+  }
+}
 
-//#app { height: 100% }
-//html,
-//body {
-//  position: relative;
-//  height: 100%;
-//}
-//
-//body {
-//  background: #eee;
-//  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-//  font-size: 14px;
-//  color: #000;
-//  margin: 0;
-//  padding: 0;
-//}
-//
-//.swiper {
-//  width: 100%;
-//  height: 100%;
-//}
-//
-//.swiper-slide {
-//  text-align: center;
-//  font-size: 18px;
-//  background: #fff;
-//
-//  /* Center slide text vertically */
-//  display: -webkit-box;
-//  display: -ms-flexbox;
-//  display: -webkit-flex;
-//  display: flex;
-//  -webkit-box-pack: center;
-//  -ms-flex-pack: center;
-//  -webkit-justify-content: center;
-//  justify-content: center;
-//  -webkit-box-align: center;
-//  -ms-flex-align: center;
-//  -webkit-align-items: center;
-//  align-items: center;
-//}
-//
-//.swiper-slide img {
-//  display: block;
-//  width: 100%;
-//  height: 100%;
-//  object-fit: cover;
-//}
+@media only screen and (min-width: 600px) {
+  .swiperContainer {
+    width: 560px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .swiperContainer {
+    width: 860px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .swiperContainer {
+    width: 1150px;
+  }
+}
+

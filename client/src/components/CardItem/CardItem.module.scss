@@ -6,6 +6,7 @@
   background-size: cover;
   color: white;
   position: relative;
+  cursor: pointer;
 
   &::after {
     content: '';
@@ -39,29 +40,36 @@
   }
 
   .header {
+    position: absolute;
     font-size: 20px;
     font-weight: bold;
-    padding: 25px;
-    margin-bottom: 0;
+    margin-top: 265px;
+    padding-left: 25px;
+    z-index: 2;
   }
 
-  .text {
-    font-size: 14px;
-    margin: 0;
-  }
+
 
   .location {
     display: flex;
     padding-left: 25px;
     padding-right: 25px;
-    //z-index: 2;
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    margin-top: 350px;
+
+    .text {
+      font-size: 14px;
+      margin: 0;
+    }
 
     img {
       padding-right: 10px;
     }
 
     .arrow {
-      margin-left: auto;
+      margin-left: 100px;
     }
   }
 }
