@@ -1,25 +1,14 @@
 import React from 'react';
 import { Stack, CardActions, CardMedia, Button, Typography, CardContent } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { ReactComponent as CoinsIcon } from '../../svg/CoinsIcon.svg';
 import styles from './CatalogTourCard.module.scss';
-
-const CardButton = styled(Button)(() => ({
-  height: '40px',
-  fontSize: '12px',
-  padding: '0',
-
-  '&:hover': {
-    color: 'secondary',
-  },
-}));
 
 function CatalogTourCard() {
   return (
     <Stack
       direction={{ xs: 'column', tablet: 'row' }}
-      sx={{ backgroundColor: 'white', borderRadius: '10px', boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)'}}
+      sx={{ backgroundColor: 'white', borderRadius: '10px', boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)' }}
       spacing={1}
     >
       <CardMedia
@@ -42,7 +31,12 @@ function CatalogTourCard() {
         alt="tour photo"
       />
       <CardContent sx={{ padding: '0 30px 0 36px' }}>
-        <Typography sx={{ color: 'black', marginBottom: '20px', marginTop: '20px' }} gutterBottom variant="h3" component="div">
+        <Typography
+          sx={{ color: 'black', marginBottom: '20px', marginTop: '20px' }}
+          gutterBottom
+          variant="h3"
+          component="div"
+        >
           Sightseeing tour of Chernivtsi
         </Typography>
 
@@ -70,7 +64,8 @@ function CatalogTourCard() {
         </Typography>
 
         <CardActions>
-          <CardButton
+          <Button
+            className={styles.cardBtn}
             href="#"
             sx={{
               width: {
@@ -81,10 +76,13 @@ function CatalogTourCard() {
                 xs: '30px',
                 desktop: '10px',
               },
+              height: '40px',
+              fontSize: '12px',
+              padding: '0',
             }}
           >
             More details
-          </CardButton>
+          </Button>
         </CardActions>
       </CardContent>
     </Stack>
