@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
 import {
+  alpha,
   Box,
+  Button,
   Container,
-  Typography,
+  Dialog,
+  Link,
+  Slide,
   Stack,
   styled,
-  alpha,
-  Button,
+  Typography,
   useMediaQuery,
-  Dialog,
-  Slide,
-  Link,
 } from '@mui/material';
+import React, { useState } from 'react';
 // Icons
-import PersonIcon from '@mui/icons-material/Person';
 import BedIcon from '@mui/icons-material/Bed';
+import PersonIcon from '@mui/icons-material/Person';
 
 import { useInView } from 'react-intersection-observer';
 
-import { TourAccordion, TourReasonToChoose, TourInfoDialog } from '../../components';
+import { TourAccordion, TourInfoDialog, TourReasonToChoose } from '../../components';
 
 const sections = [
   { title: 'About us', link: '#about-tour' },
