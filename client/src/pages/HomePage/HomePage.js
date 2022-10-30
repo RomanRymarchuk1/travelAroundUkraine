@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container, Typography, Box } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { styled } from '@mui/material/styles';
 import { ImageCarousel } from '../../components';
-import styles from './HomePage.module.scss';
 
 const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({ theme }) => ({
   fontWeight: 700,
@@ -32,6 +31,7 @@ const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({ 
     fontWeight: 400,
     fontSize: '18px',
     lineHeight: '18px',
+    textTransform: 'uppercase',
     color: theme.palette.secondary.main,
 
     position: 'absolute',
@@ -64,9 +64,10 @@ const UkraineText = styled((props) => <Typography variant="h1" {...props} />)(({
   fontWeight: 700,
   fontSize: '64px',
   lineHeight: '64px',
+  textTransform: 'uppercase',
   color: 'rgba(255, 255, 255, 0)',
-  '-webkit-text-stroke-width': '2px',
-  '-webkit-text-stroke-color': 'rgb(41, 24, 194)',
+  WebkitTextStrokeWidth: '2px',
+  WebkitTextStrokeColor: 'rgb(41, 24, 194)',
 
   [theme.breakpoints.up('tablet')]: {
     fontSize: '96px',
@@ -88,20 +89,20 @@ const HeroContainer = styled(Container)({
 });
 
 const HomePage = () => (
-  <section className={styles.heroSection}>
+  <Box sx={{ position: 'relative' }} component="section">
     <ImageCarousel />
     <HeroContainer>
       <TravelText>
-        TRAVEL <span className="heroHeaderHighlighted">AROUND</span>
+        TRAVEL <span className="heroHeaderHighlighted">around</span>
       </TravelText>
 
-      <UkraineText>UKRAINE</UkraineText>
+      <UkraineText>ukraine</UkraineText>
 
-      <Button sx={{ mt: '90px' }} endIcon={<ArrowRightAltIcon />}>
-        TO OUR TOURS
+      <Button sx={{ mt: '60px', textTransform: 'uppercase' }} endIcon={<ArrowRightAltIcon />}>
+        to our tours
       </Button>
     </HeroContainer>
-  </section>
+  </Box>
 );
 
 export default HomePage;
