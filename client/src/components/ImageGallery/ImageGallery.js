@@ -47,11 +47,10 @@ export default function ImageGallery() {
         spaceBetween={5}
         zoom
         loop
-        effect="fade"
         longSwipes
         autoplay={{
           delay: 2500,
-          disableOnInteraction: false,
+          disableOnInteraction: true,
           pauseOnMouseEnter: true,
         }}
         thumbs={{ swiper: thumbsSwiper }}
