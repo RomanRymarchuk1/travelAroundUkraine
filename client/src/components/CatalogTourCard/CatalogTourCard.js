@@ -26,37 +26,36 @@ function CatalogTourCard() {
             tablet: '10px 0 0 10px',
           },
         }}
-        component="img"
-        image="https://visitukraine.today/media/tours/gallery/ALeR7GgYjAqCqfJnQX5ZYKnBcsDZ6MTJs77IIBKi.jpg"
-        alt="tour photo"
+        component='img'
+        image='https://visitukraine.today/media/tours/gallery/ALeR7GgYjAqCqfJnQX5ZYKnBcsDZ6MTJs77IIBKi.jpg'
+        alt='tour photo'
       />
       <CardContent sx={{ padding: '0 30px 0 36px' }}>
         <Typography
           sx={{ color: 'black', marginBottom: '20px', marginTop: '20px' }}
-          gutterBottom
-          variant="h3"
-          component="div"
+          variant='h3'
+          component='div'
         >
           Sightseeing tour of Chernivtsi
         </Typography>
 
-        <Stack direction="row" spacing={3} alignItems="start" sx={{ marginBottom: '20px' }}>
-          <Stack direction="row" spacing={1} alignItems="center">
+        <Stack direction='row' spacing={3} alignItems='start' sx={{ marginBottom: '20px' }}>
+          <Stack direction='row' spacing={1} alignItems='center'>
             <CoinsIcon />
-            <Typography variant="h3" color="primary">
+            <Typography variant='h3' color='primary'>
               69 €
             </Typography>
           </Stack>
 
-          <Stack direction="row" spacing={1} alignItems="center">
-            <AccessTimeIcon color="primary" sx={{ height: '21px' }} />
-            <Typography variant="h3" color="primary">
+          <Stack direction='row' spacing={1} alignItems='center'>
+            <AccessTimeIcon color='primary' sx={{ height: '21px' }} />
+            <Typography variant='h3' color='primary'>
               3 hours
             </Typography>
           </Stack>
         </Stack>
 
-        <Typography className={styles.tourDescription} sx={{ color: 'black' }} variant="body1" color="text.secondary">
+        <Typography className={styles.tourDescription} sx={{ color: 'black' }} variant='body1' color='text.secondary'>
           Chernivtsi is often called the Ukrainian Paris, and for good reason - the pearl of Ukrainian Bukovina is in no
           way inferior to exquisite European capitals and offers tourists entertainment for every taste. We suggest
           starting with the classics and visiting the top must-see places that will make you fall in love with this
@@ -66,7 +65,7 @@ function CatalogTourCard() {
         <CardActions>
           <Button
             className={styles.cardBtn}
-            href="#"
+            href='#'
             sx={{
               width: {
                 xs: '244px',
