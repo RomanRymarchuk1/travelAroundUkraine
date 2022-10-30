@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Container,
@@ -15,6 +15,8 @@ import {
 // Icons
 import PersonIcon from '@mui/icons-material/Person';
 import BedIcon from '@mui/icons-material/Bed';
+
+import { useInView } from 'react-intersection-observer';
 
 import { TourAccordion, TourReasonToChoose, TourInfoDialog } from '../../components';
 
@@ -133,27 +135,10 @@ const TourPage = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [dialogRef, inView] = useInView({ root: null, rootMargin: '0px', threshold: 0.1 });
+
   const handleOpenDialog = () => setIsOpen(true);
   const handleCloseDialog = () => setIsOpen(false);
-
-  const dialogRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  const intersectionCallback = (entries) => {
-    const [entry] = entries;
-    setIsVisible(entry.isIntersecting);
-  };
-
-  const options = { root: null, rootMargin: '0px', threshold: 0.1 };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(intersectionCallback, options);
-    if (dialogRef.current) observer.observe(dialogRef.current);
-
-    return () => {
-      if (dialogRef.current) observer.unobserve(dialogRef.current);
-    };
-  }, [dialogRef, options]);
 
   return (
     <>
@@ -263,7 +248,7 @@ const TourPage = () => {
         </Container>
 
         {!matchesMediaQuery ? (
-          <Slide in={!isVisible} direction="up" mountOnEnter unmountOnExit>
+          <Slide in={!inView} direction="up" mountOnEnter unmountOnExit>
             <FloatingDialog>
               <Container>
                 <Stack direction="row" justifyContent="space-between" alignItems="center">
