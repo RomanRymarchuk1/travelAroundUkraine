@@ -229,7 +229,7 @@ const TourPage = () => {
                   {currency.eur}
                   {cost.eur}
                 </Cost>
-                <Button variant="contained" sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
+                <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
                   More info
                 </Button>
               </Stack>
@@ -256,12 +256,7 @@ const TourPage = () => {
                     {currency.eur}
                     {cost.eur}
                   </Cost>
-                  <Button
-                    variant="contained"
-                    sx={{ paddingInline: '30px' }}
-                    disableElevation
-                    onClick={handleOpenDialog}
-                  >
+                  <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
                     More info
                   </Button>
                 </Stack>
