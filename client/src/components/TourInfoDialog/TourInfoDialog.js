@@ -166,7 +166,7 @@ const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClo
             {currency[costCurrency]}
             {cost[costCurrency]}
           </Cost>
-          <Button variant="contained" sx={{ paddingInline: '30px' }} disableElevation>
+          <Button sx={{ paddingInline: '30px' }} disableElevation>
             Add to Cart
           </Button>
         </Stack>
