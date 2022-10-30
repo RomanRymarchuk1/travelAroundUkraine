@@ -21,7 +21,7 @@ const ImageCarousel = () => {
       indicators={false}
     >
       {images.map((url) => (
-        <img src={url} alt={url} key={url} />
+        <img src={url} alt="Ukraine" key={url} />
       ))}
     </Carousel>
   );
