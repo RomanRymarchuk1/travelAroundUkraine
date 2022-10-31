@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { Button, Container, Typography, Box } from '@mui/material';
+import { Button, Container, Typography, Box, styled } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { styled } from '@mui/material/styles';
 import { ImageCarousel } from '../../components';
 
 const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({ theme }) => ({
