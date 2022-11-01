@@ -1,126 +1,121 @@
-.container {
-    margin: 0 auto;
-    padding: 30px;
-    max-width: 1200px;
-}
+// .container {
+//     margin: 0 auto;
+//     padding: 30px;
+//     max-width: 1200px;
+// }
 
-.footer {
-    background-color: black;
-    color: white;
-    padding-bottom: 10px;
-}
+// .footer {
+//     background-color: black;
+//     color: white;
+//     padding-bottom: 10px;
+// }
 
+// .image {
+//     width: 250px;
+//     margin-top: 30px;
+//     padding-bottom: 40px;
+// }
 
-.image {
-    width: 250px;
-    margin-top: 30px;
-    padding-bottom: 40px;
-}
+// .ourAwards {
+//     & > h3 {
+//         padding-bottom: 30px;
+//     }
+//     & > p {
+//         padding-bottom: 20px;
+//     }
+// }
 
-.ourAwards {
-    & > h3 {
-        padding-bottom: 30px;
-    }
-    & > p {
-        padding-bottom: 20px;
-    }
-}
+// .contactsData {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     gap: 10px;
+//     padding-top: 30px;
+//     & > div {
+//         display: flex;
+//         & > a {
+//             text-decoration: none;
+//             color: inherit;
+//             margin-left: 10px;
+//         }
+//         & > p {
+//             margin-left: 10px;
+//             margin-bottom: 20px;
+//         }
+//     }
+// }
 
-.contactsData {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    padding-top: 30px;
-    & > div {
-        display: flex;
-        & > a {
-            text-decoration: none;
-            color: inherit;
-            margin-left: 10px;
-        }
-        & > p {
-            margin-left: 10px;
-            margin-bottom: 20px;
-        }
-    }
-}
+// .socialIcons {
+//     display: flex;
+//     justify-content: left;
+//     gap: 15px;
+//     padding-top: 20px;
+//     padding-bottom: 40px;
+//     & > div {
+//         & > svg {
+//             width: 40px;
+//             height: 40px;
+//             cursor: pointer;
+//         }
+//     }
+// }
 
+// .recentTrips {
+//     display: grid;
+//     column-gap: 5px;
+//     gap: 10px;
+//     grid-template-columns: repeat(3, 1fr);
+//     margin-bottom: 30px;
+//     padding-top: 30px;
+//     & > a >  img {
+//         width: 100%;
+//         border-radius: 5px;
+//     }
+// }
 
-.socialIcons {
-    display: flex;
-    justify-content: left;
-    gap: 15px;
-    padding-top: 20px;
-    padding-bottom: 40px;
-    & > div {
-        & > svg {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-        }
-    }  
-}
+// .navigationBar  {
+//     border-top: 1px solid rgba($color: #ffffff, $alpha: 0.5);
+// }
 
-.recentTrips {
-    display: grid;
-    column-gap: 5px;
-    gap: 10px;
-    grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 30px;
-    padding-top: 30px;
-    & > a >  img {
-        width: 100%;
-        border-radius: 5px;
-    }
-}
+// .navigationList {
+//         display: flex;
+//         justify-content: left;
+//         align-items: center;
+//         gap: 20px ;
+//         padding: 0;
+//         padding-bottom: 20px;
+//         & > li {
+//             list-style-type: none;
+//             & > a {
+//                 text-decoration: none;
+//                 color: white;
+//                 &:hover {
+//                     color: blue;
+//                 }
+//             }
+//         }
+// }@
 
-.navigationBar  {
-    border-top: 1px solid rgba($color: #ffffff, $alpha: 0.5);
-}
+// @media (min-width: 768px) {
+// .container {
+//      & > * {
+//         display: flex;
+//         gap: 30px;
+//      }
+// }
 
-.navigationList {
-        display: flex;
-        justify-content: left;
-        align-items: center;
-        gap: 20px ;
-        padding: 0;
-        padding-bottom: 20px;
-        & > li {
-            list-style-type: none;
-            & > a {
-                text-decoration: none;
-                color: white;
-                &:hover {
-                    color: blue;
-                }
-            }
-        }
-}
+// .navigationBar {
+//     display: flex;
+//     flex-direction: row-reverse;
+//     justify-content: space-between;
+// }
+// .recentTrips {
+//     grid-template-columns: repeat(2, 1fr);
+//     }
+// }
 
-@media (min-width: 768px) {
-.container {
-     & > * {
-        display: flex;
-        gap: 30px;
-     }
-}
-
-.navigationBar {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-}
-.recentTrips {
-    grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 950px) {
-    .recentTrips {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-
-
+// @media (min-width: 950px) {
+//     .recentTrips {
+//         grid-template-columns: repeat(3, 1fr);
+//     }
+// }
