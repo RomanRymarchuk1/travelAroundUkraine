@@ -33,7 +33,7 @@ const ErrorPage = () => {
         <Box src="./assets/images/404/heart.png" component="img" alt="uk-flag" />
       </Box>
       <Typography variant="h2">404 not found</Typography>
-      <Typography component="p">Please, navigate to main page to plan your trip</Typography>
+      <Typography>Please, navigate to main page to plan your trip</Typography>
       <Box>
         <Typography component="nav" className={navigataionList}>
           <Typography component="ul">
