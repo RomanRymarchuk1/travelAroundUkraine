@@ -1,22 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
-import { Typography, Box,styled,  } from '@mui/material';
-import styles from './AboutUkraine.module.scss';
-
-const UkraineInfoBlock = styled((props) => <Box {...props} />)(({ theme }) => ({
-    [theme.breakpoints.up('tablet')]: {
-        top: '55%',
-    },
-    [theme.breakpoints.up('laptop')]: {
-        top: '40%',
-        
-    },
-}));
+import {Box, Typography, styled, keyframes  } from '@mui/material';
+// import { useInView } from 'react-intersection-observer';
 
 const UkraineTextInfo = styled((props) => <Typography variant="body1" {...props} />)(({ theme }) => ({
-
     [theme.breakpoints.up('tablet')]: {
-        width: '494px',
         padding: '10px',
         fontSize: '18px',
         lineHeight: '1.2',
@@ -29,36 +17,83 @@ const UkraineTextInfo = styled((props) => <Typography variant="body1" {...props}
 }));
 
 const AboutUkraineContainer = styled((props) => <Box {...props} />)(({ theme }) => ({
-
     backgroundColor: '#EDEDED',
     borderRadius: '20px',
     zIndex: 1,
+    transition: '2s',
     position: 'absolute',
-    right: '1px',
-    top: '10%',
-    marginLeft: '30px',
+    top: '12%',
+    left: '40%',
+    width: '200px',
     marginRight: '30px',
-    padding: '40px',
+    padding: '20px',
+   
+    '&:hover':{
+        backgroundColor: '#0499dd',
+        animation: `
+        -webkit-transform: translateX(-60px);
+        transform: translateX(-60px);`,
+        boxShadow: '1px 1px #ededed, 2px 2px #ededed, 3px 3px #ededed, 4px 4px #ededed, 5px 5px #ededed, 6px 6px #ededed,  7px 7px #ededed',
+    },
+
+    '&:hover h2':{
+       color:'white'
+    },
 
     [theme.breakpoints.up('tablet')]: {
-       top:'15%'
+       top:'15%',
+       width: '400px',
+       left: '52%',
+       padding: '25px',
     },
 
     [theme.breakpoints.up('laptop')]: {
-        top:'12%',
+        top:'20%',
+        left: '55%',
+        width: '600px',
+        padding: '30px',
     },
 }));
 
 
+const fadeIn = keyframes`
+0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
+const UkraineBackground = styled((props) => <Box {...props} />)(({ theme }) => ({
+    height: 800,
+    backgroundImage: `url(${"../../img/ukraine.jpeg"})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    borderRadius: '20px',
+    objectFit: 'cover',
+    marginRight:'124px',
+    animation: `${fadeIn} 3s;`,
+    
+    [theme.breakpoints.up('tablet')]: {
+        marginRight:'264px',
+    },
+
+    [theme.breakpoints.up('laptop')]: {
+        marginRight:'369px',
+    }, 
+}));
+
+
 function AboutUkraine() {
+    // const { ref, inView } = useInView({
+    //     threshold: 0
+    //   });
     return (
-        <Box sx={{ position: 'relative' }}>
-            <Box className={styles.flex_img}>
-                <img className={styles.what_is_ukraine_img} src='../../img/ukraine.jpeg' alt='Ukraine' />
-            </Box>
-            <UkraineInfoBlock>
-                <AboutUkraineContainer className={styles.info}>
-                    <Typography variant='h2' className={styles.what_is_ukraine}>What is Ukraine?</Typography>
+        <UkraineBackground sx={{ position: 'relative' }} >
+                <AboutUkraineContainer >
+                    <Typography variant='h2' >What is Ukraine?</Typography>
                         <UkraineTextInfo variant='body1'>You are going to explore the largest country in Europe – a picturesque place where innovative creativity meets ancient traditions, and wonderful legends come into reality.
                             Upon the road you will come to know lots of brave and kind-hearted people.
                             They are fighting for freedom and dignity.
@@ -72,8 +107,7 @@ function AboutUkraine() {
                             So, you’ve got the answer to the question ‘What is Ukraine?’… Welcome, and don’t forget to take a big backpack for some great memories with you!
                         </UkraineTextInfo>
                 </AboutUkraineContainer>
-            </UkraineInfoBlock>
-        </Box>
+        </UkraineBackground>
     );
 }
 
