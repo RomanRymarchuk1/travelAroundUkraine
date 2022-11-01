@@ -1,12 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ImageViewer from 'react-simple-image-viewer';
-
+// eslint-disable-next-line import/no-unresolved
+import 'swiper/css/bundle';
 // eslint-disable-next-line import/no-unresolved
 import 'swiper/css';
 
 // eslint-disable-next-line import/no-unresolved
-import './Swiper.css';
+import './Swiper.scss';
 
 import { Autoplay, FreeMode, Mousewheel, Scrollbar, Zoom, Thumbs, Navigation } from 'swiper';
 
@@ -66,8 +67,8 @@ export default function ImageGallery() {
       >
         {image.map((src, index) => (
           // eslint-disable-next-line react/no-array-index-key
-          <SwiperSlide key={index}>
-            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions,jsx-a11y/click-events-have-key-events */}
+          <SwiperSlide key={src}>
+            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
             <img src={src} alt="" onClick={() => openImageViewer(index)} />
           </SwiperSlide>
         ))}
@@ -82,14 +83,12 @@ export default function ImageGallery() {
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
         slidesPerView="auto"
-        // freeMode={true}
         watchSlidesProgress
         modules={[Navigation, Thumbs]}
         className="thumbsSwiper"
       >
-        {image.map((src, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <SwiperSlide key={index}>
+        {image.map((src) => (
+          <SwiperSlide key={src}>
             <img src={src} alt="" />
           </SwiperSlide>
         ))}
