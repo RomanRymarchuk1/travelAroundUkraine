@@ -8,20 +8,6 @@
   -ms-animation: fadeIn 6s;
 }
 
-.info:hover {
-  background-color: #0499DD;
-  transition: 2s;
-  box-shadow:
-    1px 1px #EDEDED,
-    2px 2px #EDEDED,
-    3px 3px #EDEDED,
-    4px 4px #EDEDED,
-    5px 5px #EDEDED,
-    6px 6px #EDEDED,
-    7px 7px #EDEDED;
-  -webkit-transform: translateX(-60px);
-  transform: translateX(-60px);
-}
 
 .info:hover .what_is_ukraine {
   color: #EDEDED;
@@ -33,6 +19,10 @@
   height: 700px;
   border-radius: 20px;
   object-fit: cover;
+}
+
+.info{
+  transition: 2s;
 }
 
 .info {

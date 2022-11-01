@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Container, Typography, Box, styled } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { ImageCarousel } from '../../components';
-import AboutUkraine from '../../components/AboutUkraine/AboutUkraine'
+import { AboutUkraine, ImageCarousel, } from '../../components';
+
+
 
 // eslint-disable-next-line react/jsx-props-no-spreading
 const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({ theme }) => ({
