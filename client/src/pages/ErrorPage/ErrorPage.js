@@ -13,6 +13,7 @@ const ErrorContainer = styled('dix')({
     justifyContent: 'center',
     '& > img': {
       width: '50vw',
+      maxWidth: '500px',
     },
   },
   '& > h2': {
@@ -34,7 +35,7 @@ const ErrorPage = () => {
       </Box>
       <Typography variant="h2">404 not found</Typography>
       <Typography>Please, navigate to main page to plan your trip</Typography>
-      <Box>
+      <Box sx={{ mt: '40px' }}>
         <Button onClick={() => navigate('/')}>Home</Button>
       </Box>
     </ErrorContainer>
