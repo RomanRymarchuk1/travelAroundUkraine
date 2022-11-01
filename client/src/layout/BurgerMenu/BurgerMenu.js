@@ -38,19 +38,12 @@ const BurgerMenu = () => {
 
   const boxSX = {
     flexGrow: 1,
-    display: { sx: 'flex', laptop: 'none' },
+    display: { xs: 'flex', laptop: 'none' },
     justifyContent: 'flex-end',
   };
 
-  const menuIconSX = {
-    '&:hover': {
-      color: 'yellow',
-      transition: '0.5s',
-    },
-  };
-
   const menuSX = {
-    display: { sx: 'flex', laptop: 'none' },
+    display: { xs: 'flex', laptop: 'none' },
   };
 
   const menuItemSX = {
@@ -81,7 +74,7 @@ const BurgerMenu = () => {
         color="inherit"
         sx={{ padding: 0 }}
       >
-        <MenuIcon sx={menuIconSX} />
+        <MenuIcon />
       </IconButton>
 
       <Menu

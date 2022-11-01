@@ -22,11 +22,12 @@ const pages = [
   },
 ];
 
-const TubletMenu = () => {
+const TabletMenu = () => {
   const boxSX = {
     flexGrow: 1,
-    display: { sx: 'none', laptop: 'flex' },
+    display: { xs: 'none', laptop: 'flex' },
     justifyContent: 'flex-end',
+    alignItems: 'center',
   };
 
   return (
@@ -45,4 +46,4 @@ const TubletMenu = () => {
   );
 };
 
-export default TubletMenu;
+export default TabletMenu;

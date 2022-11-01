@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
+import { AppBar, Toolbar, Container } from '@mui/material';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import TabletMenu from '../TabletMenu/TabletMenu';
 import LogoHeader from '../LogoHeader/LogoHeader';
 import HeaderSearchField from '../HeaderSearchField/HeaderSearchField';
+import appliedTheme from '../../theme/theme';
 
 const Header = () => {
   const [scrollY, setScrollY] = useState();
 
-  useEffect(() => document.addEventListener('scroll', () => setScrollY(window.scrollY)), []);
+  useEffect(() => {
+    const handleScrollY = () => setScrollY(window.scrollY);
+    document.addEventListener('scroll', handleScrollY);
 
-  const appBarSX =
-    scrollY > 400 ? { background: 'gray', transition: '0.3s' } : { background: 'none', transition: '0.3s' };
+    return () => document.removeEventListener('scroll', handleScrollY);
+  }, []);
+
+  const appBarSX = {
+    background: scrollY > 400 ? appliedTheme.palette.primary.main : 'none',
+    boxShadow: scrollY > 400 ? null : 'none',
+    py: { xs: 1, tablet: 1.5, laptop: 2 },
+    opacity: 0.95,
+    transition: '0.3s',
+  };
 
   return (
-    <AppBar position="fixed" sx={appBarSX}>
+    <AppBar sx={appBarSX}>
       <Container>
         <Toolbar disableGutters>
           <LogoHeader />
