@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import styles from './ErrorPage.module.scss';
 
 const ErrorContainer = styled('dix')({
   width: '100%',
@@ -26,7 +26,7 @@ const ErrorContainer = styled('dix')({
 });
 
 const ErrorPage = () => {
-  const { navigataionList } = styles;
+  const navigate = useNavigate();
   return (
     <ErrorContainer>
       <Box>
@@ -35,13 +35,7 @@ const ErrorPage = () => {
       <Typography variant="h2">404 not found</Typography>
       <Typography>Please, navigate to main page to plan your trip</Typography>
       <Box>
-        <Typography component="nav" className={navigataionList}>
-          <Typography component="ul">
-            <Typography component="li">
-              <Link to="/">Home</Link>
-            </Typography>
-          </Typography>
-        </Typography>
+        <Button onClick={() => navigate('/')}>Home</Button>
       </Box>
     </ErrorContainer>
   );
