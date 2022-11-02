@@ -194,11 +194,11 @@ const Footer = () => (
           </Typography>
           <ContactsInfo>
             <Box>
-              <SmartphoneOutlinedIcon color="white" />
+              <SmartphoneOutlinedIcon sx={{ color: 'primary.contrastText' }} />
               <MUILink href="tel:+380661482997">+38 (066) 148 29 97</MUILink>
             </Box>
             <Box>
-              <LocationOnOutlinedIcon color="white" />
+              <LocationOnOutlinedIcon sx={{ color: 'primary.contrastText' }} />
               <MUILink
                 rel="noreferrer"
                 target="_blank"
