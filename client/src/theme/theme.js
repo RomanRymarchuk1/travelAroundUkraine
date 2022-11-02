@@ -16,6 +16,8 @@ const colors = {
   primaryMain: '#0499DD',
   secondaryMain: '#FFC700',
   textPrimary: '#282828',
+  bttnBgColorMain: 'linear-gradient(92.71deg, #0499DD 0%, #17C1BC 100%)',
+  bttnBgColorDark: 'linear-gradient(92.71deg, #0685bf 0%, #15a19d 100%)',
 };
 
 const appliedTheme = createTheme({
@@ -49,21 +51,21 @@ const appliedTheme = createTheme({
       fontWeight: 700,
       fontSize: '24px',
       lineHeight: '29px',
-      color: theme.palette.primary.main,
+      color: colors.primaryMain,
     },
 
     h3: {
       fontWeight: 700,
       fontSize: '18px',
       lineHeight: '22px',
-      color: theme.palette.primary.main,
+      color: colors.primaryMain,
     },
 
     body1: {
       fontWeight: 500,
       fontSize: '14px',
       lineHeight: '17px',
-      color: theme.palette.text.primary,
+      color: colors.textPrimary,
     },
   },
 
@@ -76,15 +78,17 @@ const appliedTheme = createTheme({
 
       styleOverrides: {
         root: {
-          background: 'linear-gradient(92.71deg, #0499DD 0%, #17C1BC 100%)',
+          background: colors.bttnBgColorMain,
           padding: '16px 53px',
           borderRadius: '60px',
           fontSize: '14px',
           fontWeight: 700,
           lineHeight: '17px',
+          transition: '0.5s',
+
           '&:hover': {
-            color: theme.palette.secondary.main,
-            background: 'linear-gradient(92.71deg, #0685bf 0%, #15a19d 100%)',
+            color: colors.secondaryMain,
+            background: colors.bttnBgColorDark,
           },
         },
       },
