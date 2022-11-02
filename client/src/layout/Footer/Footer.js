@@ -58,17 +58,17 @@ const FooterContainer = styled(Box)(({ theme }) => ({
   paddingBottom: '10px',
 }));
 
-const FooterWrapper = styled('div')({
+const FooterWrapper = styled(Box)(({ theme }) => ({
   margin: '0 auto',
   padding: '30px',
   maxWidth: '1200px',
-  '@media (min-width: 768px)': {
+  [theme.breakpoints.up('tablet')]: {
     '& > div': {
       display: 'flex',
       gap: '30px',
     },
   },
-});
+}));
 
 const OurAwards = styled('div')({
   '& > h3': {
