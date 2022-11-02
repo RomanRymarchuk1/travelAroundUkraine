@@ -1,8 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import { NavLink } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
+import { NavLink, useLocation } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import styles from './TabletMenu.module.scss';
+import appliedTheme from '../../theme/theme';
 
 const pages = [
   {
@@ -23,6 +24,10 @@ const pages = [
 ];
 
 const TabletMenu = () => {
+  const location = useLocation();
+
+  const { pathname } = location;
+
   const boxSX = {
     flexGrow: 1,
     display: { xs: 'none', laptop: 'flex' },
@@ -30,17 +35,31 @@ const TabletMenu = () => {
     alignItems: 'center',
   };
 
+  const typograpySX = {
+    textDecoration: 'none',
+    display: 'block',
+    margin: '0 36px',
+    transition: '0.5s',
+    fontSize: { laptop: '18px' },
+
+    '&:hover': {
+      color: appliedTheme.palette.secondary.main,
+    },
+  };
+
   return (
     <Box component="nav" sx={boxSX}>
       {pages.map(({ name, link, innerContent }) => (
-        <NavLink
+        <Typography
+          component={NavLink}
           to={link}
           key={name}
-          className={({ isActive }) => (isActive ? `${styles.actveMenuItem} ${styles.menuItem}` : styles.menuItem)}
+          sx={typograpySX}
+          style={pathname === link ? { color: appliedTheme.palette.secondary.main } : null}
           end
         >
           {innerContent}
-        </NavLink>
+        </Typography>
       ))}
     </Box>
   );

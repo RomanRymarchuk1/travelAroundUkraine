@@ -33,6 +33,8 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
+    color: 'rgb(40, 40, 40)',
+    // fontSize: { xs: '14px', tablet: '16px', laptop: '20px' },
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
@@ -51,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const HeaderSearchField = () => (
   <Search>
     <SearchIconWrapper>
-      <SearchIcon />
+      <SearchIcon sx={{ color: 'rgb(40, 40, 40)' }} />
     </SearchIconWrapper>
     <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
   </Search>

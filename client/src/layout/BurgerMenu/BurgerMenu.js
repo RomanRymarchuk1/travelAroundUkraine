@@ -5,7 +5,6 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
-import styles from './BurgerMenu.module.scss';
 
 const pages = [
   {
@@ -24,6 +23,14 @@ const pages = [
     innerContent: 'Cart',
   },
 ];
+
+const styleNavLink = {
+  display: 'block',
+  textDecoration: 'none',
+  color: 'black',
+  width: '100%',
+  padding: '6px 16px',
+};
 
 const BurgerMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -71,8 +78,7 @@ const BurgerMenu = () => {
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={handleOpenNavMenu}
-        color="inherit"
-        sx={{ padding: 0 }}
+        sx={{ padding: 0, color: 'rgb(40, 40, 40)' }}
       >
         <MenuIcon />
       </IconButton>
@@ -89,7 +95,7 @@ const BurgerMenu = () => {
       >
         {pages.map(({ name, link, innerContent }) => (
           <MenuItem key={name} onClick={handleCloseNavMenu} sx={menuItemSX}>
-            <NavLink to={link} key={name} onClick={handleCloseNavMenu} className={styles.menuItemLink}>
+            <NavLink to={link} key={name} onClick={handleCloseNavMenu} style={styleNavLink}>
               {innerContent}
             </NavLink>
           </MenuItem>
