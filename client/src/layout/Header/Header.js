@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Container } from '@mui/material';
-import BurgerMenu from '../BurgerMenu/BurgerMenu';
-import TabletMenu from '../TabletMenu/TabletMenu';
-import LogoHeader from '../LogoHeader/LogoHeader';
-import HeaderSearchField from '../HeaderSearchField/HeaderSearchField';
+import { BurgerMenu, TabletMenu, LogoHeader, HeaderSearchField } from '../../components';
 import appliedTheme from '../../theme/theme';
 
 const Header = () => {
