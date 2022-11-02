@@ -81,12 +81,6 @@ const OurAwards = styled('div')({
   },
 });
 
-const ContactsData = styled('div')({
-  '& > h3': {
-    color: 'white',
-  },
-});
-
 const ContactsInfo = styled('div')({
   display: 'flex',
   flexDirection: 'column',
@@ -123,7 +117,7 @@ const SocialIcons = styled('div')({
   },
 });
 
-const RecentTrips = styled('div')({
+const RecentTrips = styled(Box)(({ theme }) => ({
   display: 'grid',
   columnGap: '5px',
   gap: '10px',
@@ -134,13 +128,13 @@ const RecentTrips = styled('div')({
     width: '100%',
     borderRadius: '5px',
   },
-  '@media (min-width: 768px)': {
+  [theme.breakpoints.up('tablet')]: {
     gridTemplateColumns: 'repeat(2, 1fr)',
   },
-  '@media (min-width: 950px)': {
+  [theme.breakpoints.up('laptop')]: {
     gridTemplateColumns: 'repeat(3, 1fr)',
   },
-});
+}));
 
 const FooterNavigation = styled('div')({
   borderTop: '1px solid rgba($color: #ffffff, $alpha: 0.5)',
@@ -194,7 +188,7 @@ const Footer = () => (
             alt="awards_mage"
           />
         </OurAwards>
-        <ContactsData>
+        <Box>
           <Typography variant="h3" sx={{ color: 'primary.contrastText' }}>
             Contact info
           </Typography>
@@ -235,7 +229,7 @@ const Footer = () => (
               </Box>
             </SocialIcons>
           </ContactsInfo>
-        </ContactsData>
+        </Box>
         <Box>
           <Typography sx={{ color: 'primary.contrastText' }} variant="h3">
             Recent Trips
@@ -264,7 +258,7 @@ const Footer = () => (
           </NavigationList>
         </Box>
       </Box>
-      <Typography sx={{ color: 'white' }}>© Copyright travel around ukraine project team</Typography>
+      <Typography sx={{ color: 'primary.contrastText' }}>© Copyright travel around ukraine project team</Typography>
     </FooterNavigation>
   </FooterContainer>
 );
