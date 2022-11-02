@@ -145,6 +145,7 @@ const FooterNavigation = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'row-reverse',
     justifyContent: 'space-between',
+    alignItems: 'center',
     '& > *': { display: 'flex', gap: '30px' },
   },
 }));
