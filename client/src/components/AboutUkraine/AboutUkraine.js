@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react'
-import {Box, Typography, styled, keyframes  } from '@mui/material';
-// import { useInView } from 'react-intersection-observer';
+import React from 'react';
+import {Box, Typography, styled,   } from '@mui/material';
+import { motion } from 'framer-motion';
 
 const UkraineTextInfo = styled((props) => <Typography  {...props} />)(({ theme }) => ({
     [theme.breakpoints.up('tablet')]: {
@@ -28,7 +28,7 @@ const AboutUkraineContainer = styled((props) => <Box {...props} />)(({ theme }) 
     '&:hover':{
         backgroundColor: theme.palette.primary.main,
         animation: `
-        -webkitTransform: translateX(-60px);
+        webkitTransform: translateX(-60px);
         transform: translateX(-60px);`,
         boxShadow: '1px 1px #ededed, 2px 2px #ededed, 3px 3px #ededed, 4px 4px #ededed, 5px 5px #ededed, 6px 6px #ededed,  7px 7px #ededed',
     },
@@ -52,24 +52,14 @@ const AboutUkraineContainer = styled((props) => <Box {...props} />)(({ theme }) 
     },
 }));
 
-const fadeIn = keyframes`
-0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`;
-
 const UkraineBackground = styled((props) => <Box {...props} />)(({ theme }) => ({
     height: 749,
-    backgroundImage: `url(${"../../assets/imgAboutUkraineSection/ukraine.jpeg"})`,
+    backgroundImage: `url(${"./assets/images/aboutUkraineSection/ukraine.jpeg"})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     borderRadius: '20px',
     objectFit: 'cover',
     marginRight:'124px',
-    animation: `${fadeIn} 3s;`,
     
     [theme.breakpoints.up('tablet')]: {
         marginRight:'264px',
@@ -80,13 +70,26 @@ const UkraineBackground = styled((props) => <Box {...props} />)(({ theme }) => (
     }, 
 }));
 
+const blockAnimation = {
+    hidden: {
+        x: -100,
+        opacity: 0,
+    },
+    visible: {
+        x: 0,
+        opacity: 1,
+        transition: '60s',
+    },
+}
 
 function AboutUkraine() {
-    // const { ref, inView } = useInView({
-    //     threshold: 0
-    //   });
     return (
-        <UkraineBackground sx={{ position: 'relative' }} >
+        <motion.section 
+        initial='hidden' 
+        viewport={{amount: 0.3}}
+        whileInView='visible' 
+        variants={blockAnimation}>
+<UkraineBackground  sx={{ position: 'relative' }} >
                 <AboutUkraineContainer >
                     <Typography variant='h2' >What is Ukraine?</Typography>
                         <UkraineTextInfo >You are going to explore the largest country in Europe – a picturesque place where innovative creativity meets ancient traditions, and wonderful legends come into reality.
@@ -103,6 +106,7 @@ function AboutUkraine() {
                         </UkraineTextInfo>
                 </AboutUkraineContainer>
         </UkraineBackground>
+        </motion.section>
     );
 }
 
