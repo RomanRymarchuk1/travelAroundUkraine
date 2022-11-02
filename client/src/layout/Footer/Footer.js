@@ -137,7 +137,7 @@ const RecentTrips = styled(Box)(({ theme }) => ({
 }));
 
 const FooterNavigation = styled(Box)(({ theme }) => ({
-  borderTop: '1px solid rgba($color: #ffffff, $alpha: 0.5)',
+  borderTop: '1px solid  #fff',
   margin: '0 auto',
   padding: '30px',
   maxWidth: '1200px',
