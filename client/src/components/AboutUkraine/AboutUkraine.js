@@ -3,15 +3,12 @@ import React from 'react'
 import {Box, Typography, styled, keyframes  } from '@mui/material';
 // import { useInView } from 'react-intersection-observer';
 
-const UkraineTextInfo = styled((props) => <Typography variant="body1" {...props} />)(({ theme }) => ({
+const UkraineTextInfo = styled((props) => <Typography  {...props} />)(({ theme }) => ({
     [theme.breakpoints.up('tablet')]: {
         padding: '10px',
-        fontSize: '18px',
-        lineHeight: '1.2',
     },
 
     [theme.breakpoints.up('laptop')]: {
-        fontSize: '18px',
         padding: '20px'
     },
 }));
@@ -29,15 +26,15 @@ const AboutUkraineContainer = styled((props) => <Box {...props} />)(({ theme }) 
     padding: '20px',
    
     '&:hover':{
-        backgroundColor: '#0499dd',
+        backgroundColor: theme.palette.primary.main,
         animation: `
-        -webkit-transform: translateX(-60px);
+        -webkitTransform: translateX(-60px);
         transform: translateX(-60px);`,
         boxShadow: '1px 1px #ededed, 2px 2px #ededed, 3px 3px #ededed, 4px 4px #ededed, 5px 5px #ededed, 6px 6px #ededed,  7px 7px #ededed',
     },
 
     '&:hover h2':{
-       color:'white'
+       color: theme.palette.secondary.main
     },
 
     [theme.breakpoints.up('tablet')]: {
@@ -55,20 +52,20 @@ const AboutUkraineContainer = styled((props) => <Box {...props} />)(({ theme }) 
     },
 }));
 
-
 const fadeIn = keyframes`
 0% {
     opacity: 0;
   }
-
   100% {
     opacity: 1;
   }
 `;
 
+// ../../img/ukraine.jpeg
+
 const UkraineBackground = styled((props) => <Box {...props} />)(({ theme }) => ({
     height: 800,
-    backgroundImage: `url(${"../../img/ukraine.jpeg"})`,
+    backgroundImage: `url(${"../../assets/imgAboutUkraineSection/ukraine.jpeg"})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     borderRadius: '20px',
@@ -94,13 +91,13 @@ function AboutUkraine() {
         <UkraineBackground sx={{ position: 'relative' }} >
                 <AboutUkraineContainer >
                     <Typography variant='h2' >What is Ukraine?</Typography>
-                        <UkraineTextInfo variant='body1'>You are going to explore the largest country in Europe – a picturesque place where innovative creativity meets ancient traditions, and wonderful legends come into reality.
+                        <UkraineTextInfo >You are going to explore the largest country in Europe – a picturesque place where innovative creativity meets ancient traditions, and wonderful legends come into reality.
                             Upon the road you will come to know lots of brave and kind-hearted people.
                             They are fighting for freedom and dignity.
                             They are searching for peace and prosperity.
                             They are transforming Ukraine into a modern country, unique business hub and new all-season tourist destination.
                         </UkraineTextInfo>
-                        <UkraineTextInfo variant='body1'>
+                        <UkraineTextInfo >
                             Now get closer. The time has come to unlock the great and still less than fully realized potential of Ukraine.
                             It is our time.
                             And it starts right NOW.
