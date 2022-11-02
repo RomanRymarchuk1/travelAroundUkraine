@@ -2,6 +2,7 @@ import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import appliedTheme from '../../theme/theme';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -33,8 +34,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
-    color: 'rgb(40, 40, 40)',
-    // fontSize: { xs: '14px', tablet: '16px', laptop: '20px' },
+    color: appliedTheme.palette.text.primary,
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
@@ -53,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const HeaderSearchField = () => (
   <Search>
     <SearchIconWrapper>
-      <SearchIcon sx={{ color: 'rgb(40, 40, 40)' }} />
+      <SearchIcon sx={{ color: appliedTheme.palette.text.primary }} />
     </SearchIconWrapper>
     <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
   </Search>

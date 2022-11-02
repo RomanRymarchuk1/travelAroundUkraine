@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom';
+import appliedTheme from '../../theme/theme';
 
 const pages = [
   {
@@ -27,7 +28,7 @@ const pages = [
 const styleNavLink = {
   display: 'block',
   textDecoration: 'none',
-  color: 'black',
+  color: appliedTheme.palette.text.primary,
   width: '100%',
   padding: '6px 16px',
 };
@@ -78,7 +79,7 @@ const BurgerMenu = () => {
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={handleOpenNavMenu}
-        sx={{ padding: 0, color: 'rgb(40, 40, 40)' }}
+        sx={{ padding: 0, color: appliedTheme.palette.text.primary }}
       >
         <MenuIcon />
       </IconButton>
