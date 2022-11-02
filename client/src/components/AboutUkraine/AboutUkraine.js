@@ -61,10 +61,8 @@ const fadeIn = keyframes`
   }
 `;
 
-// ../../img/ukraine.jpeg
-
 const UkraineBackground = styled((props) => <Box {...props} />)(({ theme }) => ({
-    height: 800,
+    height: 749,
     backgroundImage: `url(${"../../assets/imgAboutUkraineSection/ukraine.jpeg"})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
