@@ -52,12 +52,11 @@ const footerGallery = [
     altDescription: 'recent_trips_image',
   },
 ];
-
-const FooterContainer = styled('div')({
-  color: 'white',
-  backgroundColor: 'black',
+const FooterContainer = styled(Box)(({ theme }) => ({
+  color: theme.palette.primary.contrastText,
+  backgroundColor: theme.palette.text.primary,
   paddingBottom: '10px',
-});
+}));
 
 const FooterWrapper = styled('div')({
   margin: '0 auto',
