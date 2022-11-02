@@ -70,16 +70,16 @@ const FooterWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-const OurAwards = styled('div')({
+const OurAwards = styled(Box)(({ theme }) => ({
   '& > h3': {
     paddingBottom: '30px',
-    color: 'white',
+    color: theme.palette.primary.contrastText,
   },
   '& > p': {
     paddingBottom: '30px',
-    color: 'white',
+    color: theme.palette.primary.contrastText,
   },
-});
+}));
 
 const ContactsInfo = styled(Box)(({ theme }) => ({
   display: 'flex',
