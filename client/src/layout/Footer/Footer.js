@@ -196,7 +196,9 @@ const Footer = () => (
           />
         </OurAwards>
         <ContactsData>
-          <Typography variant="h3">Contact info</Typography>
+          <Typography variant="h3" sx={{ color: 'primary.contrastText' }}>
+            Contact info
+          </Typography>
           <ContactsInfo>
             <Box>
               <SmartphoneOutlinedIcon color="white" />
@@ -236,13 +238,13 @@ const Footer = () => (
           </ContactsInfo>
         </ContactsData>
         <Box>
-          <Typography sx={{ color: 'white' }} variant="h3">
+          <Typography sx={{ color: 'primary.contrastText' }} variant="h3">
             Recent Trips
           </Typography>
           <RecentTrips>
             {footerGallery.map((el) => (
               <Link to="/catalogue">
-                <Typography component="img" src={el.imagePath} alt={el.altDescription} />
+                <Box component="img" src={el.imagePath} alt={el.altDescription} />
               </Link>
             ))}
           </RecentTrips>
@@ -251,17 +253,17 @@ const Footer = () => (
     </FooterWrapper>
     <FooterNavigation>
       <Box>
-        <Typography component="nav">
+        <Box component="nav">
           <NavigationList>
             {navigationMenu.map((el) => (
-              <Typography key={el.name} component="li">
+              <li key={el.name}>
                 <Link onClick={() => scrollToTop('smooth')} to={el.path}>
                   {el.name}
                 </Link>
-              </Typography>
+              </li>
             ))}
           </NavigationList>
-        </Typography>
+        </Box>
       </Box>
       <Typography sx={{ color: 'white' }}>© Copyright travel around ukraine project team</Typography>
     </FooterNavigation>
