@@ -8,6 +8,9 @@ const ErrorContainer = styled('div')({
   width: '100%',
   height: '100%',
   textAlign: 'center',
+  '& > *': {
+    padding: '10px',
+  },
   '& > div': {
     display: 'flex',
     justifyContent: 'center',
