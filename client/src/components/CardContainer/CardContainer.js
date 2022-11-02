@@ -2,13 +2,12 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation} from 'swiper'
+import {Box, Typography} from "@mui/material";
 import CardItem from '../CardItem';
 import styles from './CardContainer.module.scss';
 
 
 import 'swiper/swiper.min.css'
-
-
 
 
 const cards = [
@@ -57,14 +56,18 @@ const cards = [
 
 const CardContainer = () =>
 
-    <div className={styles.cardContainer}>
+    <Box className={styles.cardContainer}>
         <div className={styles.headerContainer}>
-            <h2 className={styles.header}>Popular tours</h2>
-            <NavLink className={styles.allTours} to="/catalogue">View All</NavLink>
+            <Typography variant="h2" className={styles.header}>Popular tours</Typography>
+            <NavLink to="/catalogue">
+                <Typography
+                    className={styles.allTours}>View All
+                </Typography>
+            </NavLink>
         </div>
         <div className={styles.swiperContainer}>
-            <div id='previous' className={styles.btnPrev}> </div>
-            <div id='next' className={styles.btnNext}> </div>
+            <div id='previous' className={styles.btnPrev}/>
+            <div id='next' className={styles.btnNext}/>
             <Swiper
                 breakpoints={{
                     265: {
@@ -109,8 +112,7 @@ const CardContainer = () =>
                 ))}
             </Swiper>
         </div>
-    </div>
-
+    </Box>
 
 
 export default CardContainer;
