@@ -188,7 +188,7 @@ const Footer = () => (
             Ukraine is a country of brave people and countless opportunities. Here you will be accepted as a relative,
             surrounded by care as at home and get everything done as one would do it for themselves
           </Typography>
-          <Typography
+          <Box
             sx={{ width: '250px', marginTop: '30px', paddingBottom: '40px' }}
             component="img"
             src="./assets/images/footer/awards.png"
