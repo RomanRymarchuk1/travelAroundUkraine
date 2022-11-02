@@ -1,15 +1,12 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 
-const ErrorContainer = styled('div')({
+const ErrorWrapper = styled('div')({
   width: '100%',
   height: '100%',
   textAlign: 'center',
-  '& > *': {
-    padding: '10px',
-  },
   '& > div': {
     display: 'flex',
     justifyContent: 'center',
@@ -23,18 +20,20 @@ const ErrorContainer = styled('div')({
 const ErrorPage = () => {
   const navigate = useNavigate();
   return (
-    <ErrorContainer>
-      <Box>
-        <Box src="./assets/images/404/heart.png" component="img" alt="uk-flag" />
-      </Box>
-      <Typography sx={{ mb: '40px' }} variant="h2">
-        404 not found
-      </Typography>
-      <Typography>Please, navigate to main page to plan your trip</Typography>
-      <Box sx={{ mt: '40px' }}>
-        <Button onClick={() => navigate('/')}>Home</Button>
-      </Box>
-    </ErrorContainer>
+    <Container>
+      <ErrorWrapper>
+        <Box>
+          <Box src="./assets/images/404/heart.png" component="img" alt="uk-flag" />
+        </Box>
+        <Typography sx={{ mb: '40px' }} variant="h2">
+          404 not found
+        </Typography>
+        <Typography>Please, navigate to main page to plan your trip</Typography>
+        <Box sx={{ mt: '40px' }}>
+          <Button onClick={() => navigate('/')}>Home</Button>
+        </Box>
+      </ErrorWrapper>
+    </Container>
   );
 };
 
