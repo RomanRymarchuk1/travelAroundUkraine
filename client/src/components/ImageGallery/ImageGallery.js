@@ -2,6 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ImageViewer from 'react-simple-image-viewer';
+// import { Box } from '@mui/material';
 
 import 'swiper/css/bundle';
 import 'swiper/css';
