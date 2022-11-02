@@ -1,12 +1,11 @@
+/* eslint-disable import/no-unresolved */
 import React, { useState, useCallback } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ImageViewer from 'react-simple-image-viewer';
-// eslint-disable-next-line import/no-unresolved
+
 import 'swiper/css/bundle';
-// eslint-disable-next-line import/no-unresolved
 import 'swiper/css';
 
-// eslint-disable-next-line import/no-unresolved
 import './Swiper.scss';
 
 import { Autoplay, FreeMode, Mousewheel, Scrollbar, Zoom, Thumbs, Navigation } from 'swiper';
