@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
-import Button from '@mui/material/Button';
+import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 
