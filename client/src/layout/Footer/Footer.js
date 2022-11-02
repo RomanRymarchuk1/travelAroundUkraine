@@ -81,7 +81,7 @@ const OurAwards = styled('div')({
   },
 });
 
-const ContactsInfo = styled('div')({
+const ContactsInfo = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -97,10 +97,10 @@ const ContactsInfo = styled('div')({
     '& > p': {
       marginLeft: '10px',
       marginBottom: '20px',
-      color: 'white',
+      color: theme.palette.primary.contrastText,
     },
   },
-});
+}));
 
 const SocialIcons = styled('div')({
   display: 'flex',
@@ -170,28 +170,6 @@ const NavigationList = styled('ul')(({ theme }) => ({
     paddingBottom: '0',
   },
 }));
-
-// const NavigationList = styled('ul')({
-//   display: 'flex',
-//   justifyContent: 'left',
-//   alignItems: 'center',
-//   gap: '20px',
-//   padding: '0',
-//   paddingBottom: '20px',
-//   '& > li': {
-//     listStyleType: 'none',
-//     ' & > a': {
-//       textDecoration: 'none',
-//       color: theme.palette.primary.contrastText,
-//       '&:hover': {
-//         color: theme.palette.secondary.main,
-//       },
-//     },
-//   },
-//   '@media *min-width: 768px': {
-//     paddingBottom: '0',
-//   },
-// });
 
 const Footer = () => (
   <FooterContainer>
