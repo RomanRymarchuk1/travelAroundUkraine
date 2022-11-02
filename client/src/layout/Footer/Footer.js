@@ -7,10 +7,9 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { Box, Typography, Link as MUILink } from '@mui/material';
+import { Box, Typography, Link as MUILink, styled } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import scrollToTop from '../../utils/scrollToTop/scrollToTop';
+import { scrollToTop } from '../../utils';
 
 const navigationMenu = [
   {
