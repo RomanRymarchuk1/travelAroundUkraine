@@ -136,20 +136,20 @@ const RecentTrips = styled(Box)(({ theme }) => ({
   },
 }));
 
-const FooterNavigation = styled('div')({
+const FooterNavigation = styled(Box)(({ theme }) => ({
   borderTop: '1px solid rgba($color: #ffffff, $alpha: 0.5)',
   margin: '0 auto',
   padding: '30px',
   maxWidth: '1200px',
-  '@media (min-width: 768px)': {
+  [theme.breakpoints.up('tablet')]: {
     display: 'flex',
     flexDirection: 'row-reverse',
     justifyContent: 'space-between',
     '& > *': { display: 'flex', gap: '30px' },
   },
-});
+}));
 
-const NavigationList = styled('ul')({
+const NavigationList = styled('ul')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'left',
   alignItems: 'center',
@@ -160,16 +160,38 @@ const NavigationList = styled('ul')({
     listStyleType: 'none',
     ' & > a': {
       textDecoration: 'none',
-      color: 'white',
+      color: theme.palette.primary.contrastText,
       '&:hover': {
-        color: 'blue',
+        color: theme.palette.secondary.main,
       },
     },
   },
-  '@media *min-width: 768px': {
+  [theme.breakpoints.up('tablet')]: {
     paddingBottom: '0',
   },
-});
+}));
+
+// const NavigationList = styled('ul')({
+//   display: 'flex',
+//   justifyContent: 'left',
+//   alignItems: 'center',
+//   gap: '20px',
+//   padding: '0',
+//   paddingBottom: '20px',
+//   '& > li': {
+//     listStyleType: 'none',
+//     ' & > a': {
+//       textDecoration: 'none',
+//       color: theme.palette.primary.contrastText,
+//       '&:hover': {
+//         color: theme.palette.secondary.main,
+//       },
+//     },
+//   },
+//   '@media *min-width: 768px': {
+//     paddingBottom: '0',
+//   },
+// });
 
 const Footer = () => (
   <FooterContainer>
