@@ -24,7 +24,7 @@ const MainSectionText = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   fontsize: 36,
   marginBottom: 0,
-  color: 'white',
+  color: theme.palette.primary.contrastText,
   textTransform: 'uppercase',
   
   [theme.breakpoints.up('tablet')]: {
