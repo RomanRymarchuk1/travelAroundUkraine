@@ -1,7 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable no-undef */
 import { render } from '@testing-library/react';
 import HomePage from './HomePage';
 
