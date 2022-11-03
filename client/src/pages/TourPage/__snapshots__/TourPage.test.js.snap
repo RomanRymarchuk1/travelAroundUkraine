@@ -9,36 +9,16 @@ exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
       <nav
         class="css-rtewkn"
       >
-        <div
-          class="css-152fd1"
-        >
-          <p
-            class="MuiLink-root MuiLink-underlineNone css-10s3667-MuiLink-root"
-            color="primary"
-            component="a"
-            href="#about-tour"
-            variant="body1"
-          >
+        <div>
+          <a>
             About us
-          </p>
-          <p
-            class="MuiLink-root MuiLink-underlineNone css-10s3667-MuiLink-root"
-            color="primary"
-            component="a"
-            href="#reasons-to-choose"
-            variant="body1"
-          >
+          </a>
+          <a>
             Reasons to choose
-          </p>
-          <p
-            class="MuiLink-root MuiLink-underlineNone css-10s3667-MuiLink-root"
-            color="primary"
-            component="a"
-            href="#included"
-            variant="body1"
-          >
+          </a>
+          <a>
             What is included?
-          </p>
+          </a>
         </div>
       </nav>
     </div>
@@ -47,9 +27,7 @@ exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
     class="css-souzgl"
   >
     <div>
-      <div
-        class="css-6qaath"
-      >
+      <div>
         <div
           sx="[object Object]"
         >
@@ -57,9 +35,7 @@ exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
             class="css-hyfiop"
             id="about-tour"
           >
-            <p
-              variant="h2"
-            >
+            <p>
               About tour
             </p>
             <div
@@ -103,44 +79,29 @@ exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
       <div
         class="css-13fe9vk"
       >
-        <div
-          alignitems="center"
-          direction="row"
-          justifycontent="space-between"
-        >
-          <p
-            class="css-15abi6z"
-          >
+        <div>
+          <p>
             €70
           </p>
-          <button
-            sx="[object Object]"
-          >
+          <button>
             More info
           </button>
         </div>
       </div>
     </div>
-    <div
-      class="css-v912gw"
-      style="webkit-transform: translateY(NaNpx); transform: translateY(NaNpx); webkit-transition: -webkit-transform 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms; transition: transform 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;"
-    >
-      <div>
-        <div
-          alignitems="center"
-          direction="row"
-          justifycontent="space-between"
-        >
-          <p
-            class="css-15abi6z"
-          >
-            €70
-          </p>
-          <button
-            sx="[object Object]"
-          >
-            More info
-          </button>
+    <div>
+      <div
+        class="css-v912gw"
+      >
+        <div>
+          <div>
+            <p>
+              €70
+            </p>
+            <button>
+              More info
+            </button>
+          </div>
         </div>
       </div>
     </div>
