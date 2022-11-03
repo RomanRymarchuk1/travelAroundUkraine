@@ -7,6 +7,7 @@ import BurgerMenu from './BurgerMenu/BurgerMenu';
 import HeaderSearchField from './HeaderSearchField/HeaderSearchField';
 import LogoHeader from './LogoHeader/LogoHeader';
 import TabletMenu from './TabletMenu/TabletMenu';
+import CatalogTourCard from './CatalogTourCard/CatalogTourCard';
 
 export {
   TourAccordion,
@@ -18,4 +19,5 @@ export {
   HeaderSearchField,
   LogoHeader,
   TabletMenu,
+  CatalogTourCard,
 };
