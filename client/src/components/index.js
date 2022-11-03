@@ -3,7 +3,21 @@ import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import TourAccordion from './TourAccordion/TourAccordion';
 import TourInfoDialog from './TourInfoDialog/TourInfoDialog';
 import TourReasonToChoose from './TourReasonToChoose/TourReasonToChoose';
-// eslint-disable-next-line import/no-unresolved
-import  AboutUkraine from './AboutUkraine/AboutUkraine'
+import BurgerMenu from './BurgerMenu/BurgerMenu';
+import HeaderSearchField from './HeaderSearchField/HeaderSearchField';
+import LogoHeader from './LogoHeader/LogoHeader';
+import TabletMenu from './TabletMenu/TabletMenu';
+import AboutUkraine from './AboutUkraine/AboutUkraine';
 
-export { TourAccordion, TourInfoDialog, TourReasonToChoose,ImageCarousel, ErrorBoundary, AboutUkraine };
+export {
+  TourAccordion,
+  TourInfoDialog,
+  TourReasonToChoose,
+  ImageCarousel,
+  ErrorBoundary,
+  BurgerMenu,
+  HeaderSearchField,
+  LogoHeader,
+  TabletMenu,
+  AboutUkraine,
+};
