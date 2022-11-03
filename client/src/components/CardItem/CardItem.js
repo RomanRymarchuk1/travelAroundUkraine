@@ -7,7 +7,7 @@ const CardItemWrapper = styled("div")({
     minWidth: "265px",
     maxWidth: "265px",
     height: "400px",
-    background: "url('../../../public/assets/images/hotDeals/aerial-view-of-colorful-mixed-forest-shrouded-in-morning-fog-on-a-beautiful-autumn-day.jpg')",
+    background: `url('../../assets/images/hotDeals/aerial-view-of-colorful-mixed-forest-shrouded-in-morning-fog-on-a-beautiful-autumn-day.jpg')`,
     backgroundSize: "cover",
     color: "white",
     position: "relative",
@@ -31,8 +31,8 @@ const CardItemWrapper = styled("div")({
     }
 })
 
-const CardItemPrice = styled('div')({
-    backgroundColor: "#007aff",
+const CardItemPrice = styled(Typography)(({theme}) => ({
+    backgroundColor: theme.palette.primary.main,
     textAlign: "center",
     width: "108px",
     fontSize: "18px",
@@ -43,9 +43,11 @@ const CardItemPrice = styled('div')({
     marginTop: "0",
     position: "absolute",
     zIndex: "1",
-})
+    color: theme.palette.common.white,
+}))
 
-const CardItemHeader = styled("div")({
+// eslint-disable-next-line react/jsx-props-no-spreading
+const CardItemHeader = styled((props) => <Typography variant="h3"{...props}/>)(({theme}) => ({
     position: "absolute",
     fontSize: "20px",
     fontWeight: "bold",
@@ -53,7 +55,8 @@ const CardItemHeader = styled("div")({
     paddingLeft: "25px",
     zIndex: "2",
     textTransform: "uppercase",
-})
+    color: theme.palette.common.white,
+}))
 
 const CardItemLocation = styled('div')({
     display: "flex",
@@ -66,27 +69,27 @@ const CardItemLocation = styled('div')({
     marginTop: "350px",
 })
 
-const CardItemText = styled('div')(
-    {
+const CardItemText = styled(Typography)(({theme}) => ({
         fontSize: "14px",
         margin: "0",
+        color: theme.palette.common.white,
     }
-)
+))
 
 
 const CardItem = () =>
     <CardItemWrapper>
         <CardItemPrice>
-            <Typography color="common.white">$ 200.00</Typography>
+            $ 200.00
         </CardItemPrice>
         <CardItemHeader>
-            <Typography color="common.white" variant="h3">Kyiv city walk</Typography>
+            Kyiv city walk
         </CardItemHeader>
         <CardItemLocation>
             <Box component="img" src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                  alt="location" sx={{paddingRight: "10px"}}/>
             <CardItemText>
-                <Typography color="common.white">Kyiv region</Typography>
+                Kyiv region
             </CardItemText>
             <ArrowForwardIosIcon sx={{marginLeft: "80px"}} fontSize="small"/>
         </CardItemLocation>
