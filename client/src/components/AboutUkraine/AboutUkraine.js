@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import {Box, Typography, styled,   } from '@mui/material';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { motion } from 'framer-motion';
 
 const UkraineTextInfo = styled((props) => <Typography  {...props} />)(({ theme }) => ({
@@ -54,7 +55,7 @@ const AboutUkraineContainer = styled((props) => <Box {...props} />)(({ theme }) 
 
 const UkraineBackground = styled((props) => <Box {...props} />)(({ theme }) => ({
     height: 749,
-    backgroundImage: `url(${"./assets/images/aboutUkraineSection/ukraine.jpeg"})`,
+    backgroundImage: `url(${"././assets/imgAboutUkraineSection/ukraine.jpeg"})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     borderRadius: '20px',
