@@ -1,0 +1,242 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TourInfoDialog snapshot testing should TourInfoDialog without close button match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiBox-root css-1l5oawv"
+  >
+    <div
+      class="MuiBox-root css-1kwkjfv"
+    >
+      <h3
+        class="MuiTypography-root MuiTypography-h3 css-1jjn5p1-MuiTypography-root"
+      >
+        Included
+      </h3>
+      <div
+        class="css-196xmg7-MuiStack-root"
+      >
+        <div
+          class="css-1j887li-MuiStack-root"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          >
+            Professional guide
+          </p>
+        </div>
+        <div
+          class="css-1j887li-MuiStack-root"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          >
+            Accomodation
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiBox-root css-1kwkjfv"
+    >
+      <h3
+        class="MuiTypography-root MuiTypography-h3 css-1jjn5p1-MuiTypography-root"
+      >
+        Dates
+      </h3>
+      <div
+        class="css-1j887li-MuiStack-root"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-ci5apu-MuiSvgIcon-root"
+          data-testid="CalendarMonthIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"
+          />
+        </svg>
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+        >
+          2022.02.01 - 2022.02.25
+        </p>
+      </div>
+    </div>
+    <div
+      class="MuiBox-root css-1kwkjfv"
+    >
+      <h3
+        class="MuiTypography-root MuiTypography-h3 css-1jjn5p1-MuiTypography-root"
+      >
+        Details
+      </h3>
+      <div
+        class="css-14tdmau-MuiStack-root"
+      >
+        <div
+          class="css-1ub4dmn-MuiStack-root"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-ci5apu-MuiSvgIcon-root"
+            data-testid="AccessTimeIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+            />
+            <path
+              d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+            />
+          </svg>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-16gwivt-MuiTypography-root"
+          >
+            Duration
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-32hrya-MuiTypography-root"
+          >
+            3 days
+          </p>
+        </div>
+        <div
+          class="css-1ub4dmn-MuiStack-root"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-ci5apu-MuiSvgIcon-root"
+            data-testid="FlightTakeoffIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M2.5 19h19v2h-19v-2zm19.57-9.36c-.21-.8-1.04-1.28-1.84-1.06L14.92 10l-6.9-6.43-1.93.51 4.14 7.17-4.97 1.33-1.97-1.54-1.45.39 2.59 4.49s7.12-1.9 16.57-4.43c.81-.23 1.28-1.05 1.07-1.85z"
+            />
+          </svg>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-16gwivt-MuiTypography-root"
+          >
+            Departs
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-32hrya-MuiTypography-root"
+          >
+            First city
+          </p>
+        </div>
+        <div
+          class="css-1ub4dmn-MuiStack-root"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-ci5apu-MuiSvgIcon-root"
+            data-testid="KeyboardReturnIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 7v4H5.83l3.58-3.59L8 6l-6 6 6 6 1.41-1.41L5.83 13H21V7z"
+            />
+          </svg>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-16gwivt-MuiTypography-root"
+          >
+            Returns
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-32hrya-MuiTypography-root"
+          >
+            Second city
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiBox-root css-1kwkjfv"
+    >
+      <h3
+        class="MuiTypography-root MuiTypography-h3 css-1jjn5p1-MuiTypography-root"
+      >
+        Currency
+      </h3>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth css-rtvg6-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+          role="button"
+          tabindex="0"
+        >
+          EUR
+        </div>
+        <input
+          aria-hidden="true"
+          class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+          tabindex="-1"
+          value="eur"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+          data-testid="ExpandMoreIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+    <div
+      class="MuiBox-root css-0"
+    >
+      <h3
+        class="MuiTypography-root MuiTypography-h3 css-1jjn5p1-MuiTypography-root"
+      >
+        Total
+      </h3>
+      <div
+        class="css-3y1137-MuiStack-root"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-1hoyjyq-MuiTypography-root"
+        >
+          €70
+        </p>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-disableElevation MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-disableElevation css-fwdzms-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
+          Add to Cart
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
