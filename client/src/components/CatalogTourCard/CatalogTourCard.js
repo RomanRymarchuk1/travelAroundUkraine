@@ -3,6 +3,12 @@ import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent 
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { ReactComponent as CoinsIcon } from '../../svg/CoinsIcon.svg';
 
+const CardContainer = styled(Stack)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.contrastText,
+  borderRadius: 10,
+  boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)',
+}));
+
 const CardImage = styled(CardMedia)(({ theme }) => ({
   width: '100%',
   height: 240,
@@ -36,21 +42,19 @@ const CardButton = styled(Button)(({ theme }) => ({
 }));
 
 const CatalogTourCard = () => (
-  <Stack
-    direction={{ xs: 'column', tablet: 'row' }}
-    sx={{ backgroundColor: 'white', borderRadius: '10px', boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)' }}
-    spacing={1}
-  >
+  <CardContainer direction={{ xs: 'column', tablet: 'row' }} spacing={1}>
+    
     <CardImage
       component="img"
       image="https://visitukraine.today/media/tours/gallery/ALeR7GgYjAqCqfJnQX5ZYKnBcsDZ6MTJs77IIBKi.jpg"
       alt="tour photo"
     />
-
     <CardContent sx={{ padding: '0 30px 0 36px' }}>
+
       <CardTitle variant="h3">Sightseeing tour of Chernivtsi</CardTitle>
 
       <Stack direction="row" spacing={3} alignItems="start" sx={{ marginBottom: '20px' }}>
+
         <Stack direction="row" spacing={1} alignItems="center">
           <CoinsIcon />
           <Typography variant="h3" component="span">
@@ -75,8 +79,10 @@ const CatalogTourCard = () => (
       <CardActions>
         <CardButton href="#">More details</CardButton>
       </CardActions>
+
     </CardContent>
-  </Stack>
+
+  </CardContainer>
 );
 
 export default CatalogTourCard;
