@@ -23,29 +23,29 @@ const pages = [
   },
 ];
 
+const boxSX = {
+  flexGrow: 1,
+  display: { xs: 'none', laptop: 'flex' },
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+};
+
+const typograpySX = {
+  textDecoration: 'none',
+  display: 'block',
+  margin: '0 36px',
+  transition: '0.5s',
+  fontSize: { laptop: '18px' },
+
+  '&:hover': {
+    color: appliedTheme.palette.secondary.main,
+  },
+};
+
 const TabletMenu = () => {
   const location = useLocation();
 
   const { pathname } = location;
-
-  const boxSX = {
-    flexGrow: 1,
-    display: { xs: 'none', laptop: 'flex' },
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  };
-
-  const typograpySX = {
-    textDecoration: 'none',
-    display: 'block',
-    margin: '0 36px',
-    transition: '0.5s',
-    fontSize: { laptop: '18px' },
-
-    '&:hover': {
-      color: appliedTheme.palette.secondary.main,
-    },
-  };
 
   return (
     <Box component="nav" sx={boxSX}>

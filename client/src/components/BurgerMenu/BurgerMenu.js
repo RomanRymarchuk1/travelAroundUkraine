@@ -33,6 +33,33 @@ const styleNavLink = {
   padding: '6px 16px',
 };
 
+const boxSX = {
+  flexGrow: 1,
+  display: { xs: 'flex', laptop: 'none' },
+  justifyContent: 'flex-end',
+};
+
+const menuSX = {
+  display: { xs: 'flex', laptop: 'none' },
+};
+
+const menuItemSX = {
+  padding: 0,
+  width: '40vw',
+  maxWidth: '200px',
+  height: '50px',
+};
+
+const anchorOrigin = {
+  vertical: 'bottom',
+  horizontal: 'left',
+};
+
+const transformOrigin = {
+  vertical: 'top',
+  horizontal: 'left',
+};
+
 const BurgerMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -42,33 +69,6 @@ const BurgerMenu = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const boxSX = {
-    flexGrow: 1,
-    display: { xs: 'flex', laptop: 'none' },
-    justifyContent: 'flex-end',
-  };
-
-  const menuSX = {
-    display: { xs: 'flex', laptop: 'none' },
-  };
-
-  const menuItemSX = {
-    padding: 0,
-    width: '40vw',
-    maxWidth: '200px',
-    height: '50px',
-  };
-
-  const anchorOrigin = {
-    vertical: 'bottom',
-    horizontal: 'left',
-  };
-
-  const transformOrigin = {
-    vertical: 'top',
-    horizontal: 'left',
   };
 
   return (
