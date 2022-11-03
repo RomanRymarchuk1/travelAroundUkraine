@@ -1,5 +1,5 @@
 import React from 'react';
-import CatalogMainSection from '../../components/CatalogMainSection/CatalogMainSection';
+import { CatalogMainSection } from '../../components';
 
 const CataloguePage = () => <CatalogMainSection />;
 export default CataloguePage;

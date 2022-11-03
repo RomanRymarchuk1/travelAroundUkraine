@@ -1,33 +1,48 @@
 import React from 'react';
-import { Stack, Typography, Container } from '@mui/material';
-import styles from './CatalogMainSection.module.scss';
+import { styled, Box, Container, Typography } from '@mui/material';
 
-function CatalogMainSection() {
-  return (
-    <Stack className={styles.mainSection} justifyContent="center">
-      <Container>
-        <Typography
-          variant="h1"
-          color="#FFFFFF"
-          sx={{
-            fontWeight: '700',
-            fontSize: {
-              xs: '36px',
-              tablet: '44px',
-              laptop: '72px',
-            },
-            lineHeight: {
-              xs: '44px',
-              tablet: '59px',
-              laptop: '88px',
-            },
-          }}
-        >
-          OUR TOURS
-        </Typography>
-      </Container>
-    </Stack>
-  );
-}
+const MainSectionWrapper = styled(Box)(({ theme }) => ({
+  backgroundImage: `url(${'./assets/images/cataloguePage/catalogMainSectionBG.jpg'})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  backgroundColor: theme.palette.primary.main,
+  height: 370,
+  display: 'flex',
+  alignItems: 'center',
+ 
+  [theme.breakpoints.up('tablet')]: {
+    height: 510,
+  },
+
+  [theme.breakpoints.up('laptop')]: {
+    height: 289,
+  },
+}));
+
+const MainSectionText = styled(Typography)(({ theme }) => ({
+  fontWeight: 700,
+  fontsize: 36,
+  marginBottom: 0,
+  color: 'white',
+  textTransform: 'uppercase',
+  
+  [theme.breakpoints.up('tablet')]: {
+    fontsize: 44,
+  },
+
+  [theme.breakpoints.up('laptop')]: {
+    fontsize: 72,
+  },
+
+}));
+
+const CatalogMainSection = () => (
+  <MainSectionWrapper>
+    <Container>
+      <MainSectionText variant='h1'>our tours</MainSectionText>
+    </Container>
+  </MainSectionWrapper>
+);
 
 export default CatalogMainSection;
