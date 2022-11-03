@@ -1,10 +1,10 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation} from 'swiper'
-import {Box, Typography} from "@mui/material";
-import CardItem from '../CardItem';
-import styles from './CardContainer.module.scss';
+import {Typography, styled} from "@mui/material";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import {CardItem} from '../index'
 
 
 import 'swiper/swiper.min.css'
@@ -15,6 +15,7 @@ const cards = [
         name: "Kyiv city walk",
         region: "Kyiv region",
         id: 1,
+        url: ""
     },
     {
         name: "Lviv city walk",
@@ -53,21 +54,117 @@ const cards = [
     },
 ]
 
+const CardContainerWrapper = styled('div')({
+    maxWidth: "1150px",
+    margin: "0 auto",
+    padding: "0 20px",
+})
+
+const CardContainerHeaderContainer = styled('div')({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+})
+
+const CardContainerHeader = styled(Typography)(({theme}) => ({
+    fontSize: "24px",
+    color: theme.palette.primary.main,
+    marginBottom: "0",
+}))
+
+
+const CardContainerAllTours = styled(Typography)({
+    fontSize: "12px",
+    color: "#282828",
+})
+
+const CardContainerSwiperContainer = styled('div')({
+    position: "relative",
+    margin: "70px auto 0 auto",
+
+    '@media (min-width: 300px)': {
+        width: "265px",
+    },
+
+    '@media (min-width: 600px)': {
+        width: "560px",
+    },
+
+    '@media (min-width: 900px)': {
+        width: "860px",
+    },
+
+    '@media (min-width: 1200px)': {
+        width: "1150px",
+    },
+})
+
+const CardContainerBtnPrev = styled('div')(({theme}) => ({
+    backgroundColor: "white",
+    height: "60px",
+    width: "60px",
+    borderRadius: "50px",
+    position: "absolute",
+    cursor: "pointer",
+    zIndex: "2",
+    top: "50%",
+    marginTop: "-30px",
+    marginLeft: "-30px",
+
+    "& .MuiSvgIcon-root": {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        marginLeft: "-12px",
+        marginTop: "-10px",
+        rotate: "180deg",
+        color: theme.palette.primary.main,
+    }
+}))
+
+const CardContainerBtnNext = styled('div')(({theme}) => ({
+    backgroundColor: "white",
+    height: "60px",
+    width: "60px",
+    borderRadius: "50px",
+    position: "absolute",
+    cursor: "pointer",
+    zIndex: "2",
+    top: "50%",
+    right: "-30px",
+    marginTop: "-30px",
+    marginLeft: "100%",
+
+    "& .MuiSvgIcon-root": {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        marginLeft: "-10px",
+        marginTop: "-12px",
+        color: theme.palette.primary.main,
+    }
+}))
 
 const CardContainer = () =>
 
-    <Box className={styles.cardContainer}>
-        <div className={styles.headerContainer}>
-            <Typography variant="h2" className={styles.header}>Popular tours</Typography>
-            <NavLink to="/catalogue">
-                <Typography
-                    className={styles.allTours}>View All
-                </Typography>
-            </NavLink>
-        </div>
-        <div className={styles.swiperContainer}>
-            <div id='previous' className={styles.btnPrev}/>
-            <div id='next' className={styles.btnNext}/>
+    <CardContainerWrapper>
+        <CardContainerHeaderContainer>
+            <CardContainerHeader variant="h2">
+                Popular tours
+            </CardContainerHeader>
+            <Link to="/catalogue">
+                <CardContainerAllTours>
+                    View All
+                </CardContainerAllTours>
+            </Link>
+        </CardContainerHeaderContainer>
+        <CardContainerSwiperContainer>
+            <CardContainerBtnPrev id='previous'>
+                <ArrowForwardIosIcon/>
+            </CardContainerBtnPrev>
+            <CardContainerBtnNext id='next'>
+                <ArrowForwardIosIcon/>
+            </CardContainerBtnNext>
             <Swiper
                 breakpoints={{
                     265: {
@@ -111,8 +208,8 @@ const CardContainer = () =>
                     </SwiperSlide>
                 ))}
             </Swiper>
-        </div>
-    </Box>
+        </CardContainerSwiperContainer>
+    </CardContainerWrapper>
 
 
 export default CardContainer;
