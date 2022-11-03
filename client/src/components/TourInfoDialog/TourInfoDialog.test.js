@@ -1,6 +1,17 @@
 import { render } from '@testing-library/react';
 import TourInfoDialog from './TourInfoDialog';
 
+jest.mock('@mui/material/Box', () => ({ children }) => <div>{children}</div>);
+jest.mock('@mui/material/Stack', () => ({ children }) => <div>{children}</div>);
+jest.mock('@mui/material/Container', () => ({ children }) => <div>{children}</div>);
+jest.mock('@mui/material/Typography', () => ({ children }) => <p>{children}</p>);
+jest.mock('@mui/material/Button', () => ({ children }) => <button>{children}</button>);
+jest.mock('@mui/material/IconButton', () => ({ children }) => <button>{children}</button>);
+jest.mock('@mui/material/Select', () => ({ children }) => <select>{children}</select>);
+jest.mock('@mui/material/MenuItem', () => ({ children }) => <option>{children}</option>);
+
+const handleClose = jest.fn();
+
 const included = [
   { icon: '', service: 'Professional guide' },
   { icon: '', service: 'Accomodation' },
@@ -23,6 +34,21 @@ const details = {
 describe('TourInfoDialog snapshot testing', () => {
   test('should TourInfoDialog without close button match snapshot', () => {
     const { asFragment } = render(<TourInfoDialog included={included} cost={cost} dates={dates} details={details} />);
+
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('should TourInfoDialog with close button match snapshot', () => {
+    const { asFragment } = render(
+      <TourInfoDialog
+        included={included}
+        cost={cost}
+        dates={dates}
+        details={details}
+        closeButton
+        handleClose={handleClose}
+      />
+    );
 
     expect(asFragment()).toMatchSnapshot();
   });
