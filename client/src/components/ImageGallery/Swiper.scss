@@ -67,7 +67,7 @@
 .c {
     position: relative;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 100px auto  0 auto;
 }
 
 
@@ -86,7 +86,7 @@
 
 @media screen and (max-width: 1220px){
     .c{
-        margin: 20px;
+        margin: 100px 20px 20px 20px;
     };
     .swiper{
         max-width: 1000px;
@@ -102,25 +102,29 @@
 }
 
 @media screen and (max-width: 820px){
-    .c{
-        margin: 20px 50px;
-    };
+    .c {
+        margin: 70px 20px 0 20px;
+    }
     .swiper{
         max-width: 700px;
+    }
+    .swiper-button-next,
+    .swiper-button-prev {
+
+        display: none;
     }
 }
 
 
-@media screen and (max-width: 500px){
-    .c{
-        margin: 20px;
-    }
+
+@media screen and (max-width: 500px) {
+
 
     .mySwiper2 {
         height: 300px;
 
     }
-   .mySwiper2 .swiper-wrapper .swiper-slide {
+    .mySwiper2 .swiper-wrapper .swiper-slide {
         text-align: center;
         font-size: 18px;
         background: #fff;
@@ -128,12 +132,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-       object-fit: contain;
+        object-fit: contain;
     }
 
-    .swiper-button-next,
-    .swiper-button-prev {
-
-       display: none;
-    }
 }

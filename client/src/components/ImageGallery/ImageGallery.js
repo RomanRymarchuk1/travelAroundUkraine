@@ -1,12 +1,9 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState, useCallback } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import ImageViewer from 'react-simple-image-viewer';
-// import { Box } from '@mui/material';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import 'swiper/css/bundle';
-import 'swiper/css';
-
+import 'swiper/swiper-bundle.css';
 import './Swiper.scss';
 
 import { Autoplay, FreeMode, Mousewheel, Scrollbar, Zoom, Thumbs, Navigation } from 'swiper';
@@ -67,7 +64,7 @@ export default function ImageGallery() {
       >
         {image.map((src, index) => (
           // eslint-disable-next-line react/no-array-index-key
-          <SwiperSlide key={src}>
+          <SwiperSlide key={`${src + index}`}>
             {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
             <img src={src} alt="" onClick={() => openImageViewer(index)} />
           </SwiperSlide>
@@ -87,8 +84,8 @@ export default function ImageGallery() {
         modules={[Navigation, Thumbs]}
         className="thumbsSwiper"
       >
-        {image.map((src) => (
-          <SwiperSlide key={src}>
+        {image.map((src, i) => (
+          <SwiperSlide key={`${src + i}`}>
             <img src={src} alt="" />
           </SwiperSlide>
         ))}
