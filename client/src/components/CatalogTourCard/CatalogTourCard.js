@@ -21,11 +21,13 @@ const CardImage = styled(CardMedia)(({ theme }) => ({
   },
 }));
 
-const CardTitle = styled(Typography)(({ theme }) => ({
+/* eslint-disable react/jsx-props-no-spreading */
+const CardTitle = styled((props) => <Typography variant="h3" {...props} />)(({ theme }) => ({
   color: theme.palette.text.primary,
   marginTop: 20,
   marginBottom: 20,
 }));
+
 
 const TourDescription = styled(Typography)(({ theme }) => ({
   borderLeft: `3px solid ${theme.palette.primary.main}`,
@@ -51,7 +53,7 @@ const CatalogTourCard = () => (
     />
     <CardContent sx={{ padding: '0 30px 0 36px' }}>
 
-      <CardTitle variant="h3">Sightseeing tour of Chernivtsi</CardTitle>
+      <CardTitle>Sightseeing tour of Chernivtsi</CardTitle>
 
       <Stack direction="row" spacing={3} alignItems="start" sx={{ marginBottom: '20px' }}>
 
@@ -70,7 +72,7 @@ const CatalogTourCard = () => (
         </Stack>
       </Stack>
 
-      <TourDescription variant="body1">
+      <TourDescription>
         Chernivtsi is often called the Ukrainian Paris, and for good reason - the pearl of Ukrainian Bukovina is in no
         way inferior to exquisite European capitals and offers tourists entertainment for every taste. We suggest
         starting with the classics and visiting the top must-see places that will make you fall in love with this city.

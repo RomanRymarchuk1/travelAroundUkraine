@@ -6,10 +6,10 @@ const CataloguePage = () => (
   <Box sx={{ backgroundColor: '#EDEDED' }}>
     <CatalogMainSection />
     <Container>
-      <Typography sx={{ marginBottom: '40px', textTransform: 'uppercase' }} variant="h2">
+      <Typography sx={{ marginTop: '60px', marginBottom: '40px', textTransform: 'uppercase' }} variant="h2">
         Tours
       </Typography>
-      <Stack spacing={2}>
+      <Stack sx={{ paddingBottom: '90px'}} spacing={2}>
         <CatalogTourCard />
         <CatalogTourCard />
         <CatalogTourCard />
