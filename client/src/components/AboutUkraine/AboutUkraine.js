@@ -85,7 +85,7 @@ const blockAnimation = {
 
 function AboutUkraine() {
     return (
-        <motion.section 
+        <motion.div 
         initial='hidden' 
         viewport={{amount: 0.3}}
         whileInView='visible' 
@@ -107,7 +107,7 @@ function AboutUkraine() {
                         </UkraineTextInfo>
                 </AboutUkraineContainer>
         </UkraineBackground>
-        </motion.section>
+        </motion.div>
     );
 }
 
