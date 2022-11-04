@@ -8,6 +8,7 @@ import HeaderSearchField from './HeaderSearchField/HeaderSearchField';
 import LogoHeader from './LogoHeader/LogoHeader';
 import TabletMenu from './TabletMenu/TabletMenu';
 import AboutUkraine from './AboutUkraine/AboutUkraine';
+import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
 
 export {
   TourAccordion,
@@ -19,5 +20,6 @@ export {
   HeaderSearchField,
   LogoHeader,
   TabletMenu,
+  CatalogMainSection
   AboutUkraine,
 };
