@@ -3,15 +3,17 @@
 import React from 'react';
 import {Button, Container, Typography, Box, styled} from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-// import CardContainer from "../../components/CardContainer";
+import { AboutUkraine, ImageCarousel, } from '../../components';
 import CardContainer from "../../components/CardContainer/CardContainer";
-import {ImageCarousel} from '../../components';
 
-const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({theme}) => ({
-    fontWeight: 700,
-    fontSize: '36px',
-    lineHeight: '44px',
-    color: 'white',
+
+
+// eslint-disable-next-line react/jsx-props-no-spreading
+const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({ theme }) => ({
+  fontWeight: 700,
+  fontSize: '36px',
+  lineHeight: '44px',
+  color: 'white',
 
     position: 'relative',
     margin: 0,
@@ -59,16 +61,17 @@ const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({t
     },
 }));
 
-const UkraineText = styled((props) => <Typography variant="h1" {...props} />)(({theme}) => ({
-    fontFamily: 'san serif',
-    margin: 0,
-    fontWeight: 700,
-    fontSize: '64px',
-    lineHeight: '64px',
-    textTransform: 'uppercase',
-    color: 'rgba(255, 255, 255, 0)',
-    WebkitTextStrokeWidth: '2px',
-    WebkitTextStrokeColor: 'rgb(41, 24, 194)',
+// eslint-disable-next-line react/jsx-props-no-spreading
+const UkraineText = styled((props) => <Typography variant="h1" {...props} />)(({ theme }) => ({
+  fontFamily: 'san serif',
+  margin: 0,
+  fontWeight: 700,
+  fontSize: '64px',
+  lineHeight: '64px',
+  textTransform: 'uppercase',
+  color: 'rgba(255, 255, 255, 0)',
+  WebkitTextStrokeWidth: '2px',
+  WebkitTextStrokeColor: 'rgb(41, 24, 194)',
 
     [theme.breakpoints.up('tablet')]: {
         fontSize: '96px',
@@ -90,22 +93,28 @@ const HeroContainer = styled(Container)({
 });
 
 const HomePage = () => (
-    <Box sx={{position: 'relative'}} component="section">
-        <ImageCarousel/>
-        <HeroContainer>
-            <TravelText>
-                TRAVEL <span className="heroHeaderHighlighted">around</span>
-            </TravelText>
+    <>
+  <Box sx={{ position: 'relative' }} component="section">
+    <ImageCarousel />
+    <HeroContainer>
+      <TravelText>
+        TRAVEL <span className="heroHeaderHighlighted">around</span>
+      </TravelText>
 
             <UkraineText>ukraine</UkraineText>
 
-            <Button sx={{mt: '60px', textTransform: 'uppercase'}} endIcon={<ArrowRightAltIcon/>}>
-                to our tours
-            </Button>
-        </HeroContainer>
+      <Button sx={{ mt: '60px', textTransform: 'uppercase' }} endIcon={<ArrowRightAltIcon />}>
+        to our tours
+      </Button>
+    </HeroContainer>
+  </Box>
+  <Box component="section">
+  <AboutUkraine />
+  </Box>
+      <Box component="section">
         <CardContainer/>
-    </Box>
-
+      </Box>
+  </>
 );
 
 export default HomePage;

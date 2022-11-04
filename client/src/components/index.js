@@ -7,18 +7,22 @@ import BurgerMenu from './BurgerMenu/BurgerMenu';
 import HeaderSearchField from './HeaderSearchField/HeaderSearchField';
 import LogoHeader from './LogoHeader/LogoHeader';
 import TabletMenu from './TabletMenu/TabletMenu';
+import AboutUkraine from './AboutUkraine/AboutUkraine';
+import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
 import CardItem from "./CardItem/CardItem";
 
+
 export {
-  TourAccordion,
-  TourInfoDialog,
-  TourReasonToChoose,
-  ImageCarousel,
-  ErrorBoundary,
-  BurgerMenu,
-  HeaderSearchField,
-  LogoHeader,
-  TabletMenu,
+    TourAccordion,
+    TourInfoDialog,
+    TourReasonToChoose,
+    ImageCarousel,
+    ErrorBoundary,
+    BurgerMenu,
+    HeaderSearchField,
+    LogoHeader,
+    TabletMenu,
+    CatalogMainSection,
+    AboutUkraine,
     CardItem
 };
-
