@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import {Box, Typography, styled,   } from '@mui/material';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { motion } from 'framer-motion';
 
 const UkraineTextInfo = styled((props) => <Typography  {...props} />)(({ theme }) => ({
@@ -79,7 +78,9 @@ const blockAnimation = {
     visible: {
         x: 0,
         opacity: 1,
-        transition: '60s',
+        transition: {
+            duration: 2
+        },
     },
 }
 
