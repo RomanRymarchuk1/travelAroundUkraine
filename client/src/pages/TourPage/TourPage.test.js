@@ -11,6 +11,8 @@ jest.mock('@mui/material/Button', () => ({ children }) => <button>{children}</bu
 jest.mock('@mui/material/Slide', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/Link', () => ({ children }) => <a>{children}</a>);
 jest.mock('../../components/TourAccordion/TourAccordion.js', () => () => <div>TourAccordion</div>);
+jest.mock('../../components/TourInfoDialog/TourInfoDialog.js', () => () => <div>TourInfoDialog</div>);
+jest.mock('../../components/TourReasonToChoose/TourReasonToChoose.js', () => () => <div>TourReasonToChoose</div>);
 
 describe('Tour Page snapshot testing', () => {
   test('should Tour Page match snapshot', () => {
