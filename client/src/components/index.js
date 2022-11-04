@@ -20,6 +20,6 @@ export {
   HeaderSearchField,
   LogoHeader,
   TabletMenu,
-  CatalogMainSection
+  CatalogMainSection,
   AboutUkraine,
 };
