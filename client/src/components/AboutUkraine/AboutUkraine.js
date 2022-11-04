@@ -92,7 +92,7 @@ function AboutUkraine() {
         variants={blockAnimation}>
 <UkraineBackground  sx={{ position: 'relative' }} >
                 <AboutUkraineContainer >
-                    <Typography variant='h2' >What is Ukraine?</Typography>
+                    <Typography variant='h2' sx={{transition: '2s'}}>What is Ukraine?</Typography>
                         <UkraineTextInfo >You are going to explore the largest country in Europe – a picturesque place where innovative creativity meets ancient traditions, and wonderful legends come into reality.
                             Upon the road you will come to know lots of brave and kind-hearted people.
                             They are fighting for freedom and dignity.
