@@ -10,8 +10,6 @@ jest.mock('@mui/material/IconButton', () => ({ children }) => <button>{children}
 jest.mock('@mui/material/Select', () => ({ children }) => <select>{children}</select>);
 jest.mock('@mui/material/MenuItem', () => ({ children }) => <option>{children}</option>);
 
-const handleClose = jest.fn();
-
 const included = [
   { icon: '', service: 'Professional guide' },
   { icon: '', service: 'Accomodation' },
@@ -40,14 +38,7 @@ describe('TourInfoDialog snapshot testing', () => {
 
   test('should TourInfoDialog with close button match snapshot', () => {
     const { asFragment } = render(
-      <TourInfoDialog
-        included={included}
-        cost={cost}
-        dates={dates}
-        details={details}
-        closeButton
-        handleClose={handleClose}
-      />
+      <TourInfoDialog included={included} cost={cost} dates={dates} details={details} closeButton />
     );
 
     expect(asFragment()).toMatchSnapshot();
