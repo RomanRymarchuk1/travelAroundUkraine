@@ -82,7 +82,13 @@
 .thumbsSwiper .swiper-slide-thumb-active {
     opacity: 1;
 }
-
+.react-simple-image-viewer__modal{
+    z-index: 2000!important;
+}
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}
 
 @media screen and (max-width: 1220px){
     .c{

@@ -3,10 +3,13 @@ import React, { useState, useCallback } from 'react';
 import ImageViewer from 'react-simple-image-viewer';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+
 import 'swiper/swiper-bundle.css';
 import './Swiper.scss';
 
 import { Autoplay, FreeMode, Mousewheel, Scrollbar, Zoom, Thumbs, Navigation } from 'swiper';
+
+
 
 export default function ImageGallery() {
   const [currentImage, setCurrentImage] = useState(0);
@@ -26,16 +29,27 @@ export default function ImageGallery() {
     'http://placeimg.com/1200/800/nature',
     'http://placeimg.com/1200/800/nature',
   ];
+    function disableScroll() {
+        document.body.classList.add("stop-scrolling");
+    }
+    function enableScroll() {
+        document.body.classList.remove("stop-scrolling");
+    }
 
   const openImageViewer = useCallback((index) => {
+
     setCurrentImage(index);
     setIsViewerOpen(true);
+    disableScroll()
   }, []);
 
   const closeImageViewer = () => {
     setCurrentImage(0);
     setIsViewerOpen(false);
+    enableScroll()
   };
+
+
 
   return (
     <div className="c">
@@ -90,19 +104,20 @@ export default function ImageGallery() {
           </SwiperSlide>
         ))}
       </Swiper>
-      {isViewerOpen && (
-        <ImageViewer
-          src={image}
-          currentIndex={currentImage}
-          onClose={closeImageViewer}
-          disableScroll={false}
-          backgroundStyle={{
-            backgroundColor: 'rgba(0,0,0,0.9)',
-            zIndex: 10,
-          }}
-          closeOnClickOutside
-        />
-      )}
+        {
+            isViewerOpen &&   <ImageViewer
+                src={image}
+                currentIndex={currentImage}
+                onClose={closeImageViewer}
+                disableScroll
+                backgroundStyle={{
+                    backgroundColor: 'rgba(0,0,0,0.9)',
+                    zIndex: 10,
+                }}
+                closeOnClickOutside
+            />
+        }
+
     </div>
   );
 }
