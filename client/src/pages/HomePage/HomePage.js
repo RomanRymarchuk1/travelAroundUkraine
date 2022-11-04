@@ -1,10 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Button, Container, Typography, Box, styled } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { ImageCarousel } from '../../components';
+import { AboutUkraine, ImageCarousel, } from '../../components';
 
+
+
+// eslint-disable-next-line react/jsx-props-no-spreading
 const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({ theme }) => ({
   fontWeight: 700,
   fontSize: '36px',
@@ -57,6 +58,7 @@ const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({ 
   },
 }));
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const UkraineText = styled((props) => <Typography variant="h1" {...props} />)(({ theme }) => ({
   fontFamily: 'san serif',
   margin: 0,
@@ -88,6 +90,7 @@ const HeroContainer = styled(Container)({
 });
 
 const HomePage = () => (
+    <>
   <Box sx={{ position: 'relative' }} component="section">
     <ImageCarousel />
     <HeroContainer>
@@ -102,6 +105,10 @@ const HomePage = () => (
       </Button>
     </HeroContainer>
   </Box>
+  <Box component="section">
+  <AboutUkraine />
+  </Box>
+  </>
 );
 
 export default HomePage;
