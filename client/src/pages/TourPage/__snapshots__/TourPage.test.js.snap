@@ -63,7 +63,17 @@ exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
             id="reasons-to-choose"
           >
             <div>
-              TourAccordion
+              <div>
+                <div>
+                  TourReasonToChoose
+                </div>
+                <div>
+                  TourReasonToChoose
+                </div>
+                <div>
+                  TourReasonToChoose
+                </div>
+              </div>
             </div>
           </div>
           <div
@@ -71,7 +81,40 @@ exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
             id="included"
           >
             <div>
-              TourAccordion
+              <div>
+                <div>
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-ci5apu-MuiSvgIcon-root"
+                    data-testid="PersonIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                    />
+                  </svg>
+                  <p>
+                    Professional guide
+                  </p>
+                </div>
+                <div>
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-ci5apu-MuiSvgIcon-root"
+                    data-testid="BedIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M21 10.78V8c0-1.65-1.35-3-3-3h-4c-.77 0-1.47.3-2 .78-.53-.48-1.23-.78-2-.78H6C4.35 5 3 6.35 3 8v2.78c-.61.55-1 1.34-1 2.22v6h2v-2h16v2h2v-6c0-.88-.39-1.67-1-2.22zM14 7h4c.55 0 1 .45 1 1v2h-6V8c0-.55.45-1 1-1zM5 8c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v2H5V8z"
+                    />
+                  </svg>
+                  <p>
+                    Accomodation
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
