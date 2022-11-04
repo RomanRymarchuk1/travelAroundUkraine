@@ -10,14 +10,14 @@ import TabletMenu from './TabletMenu/TabletMenu';
 import CardItem from "./CardItem/CardItem";
 
 export {
-  TourAccordion,
-  TourInfoDialog,
-  TourReasonToChoose,
-  ImageCarousel,
-  ErrorBoundary,
-  BurgerMenu,
-  HeaderSearchField,
-  LogoHeader,
-  TabletMenu,
+    TourAccordion,
+    TourInfoDialog,
+    TourReasonToChoose,
+    ImageCarousel,
+    ErrorBoundary,
+    BurgerMenu,
+    HeaderSearchField,
+    LogoHeader,
+    TabletMenu,
+    CardItem
 };
-export {TourAccordion, TourInfoDialog, TourReasonToChoose, ImageCarousel, ErrorBoundary, CardItem};
