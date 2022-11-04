@@ -1,9 +1,10 @@
 import React from 'react';
 import { Stack, Container, Box, Typography } from '@mui/material';
-import { CatalogTourCard } from '../../components';
+import { CatalogTourCard, CatalogMainSection } from '../../components';
 
 const CataloguePage = () => (
   <Box sx={{ backgroundColor: '#EDEDED' }}>
+    <CatalogMainSection />
     <Container>
       <Typography sx={{ marginBottom: '40px', textTransform: 'uppercase' }} variant="h2">
         Tours
