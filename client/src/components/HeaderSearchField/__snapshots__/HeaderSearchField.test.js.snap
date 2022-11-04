@@ -20,17 +20,7 @@ exports[`Render HeaderSearchField should HeaderSearchField render 1`] = `
         />
       </svg>
     </div>
-    <div
-      class="MuiInputBase-root MuiInputBase-colorPrimary css-wjkppp-MuiInputBase-root"
-    >
-      <input
-        aria-label="search"
-        class="MuiInputBase-input css-yz9k0d-MuiInputBase-input"
-        placeholder="Search…"
-        type="text"
-        value=""
-      />
-    </div>
+    <input />
   </div>
 </DocumentFragment>
 `;

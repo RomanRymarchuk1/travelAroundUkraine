@@ -1,6 +1,5 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { Typography, Box } from '@mui/material';
 import { NavLink, useLocation } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import appliedTheme from '../../theme/theme';
