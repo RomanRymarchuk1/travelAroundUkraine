@@ -5,8 +5,8 @@ exports[`AboutUkraine snapshot testing should render aboutUkraine component 1`] 
   <div
     style="opacity: 0; transform: translateX(-100px) translateZ(0);"
   >
-    <section>
-      <section>
+    <div>
+      <div>
         <h2>
           What is Ukraine?
         </h2>
@@ -16,8 +16,8 @@ exports[`AboutUkraine snapshot testing should render aboutUkraine component 1`] 
         <h2>
           Now get closer. The time has come to unlock the great and still less than fully realized potential of Ukraine. It is our time. And it starts right NOW. So, you’ve got the answer to the question ‘What is Ukraine?’… Welcome, and don’t forget to take a big backpack for some great memories with you!
         </h2>
-      </section>
-    </section>
+      </div>
+    </div>
   </div>
 </DocumentFragment>
 `;

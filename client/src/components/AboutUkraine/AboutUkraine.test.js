@@ -5,9 +5,8 @@
  import {render} from '@testing-library/react'
  import AboutUkraine from './AboutUkraine'
  
- jest.mock('@mui/material/Box', () => ({ children }) => <section>{children}</section>);
+ jest.mock('@mui/material/Box', () => ({ children }) => <div>{children}</div>);
  jest.mock('@mui/material/Typography', () => ({ children }) => <h2>{children}</h2>);
- jest.mock('../../components/AboutUkraine/AboutUkraine', () => () => <section>About Ukraine</section>);
  
  describe('AboutUkraine snapshot testing', () =>{
      test('should render aboutUkraine component', () =>{
