@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation} from 'swiper'
-import {Typography, styled} from "@mui/material";
+import {Typography, styled, Container} from "@mui/material";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {CardItem} from '../index'
 
@@ -54,12 +54,6 @@ const cards = [
     },
 ]
 
-const CardContainerWrapper = styled('div')({
-    maxWidth: "1150px",
-    margin: "0 auto",
-    padding: "0 20px",
-})
-
 const CardContainerHeaderContainer = styled('div')({
     display: "flex",
     justifyContent: "space-between",
@@ -73,10 +67,10 @@ const CardContainerHeader = styled(Typography)(({theme}) => ({
 }))
 
 
-const CardContainerAllTours = styled(Typography)({
-    fontSize: "12px",
-    color: "#282828",
-})
+// const CardContainerAllTours = styled(Typography)({
+//     fontSize: "12px",
+//     color: "#282828",
+// })
 
 const CardContainerSwiperContainer = styled('div')({
     position: "relative",
@@ -100,7 +94,7 @@ const CardContainerSwiperContainer = styled('div')({
 })
 
 const CardContainerBtnPrev = styled('div')(({theme}) => ({
-    backgroundColor: "white",
+    backgroundColor: theme.palette.primary.contrastText,
     height: "60px",
     width: "60px",
     borderRadius: "50px",
@@ -123,7 +117,7 @@ const CardContainerBtnPrev = styled('div')(({theme}) => ({
 }))
 
 const CardContainerBtnNext = styled('div')(({theme}) => ({
-    backgroundColor: "white",
+    backgroundColor: theme.palette.primary.contrastText,
     height: "60px",
     width: "60px",
     borderRadius: "50px",
@@ -147,15 +141,15 @@ const CardContainerBtnNext = styled('div')(({theme}) => ({
 
 const CardContainer = () =>
 
-    <CardContainerWrapper>
+    <Container>
         <CardContainerHeaderContainer>
             <CardContainerHeader variant="h2">
                 Popular tours
             </CardContainerHeader>
             <Link to="/catalogue">
-                <CardContainerAllTours>
+                <Typography>
                     View All
-                </CardContainerAllTours>
+                </Typography>
             </Link>
         </CardContainerHeaderContainer>
         <CardContainerSwiperContainer>
@@ -209,7 +203,7 @@ const CardContainer = () =>
                 ))}
             </Swiper>
         </CardContainerSwiperContainer>
-    </CardContainerWrapper>
+    </Container>
 
 
 export default CardContainer;

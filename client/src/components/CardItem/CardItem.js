@@ -7,7 +7,7 @@ const CardItemWrapper = styled("div")({
     minWidth: "265px",
     maxWidth: "265px",
     height: "400px",
-    background: `url('../../assets/images/hotDeals/aerial-view-of-colorful-mixed-forest-shrouded-in-morning-fog-on-a-beautiful-autumn-day.jpg')`,
+    background: `url('./assets/images/hotDeals/aerial-view-of-colorful-mixed-forest-shrouded-in-morning-fog-on-a-beautiful-autumn-day.jpg')`,
     backgroundSize: "cover",
     color: "white",
     position: "relative",
@@ -18,7 +18,7 @@ const CardItemWrapper = styled("div")({
         position: "absolute",
         width: "100%",
         height: "100%",
-        background: "rgba(0,0,0,0.3)",
+        background: "rgba(0,0,0,0.5)",
         left: "0",
         top: "0",
         transition: "opacity 0.5s",
@@ -59,6 +59,7 @@ const CardItemHeader = styled((props) => <Typography variant="h3"{...props}/>)((
 }))
 
 const CardItemLocation = styled('div')({
+    height: "20px",
     display: "flex",
     paddingLeft: "25px",
     paddingRight: "25px",
@@ -72,6 +73,7 @@ const CardItemLocation = styled('div')({
 const CardItemText = styled(Typography)(({theme}) => ({
         fontSize: "14px",
         margin: "0",
+        whiteSpace: "nowrap",
         color: theme.palette.common.white,
     }
 ))
@@ -87,7 +89,7 @@ const CardItem = () =>
         </CardItemHeader>
         <CardItemLocation>
             <Box component="img" src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
-                 alt="location" sx={{paddingRight: "10px"}}/>
+                 alt="location" sx={{paddingRight: "10px", maxWidth: 'min-content'}}/>
             <CardItemText>
                 Kyiv region
             </CardItemText>
