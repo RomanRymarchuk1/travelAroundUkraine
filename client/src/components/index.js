@@ -11,23 +11,23 @@ import TabletMenu from './TabletMenu/TabletMenu';
 import CatalogTourCard from './CatalogTourCard/CatalogTourCard';
 import AboutUkraine from './AboutUkraine/AboutUkraine';
 import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
-import CardItem from './CardItem/CardItem'
+import CardContainer from "./CardContainer/CardContainer";
 
 
 export {
-  TourAccordion,
-  TourInfoDialog,
-  TourReasonToChoose,
-  ImageCarousel,
-  ImageGallery,
-  ErrorBoundary,
-  BurgerMenu,
-  HeaderSearchField,
-  LogoHeader,
-  TabletMenu,
-  CatalogTourCard,
-  CatalogMainSection,
-  AboutUkraine,
-  CardItem,
+    TourAccordion,
+    TourInfoDialog,
+    TourReasonToChoose,
+    ImageCarousel,
+    ImageGallery,
+    ErrorBoundary,
+    BurgerMenu,
+    HeaderSearchField,
+    LogoHeader,
+    TabletMenu,
+    CatalogTourCard,
+    CatalogMainSection,
+    AboutUkraine,
+    CardContainer
 };
 

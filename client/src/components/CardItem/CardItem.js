@@ -3,6 +3,7 @@ import React from 'react';
 import {Typography, Box, styled} from "@mui/material";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
+
 const CardItemWrapper = styled("div")({
     minWidth: "265px",
     maxWidth: "265px",
@@ -49,8 +50,6 @@ const CardItemPrice = styled(Typography)(({theme}) => ({
 // eslint-disable-next-line react/jsx-props-no-spreading
 const CardItemHeader = styled((props) => <Typography variant="h3"{...props}/>)(({theme}) => ({
     position: "absolute",
-    fontSize: "20px",
-    fontWeight: "bold",
     marginTop: "265px",
     paddingLeft: "25px",
     zIndex: "2",
@@ -71,7 +70,6 @@ const CardItemLocation = styled('div')({
 })
 
 const CardItemText = styled(Typography)(({theme}) => ({
-        fontSize: "14px",
         margin: "0",
         whiteSpace: "nowrap",
         color: theme.palette.common.white,

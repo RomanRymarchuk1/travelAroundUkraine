@@ -4,7 +4,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation} from 'swiper'
 import {Typography, styled, Container} from "@mui/material";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import {CardItem} from '../index'
+import CardItem from '../CardItem/CardItem'
 
 
 import 'swiper/swiper.min.css'
@@ -58,19 +58,8 @@ const CardContainerHeaderContainer = styled('div')({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: "30px"
 })
-
-const CardContainerHeader = styled(Typography)(({theme}) => ({
-    fontSize: "24px",
-    color: theme.palette.primary.main,
-    marginBottom: "0",
-}))
-
-
-// const CardContainerAllTours = styled(Typography)({
-//     fontSize: "12px",
-//     color: "#282828",
-// })
 
 const CardContainerSwiperContainer = styled('div')({
     position: "relative",
@@ -143,9 +132,9 @@ const CardContainer = () =>
 
     <Container>
         <CardContainerHeaderContainer>
-            <CardContainerHeader variant="h2">
+            <Typography variant="h2" sx={{marginBottom: "0px"}}>
                 Popular tours
-            </CardContainerHeader>
+            </Typography>
             <Link to="/catalogue">
                 <Typography>
                     View All
