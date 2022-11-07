@@ -13,6 +13,8 @@ import AboutUkraine from './AboutUkraine/AboutUkraine';
 import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
 import CatalogMainFilter from './CatalogMainFilter/CatalogMainFilter';
 
+import CardContainer from './CardContainer/CardContainer';
+import CardItem from './CardItem/CardItem';
 
 export {
   TourAccordion,
@@ -28,6 +30,7 @@ export {
   CatalogTourCard,
   CatalogMainSection,
   AboutUkraine,
-  CatalogMainFilter
+  CatalogMainFilter,
+  CardContainer,
+  CardItem,
 };
-
