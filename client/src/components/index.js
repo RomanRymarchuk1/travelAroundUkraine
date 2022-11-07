@@ -11,6 +11,7 @@ import TabletMenu from './TabletMenu/TabletMenu';
 import CatalogTourCard from './CatalogTourCard/CatalogTourCard';
 import AboutUkraine from './AboutUkraine/AboutUkraine';
 import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
+import CatalogMainFilter from './CatalogMainFilter/CatalogMainFilter';
 
 
 export {
@@ -27,5 +28,6 @@ export {
   CatalogTourCard,
   CatalogMainSection,
   AboutUkraine,
+  CatalogMainFilter
 };
 
