@@ -3,11 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.10.8",
-    "@mui/system": "^5.10.12",
+    "@mui/material": "^5.10.12",
     "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -34,7 +31,7 @@
     "prepare": "cd .. && husky install client/.husky",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll=false",
+    "test": "react-scripts test --watchAll=false --passWithNoTests",
     "eject": "react-scripts eject",
     "fix": "npx eslint ./src/**/*.js --fix && npx stylelint ./src/**/*.scss --fix"
   },
@@ -72,5 +69,14 @@
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-prettier": "^2.0.0"
+  },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "node_modules",
+      ".jest-test-results.json"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(swiper|ssr-window|dom7))"
+    ]
   }
 }
