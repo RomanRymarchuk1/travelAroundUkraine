@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { render } from '@testing-library/react';
 import ImageCarousel from './ImageCarousel';
 

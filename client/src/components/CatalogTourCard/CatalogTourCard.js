@@ -21,13 +21,11 @@ const CardImage = styled(CardMedia)(({ theme }) => ({
   },
 }));
 
-/* eslint-disable react/jsx-props-no-spreading */
 const CardTitle = styled((props) => <Typography variant="h3" {...props} />)(({ theme }) => ({
   color: theme.palette.text.primary,
   marginTop: 20,
   marginBottom: 20,
 }));
-
 
 const TourDescription = styled(Typography)(({ theme }) => ({
   borderLeft: `3px solid ${theme.palette.primary.main}`,
@@ -45,18 +43,15 @@ const CardButton = styled(Button)(({ theme }) => ({
 
 const CatalogTourCard = () => (
   <CardContainer direction={{ xs: 'column', tablet: 'row' }} spacing={1}>
-    
     <CardImage
       component="img"
       image="https://visitukraine.today/media/tours/gallery/ALeR7GgYjAqCqfJnQX5ZYKnBcsDZ6MTJs77IIBKi.jpg"
       alt="tour photo"
     />
     <CardContent sx={{ padding: '0 30px 0 36px' }}>
-
       <CardTitle>Sightseeing tour of Chernivtsi</CardTitle>
 
       <Stack direction="row" spacing={3} alignItems="start" sx={{ marginBottom: '20px' }}>
-
         <Stack direction="row" spacing={1} alignItems="center">
           <CoinsIcon />
           <Typography variant="h3" component="span">
@@ -81,9 +76,7 @@ const CatalogTourCard = () => (
       <CardActions>
         <CardButton href="#">More details</CardButton>
       </CardActions>
-
     </CardContent>
-
   </CardContainer>
 );
 
