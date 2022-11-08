@@ -1,4 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/forbid-prop-types */
+
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled, alpha } from '@mui/material/styles';
