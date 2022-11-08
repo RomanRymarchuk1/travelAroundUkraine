@@ -11,7 +11,8 @@ import TabletMenu from './TabletMenu/TabletMenu';
 import CatalogTourCard from './CatalogTourCard/CatalogTourCard';
 import AboutUkraine from './AboutUkraine/AboutUkraine';
 import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
-
+import CardContainer from './CardContainer/CardContainer';
+import CardItem from './CardItem/CardItem';
 
 export {
   TourAccordion,
@@ -27,5 +28,6 @@ export {
   CatalogTourCard,
   CatalogMainSection,
   AboutUkraine,
+  CardContainer,
+  CardItem,
 };
-
