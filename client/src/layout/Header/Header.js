@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Container, useScrollTrigger, Slide } from '@mui/material';
 import { BurgerMenu, TabletMenu, LogoHeader, HeaderSearchField } from '../../components';
-import appliedTheme from '../../theme/theme';
 
 const HideOnScroll = ({ children }) => {
   const trigger = useScrollTrigger();
@@ -25,7 +24,7 @@ const Header = () => {
   }, []);
 
   const appBarSX = {
-    background: scrollY > 400 ? appliedTheme.palette.primary.main : 'none',
+    background: 'primary.main',
     boxShadow: scrollY > 400 ? null : 'none',
     py: { xs: 1, tablet: 1.5, laptop: 2 },
     opacity: 0.95,
