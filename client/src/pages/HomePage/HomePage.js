@@ -106,7 +106,7 @@ const HomePage = () => (
             <AboutUkraine/>
         </Box>
         <Box component="section">
-            {/*<CardContainer />*/}
+            <CardContainer />
         </Box>
     </>
 );

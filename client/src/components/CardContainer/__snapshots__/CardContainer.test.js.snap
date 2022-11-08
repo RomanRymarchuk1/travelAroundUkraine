@@ -8,19 +8,15 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
     <div
       class="css-4b3544"
     >
-      <h2
-        class="MuiTypography-root MuiTypography-h2 css-cf795h-MuiTypography-root"
-      >
+      <h2>
         Popular tours
       </h2>
       <a
         href="/catalogue"
       >
-        <p
-          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-        >
+        <h2>
           View All
-        </p>
+        </h2>
       </a>
     </div>
     <div
@@ -72,16 +68,12 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
             <div
               class="css-1iryrks"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
-              >
+              <h2>
                 $ 200.00
-              </p>
-              <h3
-                class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
-              >
+              </h2>
+              <h2>
                 Kyiv city walk
-              </h3>
+              </h2>
               <div
                 class="css-h56svl"
               >
@@ -90,11 +82,9 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
                   class="MuiBox-root css-dyqcbf"
                   src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                 />
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
-                >
+                <h2>
                   Kyiv region
-                </p>
+                </h2>
                 <svg
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
@@ -116,16 +106,12 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
             <div
               class="css-1iryrks"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
-              >
+              <h2>
                 $ 200.00
-              </p>
-              <h3
-                class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
-              >
+              </h2>
+              <h2>
                 Kyiv city walk
-              </h3>
+              </h2>
               <div
                 class="css-h56svl"
               >
@@ -134,11 +120,9 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
                   class="MuiBox-root css-dyqcbf"
                   src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                 />
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
-                >
+                <h2>
                   Kyiv region
-                </p>
+                </h2>
                 <svg
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
@@ -160,16 +144,12 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
             <div
               class="css-1iryrks"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
-              >
+              <h2>
                 $ 200.00
-              </p>
-              <h3
-                class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
-              >
+              </h2>
+              <h2>
                 Kyiv city walk
-              </h3>
+              </h2>
               <div
                 class="css-h56svl"
               >
@@ -178,11 +158,9 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
                   class="MuiBox-root css-dyqcbf"
                   src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                 />
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
-                >
+                <h2>
                   Kyiv region
-                </p>
+                </h2>
                 <svg
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
@@ -204,16 +182,12 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
             <div
               class="css-1iryrks"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
-              >
+              <h2>
                 $ 200.00
-              </p>
-              <h3
-                class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
-              >
+              </h2>
+              <h2>
                 Kyiv city walk
-              </h3>
+              </h2>
               <div
                 class="css-h56svl"
               >
@@ -222,11 +196,9 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
                   class="MuiBox-root css-dyqcbf"
                   src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                 />
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
-                >
+                <h2>
                   Kyiv region
-                </p>
+                </h2>
                 <svg
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
@@ -248,16 +220,12 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
             <div
               class="css-1iryrks"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
-              >
+              <h2>
                 $ 200.00
-              </p>
-              <h3
-                class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
-              >
+              </h2>
+              <h2>
                 Kyiv city walk
-              </h3>
+              </h2>
               <div
                 class="css-h56svl"
               >
@@ -266,11 +234,9 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
                   class="MuiBox-root css-dyqcbf"
                   src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                 />
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
-                >
+                <h2>
                   Kyiv region
-                </p>
+                </h2>
                 <svg
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
@@ -292,16 +258,12 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
             <div
               class="css-1iryrks"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
-              >
+              <h2>
                 $ 200.00
-              </p>
-              <h3
-                class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
-              >
+              </h2>
+              <h2>
                 Kyiv city walk
-              </h3>
+              </h2>
               <div
                 class="css-h56svl"
               >
@@ -310,11 +272,9 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
                   class="MuiBox-root css-dyqcbf"
                   src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                 />
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
-                >
+                <h2>
                   Kyiv region
-                </p>
+                </h2>
                 <svg
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
@@ -336,16 +296,12 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
             <div
               class="css-1iryrks"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
-              >
+              <h2>
                 $ 200.00
-              </p>
-              <h3
-                class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
-              >
+              </h2>
+              <h2>
                 Kyiv city walk
-              </h3>
+              </h2>
               <div
                 class="css-h56svl"
               >
@@ -354,11 +310,9 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
                   class="MuiBox-root css-dyqcbf"
                   src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                 />
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
-                >
+                <h2>
                   Kyiv region
-                </p>
+                </h2>
                 <svg
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
@@ -380,16 +334,12 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
             <div
               class="css-1iryrks"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
-              >
+              <h2>
                 $ 200.00
-              </p>
-              <h3
-                class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
-              >
+              </h2>
+              <h2>
                 Kyiv city walk
-              </h3>
+              </h2>
               <div
                 class="css-h56svl"
               >
@@ -398,11 +348,9 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
                   class="MuiBox-root css-dyqcbf"
                   src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                 />
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
-                >
+                <h2>
                   Kyiv region
-                </p>
+                </h2>
                 <svg
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
@@ -424,16 +372,12 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
             <div
               class="css-1iryrks"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
-              >
+              <h2>
                 $ 200.00
-              </p>
-              <h3
-                class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
-              >
+              </h2>
+              <h2>
                 Kyiv city walk
-              </h3>
+              </h2>
               <div
                 class="css-h56svl"
               >
@@ -442,11 +386,9 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
                   class="MuiBox-root css-dyqcbf"
                   src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                 />
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
-                >
+                <h2>
                   Kyiv region
-                </p>
+                </h2>
                 <svg
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
@@ -468,16 +410,12 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
             <div
               class="css-1iryrks"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-1ymd0vv-MuiTypography-root"
-              >
+              <h2>
                 $ 200.00
-              </p>
-              <h3
-                class="MuiTypography-root MuiTypography-h3 css-1w7kxm5-MuiTypography-root"
-              >
+              </h2>
+              <h2>
                 Kyiv city walk
-              </h3>
+              </h2>
               <div
                 class="css-h56svl"
               >
@@ -486,11 +424,9 @@ exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = 
                   class="MuiBox-root css-dyqcbf"
                   src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
                 />
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-1djbt89-MuiTypography-root"
-                >
+                <h2>
                   Kyiv region
-                </p>
+                </h2>
                 <svg
                   aria-hidden="true"
                   class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall css-bwo5fi-MuiSvgIcon-root"
