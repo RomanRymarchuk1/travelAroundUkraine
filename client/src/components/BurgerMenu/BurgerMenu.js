@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, MenuItem, Menu, IconButton } from '@mui/material';
+import { Box, MenuItem, Menu, IconButton, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
 
@@ -92,9 +92,9 @@ const BurgerMenu = () => {
       >
         {pages.map(({ name, link, innerContent }) => (
           <MenuItem key={name} onClick={handleCloseNavMenu} sx={menuItemSX}>
-            <NavLink to={link} key={name} onClick={handleCloseNavMenu} style={styleNavLink}>
+            <Typography component={NavLink} to={link} key={name} sx={styleNavLink} end>
               {innerContent}
-            </NavLink>
+            </Typography>
           </MenuItem>
         ))}
       </Menu>
