@@ -2,9 +2,7 @@
 
 exports[`Card Container Snapshot test should CardContainer match snapshot 1`] = `
 <DocumentFragment>
-  <div
-    class="MuiContainer-root MuiContainer-maxWidthLg css-1oqqzyl-MuiContainer-root"
-  >
+  <div>
     <div
       class="css-4b3544"
     >
