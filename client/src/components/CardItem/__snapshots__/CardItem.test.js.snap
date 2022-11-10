@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Card Item Snapshot test should CardContainer match snapshot 1`] = `
+exports[`Card Item Snapshot test should CardItem match snapshot 1`] = `
 <DocumentFragment>
   <div
     class="css-1iryrks"
@@ -14,7 +14,9 @@ exports[`Card Item Snapshot test should CardContainer match snapshot 1`] = `
     <div
       class="css-h56svl"
     >
-      <div />
+      <img
+        alt="test img"
+      />
       <h2>
         Kyiv region
       </h2>
