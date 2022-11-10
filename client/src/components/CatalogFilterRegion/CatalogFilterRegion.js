@@ -1,0 +1,48 @@
+import React from 'react';
+import { Box, Checkbox, FormControlLabel } from '@mui/material';
+import { FilterAccordion } from '../index';
+
+const regions = ['region1', 'region2', 'region3', 'region4'];
+
+const CatalogFilterRegion = () => {
+  const [checked, setChecked] = React.useState(Array(regions.length).fill(false));
+
+  const handleChangeAll = () => {
+    setChecked(() => {
+      const newChecked = checked.map((el) => !el);
+      return newChecked;
+    });
+  };
+
+  const handleChange = (event) => {
+    const index = regions.indexOf(event.target.id);
+    setChecked((current) => {
+      const newChecked = [...current];
+      newChecked[index] = !newChecked[index];
+      return newChecked;
+    });
+  };
+
+  const isAllChecked = checked.every((el) => el === true);
+
+  const children = (
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+      {regions.map((el) => (
+        <FormControlLabel
+          key={el}
+          label={el}
+          control={<Checkbox id={el} checked={checked[regions.indexOf(el)]} onChange={handleChange} />}
+        />
+      ))}
+    </Box>
+  );
+
+  return (
+    <FilterAccordion title="Region">
+      <FormControlLabel label="All regions" control={<Checkbox checked={isAllChecked} onChange={handleChangeAll} />} />
+      {children}
+    </FilterAccordion>
+  );
+};
+
+export default CatalogFilterRegion;
