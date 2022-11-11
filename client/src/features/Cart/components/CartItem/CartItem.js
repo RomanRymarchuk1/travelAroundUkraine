@@ -16,6 +16,8 @@ import {
 import { AccessTime, Remove, Add, DeleteOutline } from '@mui/icons-material';
 import { ReactComponent as CoinsIcon } from '../../../../svg/CoinsIcon.svg';
 
+import DeleteItemModal from '../DeleteItemModal/DeleteItemModal';
+
 const CardContainer = styled(Stack)(({ theme }) => ({
   position: 'relative',
   backgroundColor: theme.palette.primary.contrastText,
@@ -87,11 +89,16 @@ const AmountField = styled((props) => <TextField size="small" autoComplete="off"
 });
 
 const CartItem = () => {
+  const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
+
   const [amount, setAmount] = useState(1);
 
   const incrementAmount = () => setAmount((prev) => Number(prev) + 1);
-
   const decrementAmount = () => setAmount((prev) => Number(prev) - 1);
+
+  const openDeleteDialog = () => setDeleteDialogOpen(true);
+  const handleDeleteDialogClose = () => setDeleteDialogOpen(false);
+  const handleDeleteFromCart = () => setDeleteDialogOpen(false);
 
   // TODO: add error if amount less than 1
   const onAmountFieldChange = (e) => {
@@ -99,46 +106,54 @@ const CartItem = () => {
   };
 
   return (
-    <CardContainer direction={{ xs: 'column', tablet: 'row' }} gap={1}>
-      <DeleteButton />
-      <CardImage
-        component="img"
-        image="https://visitukraine.today/media/tours/gallery/ALeR7GgYjAqCqfJnQX5ZYKnBcsDZ6MTJs77IIBKi.jpg"
-        alt="tour photo"
+    <>
+      <CardContainer direction={{ xs: 'column', tablet: 'row' }} gap={1}>
+        <DeleteButton onClick={openDeleteDialog} />
+        <CardImage
+          component="img"
+          image="https://visitukraine.today/media/tours/gallery/ALeR7GgYjAqCqfJnQX5ZYKnBcsDZ6MTJs77IIBKi.jpg"
+          alt="tour photo"
+        />
+        <CardContent>
+          <CardTitle>Sightseeing tour of Chernivtsi</CardTitle>
+
+          <Stack direction="row" spacing={3} alignItems="start" sx={{ marginBottom: '10px' }}>
+            <Stack direction="row" spacing={1} alignItems="center">
+              <CoinsIcon />
+              <Typography variant="h3" component="span">
+                69 €
+              </Typography>
+            </Stack>
+
+            <Stack direction="row" spacing={1} alignItems="center">
+              <AccessTime color="primary" sx={{ height: '21px' }} />
+              <Typography variant="h3" component="span">
+                3 hours
+              </Typography>
+            </Stack>
+          </Stack>
+
+          <Stack direction="row" marginY="5px">
+            <IconButton disabled={amount <= 1} onClick={decrementAmount}>
+              <Remove />
+            </IconButton>
+            <AmountField value={amount} onChange={onAmountFieldChange} />
+            <IconButton onClick={incrementAmount}>
+              <Add />
+            </IconButton>
+          </Stack>
+          <CardActions>
+            <CardButton href="#">More details</CardButton>
+          </CardActions>
+        </CardContent>
+      </CardContainer>
+      <DeleteItemModal
+        open={isDeleteDialogOpen}
+        onClose={handleDeleteDialogClose}
+        onDelete={handleDeleteFromCart}
+        tourTitle="Sightseeing tour of Chernivtsi"
       />
-      <CardContent>
-        <CardTitle>Sightseeing tour of Chernivtsi</CardTitle>
-
-        <Stack direction="row" spacing={3} alignItems="start" sx={{ marginBottom: '10px' }}>
-          <Stack direction="row" spacing={1} alignItems="center">
-            <CoinsIcon />
-            <Typography variant="h3" component="span">
-              69 €
-            </Typography>
-          </Stack>
-
-          <Stack direction="row" spacing={1} alignItems="center">
-            <AccessTime color="primary" sx={{ height: '21px' }} />
-            <Typography variant="h3" component="span">
-              3 hours
-            </Typography>
-          </Stack>
-        </Stack>
-
-        <Stack direction="row" marginY="5px">
-          <IconButton disabled={amount <= 1} onClick={decrementAmount}>
-            <Remove />
-          </IconButton>
-          <AmountField value={amount} onChange={onAmountFieldChange} />
-          <IconButton onClick={incrementAmount}>
-            <Add />
-          </IconButton>
-        </Stack>
-        <CardActions>
-          <CardButton href="#">More details</CardButton>
-        </CardActions>
-      </CardContent>
-    </CardContainer>
+    </>
   );
 };
 
