@@ -1,13 +1,16 @@
 import React from 'react';
 
 import { Box, Container, Typography } from '@mui/material';
+import { CartItem } from '../../components';
 
 function CartPage() {
   return (
-    <Box mt="80px">
+    <Box marginY="80px">
       <Container>
         <Typography variant="h1">Cart</Typography>
-        <Box>Box</Box>
+        <Box>
+          <CartItem />
+        </Box>
       </Container>
     </Box>
   );
