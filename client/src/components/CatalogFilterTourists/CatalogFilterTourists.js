@@ -4,7 +4,7 @@ import { styled, alpha, ToggleButton } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { FilterAccordion } from '../index';
 
-const StyledToggleButton = styled((props) => <ToggleButton {...props} />)(({ theme }) => ({
+const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
   borderRadius: 40,
   border: '1px solid #EDEDED',
   background: 'none',

@@ -1,53 +1,67 @@
 import React from 'react';
-import { styled, Stack, Container, Box, Typography } from '@mui/material';
+import { styled, Stack, Box, Container, Typography } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../components';
 
-const FilterContainer = styled(Box)(({ theme }) => ({
+// const FilterContainer = styled(Box)(({ theme }) => ({
+//   backgroundColor: theme.palette.primary.contrastText,
+//   borderRadius: 10,
+//   boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)',
+//   padding: '25px 0',
+// }));
+
+const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ theme }) => ({
   backgroundColor: theme.palette.primary.contrastText,
   borderRadius: 10,
   boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)',
   padding: '25px 0',
-}));
+  height: 'fit-content',
 
+  [theme.breakpoints.up('laptop')]: {
+    width: 295,
+    order: '-1',
+  },
+}));
 
 const FilterWrapper = styled(Box)(({ theme }) => ({
   margin: '0 auto',
   width: 252,
-
+  padding: 0,
+  
   [theme.breakpoints.up('tablet')]: {
-    width: 536,
+    width: 540,
   },
 
   [theme.breakpoints.up('laptop')]: {
-    width: 225,
+    width: 235,
   },
 }));
 
 const CataloguePage = () => (
   <Box sx={{ backgroundColor: '#EDEDED', paddingBottom: '150px' }}>
     <CatalogMainSection />
-
     <Container>
-      <Typography variant="h2" sx={{ marginTop: '60px', marginBottom: '40px', textTransform: 'uppercase' }}>
-        Tours
-      </Typography>
-      <Stack sx={{ paddingBottom: '90px' }} spacing={2}>
-        <CatalogTourCard />
-        <CatalogTourCard />
-        <CatalogTourCard />
-      </Stack>
+      <Grid container sx={{ marginTop: '60px', gap: '40px' }} >
 
-      <FilterContainer>
-        <FilterWrapper>
-          <Typography variant="h3">
-            Filters
+        <Grid item xs={12} laptop sx={{ padding: 0}} >
+          <Typography variant="h2" sx={{ textTransform: 'uppercase', marginBottom: '25px' }}>
+            Tours
           </Typography>
-          <CatalogMainFilter />
-        </FilterWrapper>
-      </FilterContainer>
+          <Stack spacing={2}>
+            <CatalogTourCard />
+            <CatalogTourCard />
+            <CatalogTourCard />
+            <CatalogTourCard />
+          </Stack>
+        </Grid>
 
-
-
+        <FilterContainer>
+          <FilterWrapper>
+            <Typography variant="h3">Filters</Typography>
+            <CatalogMainFilter />
+          </FilterWrapper>
+        </FilterContainer>
+      </Grid>
     </Container>
   </Box>
 );
