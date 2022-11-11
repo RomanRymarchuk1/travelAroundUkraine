@@ -7,12 +7,27 @@ const regions = ['region1', 'region2', 'region3', 'region4'];
 const CatalogFilterRegion = () => {
   const [checked, setChecked] = React.useState(Array(regions.length).fill(false));
 
+  const isAllChecked = checked.every((el) => el === true);
+
   const handleChangeAll = () => {
-    setChecked(() => {
-      const newChecked = checked.map((el) => !el);
+    setChecked((current) => {
+      const newChecked = [...current];
+      if (!isAllChecked) {
+        newChecked.fill(true);
+      } else {
+        newChecked.fill(false);
+      }
+
       return newChecked;
     });
   };
+
+  // const handleChangeAll = () => {
+  //   setChecked(() => {
+  //     const newChecked = checked.map((el) => !el);
+  //     return newChecked;
+  //   });
+  // };
 
   const handleChange = (event) => {
     const index = regions.indexOf(event.target.id);
@@ -22,8 +37,6 @@ const CatalogFilterRegion = () => {
       return newChecked;
     });
   };
-
-  const isAllChecked = checked.every((el) => el === true);
 
   const children = (
     <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
