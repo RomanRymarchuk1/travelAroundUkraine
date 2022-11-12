@@ -2,35 +2,12 @@ import React from 'react';
 import { styled, alpha, Box, Slider, InputBase } from '@mui/material';
 import { FilterAccordion } from '../index';
 
-const minPrice = 10; 
+const minPrice = 10;
 const maxPrice = 1000;
 
 function valuetext(value) {
   return `${value} €`;
 }
-
-const RangeSlider = () => {
-  const [value, setValue] = React.useState([200, 600]);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    
-  };
-
-  return (
-    <Box sx={{ margin: '0 auto', paddingTop: '20px' }}>
-      <Slider
-        min={minPrice}
-        max={maxPrice}
-        getAriaLabel={() => 'Price range'}
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        getAriaValueText={valuetext}
-      />
-    </Box>
-  );
-};
 
 const FilterInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
@@ -49,13 +26,31 @@ const FilterInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const CatalogFilterPrice = () => <FilterAccordion title="Price">
+const CatalogFilterPrice = () => {
+  const [value, setValue] = React.useState([200, 600]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <FilterAccordion title="Price">
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <FilterInput placeholder={String(minPrice)} />
-        <FilterInput placeholder={String(maxPrice)} />
+        <FilterInput placeholder={String(minPrice)} value={value[0]} />
+        <FilterInput placeholder={String(maxPrice)} value={value[1]} />
       </Box>
-      <RangeSlider />
+      <Box sx={{ margin: '0 auto', paddingTop: '20px' }}>
+        <Slider
+          min={minPrice}
+          max={maxPrice}
+          getAriaLabel={() => 'Price range'}
+          value={value}
+          onChange={handleChange}
+          getAriaValueText={valuetext}
+        />
+      </Box>
     </FilterAccordion>
-  
+  );
+};
 
 export default CatalogFilterPrice;
