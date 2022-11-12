@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled, Button, Box, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
+import CloseIcon from '@mui/icons-material/Close';
 import { CatalogFilterPrice, CatalogFilterTourists, CatalogFilterRegion } from '../index';
 
 const FilterWrapper = styled(Box)(({ theme }) => ({
@@ -26,6 +27,38 @@ const ShowButton = styled(Button)(() => ({
   maxWidth: 200,
 }));
 
+const ResetButton = styled((props) => (
+  <Button
+    variant="text"
+    startIcon={
+      <CloseIcon
+        sx={{
+          width: '14px',
+          height: '14px',
+          color: 'gray',
+        }}
+      />
+    }
+    {...props}
+  />
+))(({ theme }) => ({
+  padding: '5px 15px',
+  marginTop: '12px',
+  border: 'none',
+  background: 'none',
+  fontWeight: 500,
+  fontSize: 12,
+  textTransform: 'none',
+  color: theme.palette.text.primary,
+  alignSelf: 'center',
+
+  '&:hover': {
+    background: 'none',
+    filter: 'brightness(1.5)',
+    color: theme.palette.text.primary,
+  },
+}));
+
 const CatalogMainFilter = () => (
   <FilterWrapper>
     <Typography variant="h3">Filters</Typography>
@@ -42,6 +75,7 @@ const CatalogMainFilter = () => (
     </Grid>
 
     <ShowButton>Show</ShowButton>
+    <ResetButton>Reset filters</ResetButton>
   </FilterWrapper>
 );
 
