@@ -54,7 +54,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-
 const HeaderSearchField = () => {
 
 const [isOpenFilterItems, setIsOpenFilterItems] = useState(false)
@@ -78,14 +77,12 @@ const changeState = (length) =>{
     setIsOpenFilterItems(false) 
   }
 }
-
-
   return (
     <Search>
       <SearchIconWrapper>
         <SearchIcon sx={{ color: appliedTheme.palette.text.primary }} />
       </SearchIconWrapper>
-      <StyledInputBase onClick={(e) => changeState(e.target.value.length)} onChange={(e) => changeState(e.target.value.length)} placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+      <StyledInputBase  onChange={(e) => changeState(e.target.value.length)} placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
     {isOpenFilterItems &&<HeaderFilterItems /> }
     </Search>
   );

@@ -62,6 +62,10 @@ const Item = styled((props) => <MenuItem  {...props} />)(() => ({
     paddingLeft: 1
 }));
 
+const NothingToFoundText = styled((props) => <Typography  {...props} />)(() => ({
+    display: 'block', textAlign: 'center'
+}));
+
 function HeaderFilterItems() {
     return(  
     <PaperContainer> 
@@ -80,6 +84,8 @@ function HeaderFilterItems() {
            </Item>
        </MenuList>
         ))}
+         <NothingToFoundText>no results.</NothingToFoundText>
+         <NothingToFoundText sx={{ marginBottom: '15px'}}>please, change your request</NothingToFoundText>
     </PaperContainer>
      )
     }
