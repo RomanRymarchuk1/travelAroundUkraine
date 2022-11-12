@@ -22,12 +22,6 @@ const CatalogFilterRegion = () => {
     });
   };
 
-  // const handleChangeAll = () => {
-  //   setChecked(() => {
-  //     const newChecked = checked.map((el) => !el);
-  //     return newChecked;
-  //   });
-  // };
 
   const handleChange = (event) => {
     const index = regions.indexOf(event.target.id);
