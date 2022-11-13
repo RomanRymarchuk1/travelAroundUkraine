@@ -121,7 +121,8 @@ const CartItem = () => {
             <Stack direction="row" spacing={1} alignItems="center">
               <CoinsIcon />
               <Typography variant="h3" component="span">
-                69 €
+                {/* for demo purpose only */}
+                {amount >= 1 ? PRICE * amount : PRICE} €
               </Typography>
             </Stack>
 
