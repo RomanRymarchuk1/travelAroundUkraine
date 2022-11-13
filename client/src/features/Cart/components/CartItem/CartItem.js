@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import {
   styled,
@@ -88,10 +88,25 @@ const AmountField = styled((props) => <TextField size="small" autoComplete="off"
   },
 });
 
+// * for now component has static data. In future it will be changed to dynamic
+
+const PRICE = 69;
+
 const CartItem = () => {
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const [amount, setAmount] = useState(1);
+  const [amountError, setAmountError] = useState(false);
+
+  useEffect(() => {
+    // ? should error text be provided?
+    // add error if amount less than 1
+    if (amount < 1) {
+      setAmountError(true);
+    } else {
+      setAmountError(false);
+    }
+  }, [amount]);
 
   const incrementAmount = () => setAmount((prev) => Number(prev) + 1);
   const decrementAmount = () => setAmount((prev) => Number(prev) - 1);
@@ -100,10 +115,11 @@ const CartItem = () => {
   const handleDeleteDialogClose = () => setDeleteDialogOpen(false);
   const handleDeleteFromCart = () => setDeleteDialogOpen(false);
 
-  // TODO: add error if amount less than 1
   const onAmountFieldChange = (e) => {
     setAmount(e.target.value);
   };
+
+  // TODO: add functionality to increase amount of tours
 
   return (
     <>
@@ -138,12 +154,13 @@ const CartItem = () => {
             <IconButton disabled={amount <= 1} onClick={decrementAmount}>
               <Remove />
             </IconButton>
-            <AmountField value={amount} onChange={onAmountFieldChange} />
+            <AmountField value={amount} onChange={onAmountFieldChange} error={amountError} />
             <IconButton onClick={incrementAmount}>
               <Add />
             </IconButton>
           </Stack>
           <CardActions>
+            {/* TODO: add link to the tour page */}
             <CardButton href="#">More details</CardButton>
           </CardActions>
         </CardContent>
