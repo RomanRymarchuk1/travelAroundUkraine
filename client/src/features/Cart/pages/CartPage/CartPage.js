@@ -14,7 +14,7 @@ const ContentWrapper = styled(Stack)(({ theme }) => ({
 
 function CartPage() {
   return (
-    <Box marginTop="80px" marginBottom="40px">
+    <Box marginTop="80px" marginBottom="40px" component="section">
       <Container>
         <Typography variant="h1">Cart</Typography>
         <ContentWrapper>
