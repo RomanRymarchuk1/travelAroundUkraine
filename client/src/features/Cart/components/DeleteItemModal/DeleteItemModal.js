@@ -31,7 +31,7 @@ const DeleteItemModal = ({ open, onClose, onDelete, tourTitle }) => (
         </Typography>
       </DialogContentText>
     </DialogContent>
-    <DialogActions>
+    <DialogActions sx={{ paddingBottom: 2 }}>
       <Button onClick={onClose} disableElevation>
         Cancel
       </Button>
