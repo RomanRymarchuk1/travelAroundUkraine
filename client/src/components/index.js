@@ -13,6 +13,12 @@ import AboutUkraine from './AboutUkraine/AboutUkraine';
 import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
 import CardContainer from './CardContainer/CardContainer';
 import CardItem from './CardItem/CardItem';
+import CheckoutForm from './CheckoutForm/CheckoutForm';
+import UserDetailsForm from './UserDetailsForm/UserDetailsForm';
+import ShippingAddressForm from './ShippingAddressForm/ShippingAddressForm';
+import PaymentForm from './PaymentForm/PaymentForm';
+import PaymentSuccess from './PaymentSuccess/PaymentSuccess';
+import CheckoutSummary from './CheckoutSummary/CheckoutSummary';
 
 export {
   TourAccordion,
@@ -30,4 +36,10 @@ export {
   AboutUkraine,
   CardContainer,
   CardItem,
+  CheckoutForm,
+  UserDetailsForm,
+  ShippingAddressForm,
+  PaymentForm,
+  PaymentSuccess,
+  CheckoutSummary,
 };
