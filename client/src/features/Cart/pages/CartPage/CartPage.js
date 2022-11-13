@@ -12,18 +12,33 @@ const ContentWrapper = styled(Stack)(({ theme }) => ({
   },
 }));
 
+const CartItemsList = styled((props) => <Stack component="ul" {...props} />)(({ theme }) => ({
+  padding: 0,
+  margin: 0,
+  flexGrow: 1,
+  gap: theme.spacing(2),
+
+  listStyleType: 'none',
+}));
+
 function CartPage() {
   return (
     <Box marginTop="80px" marginBottom="40px" component="section">
       <Container>
         <Typography variant="h1">Cart</Typography>
         <ContentWrapper>
-          <Stack gap={2} flexGrow={1}>
+          <CartItemsList>
             {/* For demonstration purpose only */}
-            <CartItem />
-            <CartItem />
-            <CartItem />
-          </Stack>
+            <li>
+              <CartItem />
+            </li>
+            <li>
+              <CartItem />
+            </li>
+            <li>
+              <CartItem />
+            </li>
+          </CartItemsList>
           <Box flexGrow={1}>
             <TotalInfoDialog />
           </Box>
