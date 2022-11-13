@@ -8,7 +8,6 @@ jest.mock('@mui/material/MenuList', () => ({ children }) => <ul>{children}</ul>)
 jest.mock('@mui/material/MenuItem', () => ({ children }) => <li>{children}</li>);
 jest.mock('@mui/material/Paper', () => ({ children }) => <div>{children}</div>);
 
-
 describe('HeaderFilterItems snapshot testing', () => {
   test('should render HeaderFilterItems component', () => {
     const { asFragment } = render(<HeaderFilterItems />);
