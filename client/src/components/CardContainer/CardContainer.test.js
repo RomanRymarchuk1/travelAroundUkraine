@@ -1,13 +1,17 @@
-
-import { render } from '@testing-library/react';
+/* eslint-disable react/prop-types */
+import React from 'react';
+import {render} from '@testing-library/react';
+import {MemoryRouter} from 'react-router-dom';
 import CardContainer from './CardContainer';
 
-jest.mock('@mui/material/Container', () => ({ children }) => <div>{children}</div>);
-jest.mock('@mui/material/Typography', () => ({ children }) => <h2>{children}</h2>);
+const RouterWrapper = ({children}) => <MemoryRouter>{children}</MemoryRouter>;
 
-describe('CardContainer snapshot testing', () => {
-    test('should render CardContainer component', () => {
-        const { asFragment } = render(<CardContainer />);
+jest.mock('@mui/material/Typography', () => ({children}) => <h2>{children}</h2>);
+jest.mock('@mui/material/Container', () => ({children}) => <div>{children}</div>);
+
+describe('Card Container Snapshot test', () => {
+    test('should CardContainer match snapshot', () => {
+        const {asFragment} = render(<CardContainer/>, {wrapper: RouterWrapper});
         expect(asFragment()).toMatchSnapshot();
     });
 });
