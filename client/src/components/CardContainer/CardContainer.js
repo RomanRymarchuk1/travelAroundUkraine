@@ -67,15 +67,15 @@ const CardContainerSwiperContainer = styled('div')({
     width: '265px',
   },
 
-  '@media (min-width: 600px)': {
+  '@media (min-width: 768px)': {
     width: '560px',
   },
 
-  '@media (min-width: 900px)': {
-    width: '860px',
+  '@media (min-width: 1024px)': {
+    width: '855px',
   },
 
-  '@media (min-width: 1200px)': {
+  '@media (min-width: 1360px)': {
     width: '1150px',
   },
 });
@@ -149,15 +149,15 @@ const CardContainer = () => (
             width: 265,
             slidesPerView: 1,
           },
-          560: {
+          768: {
             width: 560,
             slidesPerView: 2,
           },
-          860: {
-            width: 860,
+          1024: {
+            width: 855,
             slidesPerView: 3,
           },
-          1150: {
+          1360: {
             width: 1150,
             slidesPerView: 4,
           },
