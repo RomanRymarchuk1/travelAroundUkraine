@@ -107,7 +107,7 @@ const CartItem = () => {
 
   return (
     <>
-      <CardContainer direction={{ xs: 'column', tablet: 'row' }} gap={1}>
+      <CardContainer direction={{ xs: 'column', tablet: 'row' }}>
         <DeleteButton onClick={openDeleteDialog} />
         <CardImage
           component="img"
