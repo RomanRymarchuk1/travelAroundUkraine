@@ -117,8 +117,8 @@ const CartItem = () => {
         <CardContent>
           <CardTitle>Sightseeing tour of Chernivtsi</CardTitle>
 
-          <Stack direction="row" spacing={3} alignItems="start" sx={{ marginBottom: '10px' }}>
-            <Stack direction="row" spacing={1} alignItems="center">
+          <Stack direction="row" gap={1} alignItems="start" sx={{ marginBottom: '10px' }}>
+            <Stack direction="row" gap={1} alignItems="center" flexBasis="100px">
               <CoinsIcon />
               <Typography variant="h3" component="span">
                 {/* for demo purpose only */}
@@ -126,7 +126,7 @@ const CartItem = () => {
               </Typography>
             </Stack>
 
-            <Stack direction="row" spacing={1} alignItems="center">
+            <Stack direction="row" gap={1} alignItems="center">
               <AccessTime color="primary" sx={{ height: '21px' }} />
               <Typography variant="h3" component="span">
                 3 hours
