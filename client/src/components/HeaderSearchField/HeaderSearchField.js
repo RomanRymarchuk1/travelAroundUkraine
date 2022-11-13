@@ -1,6 +1,7 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable  react/prop-types */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
@@ -55,38 +56,36 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const HeaderSearchField = () => {
-
-const [isOpenFilterItems, setIsOpenFilterItems] = useState(false)
-const handleFilter = () => {
-  setIsOpenFilterItems(false)
-}
-
-useEffect(() => {
-  if (isOpenFilterItems) {
-    setIsOpenFilterItems(true);
-   return  document.addEventListener('click', handleFilter);
+  const [isOpenFilterItems, setIsOpenFilterItems] = useState(false)
+  const handleFilter = () => {
+    setIsOpenFilterItems(false)
   }
-  return document.removeEventListener("click", handleFilter)
-}, [isOpenFilterItems])
 
-const changeState = (length) =>{
+  useEffect(() => {
+    if (isOpenFilterItems) {
+      setIsOpenFilterItems(true);
+      return document.addEventListener('click', handleFilter);
+    }
+    document.addEventListener('click', handleFilter);
+  }, [isOpenFilterItems])
 
-  if(length >= 2) {
-    setIsOpenFilterItems(true)
-  } else {
-    setIsOpenFilterItems(false) 
+  const changeState = (length) => {
+    if (length >= 2) {
+      setIsOpenFilterItems(true)
+    } else {
+      setIsOpenFilterItems(false)
+    }
   }
-}
   return (
     <Search>
       <SearchIconWrapper>
         <SearchIcon sx={{ color: appliedTheme.palette.text.primary }} />
       </SearchIconWrapper>
-      <StyledInputBase  onChange={(e) => changeState(e.target.value.length)} placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
-    {isOpenFilterItems &&<HeaderFilterItems /> }
+      <StyledInputBase onChange={(e) => changeState(e.target.value.length)} placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+      {isOpenFilterItems && <HeaderFilterItems />}
     </Search>
   );
-  }
+}
 
 export default HeaderSearchField
 
