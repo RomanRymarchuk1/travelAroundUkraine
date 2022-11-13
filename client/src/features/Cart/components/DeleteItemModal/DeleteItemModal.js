@@ -12,7 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = styled(MuiButton)({
-  padding: '14px 24px',
+  padding: '12px 24px',
 });
 
 const DeleteItemModal = ({ open, onClose, onDelete, tourTitle }) => (
@@ -32,8 +32,10 @@ const DeleteItemModal = ({ open, onClose, onDelete, tourTitle }) => (
       </DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Button onClick={onClose}>Cancel</Button>
-      <Button onClick={onDelete} autoFocus>
+      <Button onClick={onClose} disableElevation>
+        Cancel
+      </Button>
+      <Button onClick={onDelete} disableElevation autoFocus>
         Delete
       </Button>
     </DialogActions>
