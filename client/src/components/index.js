@@ -11,6 +11,7 @@ import TabletMenu from './TabletMenu/TabletMenu';
 import CatalogTourCard from './CatalogTourCard/CatalogTourCard';
 import AboutUkraine from './AboutUkraine/AboutUkraine';
 import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
+import CatalogMainFilter from './CatalogMainFilter/CatalogMainFilter';
 import CardContainer from './CardContainer/CardContainer';
 import CardItem from './CardItem/CardItem';
 import CheckoutForm from './CheckoutForm/CheckoutForm';
@@ -19,6 +20,11 @@ import ShippingAddressForm from './ShippingAddressForm/ShippingAddressForm';
 import PaymentForm from './PaymentForm/PaymentForm';
 import PaymentSuccess from './PaymentSuccess/PaymentSuccess';
 import CheckoutSummary from './CheckoutSummary/CheckoutSummary';
+import FilterAccordion from './FilterAccordion/FilterAccordion';
+import CatalogFilterPrice from './CatalogFilterPrice/CatalogFilterPrice';
+import CatalogFilterTourists from './CatalogFilterTourists/CatalogFilterTourists';
+import CatalogFilterRegion from './CatalogFilterRegion/CatalogFilterRegion';
+import OutlinedToggleButton from './OutlinedToggleButton/OutlinedToggleButton';
 
 export {
   TourAccordion,
@@ -34,6 +40,7 @@ export {
   CatalogTourCard,
   CatalogMainSection,
   AboutUkraine,
+  CatalogMainFilter,
   CardContainer,
   CardItem,
   CheckoutForm,
@@ -42,4 +49,9 @@ export {
   PaymentForm,
   PaymentSuccess,
   CheckoutSummary,
+  FilterAccordion,
+  CatalogFilterPrice,
+  CatalogFilterTourists,
+  CatalogFilterRegion,
+  OutlinedToggleButton,
 };
