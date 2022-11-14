@@ -15,7 +15,7 @@ import {
 import { AccessTime, Remove, Add, DeleteOutline } from '@mui/icons-material';
 import { ReactComponent as CoinsIcon } from '../../../../svg/CoinsIcon.svg';
 
-import DeleteItemModal from '../DeleteItemModal/DeleteItemModal';
+import { DeleteItemModal } from '..';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
   position: 'relative',
