@@ -4,7 +4,6 @@ import { Button, Stack, Box as MuiBox, Typography, styled } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 
 const BoxWrapper = styled(MuiBox)(({ theme }) => ({
-  // ? should it be sticky or make it stay on its place?
   position: 'sticky',
   top: 90,
   padding: '20px 20px 30px',
