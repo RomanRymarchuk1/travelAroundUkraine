@@ -4,7 +4,7 @@ exports[`CatalogMainFilter snapshot test should CatalogTourCard match snapshot 1
 <DocumentFragment>
   <div>
     <h3>
-      Filters
+      Filter
     </h3>
     <div>
       <div>
@@ -57,7 +57,9 @@ exports[`CatalogMainFilter snapshot test should CatalogTourCard match snapshot 1
                   <div
                     class="MuiAccordionDetails-root css-1cwf0m9-MuiAccordionDetails-root"
                   >
-                    <div>
+                    <div
+                      class="MuiBox-root css-gg4vpm"
+                    >
                       <div
                         class="MuiInputBase-root MuiInputBase-colorPrimary css-wk9lxf-MuiInputBase-root"
                       >
@@ -79,7 +81,9 @@ exports[`CatalogMainFilter snapshot test should CatalogTourCard match snapshot 1
                         />
                       </div>
                     </div>
-                    <div>
+                    <div
+                      class="MuiBox-root css-14q2pzh"
+                    >
                       <span
                         class="MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeMedium css-187mznn-MuiSlider-root"
                       >
@@ -434,7 +438,9 @@ exports[`CatalogMainFilter snapshot test should CatalogTourCard match snapshot 1
                         All regions
                       </h3>
                     </label>
-                    <div>
+                    <div
+                      class="MuiBox-root css-agnjr6"
+                    >
                       <label
                         class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
                       >
@@ -569,10 +575,10 @@ exports[`CatalogMainFilter snapshot test should CatalogTourCard match snapshot 1
       </div>
     </div>
     <button>
-      Show
+      Filter
     </button>
     <button>
-      Reset filters
+      Reset filter
     </button>
   </div>
 </DocumentFragment>
