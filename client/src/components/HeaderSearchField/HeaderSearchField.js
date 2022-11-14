@@ -62,10 +62,6 @@ const HeaderSearchField = () => {
   }
 
   useEffect(() => {
-    if (isOpenFilterItems) {
-      setIsOpenFilterItems(true);
-      return document.addEventListener('click', handleFilter);
-    }
     document.addEventListener('click', handleFilter);
   }, [isOpenFilterItems])
 

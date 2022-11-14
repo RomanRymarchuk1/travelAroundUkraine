@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable arrow-body-style */
 import React from 'react';
 import { Box, Paper, MenuList, MenuItem, Typography } from '@mui/material';
 import { styled } from '@mui/system';
@@ -34,23 +34,16 @@ const ItemBox = styled((props) => <Box  {...props} />)(() => ({
     boxSizing: 'border-box'
 }));
 
-const PaperContainer = styled((props) => <Paper  {...props} />)(() => ({
-    width: '242px',
-    maxWidth: '100%',
-    borderRadius: '5px',
-    position: 'absolute'
-}));
-
-function HeaderFilterItems() {
+const HeaderFilterItems= () => {
     return (
-        <PaperContainer>
+        <Paper sx={{ width: '242px', borderRadius: '5px', position: 'absolute'}}>
             <Typography sx={{ paddingTop: '14px', paddingLeft: '10px' }}>found: 3</Typography>
             {items.map(({ image, name, price, amountOfDay }) => (
                 <MenuList key={name}>
                     <MenuItem sx={{ paddingLeft: 1 }}>
                         <ItemBox>
                             <Box sx={{ gridArea: '1 / 1 / 3 / 3' }}>
-                                <img src={image} alt="" />
+                                <img src={image} alt="karpaty" />
                             </Box>
                             <Box sx={{ gridArea: '1 / 3 / 2 / 5' }}>{name}</Box>
                             <Box sx={{ gridArea: '2 / 3 / 3 / 4' }}>{price}</Box>
@@ -59,9 +52,9 @@ function HeaderFilterItems() {
                     </MenuItem>
                 </MenuList>
             ))}
-            <Typography sx={{ textAlign: 'center' }}>no results.</Typography>
-            <Typography sx={{ textAlign: 'center', marginBottom: '15px' }}>please, change your request</Typography>
-        </PaperContainer>
+            <Typography align='center'>no results.</Typography>
+            <Typography align='center' sx={{ marginBottom: '15px' }}>please, change your request</Typography>
+        </Paper>
     )
 }
 
