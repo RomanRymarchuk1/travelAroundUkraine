@@ -47,7 +47,7 @@ const TotalInfoDialog = () => {
       <MuiBox>
         <Stack direction="row" justifyContent="end" alignItems="center">
           <Button sx={{ paddingInline: '30px' }} disableElevation onClick={() => navigate('/checkout')}>
-            Make an order
+            Checkout
           </Button>
         </Stack>
       </MuiBox>
