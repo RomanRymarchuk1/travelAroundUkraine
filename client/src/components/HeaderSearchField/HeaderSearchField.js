@@ -1,8 +1,12 @@
-import React from 'react';
+/* eslint-disable consistent-return */
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable  react/prop-types */
+import React, { useEffect, useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import appliedTheme from '../../theme/theme';
+import HeaderFilterItems from '../HeaderFilterItems/HeaderFilterItems';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -51,13 +55,33 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const HeaderSearchField = () => (
-  <Search>
-    <SearchIconWrapper>
-      <SearchIcon sx={{ color: appliedTheme.palette.text.primary }} />
-    </SearchIconWrapper>
-    <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
-  </Search>
-);
+const HeaderSearchField = () => {
+  const [isOpenFilterItems, setIsOpenFilterItems] = useState(false)
+  const handleFilter = () => {
+    setIsOpenFilterItems(false)
+  }
 
-export default HeaderSearchField;
+  useEffect(() => {
+    document.addEventListener('click', handleFilter);
+  }, [isOpenFilterItems])
+
+  const changeState = (length) => {
+    if (length >= 2) {
+      setIsOpenFilterItems(true)
+    } else {
+      setIsOpenFilterItems(false)
+    }
+  }
+  return (
+    <Search>
+      <SearchIconWrapper>
+        <SearchIcon sx={{ color: appliedTheme.palette.text.primary }} />
+      </SearchIconWrapper>
+      <StyledInputBase onChange={(e) => changeState(e.target.value.length)} placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+      {isOpenFilterItems && <HeaderFilterItems />}
+    </Search>
+  );
+}
+
+export default HeaderSearchField
+
