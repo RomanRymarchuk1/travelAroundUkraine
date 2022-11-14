@@ -1,12 +1,10 @@
 import React from 'react';
-import { styled, Button, Box, Typography } from '@mui/material';
+import { styled, Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
 import { CatalogFilterPrice, CatalogFilterTourists, CatalogFilterRegion } from '../index';
 
-const FilterWrapper = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
+const FilterWrapper = styled(Stack)(({ theme }) => ({
   margin: '0 auto',
   width: 252,
   padding: 0,
@@ -61,7 +59,7 @@ const ResetButton = styled((props) => (
 
 const CatalogMainFilter = () => (
   <FilterWrapper>
-    <Typography variant="h3">Filters</Typography>
+    <Typography variant="h3">Filter</Typography>
 
     <Grid container columnSpacing={5} sx={{ padding: 0 }}>
       <Grid spacing={4} item xs={12} tablet={6} laptop={12}>
@@ -74,8 +72,8 @@ const CatalogMainFilter = () => (
       </Grid>
     </Grid>
 
-    <ShowButton>Show</ShowButton>
-    <ResetButton>Reset filters</ResetButton>
+    <ShowButton>Filter</ShowButton>
+    <ResetButton>Reset filter</ResetButton>
   </FilterWrapper>
 );
 

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Checkbox, FormControlLabel } from '@mui/material';
 import { FilterAccordion } from '../index';
 
 const regions = ['region1', 'region2', 'region3', 'region4'];
 
 const CatalogFilterRegion = () => {
-  const [checked, setChecked] = React.useState(Array(regions.length).fill(false));
+  const [checked, setChecked] = useState(Array(regions.length).fill(false));
 
   const isAllChecked = checked.every((el) => el === true);
 

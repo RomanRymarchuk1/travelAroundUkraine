@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled, alpha, Box, Slider, InputBase } from '@mui/material';
 import { FilterAccordion } from '../index';
 
@@ -27,7 +27,7 @@ const FilterInput = styled(InputBase)(({ theme }) => ({
 }));
 
 const CatalogFilterPrice = () => {
-  const [value, setValue] = React.useState([200, 600]);
+  const [value, setValue] = useState([200, 600]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

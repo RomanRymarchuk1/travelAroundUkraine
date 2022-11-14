@@ -30,7 +30,7 @@ const StyledAccordionDetails = styled(AccordionDetails)({
   padding: '0 0 40px',
 });
 
-const AccordionTitle = styled((props) => <Typography variant="body1" {...props} />)(() => ({
+const AccordionTitle = styled(Typography)(() => ({
   padding: 0,
   flexShrink: 0,
   fontWeight: 700,

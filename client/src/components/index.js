@@ -18,6 +18,7 @@ import FilterAccordion from './FilterAccordion/FilterAccordion';
 import CatalogFilterPrice from './CatalogFilterPrice/CatalogFilterPrice';
 import CatalogFilterTourists from './CatalogFilterTourists/CatalogFilterTourists';
 import CatalogFilterRegion from './CatalogFilterRegion/CatalogFilterRegion';
+import OutlinedToggleButton from './OutlinedToggleButton/OutlinedToggleButton';
 
 export {
   TourAccordion,
@@ -40,4 +41,5 @@ export {
   CatalogFilterPrice,
   CatalogFilterTourists,
   CatalogFilterRegion,
+  OutlinedToggleButton,
 };
