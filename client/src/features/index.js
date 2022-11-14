@@ -1,3 +1,4 @@
 import CartPage from './Cart/pages/CartPage/CartPage';
+import LogInPage from './LogIn/pages/LogInPage';
 
-export default CartPage;
+export { CartPage, LogInPage };
