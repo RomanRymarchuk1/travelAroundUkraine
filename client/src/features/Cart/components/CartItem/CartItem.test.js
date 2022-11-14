@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { render } from '@testing-library/react';
 import CartItem from './CartItem';
 
 jest.mock('@mui/material/Stack', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/CardActions', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/CardMedia', () => ({ children }) => <div>{children}</div>);
-jest.mock('@mui/material/Button', () => ({ children }) => <button>{children}</button>);
+jest.mock('@mui/material/Button', () => ({ children }) => <button type="button">{children}</button>);
 jest.mock('@mui/material/Typography', () => ({ children }) => <p>{children}</p>);
 jest.mock('@mui/material/CardContent', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/IconButton', () => ({ children }) => <span>{children}</span>);

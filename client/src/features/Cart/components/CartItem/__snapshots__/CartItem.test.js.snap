@@ -80,7 +80,9 @@ exports[`CartItem snapshot test should CartItem match snapshot 1`] = `
         </span>
       </div>
       <div>
-        <button>
+        <button
+          type="button"
+        >
           More details
         </button>
       </div>
