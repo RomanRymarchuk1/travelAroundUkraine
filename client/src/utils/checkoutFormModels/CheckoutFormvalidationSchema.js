@@ -17,9 +17,7 @@ const {
   cvv,
 } = checkoutFormModel;
 
-// const visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-
-// TO DO CHECK VALIDATION MESSAGES OF YUP.NUMBER
+const visaRegEx = /^[0-9]{3,4}$/;
 
 export default [
   yup.object().shape({
@@ -41,6 +39,9 @@ export default [
     [nameOnCard.name]: yup.string().required(`${nameOnCard.requiredErrorMsg}`),
     [cardNumber.name]: yup.string().required(`${cardNumber.requiredErrorMsg}`),
     [expiryDate.name]: yup.string().required(`${expiryDate.requiredErrorMsg}`),
-    [cvv.name]: yup.number().required(`${cvv.requiredErrorMsg}`).max(3, 'Maximum 3 digits').min(3, 'Minimum 3 digits'),
+    [cvv.name]: yup
+      .string()
+      .matches(visaRegEx, 'CVV has to be between 3 to 4 digits')
+      .required(`${cvv.requiredErrorMsg}`),
   }),
 ];
