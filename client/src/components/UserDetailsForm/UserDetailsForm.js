@@ -3,8 +3,9 @@ import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import { TextField } from 'formik-mui';
 import { Field } from 'formik';
+import checkoutFormModel from '../../utils/checkoutFormModels/checkoutFormModel';
 
-const UserDetailsForm = ({ checkoutFormModel }) => {
+const UserDetailsForm = () => {
   const { firstName, lastName, email, phone } = checkoutFormModel;
 
   return (
@@ -15,19 +16,19 @@ const UserDetailsForm = ({ checkoutFormModel }) => {
 
       <Grid container spacing={2}>
         <Grid item xs={12} laptop={6}>
-          <Field component={TextField} name={firstName.name} label={firstName.label} fullWidth />
+          <Field component={TextField} required name={firstName.name} label={firstName.label} fullWidth />
         </Grid>
 
         <Grid item xs={12} laptop={6}>
-          <Field component={TextField} name={lastName.name} label={lastName.label} fullWidth />
+          <Field component={TextField} required name={lastName.name} label={lastName.label} fullWidth />
         </Grid>
 
         <Grid item xs={12} laptop={6}>
-          <Field component={TextField} name={email.name} label={email.label} fullWidth />
+          <Field component={TextField} required name={email.name} label={email.label} fullWidth />
         </Grid>
 
         <Grid item xs={12} laptop={6}>
-          <Field component={TextField} name={phone.name} label={phone.label} fullWidth />
+          <Field component={TextField} required name={phone.name} label={phone.label} fullWidth />
         </Grid>
       </Grid>
     </>
