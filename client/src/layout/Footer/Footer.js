@@ -28,32 +28,32 @@ const navigationMenu = [
 
 const footerGallery = [
   {
-    imagePath: './assets/images/footer/CARPATHIANS.jpg',
+    imagePath: '/assets/images/footer/CARPATHIANS.jpg',
     altDescription: 'recent_trips_image',
     id: 1,
   },
   {
-    imagePath: './assets/images/footer/CHERNIVTSI.jpg',
+    imagePath: '/assets/images/footer/CHERNIVTSI.jpg',
     altDescription: 'recent_trips_image',
     id: 2,
   },
   {
-    imagePath: './assets/images/footer/IVANOFRANKIVSK.jpg',
+    imagePath: '/assets/images/footer/IVANOFRANKIVSK.jpg',
     altDescription: 'recent_trips_image',
     id: 3,
   },
   {
-    imagePath: './assets/images/footer/KYIV.jpg',
+    imagePath: '/assets/images/footer/KYIV.jpg',
     altDescription: 'recent_trips_image',
     id: 4,
   },
   {
-    imagePath: './assets/images/footer/KYIVCENTER.jpg',
+    imagePath: '/assets/images/footer/KYIVCENTER.jpg',
     altDescription: 'recent_trips_image',
     id: 5,
   },
   {
-    imagePath: './assets/images/footer/PRYKARPATTIA.png',
+    imagePath: '/assets/images/footer/PRYKARPATTIA.png',
     altDescription: 'recent_trips_image',
     id: 6,
   },
@@ -191,7 +191,7 @@ const Footer = () => (
           <Box
             sx={{ width: '250px', marginTop: '30px', paddingBottom: '40px' }}
             component="img"
-            src="./assets/images/footer/awards.png"
+            src="/assets/images/footer/awards.png"
             alt="awards_mage"
           />
         </OurAwards>
