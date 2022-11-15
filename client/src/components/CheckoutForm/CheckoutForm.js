@@ -23,7 +23,8 @@ const CheckoutForm = () => {
 
   const formSubmitHandler = (values, actions) => {
     GoToNextStep();
-    console.log(values);
+    actions.setSubmitting(false);
+    console.log(actions);
   };
 
   return (
