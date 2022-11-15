@@ -10,6 +10,7 @@ const ErrorWrapper = styled('div')({
   '& > div': {
     display: 'flex',
     justifyContent: 'center',
+    paddingTop: '50px',
     '& > img': {
       width: '50vw',
       maxWidth: '500px',
@@ -29,7 +30,7 @@ const ErrorPage = () => {
           404 page not found
         </Typography>
         <Typography>Please, navigate to main page to plan your trip</Typography>
-        <Box sx={{ mt: '40px' }}>
+        <Box sx={{ mt: '40px', mb: '40px' }}>
           <Button onClick={() => navigate('/')}>Home</Button>
         </Box>
       </ErrorWrapper>
