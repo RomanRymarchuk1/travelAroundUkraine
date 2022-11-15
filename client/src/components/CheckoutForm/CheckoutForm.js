@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { Stepper, Step, StepLabel, Button } from '@mui/material';
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
-import checkoutFormModel from '../../utils/checkoutFormModels/checkoutFormModel';
 import CheckoutFormInitialValues from '../../utils/checkoutFormModels/CheckoutFormInitialValues';
 import CheckoutFormvalidationSchema from '../../utils/checkoutFormModels/CheckoutFormvalidationSchema';
 
@@ -15,11 +14,11 @@ const CheckoutForm = () => {
   const currentValidationSchema = CheckoutFormvalidationSchema[activeStep];
 
   const GoToNextStep = () => {
-    setActiveStep(activeStep + 1);
+    setActiveStep((prev) => prev + 1);
   };
 
-  const GoTOPrevStep = () => {
-    setActiveStep(activeStep - 1);
+  const GoToPrevStep = () => {
+    setActiveStep((prev) => prev - 1);
   };
 
   const formSubmitHandler = (values, actions) => {
@@ -47,11 +46,11 @@ const CheckoutForm = () => {
         >
           {({ isSubmitting }) => (
             <Form>
-              {activeStep === 0 && <UserDetailsForm checkoutFormModel={checkoutFormModel} />}
-              {activeStep === 1 && <ShippingAddressForm checkoutFormModel={checkoutFormModel} />}
-              {activeStep === 2 && <PaymentForm checkoutFormModel={checkoutFormModel} />}
+              {activeStep === 0 && <UserDetailsForm />}
+              {activeStep === 1 && <ShippingAddressForm />}
+              {activeStep === 2 && <PaymentForm />}
 
-              {activeStep !== 0 && <Button onClick={GoTOPrevStep}>Back</Button>}
+              {activeStep !== 0 && <Button onClick={GoToPrevStep}>Back</Button>}
               <Button type="submit">{activeStep !== lastStep ? 'Continue' : 'Pay'}</Button>
             </Form>
           )}
