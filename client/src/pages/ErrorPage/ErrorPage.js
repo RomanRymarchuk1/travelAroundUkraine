@@ -23,7 +23,7 @@ const ErrorPage = () => {
     <Container>
       <ErrorWrapper>
         <Box>
-          <Box src="./assets/images/404/heart.png" component="img" alt="uk-flag" />
+          <Box src="/assets/images/404/heart.png" component="img" alt="uk-flag" />
         </Box>
         <Typography sx={{ mb: '40px' }} variant="h2">
           404 page not found
