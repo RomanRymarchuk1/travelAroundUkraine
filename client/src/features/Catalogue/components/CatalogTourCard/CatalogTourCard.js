@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { ReactComponent as CoinsIcon } from '../../../../svg/CoinsIcon.svg';
+import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.primary.contrastText,

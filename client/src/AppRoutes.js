@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import CheckoutPage from './pages';
-import { HomePage, CartPage, ErrorPage, CataloguePage, AppLayout, TourPage } from './features';
+import { HomePage, CartPage, ErrorPage, CataloguePage, TourPage, CheckoutPage, AppLayout } from './pages';
 
 // TODO: add navigation from tour page to catalogue page
 

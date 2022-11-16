@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import appliedTheme from './theme/theme';
 import App from './App';
-import ErrorBoundary from './features/Error/components';
+import ErrorBoundary from './features/error/components';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
