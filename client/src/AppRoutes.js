@@ -1,14 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { TourPage, HomePage, CataloguePage, ErrorPage, CheckoutPage } from './pages';
-import CartPage from './features';
-import Layout from './layout/Layout/Layout';
+import CheckoutPage from './pages';
+import { HomePage, CartPage, ErrorPage, CataloguePage, AppLayout, TourPage } from './features';
 
 // TODO: add navigation from tour page to catalogue page
 
 const AppRoutes = () => (
   <Routes>
-    <Route path="/" element={<Layout />}>
+    <Route path="/" element={<AppLayout />}>
       <Route index element={<HomePage />} />
       <Route path="/catalogue" element={<CataloguePage />} />
       <Route path="/tour/:tourId" element={<TourPage />} />
