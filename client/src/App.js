@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.module.scss';
+import './assets/App.module.scss';
 import AppRoutes from './AppRoutes';
 
 function App() {
