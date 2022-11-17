@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteItemModal snapshot test should DeleteItemModal match snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <h3>
+      Delete this tour?
+    </h3>
+    <div>
+      <div>
+        Are you sure you want to delete tour: 
+        <p />
+      </div>
+    </div>
+    <div>
+      <button
+        type="button"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
