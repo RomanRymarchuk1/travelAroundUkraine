@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
-import { FilterAccordion, OutlinedToggleButton } from '../index';
-
+import { FilterAccordion, OutlinedToggleButton } from '..';
 
 const touristsNumber = Array(10)
   .fill()
@@ -23,4 +22,4 @@ const CatalogFilterTourists = () => (
   </FilterAccordion>
 );
 
-export default CatalogFilterTourists
+export default CatalogFilterTourists;

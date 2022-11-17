@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, Stack, Box, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/catalogue/components';
+import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
 
 const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ theme }) => ({
   backgroundColor: theme.palette.primary.contrastText,

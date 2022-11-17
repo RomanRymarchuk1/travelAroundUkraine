@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Checkbox, FormControlLabel } from '@mui/material';
-import { FilterAccordion } from '../index';
+import { FilterAccordion } from '..';
 
 const regions = ['region1', 'region2', 'region3', 'region4'];
 
@@ -21,7 +21,6 @@ const CatalogFilterRegion = () => {
       return newChecked;
     });
   };
-
 
   const handleChange = (event) => {
     const index = regions.indexOf(event.target.id);

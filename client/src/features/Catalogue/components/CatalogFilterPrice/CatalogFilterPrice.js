@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { styled, alpha, Box, Slider, InputBase } from '@mui/material';
-import { FilterAccordion } from '../index';
+import { FilterAccordion } from '..';
 
 const minPrice = 10;
 const maxPrice = 1000;

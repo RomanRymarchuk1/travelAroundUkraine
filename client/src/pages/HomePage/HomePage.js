@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button, Container, Typography, Box, styled } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { AboutUkraine, ImageCarousel, CardContainer } from '../../features/home/components';
+import { AboutUkraine, ImageCarousel, CardContainer } from '../../features/Home/components';
 
 const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({ theme }) => ({
   fontWeight: 700,

@@ -2,7 +2,7 @@ import React from 'react';
 import { styled, Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
-import { CatalogFilterPrice, CatalogFilterTourists, CatalogFilterRegion } from '../index';
+import { CatalogFilterPrice, CatalogFilterTourists, CatalogFilterRegion } from '..';
 
 const FilterWrapper = styled(Stack)(({ theme }) => ({
   margin: '0 auto',
