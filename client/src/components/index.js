@@ -14,6 +14,12 @@ import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
 import CatalogMainFilter from './CatalogMainFilter/CatalogMainFilter';
 import CardContainer from './CardContainer/CardContainer';
 import CardItem from './CardItem/CardItem';
+import CheckoutForm from './CheckoutForm/CheckoutForm';
+import UserDetailsForm from './UserDetailsForm/UserDetailsForm';
+import ShippingAddressForm from './ShippingAddressForm/ShippingAddressForm';
+import PaymentForm from './PaymentForm/PaymentForm';
+import PaymentSuccess from './PaymentSuccess/PaymentSuccess';
+import CheckoutSummary from './CheckoutSummary/CheckoutSummary';
 import FilterAccordion from './FilterAccordion/FilterAccordion';
 import CatalogFilterPrice from './CatalogFilterPrice/CatalogFilterPrice';
 import CatalogFilterTourists from './CatalogFilterTourists/CatalogFilterTourists';
@@ -37,6 +43,12 @@ export {
   CatalogMainFilter,
   CardContainer,
   CardItem,
+  CheckoutForm,
+  UserDetailsForm,
+  ShippingAddressForm,
+  PaymentForm,
+  PaymentSuccess,
+  CheckoutSummary,
   FilterAccordion,
   CatalogFilterPrice,
   CatalogFilterTourists,
