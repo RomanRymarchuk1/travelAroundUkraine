@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Typography } from '@mui/material';
-import { CheckoutForm } from '../../components';
+import { CheckoutForm } from '../../features/checkout/components';
 
 const CheckoutPage = () => (
   <Container sx={{ mt: '300px', mb: '300px' }}>

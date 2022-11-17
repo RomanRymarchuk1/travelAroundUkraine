@@ -3,15 +3,14 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { Stepper, Step, StepLabel, Button } from '@mui/material';
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
-import CheckoutFormInitialValues from '../../utils/checkoutFormModels/CheckoutFormInitialValues';
-import CheckoutFormvalidationSchema from '../../utils/checkoutFormModels/CheckoutFormvalidationSchema';
+import { initialValues, validationSchema } from '../../data';
 
 const steps = ['User Details', 'Shipping Address', 'Payment Details'];
 
 const CheckoutForm = () => {
   const [activeStep, setActiveStep] = useState(0);
   const lastStep = steps.length - 1;
-  const currentValidationSchema = CheckoutFormvalidationSchema[activeStep];
+  const currentValidationSchema = validationSchema[activeStep];
 
   const GoToNextStep = () => {
     setActiveStep((prev) => prev + 1);
@@ -40,11 +39,7 @@ const CheckoutForm = () => {
       {activeStep === steps.length ? (
         <CheckoutSummary />
       ) : (
-        <Formik
-          initialValues={CheckoutFormInitialValues}
-          validationSchema={currentValidationSchema}
-          onSubmit={formSubmitHandler}
-        >
+        <Formik initialValues={initialValues} validationSchema={currentValidationSchema} onSubmit={formSubmitHandler}>
           {({ isSubmitting }) => (
             <Form>
               {activeStep === 0 && <UserDetailsForm />}

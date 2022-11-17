@@ -3,10 +3,10 @@ import React from 'react';
 import { Grid, Typography, MenuItem } from '@mui/material';
 import { TextField } from 'formik-mui';
 import { Field } from 'formik';
-import checkoutFormModel from '../../utils/checkoutFormModels/checkoutFormModel';
+import { formModel } from '../../data';
 
 const PaymentForm = () => {
-  const { cardType, nameOnCard, cardNumber, expiryDate, cvv } = checkoutFormModel;
+  const { cardType, nameOnCard, cardNumber, expiryDate, cvv } = formModel;
 
   return (
     <>

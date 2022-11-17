@@ -3,10 +3,10 @@ import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import { TextField } from 'formik-mui';
 import { Field } from 'formik';
-import checkoutFormModel from '../../utils/checkoutFormModels/checkoutFormModel';
+import { formModel } from '../../data';
 
 const UserDetailsForm = () => {
-  const { firstName, lastName, email, phone } = checkoutFormModel;
+  const { firstName, lastName, email, phone } = formModel;
 
   return (
     <>

@@ -1,4 +1,4 @@
-import checkoutFormModel from './checkoutFormModel';
+import formModel from './formModel';
 
 const {
   firstName,
@@ -16,7 +16,7 @@ const {
   cardNumber,
   expiryDate,
   cvv,
-} = checkoutFormModel;
+} = formModel;
 
 export default {
   [firstName.name]: '',

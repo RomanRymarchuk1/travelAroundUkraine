@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import checkoutFormModel from './checkoutFormModel';
+import formModel from './formModel';
 
 const {
   firstName,
@@ -15,7 +15,7 @@ const {
   cardNumber,
   expiryDate,
   cvv,
-} = checkoutFormModel;
+} = formModel;
 
 const visaRegEx = /^[0-9]{3,4}$/;
 
