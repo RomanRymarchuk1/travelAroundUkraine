@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import appliedTheme from './theme/theme';
 import App from './App';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from './features/Error/components';
 import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

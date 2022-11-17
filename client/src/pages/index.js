@@ -1,7 +1,9 @@
-import TourPage from './TourPage/TourPage';
-import HomePage from './HomePage/HomePage';
+import CartPage from './CartPage/CartPage';
 import CataloguePage from './CataloguePage/CataloguePage';
-import ErrorPage from './ErrorPage/ErrorPage';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
+import ErrorPage from './ErrorPage/ErrorPage';
+import HomePage from './HomePage/HomePage';
+import TourPage from './TourPage/TourPage';
+import AppLayout from './AppLayout/AppLayout';
 
-export { TourPage, HomePage, CataloguePage, ErrorPage, CheckoutPage };
+export { CartPage, CataloguePage, CheckoutPage, ErrorPage, HomePage, TourPage, AppLayout };
