@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Box, Container, Stack, styled, Typography } from '@mui/material';
-import { CartItem, TotalInfoDialog } from '../../features/cart/components';
+import { CartItem, TotalInfoDialog } from '../../features/Cart/components';
 
 const ContentWrapper = styled(Stack)(({ theme }) => ({
   gap: theme.spacing(2),
