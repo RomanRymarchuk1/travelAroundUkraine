@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { TourPage, HomePage, CataloguePage, ErrorPage, CheckoutPage } from './pages';
-import { CartPage, LogInPage } from './features';
+import { CartPage, LogInPage, UserPage } from './features';
 import Layout from './layout/Layout/Layout';
 
 // TODO: add navigation from tour page to catalogue page
@@ -15,6 +15,7 @@ const AppRoutes = () => (
       <Route path="/cart" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/login" element={<LogInPage />} />
+      <Route path="/user" element={<UserPage />} />
 
       <Route path="*" element={<ErrorPage />} />
     </Route>
