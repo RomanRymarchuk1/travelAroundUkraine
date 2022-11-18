@@ -12,7 +12,7 @@ describe('Render BurgerMenu', () => {
   test('should BurgerMenu render', () => {
     const { asFragment } = render(
       <BrowserRouter>
-        <BurgerMenu />
+        <BurgerMenu isLogin />
       </BrowserRouter>
     );
     expect(asFragment()).toMatchSnapshot();

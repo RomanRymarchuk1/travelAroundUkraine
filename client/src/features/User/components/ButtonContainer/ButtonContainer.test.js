@@ -1,15 +1,15 @@
 import { render } from '@testing-library/react';
-import TabletMenu from './TabletMenu';
+import ButtonContainer from './ButtonContainer';
 import { BrowserRouter } from 'react-router-dom';
 
-jest.mock('@mui/material/Typography', () => ({ children }) => <p>{children}</p>);
+jest.mock('@mui/material/Button', () => ({ children }) => <button>{children}</button>);
 jest.mock('@mui/material/Box', () => ({ children }) => <div>{children}</div>);
 
-describe('Render TabletMenu', () => {
-  test('should TabletMenu render', () => {
+describe('Render ButtonContainer', () => {
+  test('should ButtonContainer render', () => {
     const { asFragment } = render(
       <BrowserRouter>
-        <TabletMenu isLogin />
+        <ButtonContainer />
       </BrowserRouter>
     );
     expect(asFragment()).toMatchSnapshot();
