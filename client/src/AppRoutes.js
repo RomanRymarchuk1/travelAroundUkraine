@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { HomePage, CartPage, ErrorPage, CataloguePage, TourPage, CheckoutPage, AppLayout } from './pages';
+import { HomePage, CartPage, ErrorPage, CataloguePage, TourPage, CheckoutPage, AppLayout, SignupPage } from './pages';
 
 // TODO: add navigation from tour page to catalogue page
 // TODO: add protected routes after incorporating sign in feature
