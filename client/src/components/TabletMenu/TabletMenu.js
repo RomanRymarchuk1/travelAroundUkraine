@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Box } from '@mui/material';
 import { NavLink, useLocation } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-// import appliedTheme from '../../theme/theme';
+import PropTypes from 'prop-types';
 
 const pages = [
   {
@@ -14,6 +14,16 @@ const pages = [
     name: 'Catalogue',
     link: '/catalogue',
     innerContent: 'Catalogue',
+  },
+  {
+    name: 'LogIn',
+    link: '/login',
+    innerContent: 'Log In',
+  },
+  {
+    name: 'Account',
+    link: '/user',
+    innerContent: 'Account',
   },
   {
     name: 'Cart',
@@ -42,20 +52,33 @@ const typograpySX = (link, pathname) => ({
   },
 });
 
-const TabletMenu = () => {
+const TabletMenu = ({ isLogin }) => {
   const location = useLocation();
 
   const { pathname } = location;
 
   return (
     <Box component="nav" sx={boxSX}>
-      {pages.map(({ name, link, innerContent }) => (
-        <Typography component={NavLink} to={link} key={name} sx={typograpySX(link, pathname)} end>
-          {innerContent}
-        </Typography>
-      ))}
+      {pages.map(({ name, link, innerContent }) => {
+        if (name === 'LogIn' && isLogin) {
+          return null;
+        }
+        if (name === 'Account' && !isLogin) {
+          return null;
+        }
+
+        return (
+          <Typography component={NavLink} to={link} key={name} sx={typograpySX(link, pathname)} end>
+            {innerContent}
+          </Typography>
+        );
+      })}
     </Box>
   );
+};
+
+TabletMenu.propTypes = {
+  isLogin: PropTypes.bool.isRequired,
 };
 
 export default TabletMenu;

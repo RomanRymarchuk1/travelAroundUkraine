@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, MenuItem, Menu, IconButton, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const pages = [
   {
@@ -13,6 +14,16 @@ const pages = [
     name: 'Catalogue',
     link: '/catalogue',
     innerContent: 'Catalogue',
+  },
+  {
+    name: 'LogIn',
+    link: '/login',
+    innerContent: 'Log In',
+  },
+  {
+    name: 'Account',
+    link: '/user',
+    innerContent: 'Account',
   },
   {
     name: 'Cart',
@@ -56,7 +67,7 @@ const transformOrigin = {
   horizontal: 'left',
 };
 
-const BurgerMenu = () => {
+const BurgerMenu = ({ isLogin }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -90,16 +101,29 @@ const BurgerMenu = () => {
         onClose={handleCloseNavMenu}
         sx={menuSX}
       >
-        {pages.map(({ name, link, innerContent }) => (
-          <MenuItem key={name} onClick={handleCloseNavMenu} sx={menuItemSX}>
-            <Typography component={NavLink} to={link} key={name} sx={styleNavLink} end>
-              {innerContent}
-            </Typography>
-          </MenuItem>
-        ))}
+        {pages.map(({ name, link, innerContent }) => {
+          if (name === 'LogIn' && isLogin) {
+            return null;
+          }
+          if (name === 'Account' && !isLogin) {
+            return null;
+          }
+
+          return (
+            <MenuItem key={name} onClick={handleCloseNavMenu} sx={menuItemSX}>
+              <Typography component={NavLink} to={link} key={name} sx={styleNavLink} end>
+                {innerContent}
+              </Typography>
+            </MenuItem>
+          );
+        })}
       </Menu>
     </Box>
   );
+};
+
+BurgerMenu.propTypes = {
+  isLogin: PropTypes.bool.isRequired,
 };
 
 export default BurgerMenu;
