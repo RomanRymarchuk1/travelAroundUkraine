@@ -6,7 +6,6 @@ import { BurgerMenu, TabletMenu, LogoHeader, HeaderSearchField } from '../../com
 
 const HideOnScroll = ({ children }) => {
   const trigger = useScrollTrigger();
-  // TODO: fix test warn;
   return (
     <Slide appear={false} direction="down" in={!trigger}>
       {children}
@@ -16,6 +15,7 @@ const HideOnScroll = ({ children }) => {
 
 const Header = () => {
   const [scrollY, setScrollY] = useState();
+  const [isLogin] = useState(false);
 
   useEffect(() => {
     const handleScrollY = () => setScrollY(window.scrollY);
@@ -39,8 +39,8 @@ const Header = () => {
           <Toolbar disableGutters>
             <LogoHeader />
             <HeaderSearchField />
-            <BurgerMenu />
-            <TabletMenu />
+            <BurgerMenu isLogin={isLogin} />
+            <TabletMenu isLogin={isLogin} />
           </Toolbar>
         </Container>
       </AppBar>
