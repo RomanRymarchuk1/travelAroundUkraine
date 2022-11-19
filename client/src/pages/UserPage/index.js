@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Paper, CircularProgress } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import UserList from '../components/UserList/UserList';
-import UserHeader from '../components/UserHeader/UserHeader';
-import ButtonContainer from '../components/ButtonContainer/ButtonContainer';
-import getCustomer from '../../../api/getCustomer';
+import UserList from '../../features/User/components/UserList/UserList';
+import UserHeader from '../../features/User/components/UserHeader/UserHeader';
+import ButtonContainer from '../../features/User/components/ButtonContainer/ButtonContainer';
+import getCustomer from '../../api/getCustomer';
 
 const containerSX = {
   display: 'block',

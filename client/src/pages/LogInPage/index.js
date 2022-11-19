@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Paper, Typography, Slide } from '@mui/material';
 import { grey } from '@mui/material/colors';
 
-import LogInForm from '../components/LogInForm';
+import LogInForm from '../../features/LogIn/components/LogInForm';
 
 const paperSX = {
   textAlign: 'center',
