@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CheckoutForm snapshot test should CheckoutForm render UserDetails form 1`] = `
+exports[`CheckoutForm snapshot test should CheckoutForm match snapshot 1`] = `
 <DocumentFragment>
   <div>
     <ul>

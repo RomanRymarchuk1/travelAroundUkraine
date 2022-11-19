@@ -18,7 +18,7 @@ import PersonIcon from '@mui/icons-material/Person';
 
 import { useInView } from 'react-intersection-observer';
 
-import { TourAccordion, TourInfoDialog, TourReasonToChoose, ImageGallery } from '../../components';
+import { TourAccordion, TourInfoDialog, TourReasonToChoose, ImageGallery } from '../../features/Tour/components';
 
 const sections = [
   { title: 'About us', link: '#about-tour' },
