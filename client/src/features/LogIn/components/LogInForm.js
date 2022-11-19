@@ -68,6 +68,10 @@ const LogInForm = () => {
     setIsLoading(false);
   };
 
+  const handleClickSignUp = () => {
+    navigate('/signup');
+  };
+
   return (
     <>
       <CircularProgress sx={preloaderSX(isLoading)} />
@@ -105,7 +109,9 @@ const LogInForm = () => {
             {errorMassage && <Typography sx={{ color: '#d32f2f', textAlign: 'right' }}>{errorMassage}</Typography>}
 
             <Box sx={{ my: { xs: 1.5, laptop: 2.5 } }}>
-              <Button sx={buttonSX}>sing up</Button>
+              <Button sx={buttonSX} onClick={handleClickSignUp}>
+                sign up
+              </Button>
               <Button type="submit" sx={buttonSX}>
                 log in
               </Button>
