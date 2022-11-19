@@ -2,7 +2,7 @@
 import { render } from '@testing-library/react';
 import { Formik } from 'formik';
 import UserDetailsForm from './UserDetailsForm';
-import checkoutFormModel from '../../utils/checkoutFormModels/checkoutFormModel';
+import formModel from '../../data';
 
 jest.mock('@mui/material/Typography', () => ({ children }) => <p>{children}</p>);
 jest.mock('@mui/material/Grid', () => ({ children }) => <div>{children}</div>);
@@ -13,7 +13,7 @@ describe('UserDetailsForm snapshot test', () => {
   test('should UserDetailsForm match snapshot', () => {
     const { asFragment } = render(
       <FormikWrapper>
-        <UserDetailsForm checkoutFormModel={checkoutFormModel} />
+        <UserDetailsForm checkoutFormModel={formModel} />
       </FormikWrapper>
     );
     expect(asFragment()).toMatchSnapshot();
