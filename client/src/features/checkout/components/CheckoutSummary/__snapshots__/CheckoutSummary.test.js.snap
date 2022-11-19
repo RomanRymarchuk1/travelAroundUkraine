@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CheckoutSummary snapshot test should CheckoutForm match snapshot 1`] = `
+exports[`CheckoutSummary snapshot test should CheckoutSummary match snapshot 1`] = `
 <DocumentFragment>
   <div>
     Order Summary
