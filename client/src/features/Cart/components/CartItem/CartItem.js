@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 
 import { AccessTime, Remove, Add, DeleteOutline } from '@mui/icons-material';
-import { ReactComponent as CoinsIcon } from '../../../../svg/CoinsIcon.svg';
+import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
 import { DeleteItemModal } from '..';
 

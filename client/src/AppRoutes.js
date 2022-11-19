@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { TourPage, HomePage, CataloguePage, ErrorPage, CheckoutPage } from './pages';
-import { CartPage, LogInPage, UserPage } from './features';
-import Layout from './layout/Layout/Layout';
+import { LogInPage, UserPage } from './features';
+import { HomePage, CartPage, ErrorPage, CataloguePage, TourPage, CheckoutPage, AppLayout, SignupPage } from './pages';
 
 // TODO: add navigation from tour page to catalogue page
+// TODO: add protected routes after incorporating sign in feature
 
 const AppRoutes = () => (
   <Routes>
-    <Route path="/" element={<Layout />}>
+    <Route path="/" element={<AppLayout />}>
       <Route index element={<HomePage />} />
       <Route path="/catalogue" element={<CataloguePage />} />
       <Route path="/tour/:tourId" element={<TourPage />} />
@@ -17,6 +17,7 @@ const AppRoutes = () => (
       <Route path="/login" element={<LogInPage />} />
       <Route path="/user" element={<UserPage />} />
 
+      <Route path="/signup" element={<SignupPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   </Routes>
