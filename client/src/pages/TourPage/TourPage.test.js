@@ -10,9 +10,11 @@ jest.mock('@mui/material/Typography', () => ({ children }) => <p>{children}</p>)
 jest.mock('@mui/material/Button', () => ({ children }) => <button>{children}</button>);
 jest.mock('@mui/material/Slide', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/Link', () => ({ children }) => <a>{children}</a>);
-jest.mock('../../components/TourAccordion/TourAccordion.js', () => ({ children }) => <div>{children}</div>);
-jest.mock('../../components/TourInfoDialog/TourInfoDialog.js', () => () => <div>TourInfoDialog</div>);
-jest.mock('../../components/TourReasonToChoose/TourReasonToChoose.js', () => () => <div>TourReasonToChoose</div>);
+jest.mock('../../features/Tour/components/TourAccordion/TourAccordion', () => ({ children }) => <div>{children}</div>);
+jest.mock('../../features/Tour/components/TourInfoDialog/TourInfoDialog', () => () => <div>TourInfoDialog</div>);
+jest.mock('../../features/Tour/components/TourReasonToChoose/TourReasonToChoose', () => () => (
+  <div>TourReasonToChoose</div>
+));
 
 let mockedMatchesMediaQuery = true;
 jest.mock('@mui/material/useMediaQuery', () => jest.fn(() => mockedMatchesMediaQuery));

@@ -2,7 +2,7 @@
 import { render } from '@testing-library/react';
 import { Formik } from 'formik';
 import PaymentForm from './PaymentForm';
-import checkoutFormModel from '../../utils/checkoutFormModels/checkoutFormModel';
+import formModel from '../../data';
 
 jest.mock('@mui/material/Typography', () => ({ children }) => <p>{children}</p>);
 jest.mock('@mui/material/MenuItem', () => ({ children }) => <div>{children}</div>);
@@ -14,7 +14,7 @@ describe('PaymentForm snapshot test', () => {
   test('should PaymentForm match snapshot', () => {
     const { asFragment } = render(
       <FormikWrapper>
-        <PaymentForm checkoutFormModel={checkoutFormModel} />
+        <PaymentForm checkoutFormModel={formModel} />
       </FormikWrapper>
     );
     expect(asFragment()).toMatchSnapshot();
