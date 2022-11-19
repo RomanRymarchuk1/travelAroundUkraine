@@ -5,7 +5,7 @@ const getCustomer = async () => {
     const { data } = await axiosConfig.get('/customers/customer').then((loggedInCustomer) => loggedInCustomer);
     return data;
   } catch (err) {
-    return err.response.data;
+    return console.log(err.response);
   }
 };
 
