@@ -21,7 +21,7 @@ exports[`Footer snapshot testing should Footer renders 1`] = `
           <div
             alt="awards_mage"
             component="img"
-            src="./assets/images/footer/awards.png"
+            src="/assets/images/footer/awards.png"
             sx="[object Object]"
           />
         </div>
@@ -169,7 +169,7 @@ exports[`Footer snapshot testing should Footer renders 1`] = `
               <div
                 alt="recent_trips_image"
                 component="img"
-                src="./assets/images/footer/CARPATHIANS.jpg"
+                src="/assets/images/footer/CARPATHIANS.jpg"
               />
             </a>
             <a
@@ -178,7 +178,7 @@ exports[`Footer snapshot testing should Footer renders 1`] = `
               <div
                 alt="recent_trips_image"
                 component="img"
-                src="./assets/images/footer/CHERNIVTSI.jpg"
+                src="/assets/images/footer/CHERNIVTSI.jpg"
               />
             </a>
             <a
@@ -187,7 +187,7 @@ exports[`Footer snapshot testing should Footer renders 1`] = `
               <div
                 alt="recent_trips_image"
                 component="img"
-                src="./assets/images/footer/IVANOFRANKIVSK.jpg"
+                src="/assets/images/footer/IVANOFRANKIVSK.jpg"
               />
             </a>
             <a
@@ -196,7 +196,7 @@ exports[`Footer snapshot testing should Footer renders 1`] = `
               <div
                 alt="recent_trips_image"
                 component="img"
-                src="./assets/images/footer/KYIV.jpg"
+                src="/assets/images/footer/KYIV.jpg"
               />
             </a>
             <a
@@ -205,7 +205,7 @@ exports[`Footer snapshot testing should Footer renders 1`] = `
               <div
                 alt="recent_trips_image"
                 component="img"
-                src="./assets/images/footer/KYIVCENTER.jpg"
+                src="/assets/images/footer/KYIVCENTER.jpg"
               />
             </a>
             <a
@@ -214,7 +214,7 @@ exports[`Footer snapshot testing should Footer renders 1`] = `
               <div
                 alt="recent_trips_image"
                 component="img"
-                src="./assets/images/footer/PRYKARPATTIA.png"
+                src="/assets/images/footer/PRYKARPATTIA.png"
               />
             </a>
           </div>
