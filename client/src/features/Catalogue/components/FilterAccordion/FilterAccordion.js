@@ -38,7 +38,7 @@ const AccordionTitle = styled(Typography)(() => ({
 
 const FilterAccordion = ({ title, children }) => (
   <StyledAccordion>
-    <AccordionSummary sx={{ padding: '0' }} expandIcon={<ExpandMoreIcon fontSize="medium" color="primary" />}>
+    <AccordionSummary sx={{ p: '0' }} expandIcon={<ExpandMoreIcon fontSize="medium" color="primary" />}>
       <AccordionTitle>{title}</AccordionTitle>
     </AccordionSummary>
     <StyledAccordionDetails>{children}</StyledAccordionDetails>

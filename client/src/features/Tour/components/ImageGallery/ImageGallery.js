@@ -3,13 +3,12 @@ import React, { useState, useCallback } from 'react';
 import ImageViewer from 'react-simple-image-viewer';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-
 import 'swiper/swiper-bundle.css';
 import './Swiper.scss';
 
 import { Autoplay, FreeMode, Mousewheel, Scrollbar, Zoom, Thumbs, Navigation } from 'swiper';
 
-
+import SliderButton from '../../../../components';
 
 export default function ImageGallery() {
   const [currentImage, setCurrentImage] = useState(0);
@@ -29,32 +28,29 @@ export default function ImageGallery() {
     'http://placeimg.com/1200/800/nature',
     'http://placeimg.com/1200/800/nature',
   ];
-    function disableScroll() {
-        document.body.classList.add("stop-scrolling");
-    }
-    function enableScroll() {
-        document.body.classList.remove("stop-scrolling");
-    }
+  function disableScroll() {
+    document.body.classList.add('stop-scrolling');
+  }
+  function enableScroll() {
+    document.body.classList.remove('stop-scrolling');
+  }
 
   const openImageViewer = useCallback((index) => {
-
     setCurrentImage(index);
     setIsViewerOpen(true);
-    disableScroll()
+    disableScroll();
   }, []);
 
   const closeImageViewer = () => {
     setCurrentImage(0);
     setIsViewerOpen(false);
-    enableScroll()
+    enableScroll();
   };
-
-
 
   return (
     <div className="c">
-      <div id="p" className="swiper-button-prev" />
-      <div id="n" className="swiper-button-next" />
+      <SliderButton id="p" position={{ top: '40%', left: '-30px', rotate: '180deg' }} />
+      <SliderButton id="n" position={{ top: '40%', right: '-30px' }} />
       <Swiper
         spaceBetween={5}
         zoom
@@ -88,8 +84,6 @@ export default function ImageGallery() {
         style={{
           height: '70px',
           width: 'auto',
-          '--swiper-navigation-color': '#fff',
-          '--swiper-pagination-color': '#fff',
         }}
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
@@ -104,20 +98,19 @@ export default function ImageGallery() {
           </SwiperSlide>
         ))}
       </Swiper>
-        {
-            isViewerOpen &&   <ImageViewer
-                src={image}
-                currentIndex={currentImage}
-                onClose={closeImageViewer}
-                disableScroll
-                backgroundStyle={{
-                    backgroundColor: 'rgba(0,0,0,0.9)',
-                    zIndex: 10,
-                }}
-                closeOnClickOutside
-            />
-        }
-
+      {isViewerOpen && (
+        <ImageViewer
+          src={image}
+          currentIndex={currentImage}
+          onClose={closeImageViewer}
+          disableScroll
+          backgroundStyle={{
+            backgroundColor: 'rgba(0,0,0,0.9)',
+            zIndex: 10,
+          }}
+          closeOnClickOutside
+        />
+      )}
     </div>
   );
 }
