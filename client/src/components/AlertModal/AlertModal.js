@@ -45,7 +45,7 @@ AlertModal.propTypes = {
 };
 
 AlertModal.defaultProps = {
-  title: '',
+  title: 'Alert!',
 };
 
 export default AlertModal;
