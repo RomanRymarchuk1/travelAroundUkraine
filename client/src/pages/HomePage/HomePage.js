@@ -102,10 +102,10 @@ const HomePage = () => (
         </Button>
       </HeroContainer>
     </Box>
-    <Box component="section">
+    <Box component="section" sx={{ mt: '60px' }}>
       <AboutUkraine />
     </Box>
-    <Box component="section">
+    <Box component="section" sx={{ mt: '80px', mb: '150px' }}>
       <CardContainer />
     </Box>
   </>

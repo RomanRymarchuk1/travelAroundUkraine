@@ -46,8 +46,8 @@ const CheckoutForm = () => {
               {activeStep === 1 && <ShippingAddressForm />}
               {activeStep === 2 && <PaymentForm />}
 
-              {activeStep !== 0 && <Button onClick={GoToPrevStep}>Back</Button>}
-              <Button type="submit">{activeStep !== lastStep ? 'Continue' : 'Pay'}</Button>
+              {activeStep !== 0 && <Button sx={{ mt: '20px', mr: '15px' }} onClick={GoToPrevStep}>Back</Button>}
+              <Button sx={{ mt: '20px' }} type="submit">{activeStep !== lastStep ? 'Continue' : 'Pay'}</Button>
             </Form>
           )}
         </Formik>

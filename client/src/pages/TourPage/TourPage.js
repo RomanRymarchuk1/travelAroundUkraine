@@ -61,7 +61,7 @@ const Nav = styled('nav')(({ theme }) => ({
   paddingBlock: '15px',
 
   [theme.breakpoints.up('laptop')]: {
-    paddingBlock: '20px',
+    paddingTop: '40px',
   },
 }));
 
@@ -85,14 +85,16 @@ const LinksWrapper = styled(Stack)(({ theme }) => ({
 
   [theme.breakpoints.up('tablet')]: {
     justifyContent: 'center',
+    gap: '40px',
   },
 }));
 
 const MainContent = styled(Box)(({ theme }) => ({
-  paddingBlock: '10px',
+  paddingTop: '10px',
+  marginBottom: '150px',
 
   [theme.breakpoints.up('laptop')]: {
-    paddingBlock: '25px',
+    paddingTop: '40px',
   },
 }));
 
@@ -192,7 +194,7 @@ const TourPage = () => {
 
               <Section id="reasons-to-choose">
                 <TourAccordion id="reasons-to-choose" title="Reasons to choose our tour">
-                  <Stack direction="row" gap={3} flexWrap="wrap" mt={2} pl={2}>
+                  <Stack direction="row" gap={4} flexWrap="wrap" mt={2} pl={2}>
                     <TourReasonToChoose
                       number={1}
                       description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi ducimus tenetur in aspernatur, asperiores."

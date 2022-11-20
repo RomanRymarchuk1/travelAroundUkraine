@@ -39,7 +39,7 @@ const CatalogFilterPrice = () => {
         <FilterInput placeholder={String(minPrice)} value={value[0]} />
         <FilterInput placeholder={String(maxPrice)} value={value[1]} />
       </Box>
-      <Box sx={{ margin: '0 auto', paddingTop: '20px' }}>
+      <Box sx={{ m: '0 auto', pt: '20px' }}>
         <Slider
           min={minPrice}
           max={maxPrice}
