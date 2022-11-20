@@ -10,8 +10,8 @@ jest.mock('@mui/material/Typography', () => ({ children }) => <p>{children}</p>)
 jest.mock('@mui/material/DialogContentText', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/DialogTitle', () => ({ children }) => <h3>{children}</h3>);
 
-describe('DeleteItemModal snapshot test', () => {
-  test('should DeleteItemModal match snapshot', () => {
+describe('AlertModal snapshot test', () => {
+  test('should AlertModal match snapshot', () => {
     const onClose = jest.fn();
     const onSubmit = jest.fn();
 
