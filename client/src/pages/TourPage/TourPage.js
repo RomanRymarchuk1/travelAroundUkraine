@@ -90,11 +90,11 @@ const LinksWrapper = styled(Stack)(({ theme }) => ({
 }));
 
 const MainContent = styled(Box)(({ theme }) => ({
-  paddingTop: '10px',
+  paddingBlock: '10px',
   marginBottom: '150px',
 
   [theme.breakpoints.up('laptop')]: {
-    paddingTop: '40px',
+    paddingBlock: '40px',
   },
 }));
 

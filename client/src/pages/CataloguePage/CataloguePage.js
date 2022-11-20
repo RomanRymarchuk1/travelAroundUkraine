@@ -17,7 +17,7 @@ const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ t
 }));
 
 const CataloguePage = () => (
-  <Box sx={{ backgroundColor: '#EDEDED', pb: '150px' }}>
+  <Box sx={{ backgroundColor: '#EDEDED', paddingBottom: '150px' }}>
     <CatalogMainSection />
     <Container>
       <Grid container sx={{ mt: '60px', gap: '40px' }}>
