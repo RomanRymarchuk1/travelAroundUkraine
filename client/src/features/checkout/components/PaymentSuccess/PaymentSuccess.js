@@ -31,7 +31,7 @@ const PaymentSuccess = ({ activeStep, steps }) => {
       <DialogActions>
         <Button onClick={handleCloseBttn} autoFocus>
           Great !
-        </Button >
+        </Button>
       </DialogActions>
     </Dialog>
   );
