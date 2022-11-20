@@ -51,7 +51,7 @@ const CatalogTourCard = () => (
     <CardContent sx={{ padding: '0 30px 0 36px' }}>
       <CardTitle>Sightseeing tour of Chernivtsi</CardTitle>
 
-      <Stack direction="row" spacing={3} alignItems="start" sx={{ marginBottom: '20px' }}>
+      <Stack direction="row" spacing={3} alignItems="start" sx={{ mb: '20px' }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <CoinsIcon />
           <Typography variant="h3" component="span">

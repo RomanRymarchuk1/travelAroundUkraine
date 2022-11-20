@@ -5,14 +5,12 @@ exports[`Swiper has to render swiper renders 1`] = `
   <div
     class="c"
   >
-    <div
-      class="swiper-button-prev"
-      id="p"
-    />
-    <div
-      class="swiper-button-next"
-      id="n"
-    />
+    <button>
+      test button
+    </button>
+    <button>
+      test button
+    </button>
     <div
       class="swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-watch-progress mySwiper2"
     >
@@ -321,7 +319,7 @@ exports[`Swiper has to render swiper renders 1`] = `
     </div>
     <div
       class="swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-watch-progress thumbsSwiper swiper-thumbs"
-      style="height: 70px; width: auto; --swiper-navigation-color: #fff; --swiper-pagination-color: #fff;"
+      style="height: 70px; width: auto;"
     >
       <div
         class="swiper-wrapper"
