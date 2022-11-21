@@ -38,11 +38,7 @@ const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
       <StyledToggleButton
         value={value}
         selected={selected}
-        // onChange={() => {
-        //   setSelected(!selected);
-        // }}
         onChange={() => setSelected(prev => !prev)}
-
       >
         {children}
       </StyledToggleButton>

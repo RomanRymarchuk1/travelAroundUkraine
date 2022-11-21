@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { Typography, styled, Container } from '@mui/material';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { CardItem } from '..';
+import SliderButton from '../../../../components';
 
 import 'swiper/swiper.min.css';
 
@@ -61,7 +61,7 @@ const CardContainerHeaderContainer = styled('div')({
 
 const CardContainerSwiperContainer = styled('div')({
   position: 'relative',
-  margin: '70px auto 0 auto',
+  margin: '10px auto 0 auto',
 
   '@media (min-width: 300px)': {
     width: '265px',
@@ -80,51 +80,6 @@ const CardContainerSwiperContainer = styled('div')({
   },
 });
 
-const CardContainerBtnPrev = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.primary.contrastText,
-  height: '60px',
-  width: '60px',
-  borderRadius: '50px',
-  position: 'absolute',
-  cursor: 'pointer',
-  zIndex: '2',
-  top: '50%',
-  marginTop: '-30px',
-  marginLeft: '-30px',
-
-  '& .MuiSvgIcon-root': {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginLeft: '-12px',
-    marginTop: '-10px',
-    rotate: '180deg',
-    color: theme.palette.primary.main,
-  },
-}));
-
-const CardContainerBtnNext = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.primary.contrastText,
-  height: '60px',
-  width: '60px',
-  borderRadius: '50px',
-  position: 'absolute',
-  cursor: 'pointer',
-  zIndex: '2',
-  top: '50%',
-  right: '-30px',
-  marginTop: '-30px',
-  marginLeft: '100%',
-
-  '& .MuiSvgIcon-root': {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginLeft: '-10px',
-    marginTop: '-12px',
-    color: theme.palette.primary.main,
-  },
-}));
 
 const CardContainer = () => (
   <Container>
@@ -137,12 +92,8 @@ const CardContainer = () => (
       </Link>
     </CardContainerHeaderContainer>
     <CardContainerSwiperContainer>
-      <CardContainerBtnPrev id="previous">
-        <ArrowForwardIosIcon />
-      </CardContainerBtnPrev>
-      <CardContainerBtnNext id="next">
-        <ArrowForwardIosIcon />
-      </CardContainerBtnNext>
+      <SliderButton id="previous" position={{top: '44%', left: '-30px', rotate: '180deg'}}/>
+      <SliderButton id="next" position={{top: '44%', right: '-30px'}}/>
       <Swiper
         breakpoints={{
           265: {
