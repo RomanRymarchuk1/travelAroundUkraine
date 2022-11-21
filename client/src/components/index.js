@@ -1,5 +1,4 @@
 import AlertModal from './AlertModal/AlertModal';
+import SliderButton from './SliderButton/SliderButton';
 
-// ! delete rule when there would be more than one export
-// eslint-disable-next-line import/prefer-default-export
-export { AlertModal };
+export { AlertModal, SliderButton };

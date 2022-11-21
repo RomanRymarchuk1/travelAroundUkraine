@@ -6,14 +6,42 @@ exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
     <div
       class="c"
     >
-      <div
-        class="swiper-button-prev"
+      <button
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeMedium css-hh8ras-MuiButtonBase-root-MuiIconButton-root"
         id="p"
-      />
-      <div
-        class="swiper-button-next"
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="ArrowForwardIosIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M6.23 20.23 8 22l10-10L8 2 6.23 3.77 14.46 12z"
+          />
+        </svg>
+      </button>
+      <button
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeMedium css-nl7jpl-MuiButtonBase-root-MuiIconButton-root"
         id="n"
-      />
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="ArrowForwardIosIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M6.23 20.23 8 22l10-10L8 2 6.23 3.77 14.46 12z"
+          />
+        </svg>
+      </button>
       <div
         class="swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-watch-progress mySwiper2"
       >
@@ -322,7 +350,7 @@ exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
       </div>
       <div
         class="swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-watch-progress thumbsSwiper swiper-thumbs"
-        style="height: 70px; width: auto; --swiper-navigation-color: #fff; --swiper-pagination-color: #fff;"
+        style="height: 70px; width: auto;"
       >
         <div
           class="swiper-wrapper"
@@ -425,7 +453,7 @@ exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
   >
     <div>
       <nav
-        class="css-rtewkn"
+        class="css-1ykz72r"
       >
         <div>
           <a>
@@ -442,7 +470,7 @@ exports[`Tour Page snapshot testing should Tour Page match snapshot 1`] = `
     </div>
   </div>
   <div
-    class="css-souzgl"
+    class="css-1nmiu5j"
   >
     <div>
       <div>

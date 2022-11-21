@@ -20,9 +20,9 @@ const CataloguePage = () => (
   <Box sx={{ backgroundColor: '#EDEDED', paddingBottom: '150px' }}>
     <CatalogMainSection />
     <Container>
-      <Grid container sx={{ marginTop: '60px', gap: '40px' }}>
-        <Grid item xs={12} laptop sx={{ padding: 0 }}>
-          <Typography variant="h2" sx={{ textTransform: 'uppercase', marginBottom: '25px' }}>
+      <Grid container sx={{ mt: '60px', gap: '40px' }}>
+        <Grid item xs={12} laptop sx={{ p: 0 }}>
+          <Typography variant="h2" sx={{ textTransform: 'uppercase', mb: '25px' }}>
             Tours
           </Typography>
           <Stack spacing={2}>

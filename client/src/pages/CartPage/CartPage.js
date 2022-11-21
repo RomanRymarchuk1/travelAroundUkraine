@@ -22,7 +22,7 @@ const CartItemsList = styled((props) => <Stack component="ul" {...props} />)(({ 
 
 function CartPage() {
   return (
-    <Box marginTop="80px" marginBottom="40px" component="section" paddingY={3}>
+    <Box marginTop="100px" marginBottom="150px" component="section" paddingY={3}>
       <Container>
         <Typography marginBottom={2} variant="h2">
           Cart
