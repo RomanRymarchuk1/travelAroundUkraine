@@ -23,11 +23,23 @@ const comments = require('./routes/comments');
 const shippingMethods = require('./routes/shippingMethods');
 const paymentMethods = require('./routes/paymentMethods');
 const partners = require('./routes/partners');
+const { nextTick } = require('process');
 // const mainRoute = require("./routes/index");
 
 const app = express();
 
 // Body parser middleware
+
+app.use((reg, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+
+    'OPTIONS, GET, POST, PUT, PATCH, DELETE' // what matters here is that OPTIONs is present
+  );
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
