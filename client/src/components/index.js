@@ -1,3 +1,4 @@
+import AlertModal from './AlertModal/AlertModal';
 import SliderButton from './SliderButton/SliderButton';
 
-export default SliderButton;
+export { AlertModal, SliderButton };
