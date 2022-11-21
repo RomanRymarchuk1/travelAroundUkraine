@@ -10,7 +10,8 @@ jest.mock('@mui/material/StepLabel', () => ({ children }) => <div>{children}</di
 jest.mock('@mui/material/Button', () => ({ children }) => <button>{children}</button>);
 jest.mock('@mui/material/Box', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/CircularProgress', () => ({ children }) => <div>{children}</div>);
-jest.mock('../SignupSuccess/SignupSuccess', () => ({ children }) => <div>{children}</div>);
+jest.mock('../SignupSuccess/SignupSuccess', () => () => <div>SIGN UP SUCCESS</div>);
+jest.mock('../UserInfoForm/UserInfoForm', () => () => <div>USER INFO FORM</div>);
 
 describe('SignupForm snapshot test', () => {
   test('should SignupForm match snapshot', () => {

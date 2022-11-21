@@ -10,7 +10,7 @@ export default {
   [password.name]: '',
   [retypePassword.name]: '',
   [phone.name]: '',
-  [birthDate.name]: new Date(),
+  [birthDate.name]: '',
   [gender.name]: '',
   [avatarUrl.name]: '',
 };
