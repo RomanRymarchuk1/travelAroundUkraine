@@ -31,7 +31,7 @@ const SignupSuccess = ({ activeStep, steps }) => {
       </DialogContent>
 
       <DialogActions>
-        <Button success onClick={handleCloseBttn} autoFocus>
+        <Button success="true" onClick={handleCloseBttn} autoFocus>
           Great !
         </Button>
       </DialogActions>
