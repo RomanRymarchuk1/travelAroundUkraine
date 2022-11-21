@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { toggleIsLogin } from '../../../../store/isLogin';
 
 const buttonBoxSX = { display: 'flex', width: '100%', justifyContent: 'end', my: '20px' };
 
@@ -14,9 +16,11 @@ const buttonSX = {
 
 const ButtonContainer = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const logOut = () => {
     localStorage.removeItem('token');
+    dispatch(toggleIsLogin());
     navigate('/');
   };
 

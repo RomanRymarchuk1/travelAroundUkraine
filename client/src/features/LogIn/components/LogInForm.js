@@ -1,31 +1,13 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Box, Button, Typography, CircularProgress } from '@mui/material';
+import { Box, Button, Typography, CircularProgress, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { TextField } from 'formik-mui';
 import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
 import postLogIn from '../../../api/postLogIn';
-
-const initialValues = {
-  email: '',
-  pwd: '',
-};
-
-const validationSchema = yup.object().shape({
-  email: yup.string().email('It will be an valid email').required('Email is required'),
-  pwd: yup.string().min(6, 'Password must have at least 6 characters').required('Password is required!'),
-});
-
-const inputBoxSX = (isLoading) => ({
-  display: isLoading ? 'none' : 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-});
-
-const inputSX = {
-  width: { xs: '80%', tablet: '60%', laptop: '40%' },
-  my: { xs: '4%', tablet: '3%' },
-};
+import { toggleIsLogin } from '../../../store/isLogin';
 
 const buttonSX = {
   width: { xs: '86px', mobile: '110px', tablet: '140px', laptop: '150px' },
@@ -35,36 +17,38 @@ const buttonSX = {
   fontSize: { xs: '12px', laptop: '14px' },
 };
 
-const preloaderSX = (isLoading) => ({
-  display: isLoading ? 'inline-block' : 'none',
+const preloaderSX = {
   my: 5,
   width: '80px !important',
-  height: '80px !important',
-  color: 'secondary',
-});
+  height: '80pX !important',
+};
+
+const gridItemSx = {
+  width: { xs: '80%', tablet: '60%', laptop: '40%' },
+  my: { xs: '4%', tablet: '3%' },
+};
 
 const LogInForm = () => {
   const [errorMassage, setErrorMassage] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const myHandleSubmit = async (values) => {
     setIsLoading(true);
 
-    const userData = {
-      loginOrEmail: values.email,
-      password: values.pwd,
-    };
-    const response = await postLogIn(userData).then((res) => res);
+    const response = await postLogIn(values).then((res) => res);
 
     if (response.success) {
       localStorage.setItem('token', response.token);
       setErrorMassage(null);
       navigate('/');
+      dispatch(toggleIsLogin());
     } else {
       setErrorMassage(response?.password || response?.loginOrEmail);
     }
+
     setIsLoading(false);
   };
 
@@ -72,55 +56,47 @@ const LogInForm = () => {
     navigate('/signup');
   };
 
+  const initialValues = {
+    loginOrEmail: '',
+    password: '',
+  };
+
+  const validationSchema = yup.object().shape({
+    loginOrEmail: yup.string().email('It will be an valid email').required('Email is required'),
+    password: yup.string().min(7, 'Password must have at least 7 characters').required('Password is required!'),
+  });
+
   return (
     <>
-      <CircularProgress sx={preloaderSX(isLoading)} />
-      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={myHandleSubmit}>
-        {({ handleSubmit, handleChange, values, touched, errors }) => (
-          <Box
-            component={Form}
-            sx={inputBoxSX(isLoading)}
-            onSubmit={(e) => {
-              e.preventDefault();
-              return handleSubmit();
-            }}
-          >
-            <Field
-              component={TextField}
-              onChange={handleChange}
-              value={values.email}
-              error={touched.email && Boolean(errors.email)}
-              helperText={touched.email && errors.email}
-              name="email"
-              label="Email"
-              sx={inputSX}
-            />
-            <Field
-              component={TextField}
-              onChange={handleChange}
-              value={values.pwd}
-              error={touched.pwd && Boolean(errors.pwd)}
-              helperText={touched.pwd && errors.pwd}
-              type="password"
-              name="pwd"
-              label="Password"
-              sx={inputSX}
-            />
-            {errorMassage && <Typography sx={{ color: '#d32f2f', textAlign: 'right' }}>{errorMassage}</Typography>}
-
-            <Box sx={{ my: { xs: 1.5, laptop: 2.5 } }}>
-              <Button sx={buttonSX} onClick={handleClickSignUp}>
-                sign up
-              </Button>
-              <Button type="submit" sx={buttonSX}>
-                log in
-              </Button>
-            </Box>
-          </Box>
-        )}
-      </Formik>
+      {isLoading ? (
+        <CircularProgress sx={preloaderSX} />
+      ) : (
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={myHandleSubmit}>
+          {() => (
+            <Form>
+              <Grid container direction="column" alignItems="center">
+                <Grid item sx={gridItemSx}>
+                  <Field component={TextField} name="loginOrEmail" label="Email" fullWidth />
+                </Grid>
+                <Grid sx={gridItemSx}>
+                  <Field component={TextField} type="password" name="password" label="Password" fullWidth />
+                </Grid>
+              </Grid>
+              {errorMassage && <Typography sx={{ color: '#d32f2f', textAlign: 'center' }}>{errorMassage}</Typography>}
+              <Box sx={{ my: { xs: 1.5, laptop: 2.5 } }}>
+                <Button sx={buttonSX} onClick={handleClickSignUp}>
+                  sign up
+                </Button>
+                <Button type="submit" sx={buttonSX}>
+                  log in
+                </Button>
+              </Box>
+            </Form>
+          )}
+        </Formik>
+      )}
+      {}
     </>
   );
 };
-
 export default LogInForm;
