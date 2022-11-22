@@ -63,10 +63,6 @@ const SignupForm = () => {
                       size={50}
                       sx={{
                         color: 'primary.dark',
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        marginLeft: '-25px',
                       }}
                     />
                   )}
