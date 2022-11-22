@@ -1,21 +1,32 @@
 import React, { useState } from 'react';
 import { Box, MenuItem, Menu, IconButton, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 const pages = [
   {
-    name: 'Home',
+    name: 'home',
     link: '/',
     innerContent: 'Home',
   },
   {
-    name: 'Catalogue',
+    name: 'catalogue',
     link: '/catalogue',
     innerContent: 'Catalogue',
   },
   {
-    name: 'Cart',
+    name: 'logIn',
+    link: '/login',
+    innerContent: 'Log In',
+  },
+  {
+    name: 'account',
+    link: '/user',
+    innerContent: 'Account',
+  },
+  {
+    name: 'cart',
     link: '/cart',
     innerContent: 'Cart',
   },
@@ -58,6 +69,7 @@ const transformOrigin = {
 
 const BurgerMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const { isLogin } = useSelector((store) => store.userReducer);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -90,13 +102,22 @@ const BurgerMenu = () => {
         onClose={handleCloseNavMenu}
         sx={menuSX}
       >
-        {pages.map(({ name, link, innerContent }) => (
-          <MenuItem key={name} onClick={handleCloseNavMenu} sx={menuItemSX}>
-            <Typography component={NavLink} to={link} key={name} sx={styleNavLink} end>
-              {innerContent}
-            </Typography>
-          </MenuItem>
-        ))}
+        {pages.map(({ name, link, innerContent }) => {
+          if (name === 'logIn' && isLogin) {
+            return null;
+          }
+          if (name === 'account' && !isLogin) {
+            return null;
+          }
+
+          return (
+            <MenuItem key={name} onClick={handleCloseNavMenu} sx={menuItemSX}>
+              <Typography component={NavLink} to={link} key={name} sx={styleNavLink} end>
+                {innerContent}
+              </Typography>
+            </MenuItem>
+          );
+        })}
       </Menu>
     </Box>
   );

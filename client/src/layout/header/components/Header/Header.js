@@ -5,7 +5,6 @@ import { BurgerMenu, TabletMenu, LogoHeader, HeaderSearchField } from '..';
 
 const HideOnScroll = ({ children }) => {
   const trigger = useScrollTrigger();
-  // TODO: fix test warn;
   return (
     <Slide appear={false} direction="down" in={!trigger}>
       {children}
