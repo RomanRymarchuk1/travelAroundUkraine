@@ -34,19 +34,21 @@ const UserPage = () => {
     getUserData();
   }, []);
 
-  if (userData) {
-    return (
-      <Container component={Paper} sx={containerSX}>
-        <UserHeader userData={userData} />
-        <UserList userData={userData} />
-        <ButtonContainer />
-      </Container>
-    );
-  }
   return (
-    <Container component={Paper} sx={containerSX}>
-      <CircularProgress sx={preloaderSX} />
-    </Container>
+    <>
+      {userData ? (
+        <Container component={Paper} sx={containerSX}>
+          <UserHeader userData={userData} />
+          <UserList userData={userData} />
+          <ButtonContainer />
+        </Container>
+      ) : (
+        <Container component={Paper} sx={containerSX}>
+          <CircularProgress sx={preloaderSX} />
+        </Container>
+      )}
+      {}
+    </>
   );
 };
 
