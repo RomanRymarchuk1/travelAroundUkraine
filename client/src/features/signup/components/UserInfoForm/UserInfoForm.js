@@ -2,10 +2,16 @@ import React from 'react';
 import { Field } from 'formik';
 import { TextField, RadioGroup } from 'formik-mui';
 import { DatePicker } from 'formik-mui-x-date-pickers';
-import { Grid, Typography, FormControlLabel, FormLabel, Radio } from '@mui/material';
+import { Grid, Typography, FormLabel, Radio, FormControlLabel } from '@mui/material';
 import { formModel } from '../../data';
 
 const UserInfoForm = () => {
+  const FormControlLabelSx = {
+    '& .MuiTypography-gutterBottom': {
+      mb: 0,
+    },
+  };
+
   const { firstName, lastName, gender, birthDate, phone } = formModel;
 
   return (
@@ -25,14 +31,14 @@ const UserInfoForm = () => {
         <Grid item xs={12} laptop={4}>
           <FormLabel id={gender.name}>{gender.label}</FormLabel>
           <Field component={RadioGroup} aria-labelledby={gender.name} row name={gender.name}>
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="female" control={<Radio />} label="Female" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
+            <FormControlLabel sx={FormControlLabelSx} value="male" control={<Radio />} label="Male" />
+            <FormControlLabel sx={FormControlLabelSx} value="female" control={<Radio />} label="Female" />
+            <FormControlLabel sx={FormControlLabelSx} value="other" control={<Radio />} label="Other" />
           </Field>
         </Grid>
 
         <Grid item xs={12} laptop={4}>
-          <Field component={DatePicker} disableFuture name={birthDate.name} label={birthDate.label} fullWidth />
+          <Field component={DatePicker} disableFuture name={birthDate.name} label={birthDate.label} />
         </Grid>
 
         <Grid item xs={12} laptop={4}>
