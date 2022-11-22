@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { Button, Dialog, DialogContent, Typography, Box, DialogActions, DialogTitle } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { AlertModal } from '../../../../components';
 
