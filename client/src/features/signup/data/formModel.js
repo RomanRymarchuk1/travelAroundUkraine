@@ -32,7 +32,7 @@ export default {
 
   retypePassword: {
     name: 'retypePassword',
-    label: 'Retype Password',
+    label: 'Re-type Password',
     requiredErrorMsg: 'Please retype your password',
     invalidErrorMsg: 'Passwords must match',
   },
