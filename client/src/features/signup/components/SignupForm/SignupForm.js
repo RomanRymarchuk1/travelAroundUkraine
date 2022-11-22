@@ -4,6 +4,7 @@ import { Stepper, StepLabel, Step, Button, Box, CircularProgress } from '@mui/ma
 import { Formik, Form } from 'formik';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { enAU } from 'date-fns/locale';
 
 import { initialValues, validationSchema } from '../../data';
 import { UserInfoForm, LoginInfoForm, SignupSuccess } from '..';
@@ -12,7 +13,6 @@ const steps = ['User Info', 'Login Info'];
 
 const SignupForm = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [loading, setLoading] = useState(false);
   const currentValidationSchema = validationSchema[activeStep];
   const lastStep = steps.length - 1;
 
@@ -25,10 +25,7 @@ const SignupForm = () => {
   };
 
   const formSubmitHandler = (values, { setSubmitting }) => {
-    setLoading(true);
-
     setTimeout(() => {
-      setLoading(false);
       nextStep();
       setSubmitting(false);
     }, 2000);
@@ -49,30 +46,30 @@ const SignupForm = () => {
       {activeStep !== steps.length ? (
         <Formik initialValues={initialValues} validationSchema={currentValidationSchema} onSubmit={formSubmitHandler}>
           {({ isSubmitting }) => (
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
               <Form>
                 {activeStep === 0 && <UserInfoForm />}
                 {activeStep === 1 && <LoginInfoForm />}
 
-                <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3 }}>
-                  {activeStep !== 0 && <Button onClick={previousStep}>Back</Button>}
+                <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3, position: 'relative' }}>
+                  {activeStep !== 0 && !isSubmitting && <Button onClick={previousStep}>Back</Button>}
 
-                  <Button disabled={isSubmitting} type="submit">
-                    {activeStep !== lastStep ? 'Continue' : 'Sign up'}
-                    {loading && (
-                      <CircularProgress
-                        size={30}
-                        sx={{
-                          color: 'primary.dark',
-                          position: 'absolute',
-                          top: '50%',
-                          left: '50%',
-                          marginTop: '-15px',
-                          marginLeft: '-15px',
-                        }}
-                      />
-                    )}
-                  </Button>
+                  {!isSubmitting ? (
+                    <Button disabled={isSubmitting} type="submit">
+                      {activeStep !== lastStep ? 'Continue' : 'Sign up'}
+                    </Button>
+                  ) : (
+                    <CircularProgress
+                      size={50}
+                      sx={{
+                        color: 'primary.dark',
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        marginLeft: '-25px',
+                      }}
+                    />
+                  )}
                 </Box>
               </Form>
             </LocalizationProvider>
