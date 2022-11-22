@@ -6,12 +6,6 @@ import { Grid, Typography, FormLabel, Radio, FormControlLabel } from '@mui/mater
 import { formModel } from '../../data';
 
 const UserInfoForm = () => {
-  const FormControlLabelSx = {
-    '& .MuiTypography-gutterBottom': {
-      mb: 0,
-    },
-  };
-
   const { firstName, lastName, gender, birthDate, phone } = formModel;
 
   return (
@@ -31,9 +25,24 @@ const UserInfoForm = () => {
         <Grid item xs={12} laptop={4}>
           <FormLabel id={gender.name}>{gender.label}</FormLabel>
           <Field component={RadioGroup} aria-labelledby={gender.name} row name={gender.name}>
-            <FormControlLabel sx={FormControlLabelSx} value="male" control={<Radio />} label="Male" />
-            <FormControlLabel sx={FormControlLabelSx} value="female" control={<Radio />} label="Female" />
-            <FormControlLabel sx={FormControlLabelSx} value="other" control={<Radio />} label="Other" />
+            <FormControlLabel
+              componentsProps={{ typography: { gutterBottom: 0 } }}
+              value="male"
+              control={<Radio />}
+              label="Male"
+            />
+            <FormControlLabel
+              componentsProps={{ typography: { gutterBottom: 0 } }}
+              value="female"
+              control={<Radio />}
+              label="Female"
+            />
+            <FormControlLabel
+              componentsProps={{ typography: { gutterBottom: 0 } }}
+              value="other"
+              control={<Radio />}
+              label="Other"
+            />
           </Field>
         </Grid>
 
