@@ -1,32 +1,32 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PropTypes from 'prop-types';
 
 const pages = [
   {
-    name: 'Home',
+    name: 'home',
     link: '/',
     innerContent: 'Home',
   },
   {
-    name: 'Catalogue',
+    name: 'catalogue',
     link: '/catalogue',
     innerContent: 'Catalogue',
   },
   {
-    name: 'LogIn',
+    name: 'logIn',
     link: '/login',
     innerContent: 'Log In',
   },
   {
-    name: 'Account',
+    name: 'account',
     link: '/user',
     innerContent: 'Account',
   },
   {
-    name: 'Cart',
+    name: 'cart',
     link: '/cart',
     innerContent: <ShoppingCartIcon fontSize="medium" />,
   },
@@ -52,18 +52,19 @@ const typograpySX = (link, pathname) => ({
   },
 });
 
-const TabletMenu = ({ isLogin }) => {
+const TabletMenu = () => {
   const location = useLocation();
+  const { isLogin } = useSelector((store) => store.userReducer);
 
   const { pathname } = location;
 
   return (
     <Box component="nav" sx={boxSX}>
       {pages.map(({ name, link, innerContent }) => {
-        if (name === 'LogIn' && isLogin) {
+        if (name === 'logIn' && isLogin) {
           return null;
         }
-        if (name === 'Account' && !isLogin) {
+        if (name === 'account' && !isLogin) {
           return null;
         }
 
@@ -75,10 +76,6 @@ const TabletMenu = ({ isLogin }) => {
       })}
     </Box>
   );
-};
-
-TabletMenu.propTypes = {
-  isLogin: PropTypes.bool.isRequired,
 };
 
 export default TabletMenu;

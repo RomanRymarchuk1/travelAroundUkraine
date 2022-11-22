@@ -7,7 +7,7 @@ import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import postLogIn from '../../../api/postLogIn';
-import { toggleIsLogin } from '../../../store/isLogin';
+import { toggleIsLogin } from '../../../store/slices/userSlice';
 
 const buttonSX = {
   width: { xs: '86px', mobile: '110px', tablet: '140px', laptop: '150px' },

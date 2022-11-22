@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
 import { Box, MenuItem, Menu, IconButton, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 const pages = [
   {
-    name: 'Home',
+    name: 'home',
     link: '/',
     innerContent: 'Home',
   },
   {
-    name: 'Catalogue',
+    name: 'catalogue',
     link: '/catalogue',
     innerContent: 'Catalogue',
   },
   {
-    name: 'LogIn',
+    name: 'logIn',
     link: '/login',
     innerContent: 'Log In',
   },
   {
-    name: 'Account',
+    name: 'account',
     link: '/user',
     innerContent: 'Account',
   },
   {
-    name: 'Cart',
+    name: 'cart',
     link: '/cart',
     innerContent: 'Cart',
   },
@@ -67,8 +67,9 @@ const transformOrigin = {
   horizontal: 'left',
 };
 
-const BurgerMenu = ({ isLogin }) => {
+const BurgerMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const { isLogin } = useSelector((store) => store.userReducer);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -102,10 +103,10 @@ const BurgerMenu = ({ isLogin }) => {
         sx={menuSX}
       >
         {pages.map(({ name, link, innerContent }) => {
-          if (name === 'LogIn' && isLogin) {
+          if (name === 'logIn' && isLogin) {
             return null;
           }
-          if (name === 'Account' && !isLogin) {
+          if (name === 'account' && !isLogin) {
             return null;
           }
 
@@ -120,10 +121,6 @@ const BurgerMenu = ({ isLogin }) => {
       </Menu>
     </Box>
   );
-};
-
-BurgerMenu.propTypes = {
-  isLogin: PropTypes.bool.isRequired,
 };
 
 export default BurgerMenu;

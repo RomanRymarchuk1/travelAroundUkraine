@@ -1,7 +1,6 @@
 /* eslint-disable  react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Container, useScrollTrigger, Slide } from '@mui/material';
-import { useSelector } from 'react-redux';
 import { BurgerMenu, TabletMenu, LogoHeader, HeaderSearchField } from '..';
 
 const HideOnScroll = ({ children }) => {
@@ -15,7 +14,6 @@ const HideOnScroll = ({ children }) => {
 
 const Header = () => {
   const [scrollY, setScrollY] = useState();
-  const { isLogin } = useSelector((store) => store.isLogin);
 
   useEffect(() => {
     const handleScrollY = () => setScrollY(window.scrollY);
@@ -39,8 +37,8 @@ const Header = () => {
           <Toolbar disableGutters>
             <LogoHeader />
             <HeaderSearchField />
-            <BurgerMenu isLogin={isLogin} />
-            <TabletMenu isLogin={isLogin} />
+            <BurgerMenu />
+            <TabletMenu />
           </Toolbar>
         </Container>
       </AppBar>

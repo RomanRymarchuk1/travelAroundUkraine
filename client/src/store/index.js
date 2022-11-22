@@ -1,12 +1,8 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import isLogin from './isLogin';
-
-const rootReduser = combineReducers({
-  isLogin,
-});
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './slices/userSlice';
 
 const store = configureStore({
-  reducer: rootReduser,
+  reducer: { userReducer },
 });
 
 export default store;
