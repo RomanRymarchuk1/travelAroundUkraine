@@ -9,7 +9,7 @@ describe('Render TabletMenu', () => {
   test('should TabletMenu render', () => {
     const { asFragment } = render(
       <BrowserRouter>
-        <TabletMenu />
+        <TabletMenu isLogin />
       </BrowserRouter>
     );
     expect(asFragment()).toMatchSnapshot();
