@@ -45,11 +45,15 @@ const CataloguePage = () => {
                   Tours
                 </Typography>
                 <Stack spacing={2}>
-                  {products.map((el) => console.log(el))}
-                  <CatalogTourCard />
-                  <CatalogTourCard />
-                  <CatalogTourCard />
-                  <CatalogTourCard />
+                  {products.map(({ name, currentPrice, duration, description, imageUrls }) => (
+                    <CatalogTourCard
+                      name={name}
+                      description={description}
+                      currentPrice={currentPrice}
+                      duration={duration}
+                      imageUrls={imageUrls}
+                    />
+                  ))}
                 </Stack>
               </Grid>
               <FilterContainer>
