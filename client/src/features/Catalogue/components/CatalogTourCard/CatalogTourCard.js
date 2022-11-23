@@ -16,7 +16,7 @@ const CardImage = styled(CardMedia)(({ theme }) => ({
   borderRadius: '10px 10px 0 0',
 
   [theme.breakpoints.up('tablet')]: {
-    width: 238,
+    width: 250,
     height: 'auto',
     borderRadius: '10px 0 0 10px',
   },
@@ -26,11 +26,17 @@ const CardTitle = styled((props) => <Typography variant="h3" {...props} />)(({ t
   color: theme.palette.text.primary,
   marginTop: 20,
   marginBottom: 20,
+  textTransform: 'uppercase',
 }));
 
 const TourDescription = styled(Typography)(({ theme }) => ({
   borderLeft: `3px solid ${theme.palette.primary.main}`,
   paddingLeft: 24,
+  height: '50px',
+  overflow: 'hidden',
+  '-webkit-line-clamp': '3',
+  display: '-webkit-box',
+  '-webkit-box-orient': 'vertical',
 }));
 
 const CardButton = styled(Button)(({ theme }) => ({
@@ -47,7 +53,7 @@ const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls 
     <CardImage component="img" image={imageUrls[0]} alt="tour photo" />
     <CardContent sx={{ padding: '0 30px 0 36px' }}>
       <CardTitle>{name}</CardTitle>
-      <Stack direction="row" spacing={3} alignItems="start" sx={{ mb: '20px' }}>
+      <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <CoinsIcon />
           <Typography variant="h3" component="span">
@@ -62,9 +68,7 @@ const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls 
           </Typography>
         </Stack>
       </Stack>
-
       <TourDescription>{description}</TourDescription>
-
       <CardActions>
         <CardButton href="#">More details</CardButton>
       </CardActions>
