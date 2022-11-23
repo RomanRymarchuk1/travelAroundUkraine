@@ -34,9 +34,9 @@ const TourDescription = styled(Typography)(({ theme }) => ({
   paddingLeft: 24,
   height: '50px',
   overflow: 'hidden',
-  '-webkit-line-clamp': '3',
+  WebkitLineClamp: '3',
   display: '-webkit-box',
-  '-webkit-box-orient': 'vertical',
+  WebkitBoxOrient: 'vertical',
 }));
 
 const CardButton = styled(Button)(({ theme }) => ({
