@@ -30,7 +30,11 @@ const CataloguePage = () => {
       dispatch(setProducts(data));
       setLoading(false);
     };
-    getData();
+    if (products.length > 0) {
+      setLoading(false);
+    } else {
+      getData();
+    }
   }, []);
 
   return (
@@ -45,8 +49,9 @@ const CataloguePage = () => {
                   Tours
                 </Typography>
                 <Stack spacing={2}>
-                  {products.map(({ name, currentPrice, duration, description, imageUrls }) => (
+                  {products.map(({ name, currentPrice, duration, description, imageUrls, _id }) => (
                     <CatalogTourCard
+                      key={_id}
                       name={name}
                       description={description}
                       currentPrice={currentPrice}
