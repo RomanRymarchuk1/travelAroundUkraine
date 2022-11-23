@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import PropTypes from 'prop-types';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
@@ -41,37 +42,28 @@ const CardButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const CatalogTourCard = () => (
+const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls }) => (
   <CardContainer direction={{ xs: 'column', tablet: 'row' }} spacing={1}>
-    <CardImage
-      component="img"
-      image="https://visitukraine.today/media/tours/gallery/ALeR7GgYjAqCqfJnQX5ZYKnBcsDZ6MTJs77IIBKi.jpg"
-      alt="tour photo"
-    />
+    <CardImage component="img" image={imageUrls[0]} alt="tour photo" />
     <CardContent sx={{ padding: '0 30px 0 36px' }}>
-      <CardTitle>Sightseeing tour of Chernivtsi</CardTitle>
-
+      <CardTitle>{name}</CardTitle>
       <Stack direction="row" spacing={3} alignItems="start" sx={{ mb: '20px' }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <CoinsIcon />
           <Typography variant="h3" component="span">
-            69 €
+            {currentPrice} €
           </Typography>
         </Stack>
 
         <Stack direction="row" spacing={1} alignItems="center">
           <AccessTimeIcon color="primary" sx={{ height: '21px' }} />
           <Typography variant="h3" component="span">
-            3 hours
+            {duration}
           </Typography>
         </Stack>
       </Stack>
 
-      <TourDescription>
-        Chernivtsi is often called the Ukrainian Paris, and for good reason - the pearl of Ukrainian Bukovina is in no
-        way inferior to exquisite European capitals and offers tourists entertainment for every taste. We suggest
-        starting with the classics and visiting the top must-see places that will make you fall in love with this city.
-      </TourDescription>
+      <TourDescription>{description}</TourDescription>
 
       <CardActions>
         <CardButton href="#">More details</CardButton>
@@ -79,5 +71,13 @@ const CatalogTourCard = () => (
     </CardContent>
   </CardContainer>
 );
+
+CatalogTourCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  currentPrice: PropTypes.number.isRequired,
+  duration: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default CatalogTourCard;
