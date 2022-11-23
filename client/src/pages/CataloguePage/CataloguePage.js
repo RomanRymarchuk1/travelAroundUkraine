@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { styled, Stack, Box, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
@@ -22,6 +22,7 @@ const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ t
 const CataloguePage = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(null);
+  const products = useSelector((state) => state.catalogueReducer.products, shallowEqual);
   useEffect(() => {
     setLoading(true);
     const getData = async () => {
@@ -44,6 +45,7 @@ const CataloguePage = () => {
                   Tours
                 </Typography>
                 <Stack spacing={2}>
+                  {products.map((el) => console.log(el))}
                   <CatalogTourCard />
                   <CatalogTourCard />
                   <CatalogTourCard />
