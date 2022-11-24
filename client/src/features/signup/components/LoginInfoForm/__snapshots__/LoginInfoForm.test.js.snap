@@ -151,7 +151,7 @@ exports[`LoginInfoForm snapshot test should LoginInfoForm match snapshot 1`] = `
           for=":r3:"
           id=":r3:-label"
         >
-          Retype Password
+          Re-type Password
           <span
             aria-hidden="true"
             class="MuiFormLabel-asterisk MuiInputLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
@@ -179,7 +179,7 @@ exports[`LoginInfoForm snapshot test should LoginInfoForm match snapshot 1`] = `
               class="css-yjsfm1"
             >
               <span>
-                Retype Password *
+                Re-type Password *
               </span>
             </legend>
           </fieldset>
