@@ -1,22 +1,19 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import { Dialog, DialogContent, Typography, Box, DialogActions, DialogTitle, Button } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useNavigate } from 'react-router-dom';
 
-const SignupSuccess = ({ activeStep, steps }) => {
-  const [isOpen, setIsOpen] = useState(true);
+const SignupSuccess = ({ open, onClose }) => {
   const navigate = useNavigate();
 
   const handleCloseBttn = () => {
-    setIsOpen(false);
+    onClose();
     navigate('/catalogue');
   };
 
-  if (activeStep !== steps.length) return null;
-
   return (
-    <Dialog open={isOpen} onClose={handleCloseBttn}>
+    <Dialog open={open} onClose={handleCloseBttn}>
       <DialogTitle>
         <Box display="flex" justifyContent="center" alignItems="center" columnGap="5px">
           <Typography variant="h2" sx={{ color: 'success.main', mb: 0 }}>
