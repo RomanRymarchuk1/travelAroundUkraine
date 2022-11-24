@@ -28,13 +28,23 @@ const SignupForm = () => {
     setActiveStep((prev) => prev - 1);
   };
 
-  const formSubmitHandler = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      nextStep();
-      setSubmitting(false);
-    }, 2000);
+  const formSubmitHandler = async (values) => {
+    // setTimeout(() => {
+    //   nextStep();
+    // }, 2000);
 
-    // console.log(values);
+    nextStep();
+
+    if (activeStep === lastStep) {
+      const { isSuccess, error } = await postSignUpData(values);
+      if (isSuccess) {
+        setIsModalOpen(true);
+      } else {
+        // TODO: render error alert
+        // eslint-disable-next-line no-console
+        console.error(error); // ! for demonstration purpose
+      }
+    }
   };
 
   return (
@@ -47,35 +57,33 @@ const SignupForm = () => {
         ))}
       </Stepper>
 
-      {activeStep !== steps.length ? (
-        <Formik initialValues={initialValues} validationSchema={currentValidationSchema} onSubmit={formSubmitHandler}>
-          {({ isSubmitting }) => (
-            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
-              <Form>
-                {activeStep === 0 && <UserInfoForm />}
-                {activeStep === 1 && <LoginInfoForm />}
+      <Formik initialValues={initialValues} validationSchema={currentValidationSchema} onSubmit={formSubmitHandler}>
+        {({ isSubmitting }) => (
+          <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
+            <Form>
+              {activeStep === 0 && <UserInfoForm />}
+              {activeStep === 1 && <LoginInfoForm />}
 
-                <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3, position: 'relative' }}>
-                  {activeStep !== 0 && !isSubmitting && <Button onClick={previousStep}>Back</Button>}
+              <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3, position: 'relative' }}>
+                {activeStep !== 0 && !isSubmitting && <Button onClick={previousStep}>Back</Button>}
 
-                  {!isSubmitting ? (
-                    <Button disabled={isSubmitting} type="submit">
-                      {activeStep !== lastStep ? 'Continue' : 'Sign up'}
-                    </Button>
-                  ) : (
-                    <CircularProgress
-                      size={50}
-                      sx={{
-                        color: 'primary.dark',
-                      }}
-                    />
-                  )}
-                </Box>
-              </Form>
-            </LocalizationProvider>
-          )}
-        </Formik>
-      ) : null}
+                {!isSubmitting ? (
+                  <Button disabled={isSubmitting} type="submit">
+                    {activeStep !== lastStep ? 'Continue' : 'Sign up'}
+                  </Button>
+                ) : (
+                  <CircularProgress
+                    size={50}
+                    sx={{
+                      color: 'primary.dark',
+                    }}
+                  />
+                )}
+              </Box>
+            </Form>
+          </LocalizationProvider>
+        )}
+      </Formik>
 
       <SignupSuccess open={isModalOpen} onClose={handleCloseModal} />
     </>
