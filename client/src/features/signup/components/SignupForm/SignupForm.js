@@ -8,6 +8,7 @@ import { enAU } from 'date-fns/locale';
 
 import { initialValues, validationSchema } from '../../data';
 import { UserInfoForm, LoginInfoForm, SignupSuccess } from '..';
+import postSignUpData from '../../../../api/postSignUpData';
 
 const steps = ['User Info', 'Login Info'];
 
