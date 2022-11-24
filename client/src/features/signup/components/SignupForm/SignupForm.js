@@ -21,7 +21,7 @@ const SignupForm = () => {
   const handleCloseModal = () => setIsModalOpen(false);
 
   const nextStep = () => {
-    setActiveStep((prev) => prev + 1);
+    setActiveStep((prev) => (prev >= lastStep ? prev : prev + 1));
   };
 
   const previousStep = () => {
