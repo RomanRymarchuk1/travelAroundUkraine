@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Dialog, DialogContent, Typography, Box, DialogActions, DialogTitle, Button } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useNavigate } from 'react-router-dom';
+import { AlertModal } from '../../../../components';
 
-const SignupSuccess = ({ open, onClose }) => {
+const SignupSuccess = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
 
   const handleCloseBttn = () => {
@@ -12,27 +13,27 @@ const SignupSuccess = ({ open, onClose }) => {
     navigate('/catalogue');
   };
 
+  const titleJsx = (
+    <Box display="flex" justifyContent="center" alignItems="center" columnGap="5px">
+      <Typography variant="h2" sx={{ color: 'success.main', mb: 0 }}>
+        Sign up Successfull
+      </Typography>
+      <CheckCircleOutlineRoundedIcon fontSize="large" color="success" />
+    </Box>
+  );
+
   return (
-    <Dialog open={open} onClose={handleCloseBttn}>
-      <DialogTitle>
-        <Box display="flex" justifyContent="center" alignItems="center" columnGap="5px">
-          <Typography variant="h2" sx={{ color: 'success.main', mb: 0 }}>
-            Sign up Successfull
-          </Typography>
-          <CheckCircleOutlineRoundedIcon fontSize="large" color="success" />
-        </Box>
-      </DialogTitle>
-
-      <DialogContent>
-        <Typography>You can enjoy your shopping with us now.</Typography>
-      </DialogContent>
-
-      <DialogActions>
-        <Button success="true" onClick={handleCloseBttn} autoFocus>
-          Great !
-        </Button>
-      </DialogActions>
-    </Dialog>
+    <AlertModal
+      open={isOpen}
+      onClose={handleCloseBttn}
+      onSubmit={handleCloseBttn}
+      title={titleJsx}
+      disableCancelButton
+      submitButtonText="Great !"
+      success
+    >
+      <Typography>You can enjoy your shopping with us now.</Typography>
+    </AlertModal>
   );
 };
 

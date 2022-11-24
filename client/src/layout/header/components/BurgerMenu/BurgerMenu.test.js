@@ -1,6 +1,8 @@
 import { render } from '@testing-library/react';
-import BurgerMenu from './BurgerMenu';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../../../../store';
+import BurgerMenu from './BurgerMenu';
 
 jest.mock('@mui/material/Box', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/MenuItem', () => ({ children }) => <li>{children}</li>);
@@ -11,9 +13,11 @@ jest.mock('@mui/material/Typography', () => ({ children }) => <a>{children}</a>)
 describe('Render BurgerMenu', () => {
   test('should BurgerMenu render', () => {
     const { asFragment } = render(
-      <BrowserRouter>
-        <BurgerMenu isLogin />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <BurgerMenu isLogin />
+        </BrowserRouter>
+      </Provider>
     );
     expect(asFragment()).toMatchSnapshot();
   });
