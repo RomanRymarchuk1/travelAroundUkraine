@@ -26,19 +26,19 @@ const UserInfoForm = () => {
           <FormLabel id={gender.name}>{gender.label}</FormLabel>
           <Field component={RadioGroup} aria-labelledby={gender.name} row name={gender.name}>
             <FormControlLabel
-              componentsProps={{ typography: { gutterBottom: 0 } }}
+              componentsProps={{ typography: { gutterBottom: false } }}
               value="male"
               control={<Radio />}
               label="Male"
             />
             <FormControlLabel
-              componentsProps={{ typography: { gutterBottom: 0 } }}
+              componentsProps={{ typography: { gutterBottom: false } }}
               value="female"
               control={<Radio />}
               label="Female"
             />
             <FormControlLabel
-              componentsProps={{ typography: { gutterBottom: 0 } }}
+              componentsProps={{ typography: { gutterBottom: false } }}
               value="other"
               control={<Radio />}
               label="Other"
