@@ -73,7 +73,7 @@ const SignupForm = () => {
         </Formik>
       ) : null}
 
-      <SignupSuccess activeStep={activeStep} steps={steps} />
+      <SignupSuccess open={isModalOpen} onClose={handleCloseModal} />
     </>
   );
 };
