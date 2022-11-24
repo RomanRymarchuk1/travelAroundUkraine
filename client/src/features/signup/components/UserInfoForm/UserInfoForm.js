@@ -6,7 +6,7 @@ import { Grid, Typography, FormLabel, Radio, FormControlLabel } from '@mui/mater
 import { formModel } from '../../data';
 
 const UserInfoForm = () => {
-  const { firstName, lastName, gender, birthDate, phone } = formModel;
+  const { firstName, lastName, gender, birthdate, telephone } = formModel;
 
   return (
     <>
@@ -47,11 +47,11 @@ const UserInfoForm = () => {
         </Grid>
 
         <Grid item xs={12} laptop={4}>
-          <Field component={DatePicker} disableFuture name={birthDate.name} label={birthDate.label} />
+          <Field component={DatePicker} disableFuture name={birthdate.name} label={birthdate.label} />
         </Grid>
 
         <Grid item xs={12} laptop={4}>
-          <Field component={TextField} name={phone.name} label={phone.label} fullWidth />
+          <Field component={TextField} name={telephone.name} label={telephone.label} fullWidth />
         </Grid>
       </Grid>
     </>
