@@ -157,7 +157,10 @@ const TourPage = () => {
     <>
       <HeaderContent>
         <Container>
-          {/* typography */}
+          <Typography align="center" variant="h1" mt={17} mb={5} fontSize="50px">
+            {/* to be edited later with tour name from fetched data */}
+            TOUR NAME
+          </Typography>
           <ImageGallery imageUrls={imageUrls} />
           <Nav>
             <LinksWrapper>
