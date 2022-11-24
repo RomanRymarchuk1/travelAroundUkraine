@@ -5,7 +5,7 @@ import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlin
 import { useNavigate } from 'react-router-dom';
 import { AlertModal } from '../../../../components';
 
-const SignupSuccess = ({ isOpen, onClose }) => {
+const SignupSuccess = ({ open, onClose }) => {
   const navigate = useNavigate();
 
   const handleCloseBttn = () => {
@@ -24,7 +24,7 @@ const SignupSuccess = ({ isOpen, onClose }) => {
 
   return (
     <AlertModal
-      open={isOpen}
+      open={open}
       onClose={handleCloseBttn}
       onSubmit={handleCloseBttn}
       title={titleJsx}
