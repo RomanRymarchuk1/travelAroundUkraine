@@ -14,8 +14,11 @@ const steps = ['User Info', 'Login Info'];
 
 const SignupForm = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const currentValidationSchema = validationSchema[activeStep];
   const lastStep = steps.length - 1;
+
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const nextStep = () => {
     setActiveStep((prev) => prev + 1);
