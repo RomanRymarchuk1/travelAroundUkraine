@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import BurgerMenu from './BurgerMenu';
 import store from '../../../../store';
+import BurgerMenu from './BurgerMenu';
 
 jest.mock('@mui/material/Box', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/MenuItem', () => ({ children }) => <li>{children}</li>);

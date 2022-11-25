@@ -10,6 +10,7 @@ jest.mock('@mui/material/Radio', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/Typography', () => ({ children }) => <p>{children}</p>);
 jest.mock('@mui/material/FormControlLabel', () => ({ children }) => <div>{children}</div>);
 jest.mock('@mui/material/FormLabel', () => ({ children }) => <div>{children}</div>);
+jest.mock('formik-mui-x-date-pickers', () => () => <input />);
 
 const LocalizationWrapper = ({ children }) => (
   <LocalizationProvider dateAdapter={AdapterDateFns}>{children}</LocalizationProvider>
