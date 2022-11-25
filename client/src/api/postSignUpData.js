@@ -15,9 +15,7 @@ const postSignUpData = async ({
   try {
     const { status } = await axios.post('/customers', body);
 
-    const isSuccess = status === 200;
-
-    return { isSuccess };
+    return { isSuccess: status === 200 };
   } catch (err) {
     return { isSuccess: false, error: err.response.data };
   }
