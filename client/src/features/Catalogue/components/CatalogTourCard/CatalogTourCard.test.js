@@ -14,9 +14,9 @@ describe('CatalogTourCard snapshot test', () => {
       <CatalogTourCard
         name="ItemName"
         description="Itemdescription"
-        currentPrice="ItemPrice"
+        currentPrice={1}
         duration="ItemDuration"
-        imageUrls="ItemImage"
+        imageUrls={['ItemImage']}
       />
     );
     expect(asFragment()).toMatchSnapshot();

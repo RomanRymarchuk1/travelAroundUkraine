@@ -14,7 +14,7 @@ exports[`CatalogTourCard snapshot test should CatalogTourCard match snapshot 1`]
             CoinsIcon.svg
           </svg>
           <p>
-            ItemPrice €
+            1 €
           </p>
         </div>
         <div>

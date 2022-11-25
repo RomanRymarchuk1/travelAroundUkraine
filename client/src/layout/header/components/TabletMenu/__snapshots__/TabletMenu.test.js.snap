@@ -10,7 +10,7 @@ exports[`Render TabletMenu should TabletMenu render 1`] = `
       Catalogue
     </p>
     <p>
-      Account
+      Log In
     </p>
     <p>
       <svg
