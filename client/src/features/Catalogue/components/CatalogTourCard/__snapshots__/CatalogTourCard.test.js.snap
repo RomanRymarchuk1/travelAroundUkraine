@@ -6,7 +6,7 @@ exports[`CatalogTourCard snapshot test should CatalogTourCard match snapshot 1`]
     <div />
     <div>
       <p>
-        Sightseeing tour of Chernivtsi
+        ItemName
       </p>
       <div>
         <div>
@@ -14,7 +14,7 @@ exports[`CatalogTourCard snapshot test should CatalogTourCard match snapshot 1`]
             CoinsIcon.svg
           </svg>
           <p>
-            69 €
+            ItemPrice €
           </p>
         </div>
         <div>
@@ -33,12 +33,12 @@ exports[`CatalogTourCard snapshot test should CatalogTourCard match snapshot 1`]
             />
           </svg>
           <p>
-            3 hours
+            ItemDuration
           </p>
         </div>
       </div>
       <p>
-        Chernivtsi is often called the Ukrainian Paris, and for good reason - the pearl of Ukrainian Bukovina is in no way inferior to exquisite European capitals and offers tourists entertainment for every taste. We suggest starting with the classics and visiting the top must-see places that will make you fall in love with this city.
+        Itemdescription
       </p>
       <div>
         <button>
