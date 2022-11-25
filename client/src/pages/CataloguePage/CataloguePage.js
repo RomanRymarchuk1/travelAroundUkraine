@@ -72,7 +72,7 @@ const CataloguePage = () => {
           Loading...
         </Typography>
       )}
-      )
+      {}
     </>
   );
 };
