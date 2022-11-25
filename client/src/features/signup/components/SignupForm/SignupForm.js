@@ -29,10 +29,6 @@ const SignupForm = () => {
   };
 
   const formSubmitHandler = async (values) => {
-    // setTimeout(() => {
-    //   nextStep();
-    // }, 2000);
-
     nextStep();
 
     if (activeStep === lastStep) {
