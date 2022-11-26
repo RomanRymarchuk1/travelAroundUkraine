@@ -12,9 +12,6 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-// Icons
-import BedIcon from '@mui/icons-material/Bed';
-import PersonIcon from '@mui/icons-material/Person';
 
 import { useInView } from 'react-intersection-observer';
 
@@ -30,30 +27,7 @@ const sections = [
   { title: 'What is included?', link: '#included' },
 ];
 
-const currency = {
-  eur: '€',
-  usd: '$',
-  uah: '₴',
-};
-
-const included = [
-  { icon: <PersonIcon color="primary" />, service: 'Professional guide' },
-  { icon: <BedIcon color="primary" />, service: 'Accomodation' },
-];
-
-const cost = {
-  eur: 70,
-  usd: 70,
-  uah: 2584,
-};
-
 const dates = { beginDate: new Date('2022-02-01'), endDate: new Date('2022-02-25') };
-
-const details = {
-  duration: '3 days',
-  departs: 'First city',
-  returns: 'Second city',
-};
 
 const HeaderContent = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('laptop')]: {
@@ -136,7 +110,7 @@ const FloatingDialog = styled(Box)(({ theme }) => ({
 }));
 
 const TourPage = () => {
-  const matchesMediaQuery = useMediaQuery('(min-width: 1051px)');
+  const screenWidth = useMediaQuery('(min-width: 1051px)');
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -147,7 +121,21 @@ const TourPage = () => {
 
   const dispatch = useDispatch();
   // to be revised in future from re rendering and optimizing point of view, whether we pass needed data as props to components or useSelector directly in each component.
-  const { imageUrls } = useSelector((store) => store.tour.data);
+  const {
+    imageUrls,
+    professionalGuide,
+    accommodation,
+    meals,
+    transferAlongTheRoute,
+    travelInsurance,
+    departs,
+    duration,
+    returns,
+    currentPrice,
+    region,
+    categories,
+    season,
+  } = useSelector((store) => store.tour.data);
 
   useEffect(() => {
     dispatch(fetchTour());
@@ -157,10 +145,15 @@ const TourPage = () => {
     <>
       <HeaderContent>
         <Container>
-          <Typography align="center" variant="h1" mt={17} mb={5} fontSize="50px">
+          <Typography align="center" variant="h1" mt={17} mb={3} fontSize="50px">
             {/* to be edited later with tour name from fetched data */}
             TOUR NAME
           </Typography>
+          <Stack direction="row" justifyContent="center" alignItems="center" mb={3}>
+            <Typography>{season} / </Typography>
+            <Typography>{region} / </Typography>
+            <Typography>{categories}</Typography>
+          </Stack>
           <ImageGallery imageUrls={imageUrls} />
           <Nav>
             <LinksWrapper>
@@ -177,9 +170,20 @@ const TourPage = () => {
       <MainContent>
         <Container>
           <ContentWrapper>
-            {matchesMediaQuery ? (
+            {screenWidth ? (
               <Box component="aside" sx={{ maxWidth: '370px', width: '100%' }}>
-                <TourInfoDialog included={included} cost={cost} dates={dates} details={details} />
+                <TourInfoDialog
+                  dates={dates}
+                  professionalGuide={professionalGuide}
+                  accommodation={accommodation}
+                  meals={meals}
+                  transferAlongTheRoute={transferAlongTheRoute}
+                  travelInsurance={travelInsurance}
+                  departs={departs}
+                  duration={duration}
+                  returns={returns}
+                  currentPrice={currentPrice}
+                />
               </Box>
             ) : null}
 
@@ -225,7 +229,7 @@ const TourPage = () => {
                 </TourAccordion>
               </Section>
 
-              <Section id="included">
+              {/* <Section id="included">
                 <TourAccordion title="What is included?">
                   <Stack direction="row" gap="20px">
                     {included.map(({ icon, service }) => (
@@ -236,27 +240,30 @@ const TourPage = () => {
                     ))}
                   </Stack>
                 </TourAccordion>
-              </Section>
+              </Section> */}
             </Box>
           </ContentWrapper>
 
-          {!matchesMediaQuery ? (
+          {!screenWidth ? (
             <MobileDialogWrapper ref={dialogRef}>
               <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Cost>
-                  {currency.eur}
-                  {cost.eur}
-                </Cost>
+                <Cost>€{currentPrice}</Cost>
                 <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
                   More info
                 </Button>
               </Stack>
               <Dialog open={isOpen} onClose={handleCloseDialog} hideBackdrop fullScreen>
                 <TourInfoDialog
-                  included={included}
-                  cost={cost}
                   dates={dates}
-                  details={details}
+                  professionalGuide={professionalGuide}
+                  accommodation={accommodation}
+                  meals={meals}
+                  transferAlongTheRoute={transferAlongTheRoute}
+                  travelInsurance={travelInsurance}
+                  departs={departs}
+                  duration={duration}
+                  returns={returns}
+                  currentPrice={currentPrice}
                   closeButton
                   handleClose={handleCloseDialog}
                 />
@@ -265,15 +272,12 @@ const TourPage = () => {
           ) : null}
         </Container>
 
-        {!matchesMediaQuery ? (
+        {!screenWidth ? (
           <Slide in={!inView} direction="up" mountOnEnter unmountOnExit>
             <FloatingDialog>
               <Container>
                 <Stack direction="row" justifyContent="space-between" alignItems="center">
-                  <Cost>
-                    {currency.eur}
-                    {cost.eur}
-                  </Cost>
+                  <Cost>€{currentPrice}</Cost>
                   <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
                     More info
                   </Button>
