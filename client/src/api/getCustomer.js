@@ -1,11 +1,11 @@
 import axiosConfig from '../axiosConfig';
 
-const getCustomer = async () => {
+const getCustomer = async (rejectWithValue) => {
   try {
     const { data } = await axiosConfig.get('/customers/customer').then((loggedInCustomer) => loggedInCustomer);
     return data;
   } catch (err) {
-    return console.log(err.response);
+    return rejectWithValue(err.response);
   }
 };
 
