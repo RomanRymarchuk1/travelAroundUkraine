@@ -11,12 +11,16 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // Icons
 import BedIcon from '@mui/icons-material/Bed';
 import PersonIcon from '@mui/icons-material/Person';
 
 import { useInView } from 'react-intersection-observer';
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTour } from '../../store/slices/tourSlice/tourSlice';
 
 import { TourAccordion, TourInfoDialog, TourReasonToChoose, ImageGallery } from '../../features/Tour/components';
 
@@ -141,13 +145,23 @@ const TourPage = () => {
   const handleOpenDialog = () => setIsOpen(true);
   const handleCloseDialog = () => setIsOpen(false);
 
+  const dispatch = useDispatch();
+  // to be revised in future from re rendering and optimizing point of view, whether we pass needed data as props to components or useSelector directly in each component.
+  const { imageUrls } = useSelector((store) => store.tour.data);
+
+  useEffect(() => {
+    dispatch(fetchTour());
+  }, []);
+
   return (
     <>
-      <div>
-        <ImageGallery />
-      </div>
       <HeaderContent>
         <Container>
+          <Typography align="center" variant="h1" mt={17} mb={5} fontSize="50px">
+            {/* to be edited later with tour name from fetched data */}
+            TOUR NAME
+          </Typography>
+          <ImageGallery imageUrls={imageUrls} />
           <Nav>
             <LinksWrapper>
               {sections.map(({ title, link }) => (
