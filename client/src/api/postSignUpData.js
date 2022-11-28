@@ -17,7 +17,7 @@ const postSignUpData = async ({
 
     return { isSuccess: status === 200 };
   } catch (err) {
-    return { isSuccess: false, error: err.response.data };
+    return { error: err.response.data };
   }
 };
 
