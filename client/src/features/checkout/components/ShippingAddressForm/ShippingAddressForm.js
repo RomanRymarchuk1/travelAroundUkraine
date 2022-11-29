@@ -14,7 +14,7 @@ const ShippingAddressForm = () => {
         Shipping Address
       </Typography>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={3} mb={3}>
         <Grid item xs={12}>
           <Field component={TextField} required name={addressOne.name} label={addressOne.label} fullWidth />
         </Grid>

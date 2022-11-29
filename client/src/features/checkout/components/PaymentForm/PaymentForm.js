@@ -19,7 +19,7 @@ const PaymentForm = () => {
         Payment Details
       </Typography>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={3} mb={3}>
         <Grid item xs={12} laptop={6}>
           <FormLabel id={cardType.name}>{cardType.label}</FormLabel>
           <Field component={RadioGrouping} aria-labelledby={cardType.name} row name={cardType.name}>
