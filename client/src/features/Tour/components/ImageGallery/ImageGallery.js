@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/no-unresolved */
 import React, { useState, useCallback } from 'react';
 import ImageViewer from 'react-simple-image-viewer';
@@ -10,24 +11,25 @@ import { Autoplay, FreeMode, Mousewheel, Scrollbar, Zoom, Thumbs, Navigation } f
 
 import { SliderButton } from '../../../../components';
 
-export default function ImageGallery() {
+export default function ImageGallery({ imageUrls }) {
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  const image = [
-    'http://placeimg.com/1200/800/nature',
-    'http://placeimg.com/800/1200/nature',
-    'http://placeimg.com/800/1200/nature',
-    'http://placeimg.com/1920/1080/nature',
-    'http://placeimg.com/1500/500/nature',
-    'http://placeimg.com/1500/500/nature',
-    'http://placeimg.com/800/1200/nature',
-    'http://placeimg.com/1500/500/nature',
-    'http://placeimg.com/1200/800/nature',
-    'http://placeimg.com/1200/800/nature',
-    'http://placeimg.com/1200/800/nature',
-  ];
+  // const image = [
+  //   'http://placeimg.com/1200/800/nature',
+  //   'http://placeimg.com/800/1200/nature',
+  //   'http://placeimg.com/800/1200/nature',
+  //   'http://placeimg.com/1920/1080/nature',
+  //   'http://placeimg.com/1500/500/nature',
+  //   'http://placeimg.com/1500/500/nature',
+  //   'http://placeimg.com/800/1200/nature',
+  //   'http://placeimg.com/1500/500/nature',
+  //   'http://placeimg.com/1200/800/nature',
+  //   'http://placeimg.com/1200/800/nature',
+  //   'http://placeimg.com/1200/800/nature',
+  // ];
+
   function disableScroll() {
     document.body.classList.add('stop-scrolling');
   }
@@ -46,6 +48,9 @@ export default function ImageGallery() {
     setIsViewerOpen(false);
     enableScroll();
   };
+
+  // to return a preloader in the future
+  if (!imageUrls) return null;
 
   return (
     <div className="c">
@@ -72,7 +77,7 @@ export default function ImageGallery() {
         slidesPerView="auto"
         className="mySwiper2"
       >
-        {image.map((src, index) => (
+        {imageUrls.map((src, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <SwiperSlide key={`${src + index}`}>
             {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
@@ -92,7 +97,7 @@ export default function ImageGallery() {
         modules={[Navigation, Thumbs]}
         className="thumbsSwiper"
       >
-        {image.map((src, i) => (
+        {imageUrls.map((src, i) => (
           <SwiperSlide key={`${src + i}`}>
             <img src={src} alt="" />
           </SwiperSlide>
@@ -100,7 +105,7 @@ export default function ImageGallery() {
       </Swiper>
       {isViewerOpen && (
         <ImageViewer
-          src={image}
+          src={imageUrls}
           currentIndex={currentImage}
           onClose={closeImageViewer}
           disableScroll
