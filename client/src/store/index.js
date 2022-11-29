@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './slices/userSlice';
-import catalogueReducer from './slices/catalogueSlice';
+import tourReducer from './slices/tourSlice/tourSlice';
+import catalogueSlice from './slices/catalogueSlice/catalogueSlice';
 
 const store = configureStore({
-  reducer: { userReducer, catalogueReducer },
+  reducer: { userReducer, tour: tourReducer, catalogue: catalogueSlice },
 });
 
 export default store;

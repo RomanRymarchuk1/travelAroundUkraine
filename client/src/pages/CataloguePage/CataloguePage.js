@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { styled, Stack, Box, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
-import getProducts from '../../api/getProducts';
-import { setProducts } from '../../store/slices/catalogueSlice';
+import { getProducts, setIsLoading } from '../../store/slices/catalogueSlice/catalogueSlice';
 
 const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ theme }) => ({
   backgroundColor: theme.palette.primary.contrastText,
@@ -21,25 +20,19 @@ const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ t
 
 const CataloguePage = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(null);
-  const products = useSelector((state) => state.catalogueReducer.products, shallowEqual);
+  const products = useSelector((state) => state.catalogue.products, shallowEqual);
+  const isLoading = useSelector((state) => state.catalogue.isLoading);
   useEffect(() => {
-    setLoading(true);
-    const getData = async () => {
-      const data = await getProducts();
-      dispatch(setProducts(data));
-      setLoading(false);
-    };
-    if (products.length > 0) {
-      setLoading(false);
-    } else {
-      getData();
+    if (products.length <= 0) {
+      dispatch(setIsLoading(true));
+      dispatch(getProducts());
+      dispatch(setIsLoading(false));
     }
   }, []);
 
   return (
     <>
-      {loading === false ? (
+      {isLoading === false ? (
         <Box sx={{ backgroundColor: '#EDEDED', paddingBottom: '150px' }}>
           <CatalogMainSection />
           <Container>
