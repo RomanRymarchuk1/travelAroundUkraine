@@ -1,13 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Grid, Typography, MenuItem } from '@mui/material';
-import { TextField } from 'formik-mui';
+import { Grid, Typography, FormLabel, Radio, FormControlLabel, styled } from '@mui/material';
+import { TextField, RadioGroup } from 'formik-mui';
 import { DatePicker } from 'formik-mui-x-date-pickers';
 import { Field } from 'formik';
 import { formModel } from '../../data';
 
 const PaymentForm = () => {
   const { cardType, nameOnCard, cardNumber, expiryDate, cvv } = formModel;
+
+  const RadioGrouping = styled(RadioGroup)({
+    justifyContent: 'space-evenly',
+  });
 
   return (
     <>
@@ -17,22 +21,41 @@ const PaymentForm = () => {
 
       <Grid container spacing={2}>
         <Grid item xs={12} laptop={6}>
-          <Field component={TextField} name={cardType.name} select label={cardType.label} fullWidth>
-            <MenuItem value="visa">
-              <img src="./assets/images/checkoutPageForm/visa.png" alt="visa" />
-            </MenuItem>
-            <MenuItem value="masterCard">
-              <img src="./assets/images/checkoutPageForm/mastercard.png" alt="mastercard" />
-            </MenuItem>
+          <FormLabel id={cardType.name}>{cardType.label}</FormLabel>
+          <Field component={RadioGrouping} aria-labelledby={cardType.name} row name={cardType.name}>
+            <FormControlLabel
+              componentsProps={{ typography: { gutterBottom: 0 } }}
+              value="visa"
+              control={<Radio />}
+              label={<img src="./assets/images/checkoutPageForm/visa.png" alt="visa" />}
+            />
+            <FormControlLabel
+              componentsProps={{ typography: { gutterBottom: 0 } }}
+              value="mastercard"
+              control={<Radio />}
+              label={<img src="./assets/images/checkoutPageForm/mastercard.png" alt="mastercard" />}
+            />
+            <FormControlLabel
+              componentsProps={{ typography: { gutterBottom: 0 } }}
+              value="americanExpress"
+              control={<Radio />}
+              label={<img src="./assets/images/checkoutPageForm/americanExpress.png" alt="americanExpress" />}
+            />
+            <FormControlLabel
+              componentsProps={{ typography: { gutterBottom: 0 } }}
+              value="paypal"
+              control={<Radio />}
+              label={<img src="./assets/images/checkoutPageForm/paypal.png" alt="paypal" />}
+            />
           </Field>
         </Grid>
 
         <Grid item xs={12} laptop={6}>
-          <Field component={TextField} required name={nameOnCard.name} label={nameOnCard.label} fullWidth />
+          <Field component={TextField} required name={cardNumber.name} label={cardNumber.label} fullWidth />
         </Grid>
 
         <Grid item xs={12} laptop={6}>
-          <Field component={TextField} required name={cardNumber.name} label={cardNumber.label} fullWidth />
+          <Field component={TextField} required name={nameOnCard.name} label={nameOnCard.label} fullWidth />
         </Grid>
 
         <Grid item xs={12} laptop={3}>
