@@ -4,6 +4,7 @@ import { styled, Stack, Box, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
 import { getProducts, setIsLoading } from '../../store/slices/catalogueSlice/catalogueSlice';
+import { gettWishList, setInitialItemsInFavorites } from '../../store/slices/inFavorites/inFavorites';
 
 const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ theme }) => ({
   backgroundColor: theme.palette.primary.contrastText,
@@ -22,6 +23,15 @@ const CataloguePage = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const isLoading = useSelector((state) => state.catalogue.isLoading);
+  const isLogin = useSelector((state) => state.userReducer.isLogin);
+  const inFavorites = useSelector((state) => state.favorites.inFavorites);
+  useEffect(() => {
+    if (isLogin === true) {
+      dispatch(gettWishList());
+    } else if (localStorage.getItem('inFavorites') !== null) {
+      dispatch(setInitialItemsInFavorites(localStorage.getItem('inFavorites').split(',')));
+    }
+  }, []);
   useEffect(() => {
     if (products.length <= 0) {
       dispatch(setIsLoading(true));
@@ -42,16 +52,21 @@ const CataloguePage = () => {
                   Tours
                 </Typography>
                 <Stack spacing={2}>
-                  {products.map(({ name, currentPrice, duration, description, imageUrls, _id }) => (
-                    <CatalogTourCard
-                      key={_id}
-                      name={name}
-                      description={description}
-                      currentPrice={currentPrice}
-                      duration={duration}
-                      imageUrls={imageUrls}
-                    />
-                  ))}
+                  {products.map(({ name, currentPrice, duration, description, imageUrls, _id }) => {
+                    const checkForFavorites = inFavorites.find((itemId) => _id === itemId);
+                    return (
+                      <CatalogTourCard
+                        key={_id}
+                        name={name}
+                        description={description}
+                        currentPrice={currentPrice}
+                        duration={duration}
+                        imageUrls={imageUrls}
+                        id={_id}
+                        inFavorites={checkForFavorites ? !!checkForFavorites : false}
+                      />
+                    );
+                  })}
                 </Stack>
               </Grid>
               <FilterContainer>
