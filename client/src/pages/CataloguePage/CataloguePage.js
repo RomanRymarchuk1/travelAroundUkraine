@@ -31,12 +31,15 @@ const CataloguePage = () => {
       dispatch(getProducts());
       dispatch(setIsLoading(false));
     }
+  }, []);
+
+  useEffect(() => {
     if (isLogin) {
       dispatch(gettWishList());
     } else {
-      setLocallyInitialItemsInFavorites();
+      dispatch(setLocallyInitialItemsInFavorites());
     }
-  }, []);
+  }, [isLogin]);
 
   return (
     <>

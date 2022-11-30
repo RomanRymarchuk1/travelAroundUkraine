@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import axiosConfig from '../../../axiosConfig';
 
 const inFavoritesSlice = createSlice({
   name: 'inFavorites',
@@ -60,10 +59,9 @@ export const gettWishList = () => async (dispatch) => {
 
 export const addItemtoWishList = (id) => async (dispatch) => {
   try {
-    const { status } = await axiosConfig.put(`/wishlist/${id}`, {
-      headers: {
-        Authorization: localStorage.getItem('token'),
-      },
+    const { status } = await axios.put(`/wishlist/${id}`, {
+      method: 'PUT',
+      headers: { Authorization: localStorage.getItem('token') },
     });
     if (status === 200) {
       dispatch(setServerItemInFavorites(id));
