@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setLocallyItemInFavorites,
   deleteLocallyItemFromFavorites,
+  addItemtoWishList,
 } from '../../../../store/slices/inFavorites/inFavorites';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
@@ -65,7 +66,9 @@ const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls,
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <CardTitle>{name}</CardTitle>
           {inFavorites === false ? (
-            <FavoriteBorderSharpIcon onClick={() => (isLogin ? null : dispatch(setLocallyItemInFavorites(id)))} />
+            <FavoriteBorderSharpIcon
+              onClick={() => (isLogin ? dispatch(addItemtoWishList(id)) : dispatch(setLocallyItemInFavorites(id)))}
+            />
           ) : (
             <FavoriteSharpIcon onClick={() => (isLogin ? null : dispatch(deleteLocallyItemFromFavorites(id)))} />
           )}
