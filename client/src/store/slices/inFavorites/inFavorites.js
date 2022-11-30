@@ -26,6 +26,9 @@ const inFavoritesSlice = createSlice({
     setServerItemInFavorites: (state, action) => {
       state.inFavorites = [...state.inFavorites, action.payload];
     },
+    deleteServerItemFromFavorites: (state, action) => {
+      state.inFavorites = state.inFavorites.filter((elId) => elId !== action.payload);
+    },
   },
 });
 
@@ -35,6 +38,7 @@ export const {
   deleteLocallyItemFromFavorites,
   setServerInitialItemsInFavorites,
   setServerItemInFavorites,
+  deleteServerItemFromFavorites,
 } = inFavoritesSlice.actions;
 
 export default inFavoritesSlice.reducer;
@@ -59,12 +63,26 @@ export const gettWishList = () => async (dispatch) => {
 
 export const addItemtoWishList = (id) => async (dispatch) => {
   try {
-    const { status } = await axios.put(`/wishlist/${id}`, {
+    const { status } = await axios(`/wishlist/${id}`, {
       method: 'PUT',
       headers: { Authorization: localStorage.getItem('token') },
     });
     if (status === 200) {
       dispatch(setServerItemInFavorites(id));
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const deleteItemtoWishList = (id) => async (dispatch) => {
+  try {
+    const { status } = await axios(`/wishlist/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: localStorage.getItem('token') },
+    });
+    if (status === 200) {
+      dispatch(deleteServerItemFromFavorites(id));
     }
   } catch (err) {
     console.error(err);

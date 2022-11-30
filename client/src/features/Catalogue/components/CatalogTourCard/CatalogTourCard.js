@@ -9,6 +9,7 @@ import {
   setLocallyItemInFavorites,
   deleteLocallyItemFromFavorites,
   addItemtoWishList,
+  deleteItemtoWishList,
 } from '../../../../store/slices/inFavorites/inFavorites';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
@@ -70,7 +71,11 @@ const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls,
               onClick={() => (isLogin ? dispatch(addItemtoWishList(id)) : dispatch(setLocallyItemInFavorites(id)))}
             />
           ) : (
-            <FavoriteSharpIcon onClick={() => (isLogin ? null : dispatch(deleteLocallyItemFromFavorites(id)))} />
+            <FavoriteSharpIcon
+              onClick={() =>
+                isLogin ? dispatch(deleteItemtoWishList(id)) : dispatch(deleteLocallyItemFromFavorites(id))
+              }
+            />
           )}
         </Box>
         <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>
