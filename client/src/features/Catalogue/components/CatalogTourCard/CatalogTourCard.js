@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 import FavoriteBorderSharpIcon from '@mui/icons-material/FavoriteBorderSharp';
 import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
 import { useDispatch, useSelector } from 'react-redux';
-import { setItemInFavorites, deleteItemFromFavorites } from '../../../../store/slices/inFavorites/inFavorites';
+import {
+  setLocallyItemInFavorites,
+  deleteLocallyItemFromFavorites,
+} from '../../../../store/slices/inFavorites/inFavorites';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
@@ -62,9 +65,9 @@ const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls,
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <CardTitle>{name}</CardTitle>
           {inFavorites === false ? (
-            <FavoriteBorderSharpIcon onClick={() => dispatch(setItemInFavorites({ id, isLogin }))} />
+            <FavoriteBorderSharpIcon onClick={() => (isLogin ? null : dispatch(setLocallyItemInFavorites(id)))} />
           ) : (
-            <FavoriteSharpIcon onClick={() => dispatch(deleteItemFromFavorites({ id, isLogin }))} />
+            <FavoriteSharpIcon onClick={() => (isLogin ? null : dispatch(deleteLocallyItemFromFavorites(id)))} />
           )}
         </Box>
         <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>

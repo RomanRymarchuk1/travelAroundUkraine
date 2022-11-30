@@ -4,7 +4,7 @@ import { styled, Stack, Box, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
 import { getProducts, setIsLoading } from '../../store/slices/catalogueSlice/catalogueSlice';
-import { setInitialItemsInFavorites } from '../../store/slices/inFavorites/inFavorites';
+import { setLocallyInitialItemsInFavorites, gettWishList } from '../../store/slices/inFavorites/inFavorites';
 
 const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ theme }) => ({
   backgroundColor: theme.palette.primary.contrastText,
@@ -23,15 +23,19 @@ const CataloguePage = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const isLoading = useSelector((state) => state.catalogue.isLoading);
-  const isLogin = useSelector((state) => state.userReducer.isLogin);
   const inFavorites = useSelector((state) => state.favorites.inFavorites);
+  const isLogin = useSelector((state) => state.userReducer.isLogin);
   useEffect(() => {
     if (products.length <= 0) {
       dispatch(setIsLoading(true));
       dispatch(getProducts());
       dispatch(setIsLoading(false));
     }
-    dispatch(setInitialItemsInFavorites(isLogin));
+    if (isLogin) {
+      gettWishList();
+    } else {
+      setLocallyInitialItemsInFavorites();
+    }
   }, []);
 
   return (
