@@ -32,7 +32,7 @@ const CataloguePage = () => {
       dispatch(setIsLoading(false));
     }
     if (isLogin) {
-      gettWishList();
+      dispatch(gettWishList());
     } else {
       setLocallyInitialItemsInFavorites();
     }
