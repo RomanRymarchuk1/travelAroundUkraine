@@ -68,7 +68,6 @@ const CheckoutForm = () => {
                     />
                   )}
                 </Box>
-                ;
               </Form>
             </LocalizationProvider>
           )}
