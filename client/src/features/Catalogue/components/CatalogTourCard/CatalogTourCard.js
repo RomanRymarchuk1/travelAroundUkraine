@@ -1,7 +1,11 @@
 import React from 'react';
-import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent } from '@mui/material';
+import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent, Box } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PropTypes from 'prop-types';
+import FavoriteBorderSharpIcon from '@mui/icons-material/FavoriteBorderSharp';
+import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
+import { useDispatch } from 'react-redux';
+import { setItemInFavorites, deleteItemFromFavorites } from '../../../../store/slices/inFavorites/inFavorites';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
@@ -48,33 +52,43 @@ const CardButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls }) => (
-  <CardContainer direction={{ xs: 'column', tablet: 'row' }} spacing={1}>
-    <CardImage component="img" image={imageUrls[0]} alt="tour photo" />
-    <CardContent sx={{ padding: '0 30px 0 36px' }}>
-      <CardTitle>{name}</CardTitle>
-      <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>
-        <Stack direction="row" spacing={1} alignItems="center">
-          <CoinsIcon />
-          <Typography variant="h3" component="span">
-            {currentPrice} €
-          </Typography>
-        </Stack>
+const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls, id, inFavorites }) => {
+  const dispatch = useDispatch();
+  return (
+    <CardContainer direction={{ xs: 'column', tablet: 'row' }} spacing={1}>
+      <CardImage component="img" image={imageUrls[0]} alt="tour photo" />
+      <CardContent sx={{ padding: '0 30px 0 36px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <CardTitle>{name}</CardTitle>
+          {inFavorites === false ? (
+            <FavoriteBorderSharpIcon onClick={() => dispatch(setItemInFavorites(id))} />
+          ) : (
+            <FavoriteSharpIcon onClick={() => dispatch(deleteItemFromFavorites(id))} />
+          )}
+        </Box>
+        <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <CoinsIcon />
+            <Typography variant="h3" component="span">
+              {currentPrice} €
+            </Typography>
+          </Stack>
 
-        <Stack direction="row" spacing={1} alignItems="center">
-          <AccessTimeIcon color="primary" sx={{ height: '21px' }} />
-          <Typography variant="h3" component="span">
-            {duration}
-          </Typography>
+          <Stack direction="row" spacing={1} alignItems="center">
+            <AccessTimeIcon color="primary" sx={{ height: '21px' }} />
+            <Typography variant="h3" component="span">
+              {duration}
+            </Typography>
+          </Stack>
         </Stack>
-      </Stack>
-      <TourDescription>{description}</TourDescription>
-      <CardActions>
-        <CardButton href="#">More details</CardButton>
-      </CardActions>
-    </CardContent>
-  </CardContainer>
-);
+        <TourDescription>{description}</TourDescription>
+        <CardActions>
+          <CardButton href="#">More details</CardButton>
+        </CardActions>
+      </CardContent>
+    </CardContainer>
+  );
+};
 
 CatalogTourCard.propTypes = {
   name: PropTypes.string.isRequired,
@@ -82,6 +96,8 @@ CatalogTourCard.propTypes = {
   duration: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+  id: PropTypes.string.isRequired,
+  inFavorites: PropTypes.bool.isRequired,
 };
 
 export default CatalogTourCard;
