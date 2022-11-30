@@ -12,6 +12,7 @@ import {
   LogInPage,
   UserPage,
 } from './pages';
+import FavoritesPage from './pages/Favorites/Favorites';
 
 // TODO: add navigation from tour page to catalogue page
 // TODO: add protected routes after incorporating sign in feature
@@ -27,6 +28,7 @@ const AppRoutes = () => (
       <Route path="/login" element={<LogInPage />} />
       <Route path="/user" element={<UserPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/favorites" element={<FavoritesPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   </Routes>
