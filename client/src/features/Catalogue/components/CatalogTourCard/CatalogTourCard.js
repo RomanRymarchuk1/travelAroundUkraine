@@ -4,7 +4,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PropTypes from 'prop-types';
 import FavoriteBorderSharpIcon from '@mui/icons-material/FavoriteBorderSharp';
 import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setItemInFavorites, deleteItemFromFavorites } from '../../../../store/slices/inFavorites/inFavorites';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
@@ -54,6 +54,7 @@ const CardButton = styled(Button)(({ theme }) => ({
 
 const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls, id, inFavorites }) => {
   const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.userReducer.isLogin);
   return (
     <CardContainer direction={{ xs: 'column', tablet: 'row' }} spacing={1}>
       <CardImage component="img" image={imageUrls[0]} alt="tour photo" />
@@ -61,9 +62,9 @@ const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls,
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <CardTitle>{name}</CardTitle>
           {inFavorites === false ? (
-            <FavoriteBorderSharpIcon onClick={() => dispatch(setItemInFavorites(id))} />
+            <FavoriteBorderSharpIcon onClick={() => dispatch(setItemInFavorites({ id, isLogin }))} />
           ) : (
-            <FavoriteSharpIcon onClick={() => dispatch(deleteItemFromFavorites(id))} />
+            <FavoriteSharpIcon onClick={() => dispatch(deleteItemFromFavorites({ id, isLogin }))} />
           )}
         </Box>
         <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>
