@@ -1,20 +1,17 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import { Typography, Box } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useNavigate } from 'react-router-dom';
 import { AlertModal } from '../../../../components';
 
-const SignupSuccess = ({ activeStep, steps }) => {
-  const [isOpen, setIsOpen] = useState(true);
+const SignupSuccess = ({ open, onClose }) => {
   const navigate = useNavigate();
 
   const handleCloseBttn = () => {
-    setIsOpen(false);
+    onClose();
     navigate('/catalogue');
   };
-
-  if (activeStep !== steps.length) return null;
 
   const titleJsx = (
     <Box display="flex" justifyContent="center" alignItems="center" columnGap="5px">
@@ -27,7 +24,7 @@ const SignupSuccess = ({ activeStep, steps }) => {
 
   return (
     <AlertModal
-      open={isOpen}
+      open={open}
       onClose={handleCloseBttn}
       onSubmit={handleCloseBttn}
       title={titleJsx}
