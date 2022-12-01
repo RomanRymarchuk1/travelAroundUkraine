@@ -24,25 +24,25 @@ const PaymentForm = () => {
           <FormLabel id={cardType.name}>{cardType.label}</FormLabel>
           <Field component={RadioGrouping} aria-labelledby={cardType.name} row name={cardType.name}>
             <FormControlLabel
-              componentsProps={{ typography: { gutterBottom: 0 } }}
+              componentsProps={{ typography: { gutterBottom: false } }}
               value="visa"
               control={<Radio />}
               label={<img src="./assets/images/checkoutPageForm/visa.png" alt="visa" />}
             />
             <FormControlLabel
-              componentsProps={{ typography: { gutterBottom: 0 } }}
+              componentsProps={{ typography: { gutterBottom: false } }}
               value="mastercard"
               control={<Radio />}
               label={<img src="./assets/images/checkoutPageForm/mastercard.png" alt="mastercard" />}
             />
             <FormControlLabel
-              componentsProps={{ typography: { gutterBottom: 0 } }}
+              componentsProps={{ typography: { gutterBottom: false } }}
               value="americanExpress"
               control={<Radio />}
               label={<img src="./assets/images/checkoutPageForm/americanExpress.png" alt="americanExpress" />}
             />
             <FormControlLabel
-              componentsProps={{ typography: { gutterBottom: 0 } }}
+              componentsProps={{ typography: { gutterBottom: false } }}
               value="paypal"
               control={<Radio />}
               label={<img src="./assets/images/checkoutPageForm/paypal.png" alt="paypal" />}
