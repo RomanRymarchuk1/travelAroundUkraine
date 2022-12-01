@@ -125,7 +125,7 @@ const TourInfoDialog = ({
 
         <IncludedContentWrapper>
           {included.map(({ icon, service }) => (
-            <Stack direction="row" gap="5px" alignItems="center">
+            <Stack key={service} direction="row" gap="5px" alignItems="center">
               {icon}
               <Typography gutterBottom={false}>{service}</Typography>
             </Stack>
