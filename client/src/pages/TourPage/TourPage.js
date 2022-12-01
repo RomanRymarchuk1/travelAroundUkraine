@@ -155,12 +155,20 @@ const TourPage = () => {
 
   return (
     <>
-      <div>
-        <ImageGallery />
-      </div>
       <HeaderContent>
         <Container>
-          <Typography align="center" variant="h1" mt={17} mb={5} fontSize="50px">
+          <Typography
+            align="center"
+            variant="h1"
+            mt={17}
+            mb={5}
+            fontSize="50px"
+            sx={{
+              ':first-letter': {
+                textTransform: 'capitalize',
+              },
+            }}
+          >
             {name}
           </Typography>
           <ImageGallery imageUrls={imageUrls} />
