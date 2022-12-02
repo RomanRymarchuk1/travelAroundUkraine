@@ -110,7 +110,7 @@ const FloatingDialog = styled(Box)(({ theme }) => ({
 }));
 
 const TourPage = () => {
-  const screenWidth = useMediaQuery('(min-width: 1051px)');
+  const matchesMediaQuery = useMediaQuery('(min-width: 1051px)');
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -170,7 +170,7 @@ const TourPage = () => {
       <MainContent>
         <Container>
           <ContentWrapper>
-            {screenWidth ? (
+            {matchesMediaQuery ? (
               <Box component="aside" sx={{ maxWidth: '370px', width: '100%' }}>
                 <TourInfoDialog
                   dates={dates}
@@ -244,7 +244,7 @@ const TourPage = () => {
             </Box>
           </ContentWrapper>
 
-          {!screenWidth ? (
+          {!matchesMediaQuery ? (
             <MobileDialogWrapper ref={dialogRef}>
               <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Cost>€{currentPrice}</Cost>
@@ -272,7 +272,7 @@ const TourPage = () => {
           ) : null}
         </Container>
 
-        {!screenWidth ? (
+        {!matchesMediaQuery ? (
           <Slide in={!inView} direction="up" mountOnEnter unmountOnExit>
             <FloatingDialog>
               <Container>
