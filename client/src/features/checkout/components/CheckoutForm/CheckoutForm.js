@@ -57,7 +57,7 @@ const CheckoutForm = () => {
 
                   {!isSubmitting ? (
                     <Button disabled={isSubmitting} type="submit">
-                      {activeStep !== lastStep ? 'Continue' : 'Sign up'}
+                      {activeStep !== lastStep ? 'Continue' : 'Confirm'}
                     </Button>
                   ) : (
                     <CircularProgress
