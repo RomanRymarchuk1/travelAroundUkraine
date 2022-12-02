@@ -4,8 +4,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axiosConfig from '../../axiosConfig';
 
-// import getCustomer from '../../api/getCustomer';
-
 const initialState = {
   isLogin: !!localStorage.getItem('token'),
   userData: null,
@@ -21,8 +19,6 @@ export const fetchUserInfo = createAsyncThunk('user/feacthUserInfo', async (_, {
     return rejectWithValue(err.response);
   }
 });
-
-// TODO: build
 
 const userSlice = createSlice({
   name: 'user',
