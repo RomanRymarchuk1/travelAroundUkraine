@@ -46,9 +46,9 @@ const UserPage = () => {
       )}
       {error && (
         <Container>
-          <Typography component="h2">Error code: {error.status}</Typography>
-          <Typography component="h3">{error.statusText}</Typography>
-          <Typography component="p">Please try again later</Typography>
+          <Typography variant="h2">Error code: {error.status}</Typography>
+          <Typography variant="h3">{error.statusText}</Typography>
+          <Typography>Please try again later</Typography>
         </Container>
       )}
     </Container>
