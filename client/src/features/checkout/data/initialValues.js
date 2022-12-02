@@ -32,6 +32,6 @@ export default {
   [cardType.name]: '',
   [nameOnCard.name]: '',
   [cardNumber.name]: '',
-  [expiryDate.name]: '',
+  [expiryDate.name]: new Date(),
   [cvv.name]: '',
 };
