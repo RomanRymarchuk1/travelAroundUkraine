@@ -12,9 +12,6 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-// Icons
-import BedIcon from '@mui/icons-material/Bed';
-import PersonIcon from '@mui/icons-material/Person';
 
 import { useInView } from 'react-intersection-observer';
 
@@ -30,30 +27,7 @@ const sections = [
   { title: 'What is included?', link: '#included' },
 ];
 
-const currency = {
-  eur: '€',
-  usd: '$',
-  uah: '₴',
-};
-
-const included = [
-  { icon: <PersonIcon color="primary" />, service: 'Professional guide' },
-  { icon: <BedIcon color="primary" />, service: 'Accomodation' },
-];
-
-const cost = {
-  eur: 70,
-  usd: 70,
-  uah: 2584,
-};
-
 const dates = { beginDate: new Date('2022-02-01'), endDate: new Date('2022-02-25') };
-
-const details = {
-  duration: '3 days',
-  departs: 'First city',
-  returns: 'Second city',
-};
 
 const HeaderContent = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('laptop')]: {
@@ -147,7 +121,24 @@ const TourPage = () => {
 
   const dispatch = useDispatch();
   // to be revised in future from re rendering and optimizing point of view, whether we pass needed data as props to components or useSelector directly in each component.
-  const { imageUrls, name, description, reasons } = useSelector((store) => store.tour.data);
+  const {
+    imageUrls,
+    name,
+    description,
+    reasons,
+    professionalGuide,
+    accommodation,
+    meals,
+    transferAlongTheRoute,
+    travelInsurance,
+    departs,
+    duration,
+    returns,
+    currentPrice,
+    region,
+    categories,
+    season,
+  } = useSelector((store) => store.tour.data);
 
   useEffect(() => {
     dispatch(fetchTour());
@@ -171,6 +162,11 @@ const TourPage = () => {
           >
             {name}
           </Typography>
+          <Stack direction="row" justifyContent="center" alignItems="center" mb={3}>
+            <Typography>{season} / </Typography>
+            <Typography>{region} / </Typography>
+            <Typography>{categories}</Typography>
+          </Stack>
           <ImageGallery imageUrls={imageUrls} />
           <Nav>
             <LinksWrapper>
@@ -189,7 +185,18 @@ const TourPage = () => {
           <ContentWrapper>
             {matchesMediaQuery ? (
               <Box component="aside" sx={{ maxWidth: '370px', width: '100%' }}>
-                <TourInfoDialog included={included} cost={cost} dates={dates} details={details} />
+                <TourInfoDialog
+                  dates={dates}
+                  professionalGuide={professionalGuide}
+                  accommodation={accommodation}
+                  meals={meals}
+                  transferAlongTheRoute={transferAlongTheRoute}
+                  travelInsurance={travelInsurance}
+                  departs={departs}
+                  duration={duration}
+                  returns={returns}
+                  currentPrice={currentPrice}
+                />
               </Box>
             ) : null}
 
@@ -231,20 +238,23 @@ const TourPage = () => {
           {!matchesMediaQuery ? (
             <MobileDialogWrapper ref={dialogRef}>
               <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Cost>
-                  {currency.eur}
-                  {cost.eur}
-                </Cost>
+                <Cost>€{currentPrice}</Cost>
                 <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
                   More info
                 </Button>
               </Stack>
               <Dialog open={isOpen} onClose={handleCloseDialog} hideBackdrop fullScreen>
                 <TourInfoDialog
-                  included={included}
-                  cost={cost}
                   dates={dates}
-                  details={details}
+                  professionalGuide={professionalGuide}
+                  accommodation={accommodation}
+                  meals={meals}
+                  transferAlongTheRoute={transferAlongTheRoute}
+                  travelInsurance={travelInsurance}
+                  departs={departs}
+                  duration={duration}
+                  returns={returns}
+                  currentPrice={currentPrice}
                   closeButton
                   handleClose={handleCloseDialog}
                 />
@@ -258,10 +268,7 @@ const TourPage = () => {
             <FloatingDialog>
               <Container>
                 <Stack direction="row" justifyContent="space-between" alignItems="center">
-                  <Cost>
-                    {currency.eur}
-                    {cost.eur}
-                  </Cost>
+                  <Cost>€{currentPrice}</Cost>
                   <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
                     More info
                   </Button>
