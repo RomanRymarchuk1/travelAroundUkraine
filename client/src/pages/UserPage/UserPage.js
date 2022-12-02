@@ -24,8 +24,6 @@ const preloaderSX = {
   color: 'secondary',
 };
 
-// TODO: why theme is not working on typography
-
 const UserPage = () => {
   const { userData, error, isLoading } = useSelector((store) => store.userReducer);
   const dispatch = useDispatch();
