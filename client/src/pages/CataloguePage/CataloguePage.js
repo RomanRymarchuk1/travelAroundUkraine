@@ -42,7 +42,7 @@ const CataloguePage = () => {
                   Tours
                 </Typography>
                 <Stack spacing={2}>
-                  {products.map(({ name, currentPrice, duration, description, imageUrls, _id }) => (
+                  {products.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => (
                     <CatalogTourCard
                       key={_id}
                       name={name}
@@ -50,6 +50,7 @@ const CataloguePage = () => {
                       currentPrice={currentPrice}
                       duration={duration}
                       imageUrls={imageUrls}
+                      itemNo={itemNo}
                     />
                   ))}
                 </Stack>

@@ -19,9 +19,9 @@ const tourSlice = createSlice({
 
 export const { setTour } = tourSlice.actions;
 
-export const fetchTour = () => async (dispatch) => {
+export const fetchTour = (tourId) => async (dispatch) => {
   try {
-    const { data, status } = await axios('/products/153292');
+    const { data, status } = await axios(`/products/${tourId}`);
 
     if (status) {
       dispatch(setTour(data));

@@ -15,6 +15,9 @@ import React, { useState, useEffect } from 'react';
 
 import { useInView } from 'react-intersection-observer';
 
+// React
+import { useParams } from 'react-router-dom';
+
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTour } from '../../store/slices/tourSlice/tourSlice';
@@ -120,6 +123,7 @@ const TourPage = () => {
   const handleCloseDialog = () => setIsOpen(false);
 
   const dispatch = useDispatch();
+  const { tourId } = useParams();
   // to be revised in future from re rendering and optimizing point of view, whether we pass needed data as props to components or useSelector directly in each component.
   const {
     imageUrls,
@@ -141,7 +145,7 @@ const TourPage = () => {
   } = useSelector((store) => store.tour.data);
 
   useEffect(() => {
-    dispatch(fetchTour());
+    dispatch(fetchTour(tourId));
   }, []);
 
   return (
