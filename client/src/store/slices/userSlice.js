@@ -2,7 +2,9 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import getCustomer from '../../api/getCustomer';
+import axiosConfig from '../../axiosConfig';
+
+// import getCustomer from '../../api/getCustomer';
 
 const initialState = {
   isLogin: !!localStorage.getItem('token'),
@@ -12,9 +14,15 @@ const initialState = {
 };
 
 export const fetchUserInfo = createAsyncThunk('user/feacthUserInfo', async (_, { rejectWithValue }) => {
-  const response = await getCustomer(rejectWithValue);
-  return response;
+  try {
+    const { data } = await axiosConfig.get('/customers/customer').then((loggedInCustomer) => loggedInCustomer);
+    return data;
+  } catch (err) {
+    return rejectWithValue(err.response);
+  }
 });
+
+// TODO: build
 
 const userSlice = createSlice({
   name: 'user',
@@ -26,21 +34,21 @@ const userSlice = createSlice({
     },
   },
 
-  extraReducers: {
-    [fetchUserInfo.pending]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchUserInfo.pending, (state, action) => {
       state.userData = action.payload;
       state.isLoading = true;
-    },
+    });
 
-    [fetchUserInfo.fulfilled]: (state, action) => {
+    builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
       state.userData = action.payload;
       state.isLoading = false;
-    },
+    });
 
-    [fetchUserInfo.rejected]: (state, action) => {
+    builder.addCase(fetchUserInfo.rejected, (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
-    },
+    });
   },
 });
 
