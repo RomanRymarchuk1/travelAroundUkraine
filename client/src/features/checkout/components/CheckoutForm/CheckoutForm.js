@@ -1,7 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+// Form components
 import { Formik, Form } from 'formik';
-import { Stepper, Step, StepLabel, Button } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { enAU } from 'date-fns/locale';
+// MUI Components
+import { Stepper, Step, StepLabel, Button, CircularProgress, Box } from '@mui/material';
+// Child Forms and model
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
 import { initialValues, validationSchema } from '../../data';
 
@@ -41,14 +47,29 @@ const CheckoutForm = () => {
       ) : (
         <Formik initialValues={initialValues} validationSchema={currentValidationSchema} onSubmit={formSubmitHandler}>
           {({ isSubmitting }) => (
-            <Form>
-              {activeStep === 0 && <UserDetailsForm />}
-              {activeStep === 1 && <ShippingAddressForm />}
-              {activeStep === 2 && <PaymentForm />}
+            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
+              <Form>
+                {activeStep === 0 && <UserDetailsForm />}
+                {activeStep === 1 && <ShippingAddressForm />}
+                {activeStep === 2 && <PaymentForm />}
+                <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3, position: 'relative' }}>
+                  {activeStep !== 0 && !isSubmitting && <Button onClick={GoToPrevStep}>Back</Button>}
 
-              {activeStep !== 0 && <Button onClick={GoToPrevStep}>Back</Button>}
-              <Button type="submit">{activeStep !== lastStep ? 'Continue' : 'Pay'}</Button>
-            </Form>
+                  {!isSubmitting ? (
+                    <Button disabled={isSubmitting} type="submit">
+                      {activeStep !== lastStep ? 'Continue' : 'Confirm'}
+                    </Button>
+                  ) : (
+                    <CircularProgress
+                      size={50}
+                      sx={{
+                        color: 'primary.dark',
+                      }}
+                    />
+                  )}
+                </Box>
+              </Form>
+            </LocalizationProvider>
           )}
         </Formik>
       )}
