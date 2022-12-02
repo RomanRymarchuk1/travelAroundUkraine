@@ -6,5 +6,18 @@ import ErrorPage from './ErrorPage/ErrorPage';
 import HomePage from './HomePage/HomePage';
 import TourPage from './TourPage/TourPage';
 import AppLayout from './AppLayout/AppLayout';
+import LogInPage from './LogInPage/LogInPage';
+import UserPage from './UserPage/UserPage';
 
-export { CartPage, CataloguePage, CheckoutPage, ErrorPage, HomePage, TourPage, AppLayout, SignupPage };
+export {
+  UserPage,
+  LogInPage,
+  CartPage,
+  CataloguePage,
+  CheckoutPage,
+  ErrorPage,
+  HomePage,
+  TourPage,
+  AppLayout,
+  SignupPage,
+};

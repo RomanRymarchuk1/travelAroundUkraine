@@ -29,6 +29,11 @@ exports[`Render BurgerMenu should BurgerMenu render 1`] = `
       </li>
       <li>
         <a>
+          Log In
+        </a>
+      </li>
+      <li>
+        <a>
           Cart
         </a>
       </li>
