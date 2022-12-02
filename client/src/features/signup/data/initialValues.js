@@ -1,6 +1,7 @@
 import formModel from './formModel';
 
-const { firstName, lastName, login, email, password, retypePassword, phone, birthDate, gender, avatarUrl } = formModel;
+const { firstName, lastName, login, email, password, retypePassword, telephone, birthdate, gender, avatarUrl } =
+  formModel;
 
 export default {
   [firstName.name]: '',
@@ -9,8 +10,8 @@ export default {
   [email.name]: '',
   [password.name]: '',
   [retypePassword.name]: '',
-  [phone.name]: '',
-  [birthDate.name]: '',
+  [telephone.name]: '',
+  [birthdate.name]: '',
   [gender.name]: '',
   [avatarUrl.name]: '',
 };
