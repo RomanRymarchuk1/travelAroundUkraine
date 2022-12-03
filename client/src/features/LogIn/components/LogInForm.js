@@ -62,7 +62,7 @@ const LogInForm = () => {
   };
 
   const validationSchema = yup.object().shape({
-    loginOrEmail: yup.string().email('It will be an valid email').required('Email is required'),
+    loginOrEmail: yup.string().required('Email or login are required'),
     password: yup.string().min(7, 'Password must have at least 7 characters').required('Password is required!'),
   });
 

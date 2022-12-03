@@ -32,7 +32,7 @@ const AlertModal = ({ open, onClose, onSubmit, title, children, disableCancelBut
         </Button>
       )}
 
-      <Button onClick={onSubmit} success={success} disableElevation autoFocus>
+      <Button onClick={onSubmit} success={success ? 'true' : null} disableElevation autoFocus>
         {submitButtonText}
       </Button>
     </DialogActions>
