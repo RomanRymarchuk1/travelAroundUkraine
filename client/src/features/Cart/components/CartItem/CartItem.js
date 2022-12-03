@@ -15,7 +15,7 @@ import {
 import { AccessTime, Remove, Add, DeleteOutline } from '@mui/icons-material';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
-import { DeleteItemModal } from '..';
+import { AlertModal } from '../../../../components';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
   position: 'relative',
@@ -164,12 +164,18 @@ const CartItem = () => {
           </CardActions>
         </CardContent>
       </CardContainer>
-      <DeleteItemModal
+      <AlertModal
         open={isDeleteDialogOpen}
         onClose={handleDeleteDialogClose}
-        onDelete={handleDeleteFromCart}
-        tourTitle="Sightseeing tour of Chernivtsi"
-      />
+        onSubmit={handleDeleteFromCart}
+        title="Delete this tour?"
+        submitButtonText="Delete"
+      >
+        Are you sure you want to delete tour:
+        <Typography component="span" fontStyle="italic">
+          Sightseeing tour of Chernivtsi
+        </Typography>
+      </AlertModal>
     </>
   );
 };
