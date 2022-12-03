@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Paper, CircularProgress } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Container, Paper, CircularProgress, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUserInfo } from '../../store/slices/userSlice';
 import UserList from '../../features/User/components/UserList/UserList';
 import UserHeader from '../../features/User/components/UserHeader/UserHeader';
 import ButtonContainer from '../../features/User/components/ButtonContainer/ButtonContainer';
-import getCustomer from '../../api/getCustomer';
 
 const containerSX = {
   display: 'block',
@@ -24,31 +25,31 @@ const preloaderSX = {
 };
 
 const UserPage = () => {
-  const [userData, setUserData] = useState(null);
+  const { userData, error, isLoading } = useSelector((store) => store.userReducer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getUserData = async () => {
-      const res = await getCustomer();
-      setUserData(res);
-    };
-    getUserData();
+    dispatch(fetchUserInfo());
   }, []);
 
   return (
-    <>
-      {userData ? (
-        <Container component={Paper} sx={containerSX}>
+    <Container component={Paper} sx={containerSX}>
+      {isLoading && <CircularProgress sx={preloaderSX} />}
+      {userData && (
+        <>
           <UserHeader userData={userData} />
           <UserList userData={userData} />
           <ButtonContainer />
-        </Container>
-      ) : (
-        <Container component={Paper} sx={containerSX}>
-          <CircularProgress sx={preloaderSX} />
+        </>
+      )}
+      {error && (
+        <Container>
+          <Typography variant="h2">Error code: {error.status}</Typography>
+          <Typography variant="h3">{error.statusText}</Typography>
+          <Typography>Please try again later</Typography>
         </Container>
       )}
-      {}
-    </>
+    </Container>
   );
 };
 
