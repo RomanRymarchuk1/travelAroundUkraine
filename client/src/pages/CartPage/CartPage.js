@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Box, Container, Stack, styled, Typography } from '@mui/material';
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCart } from '../../store/slices/cartSlice/cartSlice';
+
 import { CartItem, TotalInfoDialog } from '../../features/Cart/components';
 
 const ContentWrapper = styled(Stack)(({ theme }) => ({
@@ -20,7 +24,15 @@ const CartItemsList = styled((props) => <Stack component="ul" {...props} />)(({ 
   listStyleType: 'none',
 }));
 
-function CartPage() {
+const CartPage = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((store) => store.cart.data);
+  const cartLength = cart.length;
+
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, []);
+
   return (
     <Box marginTop="100px" marginBottom="150px" component="section" paddingY={3}>
       <Container>
@@ -29,24 +41,31 @@ function CartPage() {
         </Typography>
         <ContentWrapper>
           <CartItemsList>
-            {/* For demonstration purpose only */}
-            <li>
-              <CartItem />
-            </li>
-            <li>
-              <CartItem />
-            </li>
+            {cart.map(({ product: { imageUrls, name, currentPrice, duration, itemNo, _id }, cartQuantity }) => (
+              <li key={_id}>
+                <CartItem
+                  imageUrls={imageUrls}
+                  name={name}
+                  currentPrice={currentPrice}
+                  duration={duration}
+                  cartQuantity={cartQuantity}
+                  itemNo={itemNo}
+                  id={_id}
+                  cartLength={cartLength}
+                />
+              </li>
+            ))}
             <li>
               <CartItem />
             </li>
           </CartItemsList>
           <Box flexGrow={1}>
-            <TotalInfoDialog />
+            <TotalInfoDialog cart={cart} />
           </Box>
         </ContentWrapper>
       </Container>
     </Box>
   );
-}
+};
 
 export default CartPage;
