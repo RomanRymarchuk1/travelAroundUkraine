@@ -2,11 +2,16 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsModalOpen } from '../../../../store/slices/orderSlice/orderSlice';
 import { AlertModal } from '../../../../components';
 
-const PaymentSuccess = ({ open, onClose }) => {
+const PaymentSuccess = () => {
+  const { isModalOpen, orderInfo } = useSelector((store) => store.order);
+  const dispatch = useDispatch();
+
   const handleCloseBttn = () => {
-    onClose();
+    dispatch(setIsModalOpen(false));
   };
 
   const titleJsx = (
@@ -20,7 +25,7 @@ const PaymentSuccess = ({ open, onClose }) => {
 
   return (
     <AlertModal
-      open={open}
+      open={isModalOpen}
       onClose={handleCloseBttn}
       onSubmit={handleCloseBttn}
       title={titleJsx}
@@ -28,7 +33,7 @@ const PaymentSuccess = ({ open, onClose }) => {
       submitButtonText="Great !"
       success
     >
-      Your order number #425435 will be shipped shortly.
+      Your order number #{orderInfo.orderNo} will be shipped shortly.
     </AlertModal>
   );
 };
