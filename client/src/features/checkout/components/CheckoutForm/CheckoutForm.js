@@ -10,6 +10,7 @@ import { Stepper, Step, StepLabel, Button, CircularProgress, Box } from '@mui/ma
 // Child Forms and model
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
 import { initialValues, validationSchema } from '../../data';
+import postNewOrder from '../../../../api/postNewOrder';
 
 const steps = ['User Details', 'Shipping Address', 'Payment Details'];
 
@@ -26,10 +27,20 @@ const CheckoutForm = () => {
     setActiveStep((prev) => prev - 1);
   };
 
-  const formSubmitHandler = (values, actions) => {
-    GoToNextStep();
-    actions.setSubmitting(false);
-    console.log(actions);
+  const formSubmitHandler = async (values, actions) => {
+    // actions.setSubmitting(false);
+    // console.log(actions);
+
+    if (activeStep === lastStep) {
+      // console.log('Last step', values);
+      try {
+        await postNewOrder(values);
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      GoToNextStep();
+    }
   };
 
   return (
@@ -74,7 +85,7 @@ const CheckoutForm = () => {
         </Formik>
       )}
 
-      <PaymentSuccess activeStep={activeStep} steps={steps} />
+      {/* <PaymentSuccess activeStep={activeStep} steps={steps} /> */}
     </>
   );
 };
