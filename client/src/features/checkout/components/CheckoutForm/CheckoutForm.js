@@ -7,37 +7,42 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { enAU } from 'date-fns/locale';
 // MUI Components
 import { Stepper, Step, StepLabel, Button, CircularProgress, Box } from '@mui/material';
+// Redux store
+import { useSelector, useDispatch } from 'react-redux';
+import { increaseStep, decreaseStep, createNewOrder } from '../../../../store/slices/orderSlice/orderSlice';
 // Child Forms and model
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
 import { initialValues, validationSchema } from '../../data';
-import postNewOrder from '../../../../api/postNewOrder';
 
 const steps = ['User Details', 'Shipping Address', 'Payment Details'];
 
 const CheckoutForm = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const { currentStep, orderInfo } = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+
   const lastStep = steps.length - 1;
-  const currentValidationSchema = validationSchema[activeStep];
+  const currentValidationSchema = validationSchema[currentStep];
 
   const GoToNextStep = () => {
-    setActiveStep((prev) => prev + 1);
+    dispatch(increaseStep());
   };
 
   const GoToPrevStep = () => {
-    setActiveStep((prev) => prev - 1);
+    dispatch(decreaseStep());
   };
 
   const formSubmitHandler = async (values, actions) => {
     // actions.setSubmitting(false);
     // console.log(actions);
 
-    if (activeStep === lastStep) {
+    if (currentStep === lastStep) {
       // console.log('Last step', values);
       try {
-        await postNewOrder(values);
+        dispatch(createNewOrder(values));
       } catch (e) {
         console.error(e);
       }
+      console.log(orderInfo);
     } else {
       GoToNextStep();
     }
@@ -45,7 +50,7 @@ const CheckoutForm = () => {
 
   return (
     <>
-      <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: '100px' }}>
+      <Stepper activeStep={currentStep} alternativeLabel sx={{ mb: '100px' }}>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
@@ -53,22 +58,22 @@ const CheckoutForm = () => {
         ))}
       </Stepper>
 
-      {activeStep === steps.length ? (
+      {currentStep === steps.length ? (
         <CheckoutSummary />
       ) : (
         <Formik initialValues={initialValues} validationSchema={currentValidationSchema} onSubmit={formSubmitHandler}>
           {({ isSubmitting }) => (
             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
               <Form>
-                {activeStep === 0 && <UserDetailsForm />}
-                {activeStep === 1 && <ShippingAddressForm />}
-                {activeStep === 2 && <PaymentForm />}
+                {currentStep === 0 && <UserDetailsForm />}
+                {currentStep === 1 && <ShippingAddressForm />}
+                {currentStep === 2 && <PaymentForm />}
                 <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3, position: 'relative' }}>
-                  {activeStep !== 0 && !isSubmitting && <Button onClick={GoToPrevStep}>Back</Button>}
+                  {currentStep !== 0 && !isSubmitting && <Button onClick={GoToPrevStep}>Back</Button>}
 
                   {!isSubmitting ? (
                     <Button disabled={isSubmitting} type="submit">
-                      {activeStep !== lastStep ? 'Continue' : 'Confirm'}
+                      {currentStep !== lastStep ? 'Continue' : 'Confirm'}
                     </Button>
                   ) : (
                     <CircularProgress
@@ -85,7 +90,7 @@ const CheckoutForm = () => {
         </Formik>
       )}
 
-      {/* <PaymentSuccess activeStep={activeStep} steps={steps} /> */}
+      <PaymentSuccess />
     </>
   );
 };
