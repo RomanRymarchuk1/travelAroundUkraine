@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import { Button, Stack, Box as MuiBox, Typography, styled } from '@mui/material';
+import {
+  Button,
+  Stack,
+  Box as MuiBox,
+  Typography,
+  styled,
+  Select as MuiSelect,
+  MenuItem as MuiMenuItem,
+  alpha,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import { useNavigate } from 'react-router-dom';
+
+import calcToursQuantityAndPrice from '../../utils/calcToursQuantityAndPrice';
+import currencyConverter from '../../../Tour/utils/currencyConverter';
+
+const currencySymbol = {
+  eur: '€',
+  usd: '$',
+  uah: '₴',
+};
 
 const BoxWrapper = styled(MuiBox)(({ theme }) => ({
   position: 'sticky',
@@ -24,8 +45,43 @@ const Title = styled((props) => <Typography variant="h3" color="text.primary" {.
   marginBottom: 20,
 });
 
-const TotalInfoDialog = () => {
+const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
+  transition: theme.transitions.create(['color', 'background-color']),
+
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.primary.main, 0.15),
+    color: theme.palette.primary.main,
+  },
+
+  '&.Mui-selected': {
+    color: theme.palette.primary.main,
+    fontWeight: 700,
+  },
+}));
+
+const Select = styled(MuiSelect)(({ theme }) => ({
+  marginBottom: '10px',
+  fontWeight: 700,
+  '.MuiOutlinedInput-notchedOutline': {
+    borderColor: `${theme.palette.divider}`,
+
+    transition: theme.transitions.create('border-color'),
+  },
+  '&:hover .MuiOutlinedInput-notchedOutline': {
+    borderColor: `${theme.palette.primary.main}`,
+  },
+  '.MuiSelect-icon': {
+    transition: theme.transitions.create('transform'),
+  },
+}));
+
+const TotalInfoDialog = ({ cart }) => {
   const navigate = useNavigate();
+  const [currency, setCurrency] = useState('eur');
+
+  if (!cart.length) return <Typography>Your cart is empty!</Typography>;
+
+  const { toursPrice, toursQuantity } = calcToursQuantityAndPrice(cart);
 
   return (
     <BoxWrapper>
@@ -33,13 +89,28 @@ const TotalInfoDialog = () => {
         <Title>Total</Title>
         <Stack direction="row" justifyContent="space-between">
           <Typography>Tours amount:</Typography>
-          <Typography>3</Typography>
+          <Typography>{toursQuantity}</Typography>
         </Stack>
       </Section>
+
+      <Section>
+        <Title>Currency</Title>
+        <Select fullWidth value={currency} onChange={(e) => setCurrency(e.target.value)} IconComponent={ExpandMoreIcon}>
+          {Object.keys(currencySymbol).map((key) => (
+            <MenuItem key={key} value={key}>
+              {key.toUpperCase()}
+            </MenuItem>
+          ))}
+        </Select>
+      </Section>
+
       <Section>
         <Stack direction="row" justifyContent="space-between">
           <Typography>To be paid:</Typography>
-          <Typography fontSize={18}>2000 ₴</Typography>
+          <Typography fontSize={18}>
+            {currencySymbol[currency]}
+            {currencyConverter(toursPrice, currency)}
+          </Typography>
         </Stack>
       </Section>
 
@@ -52,6 +123,14 @@ const TotalInfoDialog = () => {
       </MuiBox>
     </BoxWrapper>
   );
+};
+
+TotalInfoDialog.propTypes = {
+  cart: PropTypes.array,
+};
+
+TotalInfoDialog.defaultProps = {
+  cart: [],
 };
 
 export default TotalInfoDialog;

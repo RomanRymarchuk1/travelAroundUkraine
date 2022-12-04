@@ -1,5 +1,12 @@
+// React
 import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+// Redux
+import { useDispatch } from 'react-redux';
+
+// MUI components
 import {
   styled,
   Stack,
@@ -11,11 +18,14 @@ import {
   IconButton,
   TextField,
 } from '@mui/material';
-
 import { AccessTime, Remove, Add, DeleteOutline } from '@mui/icons-material';
-import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
+// Components
+import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 import { AlertModal } from '../../../../components';
+
+// Redux Thunk functions
+import { addProduct, decreaseProduct, deleteProduct, deleteCart } from '../../../../store/slices/cartSlice/cartSlice';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
   position: 'relative',
@@ -87,80 +97,71 @@ const AmountField = styled((props) => <TextField size="small" autoComplete="off"
   },
 });
 
-// * for now component has static data. In future it will be changed to dynamic
-
-const PRICE = 69;
-
-const CartItem = () => {
+const CartItem = ({ imageUrls, name, currentPrice, duration, cartQuantity, itemNo, id, cartLength }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
-  const [amount, setAmount] = useState(1);
   const [amountError, setAmountError] = useState(false);
 
   useEffect(() => {
     // ? should error text be provided?
     // add error if amount less than 1
-    if (amount < 1) {
+    if (cartQuantity < 1) {
       setAmountError(true);
     } else {
       setAmountError(false);
     }
-  }, [amount]);
-
-  const incrementAmount = () => setAmount((prev) => Number(prev) + 1);
-  const decrementAmount = () => setAmount((prev) => Number(prev) - 1);
+  }, [cartQuantity]);
 
   const openDeleteDialog = () => setDeleteDialogOpen(true);
-  const handleDeleteDialogClose = () => setDeleteDialogOpen(false);
-  const handleDeleteFromCart = () => setDeleteDialogOpen(false);
 
-  const onAmountFieldChange = (e) => {
-    setAmount(e.target.value);
+  const handleDeleteDialogClose = () => setDeleteDialogOpen(false);
+
+  const handleDeleteFromCart = () => {
+    cartLength > 1 ? dispatch(deleteProduct(id)) : dispatch(deleteCart());
+
+    setDeleteDialogOpen(false);
   };
 
-  // TODO: add functionality to increase amount of tours
+  if (!imageUrls || !name || !currentPrice || !duration || !cartQuantity || !itemNo || !id || !cartLength) return null;
 
   return (
     <>
       <CardContainer direction={{ xs: 'column', tablet: 'row' }}>
         <DeleteButton onClick={openDeleteDialog} />
-        <CardImage
-          component="img"
-          image="https://visitukraine.today/media/tours/gallery/ALeR7GgYjAqCqfJnQX5ZYKnBcsDZ6MTJs77IIBKi.jpg"
-          alt="tour photo"
-        />
+        {imageUrls ? <CardImage component="img" image={imageUrls[1]} alt="tour photo" /> : null}
+
         <CardContent>
-          <CardTitle>Sightseeing tour of Chernivtsi</CardTitle>
+          <CardTitle>{name}</CardTitle>
 
           <Stack direction="row" gap={1} alignItems="start" sx={{ marginBottom: '10px' }}>
             <Stack direction="row" gap={1} alignItems="center" flexBasis="100px">
               <CoinsIcon />
               <Typography variant="h3" component="span">
-                {/* for demo purpose only */}
-                {amount >= 1 ? PRICE * amount : PRICE} €
+                {currentPrice * cartQuantity} €
               </Typography>
             </Stack>
 
             <Stack direction="row" gap={1} alignItems="center">
               <AccessTime color="primary" sx={{ height: '21px' }} />
               <Typography variant="h3" component="span">
-                3 hours
+                {duration}
               </Typography>
             </Stack>
           </Stack>
 
           <Stack direction="row" marginY="5px">
-            <IconButton disabled={amount <= 1} onClick={decrementAmount}>
+            <IconButton disabled={cartQuantity <= 1} onClick={() => dispatch(decreaseProduct(id))}>
               <Remove />
             </IconButton>
-            <AmountField value={amount} onChange={onAmountFieldChange} error={amountError} />
-            <IconButton onClick={incrementAmount}>
+            <AmountField value={cartQuantity} error={amountError} />
+            <IconButton onClick={() => dispatch(addProduct(id))}>
               <Add />
             </IconButton>
           </Stack>
           <CardActions>
-            {/* TODO: add link to the tour page */}
-            <CardButton href="#">More details</CardButton>
+            <CardButton onClick={() => navigate(`/tour/${itemNo}`)}>More details</CardButton>
           </CardActions>
         </CardContent>
       </CardContainer>
@@ -173,13 +174,33 @@ const CartItem = () => {
       >
         Are you sure you want to delete tour:
         <Typography component="span" fontStyle="italic">
-          Sightseeing tour of Chernivtsi
+          {name}
         </Typography>
       </AlertModal>
     </>
   );
 };
 
-CartItem.propTypes = {};
+CartItem.propTypes = {
+  imageUrls: PropTypes.array,
+  name: PropTypes.string,
+  currentPrice: PropTypes.number,
+  duration: PropTypes.string,
+  cartQuantity: PropTypes.number,
+  itemNo: PropTypes.string,
+  id: PropTypes.string,
+  cartLength: PropTypes.number,
+};
+
+CartItem.defaultProps = {
+  imageUrls: [],
+  name: '',
+  currentPrice: 0,
+  duration: '',
+  cartQuantity: 0,
+  itemNo: '',
+  id: '',
+  cartLength: 0,
+};
 
 export default CartItem;
