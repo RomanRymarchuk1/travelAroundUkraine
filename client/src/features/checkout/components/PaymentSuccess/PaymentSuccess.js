@@ -1,17 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import { Typography, Box } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { AlertModal } from '../../../../components';
 
-const PaymentSuccess = ({ activeStep, steps }) => {
-  const [isOpen, setIsOpen] = useState(true);
-
+const PaymentSuccess = ({ open, onClose }) => {
   const handleCloseBttn = () => {
-    setIsOpen(false);
+    onClose();
   };
-
-  if (activeStep !== steps.length) return null;
 
   const titleJsx = (
     <Box display="flex" justifyContent="center" alignItems="center" columnGap="5px">
@@ -24,7 +20,7 @@ const PaymentSuccess = ({ activeStep, steps }) => {
 
   return (
     <AlertModal
-      open={isOpen}
+      open={open}
       onClose={handleCloseBttn}
       onSubmit={handleCloseBttn}
       title={titleJsx}
@@ -32,7 +28,7 @@ const PaymentSuccess = ({ activeStep, steps }) => {
       submitButtonText="Great !"
       success
     >
-      <Typography>Your order number #425435 will be shipped shortly.</Typography>
+      Your order number #425435 will be shipped shortly.
     </AlertModal>
   );
 };
