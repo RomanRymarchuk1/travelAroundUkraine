@@ -4,7 +4,7 @@ import { styled, Stack, Box, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
 import { getProducts, setIsLoading } from '../../store/slices/catalogueSlice/catalogueSlice';
-import { setLocallyInitialItemsInFavorites, gettWishList } from '../../store/slices/inFavorites/inFavorites';
+import { gettWishList } from '../../store/slices/inFavorites/inFavorites';
 
 const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ theme }) => ({
   backgroundColor: theme.palette.primary.contrastText,
@@ -34,11 +34,7 @@ const CataloguePage = () => {
   }, []);
 
   useEffect(() => {
-    if (isLogin) {
-      dispatch(gettWishList());
-    } else {
-      dispatch(setLocallyInitialItemsInFavorites());
-    }
+    dispatch(gettWishList(isLogin));
   }, [isLogin]);
 
   return (
