@@ -75,7 +75,7 @@ export const addItemtoWishList = (isLogin, id) => async (dispatch) => {
 };
 
 export const deleteItemfromWishList = (isLogin, id, inFavoritesCounter) => async (dispatch) => {
-  if (isLogin && inFavoritesCounter !== 0) {
+  if (isLogin && inFavoritesCounter > 0) {
     try {
       const { status } = await axios(`/wishlist/${id}`, {
         method: 'DELETE',
@@ -87,7 +87,7 @@ export const deleteItemfromWishList = (isLogin, id, inFavoritesCounter) => async
     } catch (err) {
       console.error(err);
     }
-  } else if (isLogin && !inFavoritesCounter !== 0) {
+  } else if (isLogin && inFavoritesCounter === 0) {
     try {
       const { status } = await axios(`/wishlist`, {
         method: 'DELETE',
