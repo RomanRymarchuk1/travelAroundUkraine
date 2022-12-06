@@ -38,29 +38,36 @@ const CartPage = () => {
         <Typography marginBottom={2} variant="h2">
           Cart
         </Typography>
-        <ContentWrapper>
-          <CartItemsList>
-            {cart.map(({ product: { imageUrls, name, currentPrice, duration, itemNo, _id }, cartQuantity }) => (
-              <li key={_id}>
-                <CartItem
-                  imageUrls={imageUrls}
-                  name={name}
-                  currentPrice={currentPrice}
-                  duration={duration}
-                  cartQuantity={cartQuantity}
-                  itemNo={itemNo}
-                  id={_id}
-                />
+
+        {!cart.length ? (
+          <Typography variant="h2" align="center">
+            Your cart is empty!
+          </Typography>
+        ) : (
+          <ContentWrapper>
+            <CartItemsList>
+              {cart.map(({ product: { imageUrls, name, currentPrice, duration, itemNo, _id }, cartQuantity }) => (
+                <li key={_id}>
+                  <CartItem
+                    imageUrls={imageUrls}
+                    name={name}
+                    currentPrice={currentPrice}
+                    duration={duration}
+                    cartQuantity={cartQuantity}
+                    itemNo={itemNo}
+                    id={_id}
+                  />
+                </li>
+              ))}
+              <li>
+                <CartItem />
               </li>
-            ))}
-            <li>
-              <CartItem />
-            </li>
-          </CartItemsList>
-          <Box flexGrow={1}>
-            <TotalInfoDialog cart={cart} />
-          </Box>
-        </ContentWrapper>
+            </CartItemsList>
+            <Box flexGrow={1}>
+              <TotalInfoDialog cart={cart} />
+            </Box>
+          </ContentWrapper>
+        )}
       </Container>
     </Box>
   );

@@ -79,8 +79,6 @@ const TotalInfoDialog = ({ cart }) => {
   const navigate = useNavigate();
   const [currency, setCurrency] = useState('eur');
 
-  if (!cart.length) return <Typography>Your cart is empty!</Typography>;
-
   const { toursPrice, toursQuantity } = calcToursQuantityAndPrice(cart);
 
   return (
