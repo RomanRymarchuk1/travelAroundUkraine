@@ -110,7 +110,7 @@ const TourInfoDialog = ({
   duration,
   returns,
   currentPrice,
-  productId,
+  id,
   closeButton,
   handleClose,
 }) => {
@@ -183,7 +183,7 @@ const TourInfoDialog = ({
             {currencySymbol[currency]}
             {currencyConverter(currentPrice, currency)}
           </Cost>
-          <Button sx={{ paddingInline: '30px' }} disableElevation onClick={() => dispatch(addProduct(productId))}>
+          <Button sx={{ paddingInline: '30px' }} disableElevation onClick={() => dispatch(addProduct(id))}>
             Add to Cart
           </Button>
         </Stack>
@@ -203,7 +203,7 @@ TourInfoDialog.propTypes = {
   departs: PropTypes.string,
   returns: PropTypes.string,
   currentPrice: PropTypes.number,
-  productId: PropTypes.string,
+  id: PropTypes.string,
   closeButton: PropTypes.bool,
   handleClose: PropTypes.func,
 };
@@ -220,7 +220,7 @@ TourInfoDialog.defaultProps = {
   departs: 'Unknown',
   returns: 'Unknown',
   currentPrice: 0,
-  productId: '',
+  id: '',
 };
 
 export default TourInfoDialog;
