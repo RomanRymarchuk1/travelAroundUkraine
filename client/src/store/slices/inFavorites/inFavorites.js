@@ -74,10 +74,22 @@ export const addItemtoWishList = (isLogin, id) => async (dispatch) => {
   }
 };
 
-export const deleteItemfromWishList = (isLogin, id) => async (dispatch) => {
-  if (isLogin) {
+export const deleteItemfromWishList = (isLogin, id, inFavoritesCounter) => async (dispatch) => {
+  if (isLogin && inFavoritesCounter !== 0) {
     try {
       const { status } = await axios(`/wishlist/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: localStorage.getItem('token') },
+      });
+      if (status === 200) {
+        dispatch(deleteItemFromFavorites(id));
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  } else if (isLogin && inFavoritesCounter === 0) {
+    try {
+      const { status } = await axios(`/wishlist`, {
         method: 'DELETE',
         headers: { Authorization: localStorage.getItem('token') },
       });
@@ -93,6 +105,10 @@ export const deleteItemfromWishList = (isLogin, id) => async (dispatch) => {
       .split(',')
       .filter((elId) => elId !== id);
     dispatch(deleteItemFromFavorites(id));
-    localStorage.setItem('inFavorites', localFavorites);
+    if (localFavorites.length === 0) {
+      localStorage.removeItem('inFavorites');
+    } else {
+      localStorage.setItem('inFavorites', localFavorites);
+    }
   }
 };
