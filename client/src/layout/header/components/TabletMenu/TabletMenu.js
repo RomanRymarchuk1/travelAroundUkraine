@@ -26,6 +26,11 @@ const pages = [
     innerContent: 'Account',
   },
   {
+    name: 'favorites',
+    link: '/favorites',
+    innerContent: 'Favorites',
+  },
+  {
     name: 'cart',
     link: '/cart',
     innerContent: <ShoppingCartIcon fontSize="medium" />,
