@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Box, Container, Stack, styled, Typography } from '@mui/material';
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCart } from '../../store/slices/cartSlice/cartSlice';
+
 import { CartItem, TotalInfoDialog } from '../../features/Cart/components';
 
 const ContentWrapper = styled(Stack)(({ theme }) => ({
@@ -20,33 +24,53 @@ const CartItemsList = styled((props) => <Stack component="ul" {...props} />)(({ 
   listStyleType: 'none',
 }));
 
-function CartPage() {
+const CartPage = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((store) => store.cart.data);
+
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, []);
+
   return (
     <Box marginTop="100px" marginBottom="150px" component="section" paddingY={3}>
       <Container>
         <Typography marginBottom={2} variant="h2">
           Cart
         </Typography>
-        <ContentWrapper>
-          <CartItemsList>
-            {/* For demonstration purpose only */}
-            <li>
-              <CartItem />
-            </li>
-            <li>
-              <CartItem />
-            </li>
-            <li>
-              <CartItem />
-            </li>
-          </CartItemsList>
-          <Box flexGrow={1}>
-            <TotalInfoDialog />
-          </Box>
-        </ContentWrapper>
+
+        {!cart.length ? (
+          <Typography variant="h2" align="center">
+            Your cart is empty!
+          </Typography>
+        ) : (
+          <ContentWrapper>
+            <CartItemsList>
+              {cart.map(({ product: { imageUrls, name, currentPrice, duration, itemNo, _id }, cartQuantity }) => (
+                <li key={_id}>
+                  <CartItem
+                    imageUrls={imageUrls}
+                    name={name}
+                    currentPrice={currentPrice}
+                    duration={duration}
+                    cartQuantity={cartQuantity}
+                    itemNo={itemNo}
+                    id={_id}
+                  />
+                </li>
+              ))}
+              <li>
+                <CartItem />
+              </li>
+            </CartItemsList>
+            <Box flexGrow={1}>
+              <TotalInfoDialog cart={cart} />
+            </Box>
+          </ContentWrapper>
+        )}
       </Container>
     </Box>
   );
-}
+};
 
 export default CartPage;
