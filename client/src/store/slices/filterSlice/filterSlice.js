@@ -4,6 +4,7 @@ const initialState = {
   tours: [],
   prices: [0, 0],
   duration: [],
+  seasons: [],
   isFilter: false,
 };
 
@@ -28,10 +29,20 @@ const filterSlice = createSlice({
         state.duration.push(action.payload);
       }
     },
+    setSeasons: (state, action) => {
+      if (state.seasons.includes(action.payload)) {
+        state.seasons = state.seasons.filter((el) => el !== action.payload);
+      } else {
+        state.seasons.push(action.payload);
+      }
+    },
+    setAllSeasons: (state, action) => {
+      state.seasons = action.payload;
+    },
   },
 });
 
-export const { setFilteredTours, setPrices, setIsFilter, setDuration } =
+export const { setFilteredTours, setPrices, setIsFilter, setDuration, setSeasons, setAllSeasons } =
   filterSlice.actions;
 
 export default filterSlice.reducer;

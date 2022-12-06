@@ -4,7 +4,7 @@ import axios from 'axios';
 import { styled, Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
-import { CatalogFilterPrice, CatalogFilterDuration } from '..';
+import { CatalogFilterPrice, CatalogFilterDuration, CatalogFilterSeason } from '..';
 import { setPrices, setIsFilter, setFilteredTours } from '../../../../store/slices/filterSlice/filterSlice';
 import { getProducts, setIsLoading } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 
@@ -68,6 +68,8 @@ const CatalogMainFilter = () => {
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const allPrices = [...new Set(products.map((tour) => tour.currentPrice))].sort((a, b) => a - b);
   const duration = useSelector((store) => store.filter.duration);
+  const seasons = useSelector((store) => store.filter.seasons.map(el => el ? el.toLowerCase() : el));
+console.log(seasons)
 
   useEffect(() => {
     dispatch(getProducts());
@@ -89,8 +91,11 @@ const CatalogMainFilter = () => {
     params.set('currentPrice', filterPrices());
     if (duration.length > 0) {
       params.set('duration', duration);
+    };
+    if (seasons.length > 0) {
+      params.set('season', seasons.concat('all seasons'));
     }
-
+console.log(params.toString())
     try {
       dispatch(setIsLoading(true));
       dispatch(setIsFilter(true));
@@ -98,6 +103,7 @@ const CatalogMainFilter = () => {
       if (status) {
         dispatch(setFilteredTours(data.products));
         dispatch(setIsLoading(false));
+        console.log(data.products.map(el => el.season))
       }
     } catch (err) {
       console.error(err.message);
@@ -114,9 +120,9 @@ return (
         <CatalogFilterDuration />
       </Grid>
 
-      {/* <Grid item xs={12} tablet={6} laptop={12}>
-        <CatalogFilterRegion />
-      </Grid> */}
+      <Grid item xs={12} tablet={6} laptop={12}>
+      <CatalogFilterSeason />
+      </Grid>
     </Grid>
 
     <ShowButton onClick={filterTours}>Filter</ShowButton>

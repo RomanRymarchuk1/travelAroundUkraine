@@ -35,7 +35,6 @@ const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
 const OutlinedToggleButton = ({ value, children }) => {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(false);
-  console.log(selected);
 
   const filterDurations = (duration) => {
     setSelected((prev) => !prev);
