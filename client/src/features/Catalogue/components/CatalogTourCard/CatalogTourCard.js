@@ -53,7 +53,16 @@ const CardButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls, id, inFavorites }) => {
+const CatalogTourCard = ({
+  name,
+  currentPrice,
+  duration,
+  description,
+  imageUrls,
+  id,
+  inFavorites,
+  inFavoritesCounter,
+}) => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.userReducer.isLogin);
   return (
@@ -65,7 +74,7 @@ const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls,
           {inFavorites === false ? (
             <FavoriteBorderSharpIcon onClick={() => dispatch(addItemtoWishList(isLogin, id))} />
           ) : (
-            <FavoriteSharpIcon onClick={() => dispatch(deleteItemfromWishList(isLogin, id))} />
+            <FavoriteSharpIcon onClick={() => dispatch(deleteItemfromWishList(isLogin, id, inFavoritesCounter))} />
           )}
         </Box>
         <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>
@@ -100,6 +109,11 @@ CatalogTourCard.propTypes = {
   imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.string.isRequired,
   inFavorites: PropTypes.bool.isRequired,
+  inFavoritesCounter: PropTypes.number,
+};
+
+CatalogTourCard.defaultProps = {
+  inFavoritesCounter: 0,
 };
 
 export default CatalogTourCard;

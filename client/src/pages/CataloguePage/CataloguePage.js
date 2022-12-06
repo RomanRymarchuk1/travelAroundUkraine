@@ -61,6 +61,7 @@ const CataloguePage = () => {
                         imageUrls={imageUrls}
                         id={_id}
                         inFavorites={checkForFavorites ? !!checkForFavorites : false}
+                        inFavoritesCounter={inFavorites.length - 1}
                       />
                     );
                   })}
