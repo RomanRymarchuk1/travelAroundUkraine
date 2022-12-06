@@ -3,6 +3,7 @@ import userReducer from './slices/userSlice/userSlice';
 import tourReducer from './slices/tourSlice/tourSlice';
 import catalogueReducer from './slices/catalogueSlice/catalogueSlice';
 import cartReducer from './slices/cartSlice/cartSlice';
+import filterReducer from './slices/filterSlice/filterSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     tour: tourReducer,
     catalogue: catalogueReducer,
     cart: cartReducer,
+    filter: filterReducer
   },
 });
 

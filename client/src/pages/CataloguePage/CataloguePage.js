@@ -28,6 +28,15 @@ const CataloguePage = () => {
   let lastItemIndex = currentPage * countriesPerPage;
   let firstItemIndex = lastItemIndex - countriesPerPage;
   let currentItems = products.slice(firstItemIndex, lastItemIndex);
+
+  const isFilter = useSelector((state) => state.filter.isFilter);
+  const filteredTours = useSelector((state) => state.filter.tours);
+
+  if (isFilter && filteredTours.length > 0) {
+    currentItems = filteredTours.slice(firstItemIndex, lastItemIndex);
+    console.log(filteredTours);
+  }
+
   useEffect(() => {
     if (products.length <= 0) {
       dispatch(setIsLoading(true));
@@ -44,21 +53,33 @@ const CataloguePage = () => {
           <Container>
             <Grid container sx={{ mt: '60px', gap: '40px' }}>
               <Grid item xs={12} laptop sx={{ p: 0 }}>
-                <Typography variant="h2" sx={{ textTransform: 'uppercase', mb: '25px' }}>
-                  Tours
-                </Typography>
+                {isFilter && filteredTours.length > 0 ? (
+                  <Typography variant="h2" sx={{ mb: '25px' }}>
+                    Results for your request
+                  </Typography>
+                ) : (
+                  <Typography variant="h2" sx={{ textTransform: 'uppercase', mb: '25px' }}>
+                    Tours
+                  </Typography>
+                )}
                 <Stack spacing={2}>
-                  {currentItems.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => (
-                    <CatalogTourCard
-                      key={_id}
-                      name={name}
-                      description={description}
-                      currentPrice={currentPrice}
-                      duration={duration}
-                      imageUrls={imageUrls}
-                      itemNo={itemNo}
-                    />
-                  ))}
+                  {isFilter && filteredTours.length === 0 ? (
+                    <Typography variant="h2" sx={{ paddingTop: '400px', paddingBottom: '400px', textAlign: 'center' }}>
+                      No results for your request
+                    </Typography>
+                  ) : (
+                    currentItems.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => (
+                      <CatalogTourCard
+                        key={_id}
+                        name={name}
+                        description={description}
+                        currentPrice={currentPrice}
+                        duration={duration}
+                        imageUrls={imageUrls}
+                        itemNo={itemNo}
+                      />
+                    ))
+                  )}
                 </Stack>
               </Grid>
               <FilterContainer>
