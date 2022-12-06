@@ -4,7 +4,7 @@ import axios from 'axios';
 import { styled, Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
-import { CatalogFilterPrice } from '..';
+import { CatalogFilterPrice, CatalogFilterDuration } from '..';
 import { setPrices, setIsFilter, setFilteredTours } from '../../../../store/slices/filterSlice/filterSlice';
 import { getProducts, setIsLoading } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 
@@ -67,6 +67,7 @@ const CatalogMainFilter = () => {
   const [minPrice, maxPrice] = prices;
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const allPrices = [...new Set(products.map((tour) => tour.currentPrice))].sort((a, b) => a - b);
+  const duration = useSelector((store) => store.filter.duration);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -86,6 +87,9 @@ const CatalogMainFilter = () => {
 
     const params = new URLSearchParams();
     params.set('currentPrice', filterPrices());
+    if (duration.length > 0) {
+      params.set('duration', duration);
+    }
 
     try {
       dispatch(setIsLoading(true));
@@ -107,7 +111,7 @@ return (
     <Grid container columnSpacing={5} sx={{ p: 0 }}>
       <Grid spacing={4} item xs={12} tablet={6} laptop={12}>
         <CatalogFilterPrice />
-        {/* <CatalogFilterTourists /> */}
+        <CatalogFilterDuration />
       </Grid>
 
       {/* <Grid item xs={12} tablet={6} laptop={12}>

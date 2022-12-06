@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   tours: [],
   prices: [0, 0],
+  duration: [],
   isFilter: false,
 };
 
@@ -20,10 +21,17 @@ const filterSlice = createSlice({
     setIsFilter: (state, action) => {
       state.isFilter = action.payload;
     },
+    setDuration: (state, action) => {
+      if (state.duration.includes(action.payload)) {
+        state.duration = state.duration.filter((el) => el !== action.payload);
+      } else {
+        state.duration.push(action.payload);
+      }
+    },
   },
 });
 
-export const { setFilteredTours, setPrices, setIsFilter } =
+export const { setFilteredTours, setPrices, setIsFilter, setDuration } =
   filterSlice.actions;
 
 export default filterSlice.reducer;
