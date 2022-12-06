@@ -27,7 +27,6 @@ const CartItemsList = styled((props) => <Stack component="ul" {...props} />)(({ 
 const CartPage = () => {
   const dispatch = useDispatch();
   const cart = useSelector((store) => store.cart.data);
-  const cartLength = cart.length;
 
   useEffect(() => {
     dispatch(fetchCart());
@@ -51,7 +50,6 @@ const CartPage = () => {
                   cartQuantity={cartQuantity}
                   itemNo={itemNo}
                   id={_id}
-                  cartLength={cartLength}
                 />
               </li>
             ))}

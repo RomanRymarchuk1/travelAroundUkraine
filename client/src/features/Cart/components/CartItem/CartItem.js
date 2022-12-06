@@ -25,7 +25,7 @@ import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.sv
 import { AlertModal } from '../../../../components';
 
 // Redux Thunk functions
-import { addProduct, decreaseProduct, deleteProduct, deleteCart } from '../../../../store/slices/cartSlice/cartSlice';
+import { addProduct, decreaseProduct, deleteProduct } from '../../../../store/slices/cartSlice/cartSlice';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
   position: 'relative',
@@ -97,7 +97,7 @@ const AmountField = styled((props) => <TextField size="small" autoComplete="off"
   },
 });
 
-const CartItem = ({ imageUrls, name, currentPrice, duration, cartQuantity, itemNo, id, cartLength }) => {
+const CartItem = ({ imageUrls, name, currentPrice, duration, cartQuantity, itemNo, id }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -119,12 +119,11 @@ const CartItem = ({ imageUrls, name, currentPrice, duration, cartQuantity, itemN
   const handleDeleteDialogClose = () => setDeleteDialogOpen(false);
 
   const handleDeleteFromCart = () => {
-    cartLength > 1 ? dispatch(deleteProduct(id)) : dispatch(deleteCart());
-
+    dispatch(deleteProduct(id));
     setDeleteDialogOpen(false);
   };
 
-  if (!imageUrls || !name || !currentPrice || !duration || !cartQuantity || !itemNo || !id || !cartLength) return null;
+  if (!imageUrls || !name || !currentPrice || !duration || !cartQuantity || !itemNo || !id) return null;
 
   return (
     <>
@@ -189,7 +188,6 @@ CartItem.propTypes = {
   cartQuantity: PropTypes.number,
   itemNo: PropTypes.string,
   id: PropTypes.string,
-  cartLength: PropTypes.number,
 };
 
 CartItem.defaultProps = {
@@ -200,7 +198,6 @@ CartItem.defaultProps = {
   cartQuantity: 0,
   itemNo: '',
   id: '',
-  cartLength: 0,
 };
 
 export default CartItem;
