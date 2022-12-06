@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { AlertModal } from '../../../../components';
-import { toggleIsLogin } from '../../../../store/slices/userSlice';
+import { toggleIsLogin } from '../../../../store/slices/userSlice/userSlice';
 
 const buttonBoxSX = { display: 'flex', width: '100%', justifyContent: 'end', my: '20px' };
 
