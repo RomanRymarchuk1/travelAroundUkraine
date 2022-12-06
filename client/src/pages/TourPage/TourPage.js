@@ -201,7 +201,7 @@ const TourPage = () => {
                   duration={duration}
                   returns={returns}
                   currentPrice={currentPrice}
-                  productId={_id}
+                  id={_id}
                 />
               </Box>
             ) : null}
