@@ -13,6 +13,7 @@ const cartSlice = createSlice({
     setCart: (state, action) => {
       state.data = action.payload;
     },
+
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
