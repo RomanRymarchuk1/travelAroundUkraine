@@ -7,7 +7,7 @@ import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import postLogIn from '../../../api/postLogIn';
-import { toggleIsLogin } from '../../../store/slices/userSlice';
+import { toggleIsLogin } from '../../../store/slices/userSlice/userSlice';
 
 const buttonSX = {
   width: { xs: '86px', mobile: '110px', tablet: '140px', laptop: '150px' },
@@ -62,7 +62,7 @@ const LogInForm = () => {
   };
 
   const validationSchema = yup.object().shape({
-    loginOrEmail: yup.string().email('It will be an valid email').required('Email is required'),
+    loginOrEmail: yup.string().required('Email or login are required'),
     password: yup.string().min(7, 'Password must have at least 7 characters').required('Password is required!'),
   });
 

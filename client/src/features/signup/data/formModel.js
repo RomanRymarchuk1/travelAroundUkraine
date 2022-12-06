@@ -37,13 +37,13 @@ export default {
     invalidErrorMsg: 'Passwords must match',
   },
 
-  phone: {
-    name: 'phone',
+  telephone: {
+    name: 'telephone',
     label: 'Phone',
   },
 
-  birthDate: {
-    name: 'birthDate',
+  birthdate: {
+    name: 'birthdate',
     label: 'Birthdate',
   },
 

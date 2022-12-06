@@ -2,6 +2,7 @@ import React from 'react';
 import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent, Box } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import FavoriteBorderSharpIcon from '@mui/icons-material/FavoriteBorderSharp';
 import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,10 +62,13 @@ const CatalogTourCard = ({
   imageUrls,
   id,
   inFavorites,
+  itemNo,
   inFavoritesCounter,
 }) => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.userReducer.isLogin);
+  const navigate = useNavigate();
+
   return (
     <CardContainer direction={{ xs: 'column', tablet: 'row' }} spacing={1}>
       <CardImage component="img" image={imageUrls[0]} alt="tour photo" />
@@ -94,7 +98,7 @@ const CatalogTourCard = ({
         </Stack>
         <TourDescription>{description}</TourDescription>
         <CardActions>
-          <CardButton href="#">More details</CardButton>
+          <CardButton onClick={() => navigate(`/tour/${+itemNo}`)}>More details</CardButton>
         </CardActions>
       </CardContent>
     </CardContainer>
@@ -107,6 +111,7 @@ CatalogTourCard.propTypes = {
   duration: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+  itemNo: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   inFavorites: PropTypes.bool.isRequired,
   inFavoritesCounter: PropTypes.number,

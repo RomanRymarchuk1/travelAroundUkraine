@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
 import MuiBox from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -15,8 +16,12 @@ import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import CloseIcon from '@mui/icons-material/Close';
 
 import formatTourDate from '../../utils/formatTourDate';
+import currencyConverter from '../../utils/currencyConverter';
+import convertData from '../../utils/convertData';
 
-const currency = {
+import { addProduct } from '../../../../store/slices/cartSlice/cartSlice';
+
+const currencySymbol = {
   eur: '€',
   usd: '$',
   uah: '₴',
@@ -94,8 +99,24 @@ const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
 
 const DetailsText = styled((props) => <Typography gutterBottom={false} {...props} />)({});
 
-const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClose }) => {
-  const [costCurrency, setCostCurrency] = useState('eur');
+const TourInfoDialog = ({
+  dates,
+  professionalGuide,
+  accommodation,
+  meals,
+  transferAlongTheRoute,
+  travelInsurance,
+  departs,
+  duration,
+  returns,
+  currentPrice,
+  id,
+  closeButton,
+  handleClose,
+}) => {
+  const [currency, setCurrency] = useState('eur');
+  const included = convertData(professionalGuide, accommodation, meals, transferAlongTheRoute, travelInsurance);
+  const dispatch = useDispatch();
 
   return (
     <BoxWrapper>
@@ -108,7 +129,7 @@ const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClo
         )}
 
         <IncludedContentWrapper>
-          {included?.map(({ icon, service }) => (
+          {included.map(({ icon, service }) => (
             <Stack key={service} direction="row" gap="5px" alignItems="center">
               {icon}
               <Typography gutterBottom={false}>{service}</Typography>
@@ -131,29 +152,24 @@ const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClo
           <Stack direction="row" alignItems="center" gap="5px">
             <AccessTimeIcon color="primary" />
             <DetailsText>Duration</DetailsText>
-            <DetailsText marginLeft="auto">{details.duration}</DetailsText>
+            <DetailsText marginLeft="auto">{duration}</DetailsText>
           </Stack>
           <Stack direction="row" alignItems="center" gap="5px">
             <FlightTakeoffIcon color="primary" />
             <DetailsText>Departs</DetailsText>
-            <DetailsText marginLeft="auto">{details.departs}</DetailsText>
+            <DetailsText marginLeft="auto">{departs}</DetailsText>
           </Stack>
           <Stack direction="row" alignItems="center" gap="5px">
             <KeyboardReturnIcon color="primary" />
             <DetailsText>Returns</DetailsText>
-            <DetailsText marginLeft="auto">{details.returns}</DetailsText>
+            <DetailsText marginLeft="auto">{returns}</DetailsText>
           </Stack>
         </Stack>
       </Section>
       <Section>
         <Title>Currency</Title>
-        <Select
-          fullWidth
-          value={costCurrency}
-          onChange={(e) => setCostCurrency(e.target.value)}
-          IconComponent={ExpandMoreIcon}
-        >
-          {Object.keys(currency).map((key) => (
+        <Select fullWidth value={currency} onChange={(e) => setCurrency(e.target.value)} IconComponent={ExpandMoreIcon}>
+          {Object.keys(currencySymbol).map((key) => (
             <MenuItem key={key} value={key}>
               {key.toUpperCase()}
             </MenuItem>
@@ -164,10 +180,10 @@ const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClo
         <Title>Total</Title>
         <Stack direction="row" justifyContent="space-between" alignItems="center">
           <Cost>
-            {currency[costCurrency]}
-            {cost[costCurrency]}
+            {currencySymbol[currency]}
+            {currencyConverter(currentPrice, currency)}
           </Cost>
-          <Button sx={{ paddingInline: '30px' }} disableElevation>
+          <Button sx={{ paddingInline: '30px' }} disableElevation onClick={() => dispatch(addProduct(id))}>
             Add to Cart
           </Button>
         </Stack>
@@ -177,10 +193,17 @@ const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClo
 };
 
 TourInfoDialog.propTypes = {
-  included: PropTypes.arrayOf(PropTypes.object).isRequired,
-  cost: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   dates: PropTypes.objectOf(PropTypes.instanceOf(Date)).isRequired,
-  details: PropTypes.objectOf(PropTypes.string).isRequired,
+  professionalGuide: PropTypes.bool,
+  accommodation: PropTypes.bool,
+  meals: PropTypes.bool,
+  transferAlongTheRoute: PropTypes.bool,
+  travelInsurance: PropTypes.bool,
+  duration: PropTypes.string,
+  departs: PropTypes.string,
+  returns: PropTypes.string,
+  currentPrice: PropTypes.number,
+  id: PropTypes.string,
   closeButton: PropTypes.bool,
   handleClose: PropTypes.func,
 };
@@ -188,6 +211,16 @@ TourInfoDialog.propTypes = {
 TourInfoDialog.defaultProps = {
   closeButton: false,
   handleClose: () => {},
+  professionalGuide: false,
+  accommodation: false,
+  meals: false,
+  transferAlongTheRoute: false,
+  travelInsurance: false,
+  duration: 'Unknown',
+  departs: 'Unknown',
+  returns: 'Unknown',
+  currentPrice: 0,
+  id: '',
 };
 
 export default TourInfoDialog;
