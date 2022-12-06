@@ -12,6 +12,7 @@ const CardContainer = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.primary.contrastText,
   borderRadius: 10,
   boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)',
+  maxWidth: '1000px',
 }));
 
 const CardImage = styled(CardMedia)(({ theme }) => ({
