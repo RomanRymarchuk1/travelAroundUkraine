@@ -62,8 +62,8 @@ const ResetButton = styled((props) => (
 }));
 
 
-const CatalogMainFilter = () => {
 
+const CatalogMainFilter = () => {
   const dispatch = useDispatch();
   const prices = useSelector((store) => store.filter.prices);
   const [minPrice, maxPrice] = prices;
@@ -90,7 +90,7 @@ const CatalogMainFilter = () => {
     };
 
     const params = new URLSearchParams();
-   
+    // console.log(params.toString());
     params.set('currentPrice', filterPrices());
     if (duration.length > 0) {
       params.set('duration', duration);
@@ -100,7 +100,6 @@ const CatalogMainFilter = () => {
     }
     console.log(params.toString());
 
-
     try {
       dispatch(setIsLoading(true));
       dispatch(setIsFilter(true));
@@ -108,7 +107,7 @@ const CatalogMainFilter = () => {
       if (status) {
         dispatch(setFilteredTours(data.products));
         dispatch(setIsLoading(false));
-        
+        console.log(data.products.map((el) => el.season));
       }
     } catch (err) {
       console.error(err.message);
@@ -117,8 +116,19 @@ const CatalogMainFilter = () => {
   };
 
 
+  // const url = window.location.href;
+  // const myURL = new URL(url);
+  // myURL.searchParams.set('greeting', 'Hello World');
+  // const f = () => {
+  //   console.log(myURL.toString());
+  // };
+
+
  return (
     <FilterWrapper>
+      {/* <button type="button" >
+        path
+      </button> */}
       <Typography variant="h3">Filter</Typography>
 
       <Grid container columnSpacing={5} sx={{ p: 0 }}>

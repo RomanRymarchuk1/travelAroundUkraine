@@ -8,7 +8,8 @@ import { setPrices } from '../../../../store/slices/filterSlice/filterSlice';
 const FilterInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     borderRadius: 40,
-    border: '1px solid #EDEDED',
+    border: '1px solid',
+    borderColor: '#EDEDED',
     width: 105,
     height: 30,
     paddingLeft: 16,
@@ -31,8 +32,10 @@ function valuetext(value) {
 
 const CatalogFilterPrice = () => {
   const dispatch = useDispatch();
+
   const prices = useSelector((store) => store.filter.prices);
   const [minPrice, maxPrice] = prices;
+  
 
   const getAllToursPrices = async () => {
     try {
@@ -40,7 +43,12 @@ const CatalogFilterPrice = () => {
       const allPrices = data.map((tour) => tour.currentPrice);
       minTourPrice = Math.min.apply(null, allPrices);
       maxTourPrice = Math.max.apply(null, allPrices);
-      dispatch(setPrices([minTourPrice, maxTourPrice]));
+      console.log(maxTourPrice);
+      // dispatch(setPrices([minTourPrice, maxTourPrice]))
+      dispatch(setPrices([Math.max(minPrice, minTourPrice), Math.min(maxPrice, maxTourPrice)]));
+      if(maxPrice === 0) {
+        dispatch(setPrices([Math.max(minPrice, minTourPrice), maxTourPrice]))
+      }
       return allPrices;
     } catch (err) {
       return console.log(err);
@@ -53,26 +61,23 @@ const CatalogFilterPrice = () => {
 
   const handleChange = (event, newValue) => {
     dispatch(setPrices(newValue));
-    // dispatch(setIsFilter(true));
   };
 
   const changeMinPrice = (event) => {
-    // dispatch(setIsFilter(true));
     const newValue = Number(event.target.value);
     if (!Number.isNaN(newValue)) {
       dispatch(setPrices([newValue, maxPrice]));
     } else {
-      dispatch(setPrices([0, maxPrice]));
+      dispatch(setPrices([minTourPrice, maxPrice]));
     }
   };
 
   const changeMaxPrice = (event) => {
-    // dispatch(setIsFilter(true));
     const newValue = Number(event.target.value);
     if (!Number.isNaN(newValue)) {
       dispatch(setPrices([minPrice, newValue]));
     } else {
-      dispatch(setPrices([minPrice, 0]));
+      dispatch(setPrices([minPrice, maxTourPrice]));
     }
   };
 

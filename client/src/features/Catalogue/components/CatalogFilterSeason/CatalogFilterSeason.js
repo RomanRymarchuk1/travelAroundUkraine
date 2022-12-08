@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Checkbox, FormControlLabel } from '@mui/material';
 import { FilterAccordion } from '..';
 import { setSeasons, setAllSeasons } from '../../../../store/slices/filterSlice/filterSlice';
@@ -8,7 +8,18 @@ const seasons = ['Summer', 'Autumn', 'Winter', 'Spring'];
 
 const CatalogFilterSeason = () => {
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(Array(seasons.length).fill(false));
+  const filterSeasons = useSelector((store) => store.filter.seasons);
+
+  const initialValue = () => {
+    let value = Array(seasons.length).fill(false);
+    if (filterSeasons.length > 0) {
+      value = seasons.map((season) => filterSeasons.indexOf(season) !== -1);
+      return value;
+    }
+    return value;
+  };
+
+  const [checked, setChecked] = useState(() => initialValue());
 
   const isAllChecked = checked.every((el) => el === true);
 
@@ -26,7 +37,7 @@ const CatalogFilterSeason = () => {
     });
   };
 
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     const value = event.target.id;
     const index = seasons.indexOf(value);
     setChecked((current) => {
