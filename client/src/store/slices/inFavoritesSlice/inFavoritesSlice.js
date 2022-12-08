@@ -35,7 +35,8 @@ export const gettWishList = (isLogin) => async (dispatch) => {
       console.error(err);
     }
   } else {
-    const localFavorites = localStorage.getItem('inFavorites')?.split(',');
+    // const localFavorites = localStorage.getItem('inFavorites')?.split(',');
+    const localFavorites = JSON.parse(localStorage.getItem('inFavorites'));
     if (localFavorites) {
       dispatch(setInitialState(localFavorites));
     }
@@ -55,14 +56,15 @@ export const addItemtoWishList = (isLogin, id) => async (dispatch) => {
       console.error(err);
     }
   } else {
-    const localFavorites = localStorage.getItem('inFavorites')?.split(',');
+    const localFavorites = JSON.parse(localStorage.getItem('inFavorites'));
+    // const localFavorites = localStorage.getItem('inFavorites')?.split(',');
     if (localFavorites) {
       localFavorites.push(id);
-      localStorage.setItem('inFavorites', localFavorites);
+      localStorage.setItem('inFavorites', JSON.stringify(localFavorites));
       dispatch(setItemInFavorites(id));
     } else {
       dispatch(setItemInFavorites(id));
-      localStorage.setItem('inFavorites', [id]);
+      localStorage.setItem('inFavorites', JSON.stringify([id]));
     }
   }
 };
@@ -91,15 +93,13 @@ export const deleteItemfromWishList = (isLogin, id, inFavoritesCounter) => async
       console.error(err);
     }
   } else {
-    const localFavorites = localStorage
-      .getItem('inFavorites')
-      .split(',')
-      .filter((elId) => elId !== id);
+    const localFavorites = JSON.parse(localStorage.getItem('inFavorites')).filter((elId) => elId !== id);
+    console.log(localFavorites);
     dispatch(deleteItemFromFavorites(id));
     if (localFavorites.length === 0) {
       localStorage.removeItem('inFavorites');
     } else {
-      localStorage.setItem('inFavorites', localFavorites);
+      localStorage.setItem('inFavorites', JSON.stringify(localFavorites));
     }
   }
 };
