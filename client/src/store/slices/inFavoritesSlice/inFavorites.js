@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axiosConfig from '../../../axiosConfig';
 
-const inFavoritesSlice = createSlice({
+const inFavoritesReducer = createSlice({
   name: 'inFavorites',
   initialState: {
     inFavorites: [],
   },
   reducers: {
     setItemInFavorites: (state, action) => {
-      state.inFavorites = [...state.inFavorites, action.payload];
+      state.inFavorites.push(action.payload);
     },
     setInitialState: (state, action) => {
       state.inFavorites = action.payload;
@@ -19,23 +19,17 @@ const inFavoritesSlice = createSlice({
   },
 });
 
-export const { setItemInFavorites, setInitialState, deleteItemFromFavorites } = inFavoritesSlice.actions;
+export const { setItemInFavorites, setInitialState, deleteItemFromFavorites } = inFavoritesReducer.actions;
 
-export default inFavoritesSlice.reducer;
+export default inFavoritesReducer.reducer;
 
 export const gettWishList = (isLogin) => async (dispatch) => {
-  if (isLogin === true) {
+  if (isLogin) {
     try {
-      const { data, status } = await axios('/wishlist', {
-        headers: {
-          Authorization: localStorage.getItem('token'),
-        },
-      });
-      if (data !== null && status) {
+      const { data } = await axiosConfig('/wishlist');
+      if (data) {
         const itemIds = data.products.map(({ _id }) => _id);
         dispatch(setInitialState(itemIds));
-      } else {
-        dispatch(setInitialState([]));
       }
     } catch (err) {
       console.error(err);
@@ -51,9 +45,8 @@ export const gettWishList = (isLogin) => async (dispatch) => {
 export const addItemtoWishList = (isLogin, id) => async (dispatch) => {
   if (isLogin) {
     try {
-      const { status } = await axios(`/wishlist/${id}`, {
+      const { status } = await axiosConfig(`/wishlist/${id}`, {
         method: 'PUT',
-        headers: { Authorization: localStorage.getItem('token') },
       });
       if (status === 200) {
         dispatch(setItemInFavorites(id));
@@ -77,9 +70,8 @@ export const addItemtoWishList = (isLogin, id) => async (dispatch) => {
 export const deleteItemfromWishList = (isLogin, id, inFavoritesCounter) => async (dispatch) => {
   if (isLogin && inFavoritesCounter > 0) {
     try {
-      const { status } = await axios(`/wishlist/${id}`, {
+      const { status } = await axiosConfig(`/wishlist/${id}`, {
         method: 'DELETE',
-        headers: { Authorization: localStorage.getItem('token') },
       });
       if (status === 200) {
         dispatch(deleteItemFromFavorites(id));
@@ -89,9 +81,8 @@ export const deleteItemfromWishList = (isLogin, id, inFavoritesCounter) => async
     }
   } else if (isLogin && inFavoritesCounter === 0) {
     try {
-      const { status } = await axios(`/wishlist`, {
+      const { status } = await axiosConfig(`/wishlist`, {
         method: 'DELETE',
-        headers: { Authorization: localStorage.getItem('token') },
       });
       if (status === 200) {
         dispatch(deleteItemFromFavorites(id));
