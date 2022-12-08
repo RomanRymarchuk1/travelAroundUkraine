@@ -24,7 +24,8 @@ const CataloguePage = () => {
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const isLoading = useSelector((state) => state.catalogue.isLoading);
   const [currentPage, setCurrentPage] = useState(1);
-  const countriesPerPage = 10;
+  console.log(currentPage);
+  const countriesPerPage = 5;
   let lastItemIndex = currentPage * countriesPerPage;
   let firstItemIndex = lastItemIndex - countriesPerPage;
   let currentItems = products.slice(firstItemIndex, lastItemIndex);
@@ -43,6 +44,17 @@ const CataloguePage = () => {
       dispatch(setIsLoading(false));
     }
   }, []);
+
+  const setCountPagination = () => {
+    let num = products.length / countriesPerPage;
+    if (isFilter) {
+      num = filteredTours.length / countriesPerPage;
+    }
+    if (Number.isInteger(num)) {
+      return num;
+    }
+    return Math.floor(num) + 1;
+  };
 
   return (
     <>
@@ -88,17 +100,23 @@ const CataloguePage = () => {
           </Container>
           <Box sx={{ display: 'flex', justifyContent: 'center', pt: '50px' }}>
             <Pagination
-              count={Math.round(products.length / 10)}
+              count={setCountPagination()}
               color="primary"
               page={currentPage}
-              onChange={(_, num) => {
+              onChange={(_, num) => {  
                 setCurrentPage(num);
                 lastItemIndex = currentPage * countriesPerPage;
                 firstItemIndex = lastItemIndex - countriesPerPage;
-                currentItems = products.slice(firstItemIndex, lastItemIndex);
+                currentItems = () => {
+                  if (!isFilter) {
+                    return products.slice(firstItemIndex, lastItemIndex);
+                  }
+                  return filteredTours.slice(firstItemIndex, lastItemIndex);
+                };
                 scrollToTop();
               }}
             />
+            
           </Box>
         </Box>
       ) : (

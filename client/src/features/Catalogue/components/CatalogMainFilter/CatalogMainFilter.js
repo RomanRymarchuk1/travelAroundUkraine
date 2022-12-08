@@ -5,7 +5,13 @@ import { styled, Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
 import { CatalogFilterPrice, CatalogFilterDuration, CatalogFilterSeason } from '..';
-import { setPrices, setIsFilter, setFilteredTours, setClearDuration, setAllSeasons } from '../../../../store/slices/filterSlice/filterSlice';
+import {
+  setPrices,
+  setIsFilter,
+  setFilteredTours,
+  setClearDuration,
+  setAllSeasons,
+} from '../../../../store/slices/filterSlice/filterSlice';
 import { getProducts, setIsLoading } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 
 const FilterWrapper = styled(Stack)(({ theme }) => ({
@@ -61,9 +67,7 @@ const ResetButton = styled((props) => (
   },
 }));
 
-
 const CatalogMainFilter = () => {
-
   const dispatch = useDispatch();
   const prices = useSelector((store) => store.filter.prices);
   const [minPrice, maxPrice] = prices;
@@ -71,7 +75,6 @@ const CatalogMainFilter = () => {
   const allPrices = [...new Set(products.map((tour) => tour.currentPrice))].sort((a, b) => a - b);
   const duration = useSelector((store) => store.filter.duration);
   const seasons = useSelector((store) => store.filter.seasons.map((el) => (el ? el.toLowerCase() : el)));
- 
 
   useEffect(() => {
     dispatch(getProducts());
@@ -90,7 +93,7 @@ const CatalogMainFilter = () => {
     };
 
     const params = new URLSearchParams();
-   
+
     params.set('currentPrice', filterPrices());
     if (duration.length > 0) {
       params.set('duration', duration);
@@ -120,10 +123,9 @@ const CatalogMainFilter = () => {
     dispatch(setClearDuration([]));
     dispatch(setClearDuration([]));
     dispatch(setAllSeasons([]));
-  }
+  };
 
-
- return (
+  return (
     <FilterWrapper>
       <Typography variant="h3">Filter</Typography>
 
@@ -138,10 +140,10 @@ const CatalogMainFilter = () => {
         </Grid>
       </Grid>
 
-      <ShowButton onClick ={filterTours}>Filter</ShowButton>
-      <ResetButton onClick ={resetFilter}>Reset filter</ResetButton>
+      <ShowButton onClick={filterTours}>Filter</ShowButton>
+      <ResetButton onClick={resetFilter}>Reset filter</ResetButton>
     </FilterWrapper>
   );
- }
+};
 
 export default CatalogMainFilter;

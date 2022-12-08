@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { styled, alpha, Box, Slider, InputBase } from '@mui/material';
 import { FilterAccordion } from '..';
 import { setPrices } from '../../../../store/slices/filterSlice/filterSlice';
+// import { getProducts } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 
 const FilterInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
@@ -25,9 +26,6 @@ const FilterInput = styled(InputBase)(({ theme }) => ({
 
 let minTourPrice = 0;
 let maxTourPrice = 0;
-
-// const minTourPrice = 0;
-// const maxTourPrice = 0;
 
 function valuetext(value) {
   return `${value}`;
@@ -59,7 +57,7 @@ const CatalogFilterPrice = () => {
     getAllToursPrices();
   }, []);
 
- const handleChange = (event, newValue) => {
+  const handleChange = (event, newValue) => {
     dispatch(setPrices(newValue));
   };
 
