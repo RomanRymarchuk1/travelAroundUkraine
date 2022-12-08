@@ -35,7 +35,6 @@ export const gettWishList = (isLogin) => async (dispatch) => {
       console.error(err);
     }
   } else {
-    // const localFavorites = localStorage.getItem('inFavorites')?.split(',');
     const localFavorites = JSON.parse(localStorage.getItem('inFavorites'));
     if (localFavorites) {
       dispatch(setInitialState(localFavorites));
@@ -57,7 +56,6 @@ export const addItemtoWishList = (isLogin, id) => async (dispatch) => {
     }
   } else {
     const localFavorites = JSON.parse(localStorage.getItem('inFavorites'));
-    // const localFavorites = localStorage.getItem('inFavorites')?.split(',');
     if (localFavorites) {
       localFavorites.push(id);
       localStorage.setItem('inFavorites', JSON.stringify(localFavorites));
