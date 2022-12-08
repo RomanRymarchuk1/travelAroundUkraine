@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import FavoriteBorderSharpIcon from '@mui/icons-material/FavoriteBorderSharp';
 import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemtoWishList, deleteItemfromWishList } from '../../../../store/slices/inFavoritesSlice/inFavorites';
+import { addItemtoWishList, deleteItemfromWishList } from '../../../../store/slices/inFavoritesSlice/inFavoritesSlice';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
 const CardContainer = styled(Stack)(({ theme }) => ({

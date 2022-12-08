@@ -3,7 +3,7 @@ import userReducer from './slices/userSlice/userSlice';
 import tourReducer from './slices/tourSlice/tourSlice';
 import catalogueReducer from './slices/catalogueSlice/catalogueSlice';
 import cartReducer from './slices/cartSlice/cartSlice';
-import inFavoritesReducer from './slices/inFavoritesSlice/inFavorites';
+import inFavoritesReducer from './slices/inFavoritesSlice/inFavoritesSlice';
 
 const store = configureStore({
   reducer: {

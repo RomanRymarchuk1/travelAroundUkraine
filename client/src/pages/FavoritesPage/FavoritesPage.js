@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { Grid, Typography } from '@mui/material';
 import { CatalogTourCard } from '../../features/Catalogue/components';
-import { gettWishList } from '../../store/slices/inFavoritesSlice/inFavorites';
+import { gettWishList } from '../../store/slices/inFavoritesSlice/inFavoritesSlice';
 import { setIsLoading, getProducts } from '../../store/slices/catalogueSlice/catalogueSlice';
 
 const FavoritesPage = () => {

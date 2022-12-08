@@ -4,7 +4,7 @@ import { styled, Stack, Box, Container, Typography, Pagination } from '@mui/mate
 import Grid from '@mui/material/Unstable_Grid2';
 import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
 import { getProducts, setIsLoading } from '../../store/slices/catalogueSlice/catalogueSlice';
-import { gettWishList } from '../../store/slices/inFavoritesSlice/inFavorites';
+import { gettWishList } from '../../store/slices/inFavoritesSlice/inFavoritesSlice';
 import scrollToTop from '../../layout/utils/scrollToTop';
 
 const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ theme }) => ({
