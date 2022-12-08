@@ -24,7 +24,6 @@ const CataloguePage = () => {
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const isLoading = useSelector((state) => state.catalogue.isLoading);
   const [currentPage, setCurrentPage] = useState(1);
-  console.log(currentPage);
   const countriesPerPage = 5;
   let lastItemIndex = currentPage * countriesPerPage;
   let firstItemIndex = lastItemIndex - countriesPerPage;
