@@ -3,7 +3,7 @@ import userReducer from './slices/userSlice/userSlice';
 import tourReducer from './slices/tourSlice/tourSlice';
 import catalogueReducer from './slices/catalogueSlice/catalogueSlice';
 import cartReducer from './slices/cartSlice/cartSlice';
-import inFavoritesSlice from './slices/inFavorites/inFavorites';
+import inFavoritesReducer from './slices/inFavoritesSlice/inFavorites';
 
 const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ const store = configureStore({
     tour: tourReducer,
     catalogue: catalogueReducer,
     cart: cartReducer,
-    favorites: inFavoritesSlice,
+    favorites: inFavoritesReducer,
   },
 });
 
