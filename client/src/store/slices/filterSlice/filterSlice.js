@@ -29,6 +29,9 @@ const filterSlice = createSlice({
         state.duration.push(action.payload);
       }
     },
+    setClearDuration: (state, action) => {
+      state.duration = action.payload;
+    },
     setSeasons: (state, action) => {
       if (state.seasons.includes(action.payload)) {
         state.seasons = state.seasons.filter((el) => el !== action.payload);
@@ -42,7 +45,7 @@ const filterSlice = createSlice({
   },
 });
 
-export const { setFilteredTours, setPrices, setIsFilter, setDuration, setSeasons, setAllSeasons } =
+export const { setFilteredTours, setPrices, setIsFilter, setDuration, setSeasons, setAllSeasons, setClearDuration } =
   filterSlice.actions;
 
 export default filterSlice.reducer;

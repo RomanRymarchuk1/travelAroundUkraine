@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { styled, alpha, ToggleButton } from '@mui/material';
@@ -37,6 +37,11 @@ const OutlinedToggleButton = ({ value, children }) => {
   const filterDuration = useSelector((store) => store.filter.duration);
 
   const [selected, setSelected] = useState(filterDuration.includes(value));
+
+  useEffect(() => {
+    setSelected(filterDuration.includes(value))      
+  }, [filterDuration]);
+
 
   const filterDurations = (duration) => {
     setSelected((prev) => !prev);

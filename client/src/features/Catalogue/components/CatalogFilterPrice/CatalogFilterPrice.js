@@ -26,6 +26,9 @@ const FilterInput = styled(InputBase)(({ theme }) => ({
 let minTourPrice = 0;
 let maxTourPrice = 0;
 
+// const minTourPrice = 0;
+// const maxTourPrice = 0;
+
 function valuetext(value) {
   return `${value}`;
 }
@@ -35,7 +38,6 @@ const CatalogFilterPrice = () => {
 
   const prices = useSelector((store) => store.filter.prices);
   const [minPrice, maxPrice] = prices;
-  
 
   const getAllToursPrices = async () => {
     try {
@@ -43,11 +45,9 @@ const CatalogFilterPrice = () => {
       const allPrices = data.map((tour) => tour.currentPrice);
       minTourPrice = Math.min.apply(null, allPrices);
       maxTourPrice = Math.max.apply(null, allPrices);
-      console.log(maxTourPrice);
-      // dispatch(setPrices([minTourPrice, maxTourPrice]))
       dispatch(setPrices([Math.max(minPrice, minTourPrice), Math.min(maxPrice, maxTourPrice)]));
-      if(maxPrice === 0) {
-        dispatch(setPrices([Math.max(minPrice, minTourPrice), maxTourPrice]))
+      if (maxPrice === 0) {
+        dispatch(setPrices([Math.max(minPrice, minTourPrice), maxTourPrice]));
       }
       return allPrices;
     } catch (err) {
@@ -59,7 +59,7 @@ const CatalogFilterPrice = () => {
     getAllToursPrices();
   }, []);
 
-  const handleChange = (event, newValue) => {
+ const handleChange = (event, newValue) => {
     dispatch(setPrices(newValue));
   };
 

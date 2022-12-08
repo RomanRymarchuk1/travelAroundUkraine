@@ -5,7 +5,7 @@ import { styled, Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
 import { CatalogFilterPrice, CatalogFilterDuration, CatalogFilterSeason } from '..';
-import { setPrices, setIsFilter, setFilteredTours } from '../../../../store/slices/filterSlice/filterSlice';
+import { setPrices, setIsFilter, setFilteredTours, setClearDuration, setAllSeasons } from '../../../../store/slices/filterSlice/filterSlice';
 import { getProducts, setIsLoading } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 
 const FilterWrapper = styled(Stack)(({ theme }) => ({
@@ -98,8 +98,6 @@ const CatalogMainFilter = () => {
     if (seasons.length > 0) {
       params.set('season', seasons.concat('all seasons'));
     }
-    console.log(params.toString());
-
 
     try {
       dispatch(setIsLoading(true));
@@ -115,6 +113,15 @@ const CatalogMainFilter = () => {
       dispatch(setIsLoading(false));
     }
   };
+
+  const resetFilter = () => {
+    dispatch(setIsFilter(false));
+    dispatch(setFilteredTours([]));
+    dispatch(setPrices([Math.min.apply(null, allPrices), Math.max.apply(null, allPrices)]));
+    dispatch(setClearDuration([]));
+    dispatch(setClearDuration([]));
+    dispatch(setAllSeasons([]));
+  }
 
 
  return (
@@ -133,7 +140,7 @@ const CatalogMainFilter = () => {
       </Grid>
 
       <ShowButton onClick ={filterTours}>Filter</ShowButton>
-      <ResetButton>Reset filter</ResetButton>
+      <ResetButton onClick ={resetFilter}>Reset filter</ResetButton>
     </FilterWrapper>
   );
  }
