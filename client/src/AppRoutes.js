@@ -11,8 +11,8 @@ import {
   SignupPage,
   LogInPage,
   UserPage,
+  FavoritesPage,
 } from './pages';
-import FavoritesPage from './pages/Favorites/Favorites';
 
 // TODO: add navigation from tour page to catalogue page
 // TODO: add protected routes after incorporating sign in feature
