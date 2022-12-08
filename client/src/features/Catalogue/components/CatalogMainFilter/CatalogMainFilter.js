@@ -106,7 +106,6 @@ const CatalogMainFilter = () => {
       if (status) {
         dispatch(setFilteredTours(data.products));
         dispatch(setIsLoading(false));
-        
       }
     } catch (err) {
       console.error(err.message);

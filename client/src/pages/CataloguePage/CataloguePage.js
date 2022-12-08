@@ -34,7 +34,6 @@ const CataloguePage = () => {
 
   if (isFilter && filteredTours.length > 0) {
     currentItems = filteredTours.slice(firstItemIndex, lastItemIndex);
-    console.log(filteredTours);
   }
 
   useEffect(() => {
