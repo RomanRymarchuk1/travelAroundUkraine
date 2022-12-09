@@ -17,7 +17,7 @@ import { initialValues, validationSchema } from '../../data';
 const steps = ['User Details', 'Shipping Address', 'Payment Details'];
 
 const CheckoutForm = () => {
-  const { currentStep, orderInfo } = useSelector((state) => state.order);
+  const { currentStep, isLoading } = useSelector((state) => state.order);
   const dispatch = useDispatch();
 
   const lastStep = steps.length - 1;
@@ -71,7 +71,7 @@ const CheckoutForm = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3, position: 'relative' }}>
                   {currentStep !== 0 && !isSubmitting && <Button onClick={GoToPrevStep}>Back</Button>}
 
-                  {!isSubmitting ? (
+                  {!isLoading ? (
                     <Button disabled={isSubmitting} type="submit">
                       {currentStep !== lastStep ? 'Continue' : 'Confirm'}
                     </Button>
