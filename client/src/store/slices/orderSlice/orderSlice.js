@@ -5,12 +5,19 @@ import postNewOrder from '../../../api/postNewOrder';
 const initialState = {
   currentStep: 0,
   isModalOpen: false,
+  isLoading: false,
   orderInfo: {},
 };
 
 export const createNewOrder = createAsyncThunk('order/createNewOrder', async (orderData, { rejectWithValue }) => {
   try {
     const orderInfo = await postNewOrder(orderData);
+
+    // checks if order does not contain order object (possible in cases when server returns response with incorrect data passed in input fields)
+    if (!orderInfo.order) {
+      await Promise.reject(orderInfo);
+    }
+
     return orderInfo;
   } catch (e) {
     return rejectWithValue(e);
