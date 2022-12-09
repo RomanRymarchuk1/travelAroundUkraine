@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, MenuItem, Menu, IconButton, Typography } from '@mui/material';
+import { Box, MenuItem, Menu, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -73,6 +73,7 @@ const menuItemSX = {
   maxWidth: '200px',
   height: '50px',
   color: 'text.primary',
+  textDecoration: 'none',
 };
 
 const anchorOrigin = {
@@ -126,17 +127,18 @@ const BurgerMenu = () => {
         sx={menuSX}
       >
         {currentPages.map(({ name, link, innerContent, onClick }) => (
-          <MenuItem key={name} onClick={handleCloseNavMenu} sx={menuItemSX}>
-            <Typography
-              component={NavLink}
-              onClick={() => onClick(dispatch, navigate)}
-              to={link}
-              key={name}
-              sx={{ textDecoration: 'none' }}
-              end
-            >
-              {innerContent}
-            </Typography>
+          <MenuItem
+            component={NavLink}
+            key={name}
+            onClick={() => {
+              onClick(dispatch, navigate);
+              handleCloseNavMenu();
+            }}
+            to={link}
+            sx={menuItemSX}
+            end
+          >
+            {innerContent}
           </MenuItem>
         ))}
       </Menu>
