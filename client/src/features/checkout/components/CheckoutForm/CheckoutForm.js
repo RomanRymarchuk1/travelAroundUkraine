@@ -9,7 +9,12 @@ import { enAU } from 'date-fns/locale';
 import { Stepper, Step, StepLabel, Button, CircularProgress, Box } from '@mui/material';
 // Redux store
 import { useSelector, useDispatch } from 'react-redux';
-import { increaseStep, decreaseStep, createNewOrder } from '../../../../store/slices/orderSlice/orderSlice';
+import {
+  increaseStep,
+  decreaseStep,
+  createNewOrder,
+  setIsModalOpen,
+} from '../../../../store/slices/orderSlice/orderSlice';
 // Child Forms and model
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
 import { initialValues, validationSchema } from '../../data';
