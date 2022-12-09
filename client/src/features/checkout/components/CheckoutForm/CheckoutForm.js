@@ -36,20 +36,18 @@ const CheckoutForm = () => {
     dispatch(decreaseStep());
   };
 
-  const formSubmitHandler = async (values, actions) => {
-    // actions.setSubmitting(false);
-    // console.log(actions);
-
-    if (currentStep === lastStep) {
-      // console.log('Last step', values);
-      try {
-        dispatch(createNewOrder(values));
-      } catch (e) {
-        console.error(e);
-      }
-      console.log(orderInfo);
-    } else {
+  const formSubmitHandler = async (values) => {
+    if (currentStep !== lastStep) {
       GoToNextStep();
+      return;
+    }
+
+    try {
+      await dispatch(createNewOrder(values)).unwrap();
+
+      dispatch(setIsModalOpen(true));
+    } catch (e) {
+      console.error(e);
     }
   };
 
