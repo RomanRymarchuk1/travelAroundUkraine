@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axiosConfig from '../../axiosConfig';
+import axiosConfig from '../../../axiosConfig';
 
 const initialState = {
   isLogin: !!localStorage.getItem('token'),
