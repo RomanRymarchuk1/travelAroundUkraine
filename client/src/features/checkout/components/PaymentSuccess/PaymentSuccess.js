@@ -3,7 +3,7 @@ import React from 'react';
 import { Typography, Box } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsModalOpen } from '../../../../store/slices/orderSlice/orderSlice';
+import { setIsModalOpen, increaseStep } from '../../../../store/slices/orderSlice/orderSlice';
 import { AlertModal } from '../../../../components';
 
 const PaymentSuccess = () => {
@@ -12,6 +12,7 @@ const PaymentSuccess = () => {
 
   const handleCloseBttn = () => {
     dispatch(setIsModalOpen(false));
+    dispatch(increaseStep());
   };
 
   const titleJsx = (
@@ -33,7 +34,7 @@ const PaymentSuccess = () => {
       submitButtonText="Great !"
       success
     >
-      Your order number #{orderInfo.orderNo} will be shipped shortly.
+      Your order number #{orderInfo?.orderNo} will be shipped shortly.
     </AlertModal>
   );
 };
