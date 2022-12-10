@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import axios from 'axios';
+// import axios from 'axios';
 import { styled, Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
@@ -11,6 +11,7 @@ import {
   setFilteredTours,
   setClearDuration,
   setAllSeasons,
+  fetchFilteredTours,
 } from '../../../../store/slices/filterSlice/filterSlice';
 import { getProducts, setIsLoading } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 
@@ -80,7 +81,7 @@ const CatalogMainFilter = () => {
     dispatch(getProducts());
   }, []);
 
-  const filterTours = async () => {
+  const filterTours = () => {
     const filterPrices = () => {
       if (minPrice > maxPrice) {
         const reversePrices = [...prices].reverse();
@@ -105,11 +106,8 @@ const CatalogMainFilter = () => {
     try {
       dispatch(setIsLoading(true));
       dispatch(setIsFilter(true));
-      const { data, status } = await axios(`/products/filter?${params}`);
-      if (status) {
-        dispatch(setFilteredTours(data.products));
-        dispatch(setIsLoading(false));
-      }
+      dispatch(fetchFilteredTours(params));
+      dispatch(setIsLoading(false));
     } catch (err) {
       console.error(err.message);
       dispatch(setIsLoading(false));

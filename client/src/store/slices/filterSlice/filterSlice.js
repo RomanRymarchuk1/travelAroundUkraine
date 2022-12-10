@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   tours: [],
@@ -47,5 +48,19 @@ const filterSlice = createSlice({
 
 export const { setFilteredTours, setPrices, setIsFilter, setDuration, setSeasons, setAllSeasons, setClearDuration } =
   filterSlice.actions;
+
+
+  export const fetchFilteredTours = (params) => async (dispatch) => {
+    try {
+      const { data, status } = await axios(`/products/filter?${params}`);
+  
+      if (status) {
+        dispatch(setFilteredTours(data.products));
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+  
 
 export default filterSlice.reducer;
