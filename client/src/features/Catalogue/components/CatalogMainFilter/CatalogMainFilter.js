@@ -81,7 +81,7 @@ const CatalogMainFilter = () => {
     dispatch(getProducts());
   }, []);
 
-  const filterTours = () => {
+  const filterTours = async () => {
     const filterPrices = () => {
       if (minPrice > maxPrice) {
         const reversePrices = [...prices].reverse();
@@ -103,15 +103,10 @@ const CatalogMainFilter = () => {
       params.set('season', seasons.concat('all seasons'));
     }
 
-    try {
-      dispatch(setIsLoading(true));
-      dispatch(setIsFilter(true));
-      dispatch(fetchFilteredTours(params));
-      dispatch(setIsLoading(false));
-    } catch (err) {
-      console.error(err.message);
-      dispatch(setIsLoading(false));
-    }
+    dispatch(setIsLoading(true));
+    dispatch(setIsFilter(true));
+    await dispatch(fetchFilteredTours(params));
+    dispatch(setIsLoading(false));
   };
 
   const resetFilter = () => {
