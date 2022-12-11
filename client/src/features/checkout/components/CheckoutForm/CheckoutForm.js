@@ -8,7 +8,7 @@ import { enAU } from 'date-fns/locale';
 // MUI Components
 import { Stepper, Step, StepLabel, Button, CircularProgress, Box } from '@mui/material';
 // Redux store
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import {
   increaseStep,
   decreaseStep,
@@ -22,7 +22,7 @@ import { initialValues, validationSchema } from '../../data';
 const steps = ['User Details', 'Shipping Address', 'Payment Details'];
 
 const CheckoutForm = () => {
-  const { currentStep, isLoading } = useSelector((state) => state.order);
+  const { currentStep, isLoading } = useSelector((state) => state.order, shallowEqual);
   const dispatch = useDispatch();
 
   const lastStep = steps.length - 1;
