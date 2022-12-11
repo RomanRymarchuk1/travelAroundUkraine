@@ -38,43 +38,45 @@ const UserPage = () => {
   }, []);
 
   return (
-    <Container component={Paper} sx={containerSX}>
-      {isLoading && <CircularProgress sx={preloaderSX} />}
-      {userData && (
-        <>
-          <UserHeader userData={userData} />
+    <Container>
+      <Container component={Paper} sx={containerSX}>
+        {isLoading && <CircularProgress sx={preloaderSX} />}
+        {userData && (
+          <>
+            <UserHeader userData={userData} />
 
-          <TabContext value={value}>
-            <TabList
-              textColor="secondary"
-              indicatorColor="secondary"
-              onChange={handleChange}
-              aria-label="lab API tabs example"
-              centered
-            >
-              <Tab label="User Info" value="1" />
-              <Tab label="Orders" value="2" />
-            </TabList>
+            <TabContext value={value}>
+              <TabList
+                textColor="secondary"
+                indicatorColor="secondary"
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+                centered
+              >
+                <Tab label="User Info" value="1" />
+                <Tab label="Orders" value="2" />
+              </TabList>
 
-            <TabPanel value="1">
-              <UserList userData={userData} />
-            </TabPanel>
+              <TabPanel value="1">
+                <UserList userData={userData} />
+              </TabPanel>
 
-            <TabPanel value="2">Item Two</TabPanel>
-          </TabContext>
+              <TabPanel value="2">Item Two</TabPanel>
+            </TabContext>
 
-          <ButtonContainer />
-        </>
-      )}
-      {error && (
-        <Container sx={{ textAlign: 'center' }}>
-          <Typography variant="h2">Error code: {error.status}</Typography>
-          <Typography sx={{ color: 'red', py: 3 }} variant="h3">
-            {error.statusText}
-          </Typography>
-          <Typography>Please try again later</Typography>
-        </Container>
-      )}
+            <ButtonContainer />
+          </>
+        )}
+        {error && (
+          <Container sx={{ textAlign: 'center' }}>
+            <Typography variant="h2">Error code: {error.status}</Typography>
+            <Typography sx={{ color: 'red', py: 3 }} variant="h3">
+              {error.statusText}
+            </Typography>
+            <Typography>Please try again later</Typography>
+          </Container>
+        )}
+      </Container>
     </Container>
   );
 };
