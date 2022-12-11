@@ -33,9 +33,7 @@ const orderSlice = createSlice({
       state.currentStep += 1;
     },
     decreaseStep: (state) => {
-      if (state.currentStep === 0) {
-        state.currentStep = 0;
-      } else {
+      if (state.currentStep >= 1) {
         state.currentStep -= 1;
       }
     },
