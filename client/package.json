@@ -5,6 +5,7 @@
 	"proxy": "http://localhost:5000",
 	"dependencies": {
 		"@mui/icons-material": "^5.10.9",
+		"@mui/lab": "^5.0.0-alpha.111",
 		"@mui/material": "^5.10.12",
 		"@mui/x-date-pickers": "^5.0.8",
 		"@reduxjs/toolkit": "^1.8.6",
