@@ -40,8 +40,29 @@ const SocialItem = styled('button')(() => ({
   }
 }))
 
+const StackContact = styled((props) => <Stack {...props} />)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column', 
+  justifyContent: 'center', 
+  margin: '120px 15px 100px 15px',
+
+  [theme.breakpoints.up('laptop')]: {
+    flexDirection: 'row', 
+  },
+
+}));
+
+const TypographyBlock = styled((props) => <Typography {...props} />)(({ theme }) => ({
+  marginTop: '50px',
+
+  [theme.breakpoints.up('laptop')]: {
+    marginTop: 0,
+  },
+
+}));
+
 const ContactUsPage = () => (
-  <Stack direction='row' maxWidth='1200px' justifyContent='center' m='150px auto 100px auto'>
+  <StackContact>
     <Box>
       <Box>
         <Typography variant="h2">Contact Info</Typography>
@@ -87,13 +108,13 @@ const ContactUsPage = () => (
       </Box>
     </Box>
     <Box>
-      <Typography variant="h2">Get In Touch with Us</Typography>
-      <Typography>
+      <TypographyBlock variant="h2" >Get In Touch with Us</TypographyBlock>
+      <Typography sx={{width:'90%'}}>
         if  you have some questions and you want to contact us personally - you can write your message to us and we will contact you as soon as possible!
       </Typography>
       <ContactsForm />
     </Box>
-  </Stack>
+  </StackContact>
 )
 
 export default ContactUsPage;  

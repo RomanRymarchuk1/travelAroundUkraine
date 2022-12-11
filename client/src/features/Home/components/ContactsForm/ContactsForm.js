@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import {Box, Button, TextField} from "@mui/material"
+import {Box, Button, TextField, styled} from "@mui/material"
 
 const validationSchema = yup.object({
     name: yup
@@ -14,6 +14,34 @@ const validationSchema = yup.object({
     message: yup
         .string('Enter your Message').required('Message is required'),
 });
+
+
+const TextFieldContactsPersonData = styled((props) => <TextField {...props} />)(({ theme }) => ({
+    marginRight: '10px',
+    
+    [theme.breakpoints.up('tablet')]: {
+        width: '250px',
+    },
+
+    [theme.breakpoints.up('laptop')]: {
+        width: '300px'
+    },
+  
+  }));
+
+const TextFieldContacts = styled((props) => <TextField {...props} />)(({ theme }) => ({
+    width: '350px',
+    display: 'block',
+  
+    [theme.breakpoints.up('tablet')]: {
+        width: '450px'
+    },
+
+    [theme.breakpoints.up('laptop')]: {
+        width: '600px'
+    },
+  
+  }));
 
 const ContactsForm = () => {
 
@@ -31,20 +59,19 @@ const ContactsForm = () => {
     });
 
     return (
-        <Box>
+        <Box >
             <form onSubmit={formik.handleSubmit}>
-                <TextField sx={{ width: '300px' }}
+                <TextFieldContactsPersonData 
                     id="name"
                     name="name"
-                    label="name"
+                    label="Name"
                     margin="normal"
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     error={formik.touched.name && Boolean(formik.errors.name)}
                     helperText={formik.touched.name && formik.errors.name}
                 />
-                <TextField sx={{ marginLeft: '10px', width: '300px' }}
-                    fullWidth
+                <TextFieldContactsPersonData 
                     id="email"
                     name="email"
                     label="Email"
@@ -54,12 +81,13 @@ const ContactsForm = () => {
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}
                 />
-                <TextField sx={{ width: '610px' }}
+                <TextFieldContacts 
                     id="message"
                     name="message"
                     label="Message"
                     type="message"
                     multiline
+                    fullWidth
                     margin="normal"
                     rows={6}
                     value={formik.values.message}
