@@ -1,8 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { toggleIsLogin } from '../../../../store/slices/userSlice';
+import { setIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
 
 const buttonBoxSX = { display: 'flex', width: '100%', justifyContent: 'end', my: '20px' };
 
@@ -15,18 +14,11 @@ const buttonSX = {
 };
 
 const ButtonContainer = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const logOut = () => {
-    localStorage.removeItem('token');
-    dispatch(toggleIsLogin());
-    navigate('/');
-  };
 
   return (
     <Box sx={buttonBoxSX}>
-      <Button onClick={logOut} sx={buttonSX}>
+      <Button onClick={() => dispatch(setIsModalOpen(true))} sx={buttonSX}>
         log out
       </Button>
     </Box>

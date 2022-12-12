@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
 import MuiBox from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -17,6 +18,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import formatTourDate from '../../utils/formatTourDate';
 import currencyConverter from '../../utils/currencyConverter';
 import convertData from '../../utils/convertData';
+
+import { addProduct } from '../../../../store/slices/cartSlice/cartSlice';
 
 const currencySymbol = {
   eur: '€',
@@ -107,11 +110,13 @@ const TourInfoDialog = ({
   duration,
   returns,
   currentPrice,
+  id,
   closeButton,
   handleClose,
 }) => {
   const [currency, setCurrency] = useState('eur');
   const included = convertData(professionalGuide, accommodation, meals, transferAlongTheRoute, travelInsurance);
+  const dispatch = useDispatch();
 
   return (
     <BoxWrapper>
@@ -178,7 +183,7 @@ const TourInfoDialog = ({
             {currencySymbol[currency]}
             {currencyConverter(currentPrice, currency)}
           </Cost>
-          <Button sx={{ paddingInline: '30px' }} disableElevation>
+          <Button sx={{ paddingInline: '30px' }} disableElevation onClick={() => dispatch(addProduct(id))}>
             Add to Cart
           </Button>
         </Stack>
@@ -198,6 +203,7 @@ TourInfoDialog.propTypes = {
   departs: PropTypes.string,
   returns: PropTypes.string,
   currentPrice: PropTypes.number,
+  id: PropTypes.string,
   closeButton: PropTypes.bool,
   handleClose: PropTypes.func,
 };
@@ -214,6 +220,7 @@ TourInfoDialog.defaultProps = {
   departs: 'Unknown',
   returns: 'Unknown',
   currentPrice: 0,
+  id: '',
 };
 
 export default TourInfoDialog;

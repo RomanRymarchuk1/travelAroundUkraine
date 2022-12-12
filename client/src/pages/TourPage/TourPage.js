@@ -142,6 +142,7 @@ const TourPage = () => {
     region,
     categories,
     season,
+    _id,
   } = useSelector((store) => store.tour.data);
 
   useEffect(() => {
@@ -200,6 +201,7 @@ const TourPage = () => {
                   duration={duration}
                   returns={returns}
                   currentPrice={currentPrice}
+                  id={_id}
                 />
               </Box>
             ) : null}
@@ -259,6 +261,7 @@ const TourPage = () => {
                   duration={duration}
                   returns={returns}
                   currentPrice={currentPrice}
+                  id={_id}
                   closeButton
                   handleClose={handleCloseDialog}
                 />

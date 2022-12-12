@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Container, useScrollTrigger, Slide } from '@mui/material';
 import { BurgerMenu, TabletMenu, LogoHeader, HeaderSearchField } from '..';
+import { LogOutModal } from '../../../../components';
 
 const HideOnScroll = ({ children }) => {
   const trigger = useScrollTrigger();
@@ -39,6 +40,7 @@ const Header = () => {
             <HeaderSearchField />
             <BurgerMenu />
             <TabletMenu />
+            <LogOutModal />
           </Toolbar>
         </Container>
       </AppBar>
