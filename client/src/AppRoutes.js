@@ -11,6 +11,7 @@ import {
   SignupPage,
   LogInPage,
   UserPage,
+  FavoritesPage,
 } from './pages';
 
 // TODO: add navigation from tour page to catalogue page
@@ -27,6 +28,7 @@ const AppRoutes = () => (
       <Route path="/login" element={<LogInPage />} />
       <Route path="/user" element={<UserPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/favorites" element={<FavoritesPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   </Routes>

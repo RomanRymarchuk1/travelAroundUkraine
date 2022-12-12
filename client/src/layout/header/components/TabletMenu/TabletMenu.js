@@ -1,10 +1,41 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
 import { NavLink, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { setIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
 
-const pages = [
+const loggedPages = [
+  {
+    name: 'home',
+    link: '/',
+    innerContent: 'Home',
+  },
+  {
+    name: 'catalogue',
+    link: '/catalogue',
+    innerContent: 'Catalogue',
+  },
+  {
+    name: 'logOut',
+    link: null,
+    innerContent: 'LogOut',
+    onClick: (dispatch) => dispatch(setIsModalOpen(true)),
+  },
+  {
+    name: 'cart',
+    link: '/cart',
+    innerContent: <ShoppingCartIcon fontSize="medium" />,
+  },
+  {
+    name: 'account',
+    link: '/user',
+    innerContent: <PersonIcon fontSize="medium" />,
+  },
+];
+
+const unloggedPages = [
   {
     name: 'home',
     link: '/',
@@ -18,12 +49,12 @@ const pages = [
   {
     name: 'logIn',
     link: '/login',
-    innerContent: 'Log In',
+    innerContent: 'LogIn',
   },
   {
-    name: 'account',
-    link: '/user',
-    innerContent: 'Account',
+    name: 'favorites',
+    link: '/favorites',
+    innerContent: 'Favorites',
   },
   {
     name: 'cart',
@@ -45,7 +76,7 @@ const typograpySX = (link, pathname) => ({
   margin: '0 36px',
   transition: '0.5s',
   fontSize: { laptop: '18px' },
-  color: link === pathname && 'secondary.main',
+  color: link ? link === pathname && 'secondary.main' : null,
 
   '&:hover': {
     color: 'secondary.main',
@@ -56,24 +87,25 @@ const TabletMenu = () => {
   const location = useLocation();
   const { isLogin } = useSelector((store) => store.userReducer);
 
+  const dispatch = useDispatch();
   const { pathname } = location;
+
+  const currentPages = isLogin ? loggedPages : unloggedPages;
 
   return (
     <Box component="nav" sx={boxSX}>
-      {pages.map(({ name, link, innerContent }) => {
-        if (name === 'logIn' && isLogin) {
-          return null;
-        }
-        if (name === 'account' && !isLogin) {
-          return null;
-        }
-
-        return (
-          <Typography component={NavLink} to={link} key={name} sx={typograpySX(link, pathname)} end>
-            {innerContent}
-          </Typography>
-        );
-      })}
+      {currentPages.map(({ name, link, innerContent, onClick }) => (
+        <Typography
+          onClick={() => onClick(dispatch)}
+          component={NavLink}
+          to={link}
+          key={name}
+          sx={typograpySX(link, pathname)}
+          end
+        >
+          {innerContent}
+        </Typography>
+      ))}
     </Box>
   );
 };
