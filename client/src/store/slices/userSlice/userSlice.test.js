@@ -1,7 +1,8 @@
-import userReducer, { toggleIsLogin, fetchUserInfo } from './userSlice';
+import userReducer, { toggleIsLogin, toggleIsModalOpen } from './userSlice';
 
 const initialState = {
   isLogin: !!localStorage.getItem('token'),
+  isModalOpen: false,
   userData: null,
   error: null,
   isLoading: false,
@@ -20,5 +21,13 @@ describe('userSlice', () => {
     const res = userReducer(initialState, action);
 
     expect(res.isLogin).not.toEqual(initialState.isLogin);
+  });
+
+  test('should toggleIsModalOpen work correct', () => {
+    const action = { type: toggleIsModalOpen.type };
+
+    const res = userReducer(initialState, action);
+
+    expect(res.isModalOpen).not.toEqual(initialState.isModalOpen);
   });
 });

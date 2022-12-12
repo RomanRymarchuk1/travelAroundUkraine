@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { Box, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { AlertModal } from '../../../../components';
-import { toggleIsLogin } from '../../../../store/slices/userSlice/userSlice';
-import { setCart } from '../../../../store/slices/cartSlice/cartSlice';
+import { setIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
 
 const buttonBoxSX = { display: 'flex', width: '100%', justifyContent: 'end', my: '20px' };
 
@@ -17,37 +14,11 @@ const buttonSX = {
 };
 
 const ButtonContainer = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const logOut = () => {
-    localStorage.removeItem('token');
-    dispatch(toggleIsLogin());
-    dispatch(setCart([]));
-    navigate('/');
-  };
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   return (
     <Box sx={buttonBoxSX}>
-      <AlertModal
-        open={isModalOpen}
-        onSubmit={logOut}
-        onClose={closeModal}
-        title="Confirm your actions"
-        submitButtonText="Log Out"
-      >
-        Are you sure you want to log out of your account?
-      </AlertModal>
-      <Button onClick={openModal} sx={buttonSX}>
+      <Button onClick={() => dispatch(setIsModalOpen(true))} sx={buttonSX}>
         log out
       </Button>
     </Box>
