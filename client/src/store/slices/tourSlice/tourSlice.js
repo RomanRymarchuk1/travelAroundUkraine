@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import getProduct from '../../../api/getProduct';
 
 const initialState = {
   data: {},
@@ -19,16 +19,10 @@ const tourSlice = createSlice({
 
 export const { setTour } = tourSlice.actions;
 
-export const fetchTour = (tourId) => async (dispatch) => {
-  try {
-    const { data, status } = await axios(`/products/${tourId}`);
+export const fetchTour = (itemNo) => async (dispatch) => {
+  const data = await getProduct(itemNo);
 
-    if (status) {
-      dispatch(setTour(data));
-    }
-  } catch (err) {
-    console.error(err.message);
-  }
+  dispatch(setTour(data));
 };
 
 export default tourSlice.reducer;
