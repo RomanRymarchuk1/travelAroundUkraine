@@ -123,7 +123,7 @@ const TourPage = () => {
   const handleCloseDialog = () => setIsOpen(false);
 
   const dispatch = useDispatch();
-  const { tourId } = useParams();
+  const { itemNo } = useParams();
   // to be revised in future from re rendering and optimizing point of view, whether we pass needed data as props to components or useSelector directly in each component.
   const {
     imageUrls,
@@ -146,7 +146,7 @@ const TourPage = () => {
   } = useSelector((store) => store.tour.data);
 
   useEffect(() => {
-    dispatch(fetchTour(tourId));
+    dispatch(fetchTour(itemNo));
   }, []);
 
   return (
@@ -202,6 +202,7 @@ const TourPage = () => {
                   returns={returns}
                   currentPrice={currentPrice}
                   id={_id}
+                  itemNo={itemNo}
                 />
               </Box>
             ) : null}
@@ -225,19 +226,6 @@ const TourPage = () => {
                   </Stack>
                 </TourAccordion>
               </Section>
-
-              {/* <Section id="included">
-                <TourAccordion title="What is included?">
-                  <Stack direction="row" gap="20px">
-                    {included.map(({ icon, service }) => (
-                      <Stack key={service} direction="row" gap="5px" alignItems="center" flexWrap="wrap">
-                        {icon}
-                        <Typography gutterBottom={false}>{service}</Typography>
-                      </Stack>
-                    ))}
-                  </Stack>
-                </TourAccordion>
-              </Section> */}
             </Box>
           </ContentWrapper>
 
@@ -262,6 +250,7 @@ const TourPage = () => {
                   returns={returns}
                   currentPrice={currentPrice}
                   id={_id}
+                  itemNo={itemNo}
                   closeButton
                   handleClose={handleCloseDialog}
                 />

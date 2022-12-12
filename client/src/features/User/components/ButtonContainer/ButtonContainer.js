@@ -4,6 +4,7 @@ import { Box, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { AlertModal } from '../../../../components';
 import { toggleIsLogin } from '../../../../store/slices/userSlice/userSlice';
+import { setCart } from '../../../../store/slices/cartSlice/cartSlice';
 
 const buttonBoxSX = { display: 'flex', width: '100%', justifyContent: 'end', my: '20px' };
 
@@ -23,6 +24,7 @@ const ButtonContainer = () => {
   const logOut = () => {
     localStorage.removeItem('token');
     dispatch(toggleIsLogin());
+    dispatch(setCart([]));
     navigate('/');
   };
 
