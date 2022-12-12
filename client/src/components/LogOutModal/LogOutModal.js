@@ -24,7 +24,7 @@ const LogOutModal = () => {
   return (
     <AlertModal
       open={isModalOpen}
-      onSubmit={() => logOut()}
+      onSubmit={logOut}
       onClose={closeModal}
       title="Confirm your actions"
       submitButtonText="Log Out"
