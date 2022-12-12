@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Container, Paper, CircularProgress, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserInfo } from '../../store/slices/userSlice/userSlice';
+import { fetchUserInfo, fetchUserOrders } from '../../store/slices/userSlice/userSlice';
 import UserList from '../../features/User/components/UserList/UserList';
 import UserHeader from '../../features/User/components/UserHeader/UserHeader';
 import ButtonContainer from '../../features/User/components/ButtonContainer/ButtonContainer';
@@ -30,6 +30,7 @@ const UserPage = () => {
 
   useEffect(() => {
     dispatch(fetchUserInfo());
+    dispatch(fetchUserOrders());
   }, []);
 
   return (

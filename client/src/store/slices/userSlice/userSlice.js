@@ -9,11 +9,23 @@ const initialState = {
   userData: null,
   error: null,
   isLoading: false,
+  orders: null,
+  ordersError: null,
 };
 
 export const fetchUserInfo = createAsyncThunk('user/feacthUserInfo', async (_, { rejectWithValue }) => {
   try {
     const { data } = await axiosConfig.get('/customers/customer').then((loggedInCustomer) => loggedInCustomer);
+    return data;
+  } catch (err) {
+    return rejectWithValue(err.response);
+  }
+});
+
+export const fetchUserOrders = createAsyncThunk('user/fetchUserOrders', async (_, { rejectWithValue }) => {
+  try {
+    const { data } = await axiosConfig.get('/orders').then((orders) => orders);
+    console.log(data);
     return data;
   } catch (err) {
     return rejectWithValue(err.response);
@@ -31,8 +43,7 @@ const userSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(fetchUserInfo.pending, (state, action) => {
-      state.userData = action.payload;
+    builder.addCase(fetchUserInfo.pending, (state) => {
       state.isLoading = true;
     });
 
@@ -43,6 +54,20 @@ const userSlice = createSlice({
 
     builder.addCase(fetchUserInfo.rejected, (state, action) => {
       state.error = action.payload;
+      state.isLoading = false;
+    });
+
+    builder.addCase(fetchUserOrders.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(fetchUserOrders.fulfilled, (state, action) => {
+      state.orders = action.payload;
+      state.isLoading = false;
+    });
+
+    builder.addCase(fetchUserOrders.rejected, (state, action) => {
+      state.ordersError = action.payload;
       state.isLoading = false;
     });
   },
