@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { toggleIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
+import { setIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
 
 const buttonBoxSX = { display: 'flex', width: '100%', justifyContent: 'end', my: '20px' };
 
@@ -18,7 +18,7 @@ const ButtonContainer = () => {
 
   return (
     <Box sx={buttonBoxSX}>
-      <Button onClick={() => dispatch(toggleIsModalOpen())} sx={buttonSX}>
+      <Button onClick={() => dispatch(setIsModalOpen(true))} sx={buttonSX}>
         log out
       </Button>
     </Box>

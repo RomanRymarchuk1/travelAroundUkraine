@@ -3,7 +3,7 @@ import { Box, MenuItem, Menu, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { toggleIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
+import { setIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
 
 const loggedPages = [
   {
@@ -30,7 +30,7 @@ const loggedPages = [
     name: 'logOut',
     link: null,
     innerContent: 'LogOut',
-    onClick: (dispatch) => dispatch(toggleIsModalOpen()),
+    onClick: (dispatch) => dispatch(setIsModalOpen(true)),
   },
 ];
 

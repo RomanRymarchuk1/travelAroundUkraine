@@ -4,7 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { toggleIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
+import { setIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
 
 const loggedPages = [
   {
@@ -21,7 +21,7 @@ const loggedPages = [
     name: 'logOut',
     link: null,
     innerContent: 'LogOut',
-    onClick: (dispatch) => dispatch(toggleIsModalOpen()),
+    onClick: (dispatch) => dispatch(setIsModalOpen(true)),
   },
   {
     name: 'cart',

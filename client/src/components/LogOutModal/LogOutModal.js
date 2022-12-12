@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AlertModal } from '..';
-import { toggleIsModalOpen, toggleIsLogin } from '../../store/slices/userSlice/userSlice';
+import { setIsModalOpen, toggleIsLogin } from '../../store/slices/userSlice/userSlice';
 
 const LogOutModal = () => {
   const { isModalOpen } = useSelector((store) => store.userReducer);
@@ -11,12 +11,13 @@ const LogOutModal = () => {
   const dispatch = useDispatch();
 
   const closeModal = () => {
-    dispatch(toggleIsModalOpen());
+    dispatch(setIsModalOpen(false));
   };
 
   const logOut = () => {
     localStorage.removeItem('token');
     dispatch(toggleIsLogin());
+    closeModal();
     navigate('/');
   };
 
