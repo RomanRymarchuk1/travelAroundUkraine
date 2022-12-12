@@ -1,14 +1,19 @@
 import React from 'react';
-import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent } from '@mui/material';
+import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent, Box } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import FavoriteBorderSharpIcon from '@mui/icons-material/FavoriteBorderSharp';
+import FavoriteSharpIcon from '@mui/icons-material/FavoriteSharp';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemtoWishList, deleteItemfromWishList } from '../../../../store/slices/inFavoritesSlice/inFavoritesSlice';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.primary.contrastText,
   borderRadius: 10,
   boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)',
+  maxWidth: '1000px',
 }));
 
 const CardImage = styled(CardMedia)(({ theme }) => ({
@@ -49,14 +54,33 @@ const CardButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const CatalogTourCard = ({ name, currentPrice, duration, description, imageUrls, itemNo }) => {
+const CatalogTourCard = ({
+  name,
+  currentPrice,
+  duration,
+  description,
+  imageUrls,
+  id,
+  inFavorites,
+  itemNo,
+  inFavoritesCounter,
+}) => {
+  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.userReducer.isLogin);
   const navigate = useNavigate();
 
   return (
     <CardContainer direction={{ xs: 'column', tablet: 'row' }} spacing={1}>
       <CardImage component="img" image={imageUrls[0]} alt="tour photo" />
       <CardContent sx={{ padding: '0 30px 0 36px' }}>
-        <CardTitle>{name}</CardTitle>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <CardTitle>{name}</CardTitle>
+          {inFavorites === false ? (
+            <FavoriteBorderSharpIcon onClick={() => dispatch(addItemtoWishList(isLogin, id))} />
+          ) : (
+            <FavoriteSharpIcon onClick={() => dispatch(deleteItemfromWishList(isLogin, id, inFavoritesCounter))} />
+          )}
+        </Box>
         <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>
           <Stack direction="row" spacing={1} alignItems="center">
             <CoinsIcon />
@@ -88,6 +112,13 @@ CatalogTourCard.propTypes = {
   description: PropTypes.string.isRequired,
   imageUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
   itemNo: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  inFavorites: PropTypes.bool.isRequired,
+  inFavoritesCounter: PropTypes.number,
+};
+
+CatalogTourCard.defaultProps = {
+  inFavoritesCounter: 0,
 };
 
 export default CatalogTourCard;

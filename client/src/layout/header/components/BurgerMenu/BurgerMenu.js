@@ -30,6 +30,11 @@ const pages = [
     link: '/cart',
     innerContent: 'Cart',
   },
+  {
+    name: 'favorites',
+    link: '/favorites',
+    innerContent: 'Favorites',
+  },
 ];
 
 const styleNavLink = {
