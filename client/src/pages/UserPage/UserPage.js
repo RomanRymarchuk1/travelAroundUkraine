@@ -4,7 +4,7 @@ import { TabPanel, TabList, TabContext } from '@mui/lab';
 import { grey } from '@mui/material/colors';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserInfo } from '../../store/slices/userSlice/userSlice';
-import { UserList, UserHeader, ButtonContainer } from '../../features/User/components';
+import { UserList, ButtonContainer } from '../../features/User/components';
 
 const containerSX = {
   display: 'block',
@@ -43,7 +43,10 @@ const UserPage = () => {
         {isLoading && <CircularProgress sx={preloaderSX} />}
         {userData && (
           <>
-            <UserHeader userData={userData} />
+            <Typography
+              sx={{ my: '15px', textAlign: 'center' }}
+              variant="h2"
+            >{`${userData.firstName} ${userData.lastName}`}</Typography>
 
             <TabContext value={value}>
               <TabList
