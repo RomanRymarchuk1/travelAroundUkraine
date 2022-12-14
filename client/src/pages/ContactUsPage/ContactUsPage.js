@@ -6,7 +6,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import TelegramIcon from '@mui/icons-material/Telegram';
-import ContactsForm from '../../features/Home/components/ContactsForm/ContactsForm';
+import ContactsForm from '../../features/contactUs/components';
 
 const icons = [
   <FacebookIcon />,
@@ -46,8 +46,13 @@ const StackContact = styled((props) => <Stack {...props} />)(({ theme }) => ({
   justifyContent: 'center', 
   margin: '120px 15px 100px 15px',
 
+  [theme.breakpoints.up('tablet')]: {
+    margin: '120px 30px 100px 30px',
+  },
+
   [theme.breakpoints.up('laptop')]: {
     flexDirection: 'row', 
+    margin: '120px 50px 100px 50px',
   },
 
 }));
@@ -110,7 +115,7 @@ const ContactUsPage = () => (
     <Box>
       <TypographyBlock variant="h2" >Get In Touch with Us</TypographyBlock>
       <Typography sx={{width:'90%'}}>
-        if  you have some questions and you want to contact us personally - you can write your message to us and we will contact you as soon as possible!
+        if you have some questions and you want to contact us personally - you can write your message to us and we will contact you as soon as possible!
       </Typography>
       <ContactsForm />
     </Box>
