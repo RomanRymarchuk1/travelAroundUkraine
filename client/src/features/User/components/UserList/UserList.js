@@ -7,10 +7,9 @@ const ListSX = {
   flexDirection: 'column',
   borderRadius: '20px',
   maxWidth: '400px',
-  minWidth: '300px',
-  width: '60%',
+  minWidth: '250px',
   py: '20px',
-  px: { xs: '10px', laptop: '45px' },
+  px: 2,
   listStyleType: 'none',
   m: '2% auto',
 };

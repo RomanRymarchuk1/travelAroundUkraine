@@ -6,6 +6,7 @@ import axiosConfig from '../../../axiosConfig';
 
 const initialState = {
   isLogin: !!localStorage.getItem('token'),
+  isModalOpen: false,
   userData: null,
   error: null,
   isLoading: false,
@@ -38,6 +39,10 @@ const userSlice = createSlice({
   reducers: {
     toggleIsLogin: (state) => {
       state.isLogin = !state.isLogin;
+    },
+
+    setIsModalOpen: (state, action) => {
+      state.isModalOpen = action.payload;
     },
   },
 
@@ -72,6 +77,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { toggleIsLogin } = userSlice.actions;
+export const { toggleIsLogin, setIsModalOpen } = userSlice.actions;
 
 export default userSlice.reducer;

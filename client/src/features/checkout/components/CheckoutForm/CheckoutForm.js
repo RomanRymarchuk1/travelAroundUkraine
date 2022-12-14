@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 // Form components
 import { Formik, Form } from 'formik';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -7,6 +7,14 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { enAU } from 'date-fns/locale';
 // MUI Components
 import { Stepper, Step, StepLabel, Button, CircularProgress, Box } from '@mui/material';
+// Redux store
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import {
+  increaseStep,
+  decreaseStep,
+  createNewOrder,
+  setIsModalOpen,
+} from '../../../../store/slices/orderSlice/orderSlice';
 // Child Forms and model
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
 import { initialValues, validationSchema } from '../../data';
@@ -14,27 +22,38 @@ import { initialValues, validationSchema } from '../../data';
 const steps = ['User Details', 'Shipping Address', 'Payment Details'];
 
 const CheckoutForm = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const { currentStep, isLoading } = useSelector((state) => state.order, shallowEqual);
+  const dispatch = useDispatch();
+
   const lastStep = steps.length - 1;
-  const currentValidationSchema = validationSchema[activeStep];
+  const currentValidationSchema = validationSchema[currentStep];
 
   const GoToNextStep = () => {
-    setActiveStep((prev) => prev + 1);
+    dispatch(increaseStep());
   };
 
   const GoToPrevStep = () => {
-    setActiveStep((prev) => prev - 1);
+    dispatch(decreaseStep());
   };
 
-  const formSubmitHandler = (values, actions) => {
-    GoToNextStep();
-    actions.setSubmitting(false);
-    console.log(actions);
+  const formSubmitHandler = async (values) => {
+    if (currentStep !== lastStep) {
+      GoToNextStep();
+      return;
+    }
+
+    try {
+      await dispatch(createNewOrder(values)).unwrap();
+
+      dispatch(setIsModalOpen(true));
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
     <>
-      <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: '100px' }}>
+      <Stepper activeStep={currentStep} alternativeLabel sx={{ mb: '100px' }}>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
@@ -42,22 +61,22 @@ const CheckoutForm = () => {
         ))}
       </Stepper>
 
-      {activeStep === steps.length ? (
+      {currentStep === steps.length ? (
         <CheckoutSummary />
       ) : (
         <Formik initialValues={initialValues} validationSchema={currentValidationSchema} onSubmit={formSubmitHandler}>
           {({ isSubmitting }) => (
             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
               <Form>
-                {activeStep === 0 && <UserDetailsForm />}
-                {activeStep === 1 && <ShippingAddressForm />}
-                {activeStep === 2 && <PaymentForm />}
+                {currentStep === 0 && <UserDetailsForm />}
+                {currentStep === 1 && <ShippingAddressForm />}
+                {currentStep === 2 && <PaymentForm />}
                 <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3, position: 'relative' }}>
-                  {activeStep !== 0 && !isSubmitting && <Button onClick={GoToPrevStep}>Back</Button>}
+                  {currentStep !== 0 && !isSubmitting && <Button onClick={GoToPrevStep}>Back</Button>}
 
-                  {!isSubmitting ? (
+                  {!isLoading ? (
                     <Button disabled={isSubmitting} type="submit">
-                      {activeStep !== lastStep ? 'Continue' : 'Confirm'}
+                      {currentStep !== lastStep ? 'Continue' : 'Confirm'}
                     </Button>
                   ) : (
                     <CircularProgress
@@ -74,7 +93,7 @@ const CheckoutForm = () => {
         </Formik>
       )}
 
-      <PaymentSuccess activeStep={activeStep} steps={steps} />
+      <PaymentSuccess />
     </>
   );
 };
