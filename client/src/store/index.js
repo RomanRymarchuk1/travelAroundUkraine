@@ -13,6 +13,6 @@ const store = configureStore({
     cart: cartReducer,
     favorites: inFavoritesReducer,
   },
-
+});
 
 export default store;
