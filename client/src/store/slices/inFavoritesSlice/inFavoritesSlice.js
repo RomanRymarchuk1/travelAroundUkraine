@@ -3,6 +3,7 @@ import axiosConfig from '../../../axiosConfig';
 
 // TODO: 1) Remove inFavoritesCounter and send 2 requests instead of one. Then, delete unnecessary logic from components. 2) Delete Infavorites slice - move logic to catalog slice and add inFavorites property to all items at DB.
 
+
 const inFavoritesReducer = createSlice({
   name: 'inFavorites',
   initialState: {
