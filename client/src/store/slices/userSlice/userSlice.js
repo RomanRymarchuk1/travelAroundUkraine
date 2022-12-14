@@ -25,7 +25,6 @@ export const fetchUserInfo = createAsyncThunk('user/feacthUserInfo', async (_, {
 export const fetchUserOrders = createAsyncThunk('user/fetchUserOrders', async (_, { rejectWithValue }) => {
   try {
     const { data } = await axiosConfig.get('/orders').then((orders) => orders);
-    console.log(data);
     return data;
   } catch (err) {
     return rejectWithValue(err.response);
