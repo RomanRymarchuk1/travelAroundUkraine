@@ -11,6 +11,7 @@ const initialState = {
   error: null,
   isLoading: false,
   orders: null,
+  isOrdersLoading: false,
   ordersError: null,
 };
 
@@ -62,17 +63,17 @@ const userSlice = createSlice({
     });
 
     builder.addCase(fetchUserOrders.pending, (state) => {
-      state.isLoading = true;
+      state.isOrdersLoading = true;
     });
 
     builder.addCase(fetchUserOrders.fulfilled, (state, action) => {
       state.orders = action.payload;
-      state.isLoading = false;
+      state.isOrdersLoading = false;
     });
 
     builder.addCase(fetchUserOrders.rejected, (state, action) => {
       state.ordersError = action.payload;
-      state.isLoading = false;
+      state.isOrdersLoading = false;
     });
   },
 });
