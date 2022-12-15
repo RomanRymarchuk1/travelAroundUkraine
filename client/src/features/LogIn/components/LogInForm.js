@@ -8,6 +8,7 @@ import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import postLogIn from '../../../api/postLogIn';
 import { toggleIsLogin } from '../../../store/slices/userSlice/userSlice';
+import { migrateCart } from '../../../store/slices/cartSlice/cartSlice';
 
 const buttonSX = {
   width: { xs: '86px', mobile: '110px', tablet: '140px', laptop: '150px' },
@@ -45,6 +46,7 @@ const LogInForm = () => {
       setErrorMassage(null);
       navigate('/');
       dispatch(toggleIsLogin());
+      dispatch(migrateCart());
     } else {
       setErrorMassage(response?.password || response?.loginOrEmail);
     }

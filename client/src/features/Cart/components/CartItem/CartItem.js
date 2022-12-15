@@ -25,7 +25,7 @@ import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.sv
 import { AlertModal } from '../../../../components';
 
 // Redux Thunk functions
-import { addProduct, decreaseProduct, deleteProduct } from '../../../../store/slices/cartSlice/cartSlice';
+import { addProduct, decreaseQuantity, deleteProduct } from '../../../../store/slices/cartSlice/cartSlice';
 
 const CardContainer = styled(Stack)(({ theme }) => ({
   position: 'relative',
@@ -97,7 +97,7 @@ const AmountField = styled((props) => <TextField size="small" autoComplete="off"
   },
 });
 
-const CartItem = ({ imageUrls, name, currentPrice, duration, cartQuantity, itemNo, id }) => {
+const CartItem = ({ imageUrls, name, currentPrice, duration, cartQuantity, itemNo, id, isLogin }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -119,7 +119,7 @@ const CartItem = ({ imageUrls, name, currentPrice, duration, cartQuantity, itemN
   const handleDeleteDialogClose = () => setDeleteDialogOpen(false);
 
   const handleDeleteFromCart = () => {
-    dispatch(deleteProduct(id));
+    dispatch(deleteProduct(id, isLogin));
     setDeleteDialogOpen(false);
   };
 
@@ -151,11 +151,11 @@ const CartItem = ({ imageUrls, name, currentPrice, duration, cartQuantity, itemN
           </Stack>
 
           <Stack direction="row" marginY="5px">
-            <IconButton disabled={cartQuantity <= 1} onClick={() => dispatch(decreaseProduct(id))}>
+            <IconButton disabled={cartQuantity <= 1} onClick={() => dispatch(decreaseQuantity(id, isLogin))}>
               <Remove />
             </IconButton>
             <AmountField value={cartQuantity} error={amountError} />
-            <IconButton onClick={() => dispatch(addProduct(id))}>
+            <IconButton onClick={() => dispatch(addProduct(itemNo, id, isLogin))}>
               <Add />
             </IconButton>
           </Stack>
@@ -188,16 +188,18 @@ CartItem.propTypes = {
   cartQuantity: PropTypes.number,
   itemNo: PropTypes.string,
   id: PropTypes.string,
+  isLogin: PropTypes.bool,
 };
 
 CartItem.defaultProps = {
   imageUrls: [],
-  name: '',
+  name: 'unknown',
   currentPrice: 0,
   duration: '',
   cartQuantity: 0,
   itemNo: '',
   id: '',
+  isLogin: false,
 };
 
 export default CartItem;

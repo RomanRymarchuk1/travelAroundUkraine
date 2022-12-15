@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
 import MuiBox from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -111,12 +111,14 @@ const TourInfoDialog = ({
   returns,
   currentPrice,
   id,
+  itemNo,
   closeButton,
   handleClose,
 }) => {
   const [currency, setCurrency] = useState('eur');
   const included = convertData(professionalGuide, accommodation, meals, transferAlongTheRoute, travelInsurance);
   const dispatch = useDispatch();
+  const isLogin = useSelector((store) => store.userReducer.isLogin);
 
   return (
     <BoxWrapper>
@@ -183,7 +185,11 @@ const TourInfoDialog = ({
             {currencySymbol[currency]}
             {currencyConverter(currentPrice, currency)}
           </Cost>
-          <Button sx={{ paddingInline: '30px' }} disableElevation onClick={() => dispatch(addProduct(id))}>
+          <Button
+            sx={{ paddingInline: '30px' }}
+            disableElevation
+            onClick={() => dispatch(addProduct(itemNo, id, isLogin))}
+          >
             Add to Cart
           </Button>
         </Stack>
@@ -204,6 +210,7 @@ TourInfoDialog.propTypes = {
   returns: PropTypes.string,
   currentPrice: PropTypes.number,
   id: PropTypes.string,
+  itemNo: PropTypes.string,
   closeButton: PropTypes.bool,
   handleClose: PropTypes.func,
 };
@@ -221,6 +228,7 @@ TourInfoDialog.defaultProps = {
   returns: 'Unknown',
   currentPrice: 0,
   id: '',
+  itemNo: '',
 };
 
 export default TourInfoDialog;
