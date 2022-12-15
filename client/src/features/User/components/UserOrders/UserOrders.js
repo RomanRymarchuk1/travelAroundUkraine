@@ -1,20 +1,59 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { Paper, CircularProgress, Typography } from '@mui/material';
+import { fetchUserOrders } from '../../../../store/slices/userSlice/userSlice';
+import { EmptyOrderList, Order } from '..';
 
-const UserOrders = ({ orders, ordersError }) => {
-  console.log(orders, ordersError);
-
-  return <Box>sdadasd</Box>;
+const preloaderSX = {
+  display: 'block',
+  m: '15% auto',
+  width: '100px !important',
+  height: '100px !important',
+  color: 'secondary',
 };
 
-UserOrders.propTypes = {
-  orders: PropTypes.array.isRequired,
-  ordersError: PropTypes.object,
+const paperOrderListSX = {
+  listStyleType: 'none',
+  p: '5%',
+  overflow: 'scroll',
+  height: 'auto',
+  maxHeight: '350px',
+  borderRadius: '20px',
 };
 
-UserOrders.defaultProps = {
-  ordersError: null,
+const UserOrders = () => {
+  const { orders, ordersError, isOrdersLoading } = useSelector((store) => store.userReducer, shallowEqual);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!orders) {
+      dispatch(fetchUserOrders());
+    }
+  }, []);
+
+  if (!orders)
+    return (
+      <>
+        {isOrdersLoading && <CircularProgress sx={preloaderSX} />}{' '}
+        {ordersError && <Typography>{ordersError}</Typography>}
+      </>
+    );
+
+  return (
+    <>
+      {orders && orders.length === 0 ? (
+        <EmptyOrderList />
+      ) : (
+        <Paper component="ul" sx={paperOrderListSX}>
+          {orders.map(({ date, orderNo, products, totalSum }) => (
+            <Order totalSum={totalSum} products={products} key={orderNo} date={date.split('T')[0]} orderNo={orderNo} />
+          ))}
+        </Paper>
+      )}
+      {}
+    </>
+  );
 };
 
 export default UserOrders;
