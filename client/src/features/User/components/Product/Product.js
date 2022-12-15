@@ -4,15 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { styled, Stack, CardMedia, Typography, CardContent, Box } from '@mui/material';
 import { ReactComponent as CoinsIcon } from '../../../../assets/svg/CoinsIcon.svg';
 
-const CardContainer = styled(Stack)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.contrastText,
-  borderRadius: 10,
-  boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)',
-  maxWidth: '1000px',
-  margin: '20px',
-}));
-
-const CardImage = styled(CardMedia)(({ theme }) => ({
+const PoductImage = styled(CardMedia)(({ theme }) => ({
   width: '100%',
   height: 240,
   borderRadius: '10px 10px 0 0',
@@ -24,33 +16,45 @@ const CardImage = styled(CardMedia)(({ theme }) => ({
   },
 }));
 
-const CardTitle = styled((props) => <Typography variant="h3" {...props} />)(({ theme }) => ({
-  color: theme.palette.text.primary,
-  marginTop: 20,
-  marginBottom: 20,
-  textTransform: 'uppercase',
-}));
+const productContainerSX = {
+  backgroundColor: 'primary.contrastText',
+  borderRadius: '25px',
+  boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)',
+  maxWidth: '1000px',
+  margin: '20px',
+  flexDirection: { xs: 'column', laptop: 'row' },
+};
 
-const TourDescription = styled(Typography)(({ theme }) => ({
-  borderLeft: `3px solid ${theme.palette.primary.main}`,
-  paddingLeft: 24,
+const productTitleSX = {
+  color: 'text.primary',
+  marginTop: '20px',
+  marginBottom: '20px',
+  textTransform: 'uppercase',
+};
+
+const TourDescriptionSX = {
+  borderLeft: '3px solid',
+  borderColor: 'primary.main',
+  paddingLeft: '24px',
   height: '50px',
   overflow: 'hidden',
   WebkitLineClamp: '3',
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical',
-}));
+};
 
 const Product = ({ name, currentPrice, itemNo, image, cartQuantity, description }) => {
   const navigate = useNavigate();
   const handleClick = () => navigate(`/tour/${itemNo}`);
 
   return (
-    <CardContainer onClick={handleClick} direction={{ xs: 'column', laptop: 'row' }} spacing={1}>
-      <CardImage component="img" image={image} alt="tour photo" />
+    <Stack component="li" onClick={handleClick} sx={productContainerSX} spacing={1}>
+      <PoductImage component="img" image={image} alt="tour photo" />
       <CardContent sx={{ padding: '0 30px 0 36px' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <CardTitle>{name}</CardTitle>
+          <Typography variant="h3" sx={productTitleSX}>
+            {name}
+          </Typography>
         </Box>
         <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>
           <Stack direction="row" spacing={1} alignItems="center">
@@ -74,9 +78,9 @@ const Product = ({ name, currentPrice, itemNo, image, cartQuantity, description 
             </Typography>
           </Stack>
         </Stack>
-        <TourDescription>{description}</TourDescription>
+        <Typography sx={TourDescriptionSX}>{description}</Typography>
       </CardContent>
-    </CardContainer>
+    </Stack>
   );
 };
 
