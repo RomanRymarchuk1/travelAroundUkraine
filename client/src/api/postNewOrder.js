@@ -17,7 +17,6 @@ const postNewOrder = async ({
   expiryDate,
   cvv,
 }) => {
-  // body for logged in customer's order
   const body = {
     firstName,
     lastName,
@@ -44,6 +43,7 @@ const postNewOrder = async ({
   };
 
   const token = localStorage.getItem('token');
+  const products = JSON.parse(localStorage.getItem('cart'));
 
   // add customerId to body if customer is logged in
   if (token) {
@@ -58,7 +58,10 @@ const postNewOrder = async ({
     }
   }
 
-  // TODO: add additional params for non logged in customer into body
+  // add products from local storage cart to body if user is not logged in
+  if (!token && products) {
+    body.products = products;
+  }
 
   console.log('post new order', body);
   try {
