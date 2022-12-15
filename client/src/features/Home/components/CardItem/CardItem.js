@@ -1,13 +1,13 @@
+
 import React from 'react';
-// import PropTypes from 'prop-types';
-import { Typography, Box, styled } from '@mui/material';
+import PropTypes from 'prop-types';
+import {Typography, Box, styled} from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const CardItemWrapper = styled('div')({
   minWidth: '265px',
   maxWidth: '265px',
   height: '400px',
-  background: `url('./assets/images/hotDeals/aerial-view-of-colorful-mixed-forest-shrouded-in-morning-fog-on-a-beautiful-autumn-day.jpg')`,
   backgroundSize: 'cover',
   color: 'white',
   position: 'relative',
@@ -31,7 +31,7 @@ const CardItemWrapper = styled('div')({
   },
 });
 
-const CardItemPrice = styled(Typography)(({ theme }) => ({
+const CardItemPrice = styled(Typography)(({theme}) => ({
   backgroundColor: theme.palette.primary.main,
   textAlign: 'center',
   width: '108px',
@@ -46,10 +46,11 @@ const CardItemPrice = styled(Typography)(({ theme }) => ({
   color: theme.palette.common.white,
 }));
 
-const CardItemHeader = styled((props) => <Typography variant="h3" {...props} />)(({ theme }) => ({
+const CardItemHeader = styled((props) => <Typography variant="h3" {...props} />)(({theme}) => ({
   position: 'absolute',
-  marginTop: '265px',
+  marginTop: '250px',
   paddingLeft: '25px',
+  paddingRight: '25px',
   zIndex: '2',
   textTransform: 'uppercase',
   color: theme.palette.common.white,
@@ -62,37 +63,50 @@ const CardItemLocation = styled('div')({
   paddingRight: '25px',
   zIndex: '2',
   position: 'absolute',
-  width: '100%',
+  width: '215px',
   alignItems: 'center',
   marginTop: '350px',
 });
 
-const CardItemText = styled(Typography)(({ theme }) => ({
+const CardItemText = styled(Typography)(({theme}) => ({
   margin: '0',
   whiteSpace: 'nowrap',
   color: theme.palette.common.white,
 }));
 
-const CardItem = () => (
-  <CardItemWrapper>
-    <CardItemPrice>$ 200.00</CardItemPrice>
-    <CardItemHeader>Kyiv city walk</CardItemHeader>
-    <CardItemLocation>
-      <Box
-        component="img"
-        src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
-        alt="location"
-        sx={{ paddingRight: '10px', maxWidth: 'min-content' }}
-      />
-      <CardItemText>Kyiv region</CardItemText>
-      <ArrowForwardIosIcon sx={{ marginLeft: '80px' }} fontSize="small" />
-    </CardItemLocation>
-  </CardItemWrapper>
+const CardItem = ({
+                    name, region, currentPrice, imageUrls, navigate, itemNo
+                  }) => (
+    <CardItemWrapper
+        onClick={() => navigate(`/tour/${+itemNo}`)}
+        sx={{ height: "400px",
+          backgroundImage: `url(${imageUrls[0]})`,
+        }}
+    >
+      <CardItemPrice>{currentPrice} $</CardItemPrice>
+      <CardItemHeader>{name}</CardItemHeader>
+      <CardItemLocation>
+        <Box
+            component="img"
+            src="https://visitukraine.today/assets/img/fromukraine/maps-and-flags.png"
+            alt="location"
+            sx={{paddingRight: '10px', maxWidth: 'min-content'}}
+        />
+        <CardItemText>{region} region</CardItemText>
+        <ArrowForwardIosIcon sx={{ display: "block", marginLeft: "auto"}} fontSize="small"/>
+      </CardItemLocation>
+    </CardItemWrapper>
 );
 
-// CardItem.PropTypes = {
-//     name: PropTypes.string.isRequired,
-//     region: PropTypes.string.isRequired,
-// };
+
+CardItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  region: PropTypes.string.isRequired,
+  currentPrice: PropTypes.number.isRequired,
+  imageUrls: PropTypes.array.isRequired,
+  itemNo: PropTypes.string.isRequired,
+};
+
+
 
 export default CardItem;
