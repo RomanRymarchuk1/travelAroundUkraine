@@ -1,5 +1,5 @@
-import React from 'react'
-import { Typography, Box, Grid, Link, Stack, styled } from "@mui/material"
+import React from 'react';
+import { Typography, Box, Grid, Link, Stack, styled } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -14,13 +14,13 @@ const icons = [
   <LinkedInIcon />,
   <YouTubeIcon />,
   <PinterestIcon />,
-  <TelegramIcon />
-]
+  <TelegramIcon />,
+];
 
 const SocialsContainer = styled(Box)(() => ({
   display: 'flex',
-  flexDirection: 'row'
-}))
+  flexDirection: 'row',
+}));
 
 const SocialItem = styled('button')(() => ({
   backgroundColor: 'rgba(40, 44, 52, 0.2)',
@@ -36,14 +36,12 @@ const SocialItem = styled('button')(() => ({
   transition: 'all 0.3s ease',
   border: 'none',
   '&:hover': {
-    backgroundColor: 'rgba(0, 75, 252, 0.04)'
-  }
-}))
+    backgroundColor: 'rgba(0, 75, 252, 0.04)',
+  },
+}));
 
-const StackContact = styled((props) => <Stack {...props} />)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column', 
-  justifyContent: 'center', 
+const StackContact = styled(Stack)(({ theme }) => ({
+  justifyContent: 'center',
   margin: '120px 15px 100px 15px',
 
   [theme.breakpoints.up('tablet')]: {
@@ -51,19 +49,17 @@ const StackContact = styled((props) => <Stack {...props} />)(({ theme }) => ({
   },
 
   [theme.breakpoints.up('laptop')]: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     margin: '120px 50px 100px 50px',
   },
-
 }));
 
-const TypographyBlock = styled((props) => <Typography {...props} />)(({ theme }) => ({
+const TypographyBlock = styled(Typography)(({ theme }) => ({
   marginTop: '50px',
 
   [theme.breakpoints.up('laptop')]: {
     marginTop: 0,
   },
-
 }));
 
 const ContactUsPage = () => (
@@ -72,19 +68,19 @@ const ContactUsPage = () => (
       <Box>
         <Typography variant="h2">Contact Info</Typography>
       </Box>
-      <Grid container direction='row' wrap='nowrap' pt='30px' minWidth='400px' alignItems='center'>
-        <Grid container item width='70px' spacing={3} xs={2} direction='column'>
+      <Grid container direction="row" wrap="nowrap" pt="30px" minWidth="400px" alignItems="center">
+        <Grid container item width="70px" spacing={3} xs={2} direction="column">
           <Grid item>
-            <Typography fontWeight='bold'>Address:</Typography>
+            <Typography fontWeight="bold">Address:</Typography>
           </Grid>
           <Grid item>
-            <Typography fontWeight='bold'>Phone:</Typography>
+            <Typography fontWeight="bold">Phone:</Typography>
           </Grid>
           <Grid item>
-            <Typography fontWeight='bold'>Email:</Typography>
+            <Typography fontWeight="bold">Email:</Typography>
           </Grid>
         </Grid>
-        <Grid container item xs={9} spacing={3} direction='column' className="contacts__credentials-cred">
+        <Grid container item xs={9} spacing={3} direction="column" className="contacts__credentials-cred">
           <Grid item>
             <Typography>Pavla Tychyny Ave, 1В, Kyiv, 02000</Typography>
           </Grid>
@@ -101,25 +97,26 @@ const ContactUsPage = () => (
         </Grid>
       </Grid>
       <Box>
-        <Typography variant="h2" sx={{ marginTop: '50px', paddingBottom: '15px' }}>Get Social</Typography>
+        <Typography variant="h2" sx={{ marginTop: '50px', paddingBottom: '15px' }}>
+          Get Social
+        </Typography>
         <SocialsContainer>
-          {
-            icons.map((icon, i) => {
-              const key = icon + i;
-              return <SocialItem key={key}> {icon} </SocialItem>
-            })
-          }
+          {icons.map((icon, i) => {
+            const key = icon + i;
+            return <SocialItem key={key}> {icon} </SocialItem>;
+          })}
         </SocialsContainer>
       </Box>
     </Box>
     <Box>
-      <TypographyBlock variant="h2" >Get In Touch with Us</TypographyBlock>
-      <Typography sx={{width:'90%'}}>
-        if you have some questions and you want to contact us personally - you can write your message to us and we will contact you as soon as possible!
+      <TypographyBlock variant="h2">Get In Touch with Us</TypographyBlock>
+      <Typography sx={{ width: '90%' }}>
+        if you have some questions and you want to contact us personally - you can write your message to us and we will
+        contact you as soon as possible!
       </Typography>
       <ContactsForm />
     </Box>
   </StackContact>
-)
+);
 
-export default ContactUsPage;  
+export default ContactUsPage;
