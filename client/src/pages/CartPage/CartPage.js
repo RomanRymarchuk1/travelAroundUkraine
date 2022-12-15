@@ -26,10 +26,11 @@ const CartItemsList = styled((props) => <Stack component="ul" {...props} />)(({ 
 
 const CartPage = () => {
   const dispatch = useDispatch();
+  const isLogin = useSelector((store) => store.userReducer.isLogin);
   const cart = useSelector((store) => store.cart.data);
 
   useEffect(() => {
-    dispatch(fetchCart());
+    dispatch(fetchCart(isLogin));
   }, []);
 
   return (
@@ -56,6 +57,7 @@ const CartPage = () => {
                     cartQuantity={cartQuantity}
                     itemNo={itemNo}
                     id={_id}
+                    isLogin={isLogin}
                   />
                 </li>
               ))}
