@@ -96,7 +96,7 @@ const TabletMenu = () => {
     <Box component="nav" sx={boxSX}>
       {currentPages.map(({ name, link, innerContent, onClick }) => (
         <Typography
-          onClick={() => onClick(dispatch)}
+          onClick={onClick && (() => onClick(dispatch))}
           component={NavLink}
           to={link}
           key={name}

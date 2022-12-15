@@ -136,7 +136,9 @@ const BurgerMenu = () => {
             component={NavLink}
             key={name}
             onClick={() => {
-              onClick(dispatch, navigate);
+              if (onClick) {
+                onClick(dispatch, navigate);
+              }
               handleCloseNavMenu();
             }}
             to={link}
