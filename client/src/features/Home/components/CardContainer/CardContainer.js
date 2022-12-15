@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Navigation} from 'swiper';
 import {Typography, styled, Container} from '@mui/material';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {getProducts, setIsLoading} from "../../../../store/slices/catalogueSlice/catalogueSlice";
+import {getProducts} from "../../../../store/slices/catalogueSlice/catalogueSlice";
 import {CardItem} from '..';
 import {SliderButton} from '../../../../components';
 
@@ -44,25 +44,12 @@ const CardContainer = () => {
 
   const dispatch = useDispatch();
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
-  const isLoading = useSelector((state) => state.catalogue.isLoading);
-  const [currentPage] = useState(1);
-  const countriesPerPage = 10;
-  const lastItemIndex = currentPage * countriesPerPage;
-  const firstItemIndex = lastItemIndex - countriesPerPage;
-  const currentItems = products.slice(firstItemIndex, lastItemIndex);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (products.length <= 0) {
-      dispatch(setIsLoading(true));
       dispatch(getProducts());
-      dispatch(setIsLoading(false));
-    }
   }, []);
 
   return (
-      <>
-        {isLoading === false ? (
             <Container>
               <CardContainerHeaderContainer>
                 <Typography variant="h2" sx={{marginBottom: '0px'}}>
@@ -108,23 +95,15 @@ const CardContainer = () => {
                     modules={[Navigation]}
                     className="mySwiper"
                 >
-                  {currentItems &&
-                      currentItems.map(({name, region, _id, imageUrls, currentPrice, itemNo}) => (
+                  {products &&
+                      products.map(({name, region, _id, imageUrls, currentPrice, itemNo}) => (
                           <SwiperSlide key={_id}>
-                            <CardItem name={name} region={region} id={_id} imageUrls={imageUrls} currentPrice={currentPrice} navigate={navigate} itemNo={itemNo}/>
+                            <CardItem name={name} region={region} id={_id} imageUrls={imageUrls} currentPrice={currentPrice} itemNo={itemNo}/>
                           </SwiperSlide>
                       ))}
                 </Swiper>
               </CardContainerSwiperContainer>
-
             </Container>
-        ) : (
-            <Typography variant="h2" sx={{paddingTop: '400px', paddingBottom: '400px', textAlign: 'center'}}>
-              Loading...
-            </Typography>
-        )}
-        {}
-      </>
   )
 };
 
