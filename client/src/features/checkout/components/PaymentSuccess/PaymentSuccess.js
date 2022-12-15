@@ -1,17 +1,19 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import { Typography, Box } from '@mui/material';
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsModalOpen, increaseStep } from '../../../../store/slices/orderSlice/orderSlice';
 import { AlertModal } from '../../../../components';
 
-const PaymentSuccess = ({ activeStep, steps }) => {
-  const [isOpen, setIsOpen] = useState(true);
+const PaymentSuccess = () => {
+  const { isModalOpen, orderInfo } = useSelector((store) => store.order);
+  const dispatch = useDispatch();
 
   const handleCloseBttn = () => {
-    setIsOpen(false);
+    dispatch(setIsModalOpen(false));
+    dispatch(increaseStep());
   };
-
-  if (activeStep !== steps.length) return null;
 
   const titleJsx = (
     <Box display="flex" justifyContent="center" alignItems="center" columnGap="5px">
@@ -24,7 +26,7 @@ const PaymentSuccess = ({ activeStep, steps }) => {
 
   return (
     <AlertModal
-      open={isOpen}
+      open={isModalOpen}
       onClose={handleCloseBttn}
       onSubmit={handleCloseBttn}
       title={titleJsx}
@@ -32,7 +34,7 @@ const PaymentSuccess = ({ activeStep, steps }) => {
       submitButtonText="Great !"
       success
     >
-      <Typography>Your order number #425435 will be shipped shortly.</Typography>
+      Your order number #{orderInfo?.orderNo} will be shipped shortly.
     </AlertModal>
   );
 };
