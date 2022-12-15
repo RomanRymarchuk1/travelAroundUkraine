@@ -22,6 +22,7 @@ const productContainerSX = {
   boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)',
   maxWidth: '1000px',
   margin: '20px',
+  cursor: 'pointer',
   flexDirection: { xs: 'column', laptop: 'row' },
 };
 
