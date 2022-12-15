@@ -11,13 +11,14 @@ const Order = ({ totalSum, orderNo, date, products }) => (
     </AccordionSummary>
     <AccordionDetails>
       <Box sx={{ marginBottom: 4 }}>
-        {products.map(({ product: { name, currentPrice, itemNo, imageUrls }, cartQuantity }) => (
+        {products.map(({ product: { name, currentPrice, itemNo, imageUrls, description }, cartQuantity }) => (
           <Product
             name={name}
             currentPrice={currentPrice}
             itemNo={itemNo}
             image={imageUrls[0]}
             cartQuantity={cartQuantity}
+            description={description}
             key={itemNo}
           />
         ))}
