@@ -9,7 +9,6 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Box, Typography, Link as MUILink, styled } from '@mui/material';
 import { Link } from 'react-router-dom';
-import scrollToTop from '../../../utils/scrollToTop';
 
 const navigationMenu = [
   {
@@ -257,9 +256,7 @@ const Footer = () => (
           <NavigationList>
             {navigationMenu.map((el) => (
               <li key={el.name}>
-                <Link onClick={() => scrollToTop('smooth')} to={el.path}>
-                  {el.name}
-                </Link>
+                <Link to={el.path}>{el.name}</Link>
               </li>
             ))}
           </NavigationList>
