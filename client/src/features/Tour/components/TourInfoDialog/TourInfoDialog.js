@@ -118,13 +118,13 @@ const TourInfoDialog = ({
 
   return (
     <BoxWrapper>
+      {closeButton && (
+        <IconButton sx={{ position: 'absolute', right: '10px', top: '10px' }} onClick={handleClose}>
+          <CloseIcon />
+        </IconButton>
+      )}
       <Section>
         <Title>Included</Title>
-        {closeButton && (
-          <IconButton sx={{ position: 'absolute', right: '10px', top: '10px' }} onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
-        )}
 
         <IncludedContentWrapper>
           {included.map(({ icon, service }) => (
