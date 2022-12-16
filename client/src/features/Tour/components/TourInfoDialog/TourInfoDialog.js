@@ -49,13 +49,10 @@ const Title = styled((props) => <Typography variant="h3" color="text.primary" {.
   marginBottom: 20,
 });
 
-const IncludedContentWrapper = styled((props) => <Stack direction="row" {...props} />)({
-  flexWrap: 'wrap',
-  gap: '12px',
-
-  '@media (min-width: 1051px)': {
-    justifyContent: 'space-between',
-  },
+const IncludedContentWrapper = styled(MuiBox)({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+  gap: '7px',
 });
 
 const Cost = styled(Typography)(({ theme }) => ({
