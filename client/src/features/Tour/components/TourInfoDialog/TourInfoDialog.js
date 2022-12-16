@@ -4,9 +4,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
-import MuiBox from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Button, IconButton, MenuItem as MuiMenuItem, Select as MuiSelect, Stack } from '@mui/material';
+import { Box as MuiBox, Button, IconButton, MenuItem as MuiMenuItem, Select as MuiSelect, Stack } from '@mui/material';
 // Icons
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
