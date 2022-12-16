@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import valid from 'card-validator';
 import formModel from './formModel';
 
 const {
@@ -37,7 +38,10 @@ export default [
   yup.object().shape({
     [cardType.name]: yup.string().required(`${cardType.requiredErrorMsg}`),
     [nameOnCard.name]: yup.string().required(`${nameOnCard.requiredErrorMsg}`),
-    [cardNumber.name]: yup.string().required(`${cardNumber.requiredErrorMsg}`),
+    [cardNumber.name]: yup
+      .string()
+      .test('card number test', 'Credit card number is invalid.', (value) => valid.number(value).isValid)
+      .required(`${cardNumber.requiredErrorMsg}`),
     [expiryDate.name]: yup.string().required(`${expiryDate.requiredErrorMsg}`),
     [cvv.name]: yup
       .string()
