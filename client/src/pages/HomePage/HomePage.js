@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button, Container, Typography, Box, styled } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { useNavigate } from 'react-router-dom';
 import { AboutUkraine, ImageCarousel, CardContainer } from '../../features/Home/components';
 
 const TravelText = styled((props) => <Typography variant="h1" {...props} />)(({ theme }) => ({
@@ -86,29 +87,37 @@ const HeroContainer = styled(Container)({
   zIndex: 1000,
 });
 
-const HomePage = () => (
-  <>
-    <Box sx={{ position: 'relative' }} component="section">
-      <ImageCarousel />
-      <HeroContainer>
-        <TravelText>
-          TRAVEL <span className="heroHeaderHighlighted">around</span>
-        </TravelText>
+const HomePage = () => {
+  const navigate = useNavigate();
 
-        <UkraineText>ukraine</UkraineText>
+  return (
+    <>
+      <Box sx={{ position: 'relative' }} component="section">
+        <ImageCarousel />
+        <HeroContainer>
+          <TravelText>
+            TRAVEL <span className="heroHeaderHighlighted">around</span>
+          </TravelText>
 
-        <Button sx={{ mt: '60px', textTransform: 'uppercase' }} endIcon={<ArrowRightAltIcon />}>
-          to our tours
-        </Button>
-      </HeroContainer>
-    </Box>
-    <Box component="section" sx={{ mt: '60px' }}>
-      <AboutUkraine />
-    </Box>
-    <Box component="section" sx={{ mt: '80px', mb: '150px' }}>
-      <CardContainer />
-    </Box>
-  </>
-);
+          <UkraineText>ukraine</UkraineText>
+
+          <Button
+            sx={{ mt: '60px', textTransform: 'uppercase' }}
+            endIcon={<ArrowRightAltIcon />}
+            onClick={() => navigate('/catalogue')}
+          >
+            to our tours
+          </Button>
+        </HeroContainer>
+      </Box>
+      <Box component="section" sx={{ mt: '60px' }}>
+        <AboutUkraine />
+      </Box>
+      <Box component="section" sx={{ mt: '80px', mb: '150px' }}>
+        <CardContainer />
+      </Box>
+    </>
+  );
+};
 
 export default HomePage;
