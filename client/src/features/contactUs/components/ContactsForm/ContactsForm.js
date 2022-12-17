@@ -5,7 +5,7 @@ import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
 import { AlertModal } from '../../../../components';
 
-const TextFieldContactsPersonData = styled((props) => <Field {...props} />)(({ theme }) => ({
+const TextFieldContactsPersonData = styled(Field)(({ theme }) => ({
   marginRight: '10px',
 
   [theme.breakpoints.up('tablet')]: {
@@ -16,12 +16,12 @@ const TextFieldContactsPersonData = styled((props) => <Field {...props} />)(({ t
   },
 }));
 
-const TextFieldContacts = styled((props) => <Field {...props} />)(({ theme }) => ({
+const TextFieldContacts = styled(Field)(({ theme }) => ({
   width: '350px',
   display: 'block',
 
   [theme.breakpoints.up('tablet')]: {
-    width: '450px',
+    width: '510px',
   },
   [theme.breakpoints.up('laptop')]: {
     width: '610px',
@@ -82,7 +82,7 @@ const ContactsForm = () => {
             onClose={closeModal}
             onSubmit={modalSubmit}
           >
-            thank you for your message. we will write you as soon as possible!
+             Thank you for your message. we will write you as soon as possible!
           </AlertModal>
         </Form>
       )}

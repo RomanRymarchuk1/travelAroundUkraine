@@ -17,13 +17,14 @@ const icons = [
   <TelegramIcon />,
 ];
 
-const SocialsContainer = styled(Box)(() => ({
+const SocialsContainer = styled(Stack)(() => ({
   display: 'flex',
   flexDirection: 'row',
 }));
 
-const SocialItem = styled('button')(() => ({
+const SocialItem = styled('a')(() => ({
   backgroundColor: 'rgba(40, 44, 52, 0.2)',
+  color: 'black',
   margin: '5px',
   marginLeft: 0,
   width: '40px',
@@ -103,7 +104,7 @@ const ContactUsPage = () => (
         <SocialsContainer>
           {icons.map((icon, i) => {
             const key = icon + i;
-            return <SocialItem key={key}> {icon} </SocialItem>;
+            return <SocialItem key={key} href='https://google.com' target="_blank"> {icon} </SocialItem>;
           })}
         </SocialsContainer>
       </Box>
