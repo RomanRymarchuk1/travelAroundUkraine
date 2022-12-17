@@ -24,7 +24,7 @@ const TextFieldContacts = styled((props) => <Field {...props} />)(({ theme }) =>
     width: '450px',
   },
   [theme.breakpoints.up('laptop')]: {
-    width: '600px',
+    width: '610px',
   },
 }));
 
@@ -58,7 +58,7 @@ const ContactsForm = () => {
     <Formik initialValues={initialValues} validationSchema={schema} onSubmit={handleSubmit}>
       {() => (
         <Form>
-          <TextFieldContacts component={TextField} name="name" label="Name" margin="normal" />
+          <TextFieldContactsPersonData component={TextField} name="name" label="Name" margin="normal" />
           <TextFieldContactsPersonData component={TextField} name="email" label="Email" margin="normal" />
           <TextFieldContacts
             component={TextField}
@@ -67,7 +67,7 @@ const ContactsForm = () => {
             multiline
             fullWidth
             margin="normal"
-            rows={6}
+            rows={8}
           />
 
           <Button margin="normal" sx={{ display: 'block', marginTop: '15px' }} color="primary" type="submit">
