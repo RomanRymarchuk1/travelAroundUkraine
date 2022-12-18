@@ -4,9 +4,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
-import MuiBox from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Button, IconButton, MenuItem as MuiMenuItem, Select as MuiSelect, Stack } from '@mui/material';
+import { Box as MuiBox, Button, IconButton, MenuItem as MuiMenuItem, Select as MuiSelect, Stack } from '@mui/material';
 // Icons
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -50,13 +49,10 @@ const Title = styled((props) => <Typography variant="h3" color="text.primary" {.
   marginBottom: 20,
 });
 
-const IncludedContentWrapper = styled((props) => <Stack direction="row" {...props} />)({
-  flexWrap: 'wrap',
-  gap: '12px',
-
-  '@media (min-width: 1051px)': {
-    justifyContent: 'space-between',
-  },
+const IncludedContentWrapper = styled(MuiBox)({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+  gap: '7px',
 });
 
 const Cost = styled(Typography)(({ theme }) => ({
@@ -122,13 +118,13 @@ const TourInfoDialog = ({
 
   return (
     <BoxWrapper>
+      {closeButton && (
+        <IconButton sx={{ position: 'absolute', right: '10px', top: '10px' }} onClick={handleClose}>
+          <CloseIcon />
+        </IconButton>
+      )}
       <Section>
         <Title>Included</Title>
-        {closeButton && (
-          <IconButton sx={{ position: 'absolute', right: '10px', top: '10px' }} onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
-        )}
 
         <IncludedContentWrapper>
           {included.map(({ icon, service }) => (
