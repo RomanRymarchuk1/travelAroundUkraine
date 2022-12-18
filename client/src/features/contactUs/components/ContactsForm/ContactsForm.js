@@ -7,9 +7,10 @@ import { AlertModal } from '../../../../components';
 
 const TextFieldContactsPersonData = styled(Field)(({ theme }) => ({
   marginRight: '10px',
+  width: '270px',
 
   [theme.breakpoints.up('tablet')]: {
-    width: '250px',
+    width: '280px',
   },
   [theme.breakpoints.up('laptop')]: {
     width: '300px',
@@ -21,7 +22,7 @@ const TextFieldContacts = styled(Field)(({ theme }) => ({
   display: 'block',
 
   [theme.breakpoints.up('tablet')]: {
-    width: '510px',
+    width: '570px',
   },
   [theme.breakpoints.up('laptop')]: {
     width: '610px',
