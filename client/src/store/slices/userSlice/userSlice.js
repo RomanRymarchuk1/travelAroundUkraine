@@ -54,6 +54,7 @@ const userSlice = createSlice({
 
     builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
       state.userData = action.payload;
+      state.error = null;
       state.isLoading = false;
     });
 
