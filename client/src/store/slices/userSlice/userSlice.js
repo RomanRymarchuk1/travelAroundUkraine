@@ -10,6 +10,9 @@ const initialState = {
   userData: null,
   error: null,
   isLoading: false,
+  orders: null,
+  isOrdersLoading: false,
+  ordersError: null,
 };
 
 export const fetchUserInfo = createAsyncThunk('user/feacthUserInfo', async (_, { rejectWithValue }) => {
@@ -21,13 +24,22 @@ export const fetchUserInfo = createAsyncThunk('user/feacthUserInfo', async (_, {
   }
 });
 
+export const fetchUserOrders = createAsyncThunk('user/fetchUserOrders', async (_, { rejectWithValue }) => {
+  try {
+    const { data } = await axiosConfig.get('/orders').then((orders) => orders);
+    return data;
+  } catch (err) {
+    return rejectWithValue(err.response);
+  }
+});
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
 
   reducers: {
-    toggleIsLogin: (state) => {
-      state.isLogin = !state.isLogin;
+    setIsLogin: (state, action) => {
+      state.isLogin = action.payload;
     },
 
     setIsModalOpen: (state, action) => {
@@ -36,8 +48,7 @@ const userSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(fetchUserInfo.pending, (state, action) => {
-      state.userData = action.payload;
+    builder.addCase(fetchUserInfo.pending, (state) => {
       state.isLoading = true;
     });
 
@@ -51,9 +62,23 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     });
+
+    builder.addCase(fetchUserOrders.pending, (state) => {
+      state.isOrdersLoading = true;
+    });
+
+    builder.addCase(fetchUserOrders.fulfilled, (state, action) => {
+      state.orders = action.payload;
+      state.isOrdersLoading = false;
+    });
+
+    builder.addCase(fetchUserOrders.rejected, (state, action) => {
+      state.ordersError = action.payload;
+      state.isOrdersLoading = false;
+    });
   },
 });
 
-export const { toggleIsLogin, setIsModalOpen } = userSlice.actions;
+export const { setIsLogin, setIsModalOpen } = userSlice.actions;
 
 export default userSlice.reducer;
