@@ -32,26 +32,22 @@ const UserOrders = () => {
     }
   }, []);
 
-  if (!orders)
-    return (
-      <>
-        {isOrdersLoading && <CircularProgress sx={preloaderSX} />}{' '}
-        {ordersError && <Typography>{ordersError}</Typography>}
-      </>
+  if (orders) {
+    return orders.length === 0 ? (
+      <EmptyOrderList />
+    ) : (
+      <Paper component="ul" sx={paperOrderListSX}>
+        {orders.map(({ date, orderNo, products, totalSum }) => (
+          <Order totalSum={totalSum} products={products} key={orderNo} date={date.split('T')[0]} orderNo={orderNo} />
+        ))}
+      </Paper>
     );
+  }
 
   return (
     <>
-      {orders && orders.length === 0 ? (
-        <EmptyOrderList />
-      ) : (
-        <Paper component="ul" sx={paperOrderListSX}>
-          {orders.map(({ date, orderNo, products, totalSum }) => (
-            <Order totalSum={totalSum} products={products} key={orderNo} date={date.split('T')[0]} orderNo={orderNo} />
-          ))}
-        </Paper>
-      )}
-      {}
+      {isOrdersLoading && <CircularProgress sx={preloaderSX} />}
+      {ordersError && <Typography>{ordersError}</Typography>}
     </>
   );
 };
