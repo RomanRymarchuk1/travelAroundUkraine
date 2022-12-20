@@ -7,7 +7,7 @@ import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import postLogIn from '../../../api/postLogIn';
-import { toggleIsLogin } from '../../../store/slices/userSlice/userSlice';
+import { setIsLogin } from '../../../store/slices/userSlice/userSlice';
 import { migrateCart } from '../../../store/slices/cartSlice/cartSlice';
 
 const buttonSX = {
@@ -45,7 +45,7 @@ const LogInForm = () => {
       localStorage.setItem('token', response.token);
       setErrorMassage(null);
       navigate('/');
-      dispatch(toggleIsLogin());
+      dispatch(setIsLogin(true));
       dispatch(migrateCart());
     } else {
       setErrorMassage(response?.password || response?.loginOrEmail);
