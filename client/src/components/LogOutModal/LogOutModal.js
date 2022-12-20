@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AlertModal } from '..';
-import { setIsModalOpen, toggleIsLogin } from '../../store/slices/userSlice/userSlice';
+import { clearUserData, setIsModalOpen, toggleIsLogin } from '../../store/slices/userSlice/userSlice';
 import { setCart } from '../../store/slices/cartSlice/cartSlice';
 
 const LogOutModal = () => {
@@ -20,6 +20,7 @@ const LogOutModal = () => {
     dispatch(toggleIsLogin());
     closeModal();
     dispatch(setCart([]));
+    dispatch(clearUserData());
     navigate('/');
   };
 

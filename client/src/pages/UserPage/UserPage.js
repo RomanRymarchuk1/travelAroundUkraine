@@ -27,6 +27,8 @@ const UserPage = () => {
   const { userData, error, isLoading } = useSelector((store) => store.userReducer, shallowEqual);
   const [value, setValue] = useState('1');
 
+  console.log(window);
+
   const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {

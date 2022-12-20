@@ -45,6 +45,10 @@ const userSlice = createSlice({
     setIsModalOpen: (state, action) => {
       state.isModalOpen = action.payload;
     },
+
+    clearUserData: (state) => {
+      state.userData = null;
+    },
   },
 
   extraReducers: (builder) => {
@@ -78,6 +82,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { toggleIsLogin, setIsModalOpen } = userSlice.actions;
+export const { toggleIsLogin, setIsModalOpen, clearUserData } = userSlice.actions;
 
 export default userSlice.reducer;
