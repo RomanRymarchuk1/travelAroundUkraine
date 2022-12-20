@@ -134,6 +134,7 @@ const CataloguePage = () => {
           Loading...
         </Typography>
       )}
+      {}
     </>
   );
 };
