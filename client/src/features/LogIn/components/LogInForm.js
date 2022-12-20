@@ -84,7 +84,9 @@ const LogInForm = () => {
                   <Field component={TextField} type="password" name="password" label="Password" fullWidth />
                 </Grid>
               </Grid>
-              {errorMassage && <Typography sx={{ color: '#d32f2f', textAlign: 'center' }}>{errorMassage}</Typography>}
+              {errorMassage && (
+                <Typography sx={{ color: '#d32f2f', textAlign: 'center' }}>Password or login is not correct</Typography>
+              )}
               <Box sx={{ my: { xs: 1.5, laptop: 2.5 } }}>
                 <Button sx={buttonSX} onClick={handleClickSignUp}>
                   sign up
