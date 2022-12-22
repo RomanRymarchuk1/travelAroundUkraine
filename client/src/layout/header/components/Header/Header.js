@@ -1,7 +1,8 @@
 /* eslint-disable  react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Container, useScrollTrigger, Slide } from '@mui/material';
-import { BurgerMenu, TabletMenu, LogoHeader, HeaderSearchField } from '..';
+import { NavLink } from 'react-router-dom';
+import { BurgerMenu, TabletMenu, HeaderSearchField } from '..';
 import { LogOutModal } from '../../../../components';
 
 const HideOnScroll = ({ children }) => {
@@ -12,6 +13,12 @@ const HideOnScroll = ({ children }) => {
     </Slide>
   );
 };
+
+const LogoHeader = () => (
+  <NavLink to="/" style={{ textDecoration: 'none' }}>
+    <img src="/assets/images/logo/logo.png" alt="logo" width="65" height="50" />
+  </NavLink>
+);
 
 const Header = () => {
   const [scrollY, setScrollY] = useState();
