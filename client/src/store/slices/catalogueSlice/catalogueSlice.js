@@ -43,7 +43,7 @@ export const getProducts = () => async (dispatch) => {
 };
 
 export const getPopularProducts = () => async (dispatch) => {
-  const { data, status } = await axios('/products/filter?isPopular=yes');
+  const { data, status } = await axios('/products/filter?isPopular=true');
 
   if (status) {
     const { products } = data;
