@@ -24,7 +24,7 @@ const preloaderSX = {
 };
 
 const UserPage = () => {
-  const { userData, error, isLoading } = useSelector((store) => store.userReducer, shallowEqual);
+  const { userData, error, isLoading } = useSelector((store) => store.user, shallowEqual);
   const [value, setValue] = useState('1');
 
   const dispatch = useDispatch();

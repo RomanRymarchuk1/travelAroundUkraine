@@ -26,7 +26,7 @@ const CartItemsList = styled((props) => <Stack component="ul" {...props} />)(({ 
 
 const CartPage = () => {
   const dispatch = useDispatch();
-  const isLogin = useSelector((store) => store.userReducer.isLogin);
+  const isLogin = useSelector((store) => store.user.isLogin);
   const cart = useSelector((store) => store.cart.data);
 
   useEffect(() => {
