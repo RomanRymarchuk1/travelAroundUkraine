@@ -33,6 +33,34 @@ const CartPage = () => {
     dispatch(fetchCart(isLogin));
   }, []);
 
+  // components saved into constants
+  const cartContentWrapper = (
+    <ContentWrapper>
+      <CartItemsList>
+        {cart.map(({ product: { imageUrls, name, currentPrice, duration, itemNo, _id }, cartQuantity }) => (
+          <li key={_id}>
+            <CartItem
+              imageUrls={imageUrls}
+              name={name}
+              currentPrice={currentPrice}
+              duration={duration}
+              cartQuantity={cartQuantity}
+              itemNo={itemNo}
+              id={_id}
+              isLogin={isLogin}
+            />
+          </li>
+        ))}
+        <li>
+          <CartItem />
+        </li>
+      </CartItemsList>
+      <Box flexGrow={1}>
+        <TotalInfoDialog cart={cart} />
+      </Box>
+    </ContentWrapper>
+  );
+
   return (
     <Box marginTop="100px" marginBottom="150px" component="section" paddingY={3}>
       <Container>
@@ -40,35 +68,12 @@ const CartPage = () => {
           Cart
         </Typography>
 
-        {!cart.length ? (
+        {cart.length ? (
+          cartContentWrapper
+        ) : (
           <Typography variant="h2" align="center">
             Your cart is empty!
           </Typography>
-        ) : (
-          <ContentWrapper>
-            <CartItemsList>
-              {cart.map(({ product: { imageUrls, name, currentPrice, duration, itemNo, _id }, cartQuantity }) => (
-                <li key={_id}>
-                  <CartItem
-                    imageUrls={imageUrls}
-                    name={name}
-                    currentPrice={currentPrice}
-                    duration={duration}
-                    cartQuantity={cartQuantity}
-                    itemNo={itemNo}
-                    id={_id}
-                    isLogin={isLogin}
-                  />
-                </li>
-              ))}
-              <li>
-                <CartItem />
-              </li>
-            </CartItemsList>
-            <Box flexGrow={1}>
-              <TotalInfoDialog cart={cart} />
-            </Box>
-          </ContentWrapper>
         )}
       </Container>
     </Box>
