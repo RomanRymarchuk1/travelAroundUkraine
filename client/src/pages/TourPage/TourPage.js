@@ -149,6 +149,78 @@ const TourPage = () => {
     dispatch(fetchTour(itemNo));
   }, []);
 
+  // components saved into constants
+  const asideTourInfoDialog = (
+    <Box component="aside" sx={{ maxWidth: '370px', width: '100%' }}>
+      <TourInfoDialog
+        dates={dates}
+        professionalGuide={professionalGuide}
+        accommodation={accommodation}
+        meals={meals}
+        transferAlongTheRoute={transferAlongTheRoute}
+        travelInsurance={travelInsurance}
+        departs={departs}
+        duration={duration}
+        returns={returns}
+        currentPrice={currentPrice}
+        id={_id}
+        itemNo={itemNo}
+      />
+    </Box>
+  );
+
+  const mobileTourInfoDialog = (
+    <MobileDialogWrapper ref={dialogRef}>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Cost>€{currentPrice}</Cost>
+        <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
+          More info
+        </Button>
+      </Stack>
+      <Dialog open={isOpen} onClose={handleCloseDialog} hideBackdrop fullScreen>
+        <TourInfoDialog
+          dates={dates}
+          professionalGuide={professionalGuide}
+          accommodation={accommodation}
+          meals={meals}
+          transferAlongTheRoute={transferAlongTheRoute}
+          travelInsurance={travelInsurance}
+          departs={departs}
+          duration={duration}
+          returns={returns}
+          currentPrice={currentPrice}
+          id={_id}
+          itemNo={itemNo}
+          closeButton
+          handleClose={handleCloseDialog}
+        />
+      </Dialog>
+    </MobileDialogWrapper>
+  );
+
+  const slideInfoBar = (
+    <Slide in={!inView} direction="up" mountOnEnter unmountOnExit>
+      <FloatingDialog>
+        <Container>
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Cost>€{currentPrice}</Cost>
+            <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
+              More info
+            </Button>
+          </Stack>
+        </Container>
+      </FloatingDialog>
+    </Slide>
+  );
+
+  let reasonsToChooseArr;
+
+  if (reasons) {
+    reasonsToChooseArr = reasons.map((item, index) => (
+      <TourReasonToChoose description={item} number={index + 1} key={item} />
+    ));
+  }
+
   return (
     <>
       <HeaderContent>
@@ -188,24 +260,7 @@ const TourPage = () => {
       <MainContent>
         <Container>
           <ContentWrapper>
-            {matchesMediaQuery ? (
-              <Box component="aside" sx={{ maxWidth: '370px', width: '100%' }}>
-                <TourInfoDialog
-                  dates={dates}
-                  professionalGuide={professionalGuide}
-                  accommodation={accommodation}
-                  meals={meals}
-                  transferAlongTheRoute={transferAlongTheRoute}
-                  travelInsurance={travelInsurance}
-                  departs={departs}
-                  duration={duration}
-                  returns={returns}
-                  currentPrice={currentPrice}
-                  id={_id}
-                  itemNo={itemNo}
-                />
-              </Box>
-            ) : null}
+            {matchesMediaQuery ? asideTourInfoDialog : null}
 
             <Box sx={{ flex: 1 }}>
               <Section id="about-tour">
@@ -218,61 +273,17 @@ const TourPage = () => {
               <Section id="reasons-to-choose">
                 <TourAccordion id="reasons-to-choose" title="Reasons to choose our tour">
                   <Stack direction="row" gap={4} flexWrap="wrap" mt={2} pl={2}>
-                    {reasons
-                      ? reasons.map((item, index) => (
-                          <TourReasonToChoose description={item} number={index + 1} key={item} />
-                        ))
-                      : null}
+                    {reasons ? reasonsToChooseArr : null}
                   </Stack>
                 </TourAccordion>
               </Section>
             </Box>
           </ContentWrapper>
 
-          {!matchesMediaQuery ? (
-            <MobileDialogWrapper ref={dialogRef}>
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Cost>€{currentPrice}</Cost>
-                <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
-                  More info
-                </Button>
-              </Stack>
-              <Dialog open={isOpen} onClose={handleCloseDialog} hideBackdrop fullScreen>
-                <TourInfoDialog
-                  dates={dates}
-                  professionalGuide={professionalGuide}
-                  accommodation={accommodation}
-                  meals={meals}
-                  transferAlongTheRoute={transferAlongTheRoute}
-                  travelInsurance={travelInsurance}
-                  departs={departs}
-                  duration={duration}
-                  returns={returns}
-                  currentPrice={currentPrice}
-                  id={_id}
-                  itemNo={itemNo}
-                  closeButton
-                  handleClose={handleCloseDialog}
-                />
-              </Dialog>
-            </MobileDialogWrapper>
-          ) : null}
+          {matchesMediaQuery ? null : mobileTourInfoDialog}
         </Container>
 
-        {!matchesMediaQuery ? (
-          <Slide in={!inView} direction="up" mountOnEnter unmountOnExit>
-            <FloatingDialog>
-              <Container>
-                <Stack direction="row" justifyContent="space-between" alignItems="center">
-                  <Cost>€{currentPrice}</Cost>
-                  <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
-                    More info
-                  </Button>
-                </Stack>
-              </Container>
-            </FloatingDialog>
-          </Slide>
-        ) : null}
+        {matchesMediaQuery ? null : slideInfoBar}
       </MainContent>
     </>
   );
