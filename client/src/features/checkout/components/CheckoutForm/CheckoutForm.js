@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect } from 'react';
 // Form components
 import { Formik, Form } from 'formik';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -17,12 +17,18 @@ import {
 } from '../../../../store/slices/orderSlice/orderSlice';
 // Child Forms and model
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
-import { initialValues, validationSchema } from '../../data';
+import { validationSchema } from '../../data';
+import setInitialValue from '../../utils/setInitialValue';
+
+import { fetchUserInfo } from '../../../../store/slices/userSlice/userSlice';
 
 const steps = ['User Details', 'Shipping Address', 'Payment Details'];
 
 const CheckoutForm = () => {
   const { currentStep, isLoading } = useSelector((state) => state.order, shallowEqual);
+  const isLogin = useSelector((store) => store.user.isLogin);
+  const userData = useSelector((store) => store.user.userData);
+
   const dispatch = useDispatch();
 
   const lastStep = steps.length - 1;
@@ -51,6 +57,12 @@ const CheckoutForm = () => {
     }
   };
 
+  useEffect(() => {
+    if (isLogin) {
+      dispatch(fetchUserInfo());
+    }
+  }, []);
+
   return (
     <>
       <Stepper activeStep={currentStep} alternativeLabel sx={{ mb: '100px' }}>
@@ -64,7 +76,11 @@ const CheckoutForm = () => {
       {currentStep === steps.length ? (
         <CheckoutSummary />
       ) : (
-        <Formik initialValues={initialValues} validationSchema={currentValidationSchema} onSubmit={formSubmitHandler}>
+        <Formik
+          initialValues={setInitialValue(isLogin, userData)}
+          validationSchema={currentValidationSchema}
+          onSubmit={formSubmitHandler}
+        >
           {({ isSubmitting }) => (
             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
               <Form>
