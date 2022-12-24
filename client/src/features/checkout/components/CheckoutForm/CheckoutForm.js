@@ -1,14 +1,14 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
-// Form components
+// Formik
 import { Formik, Form } from 'formik';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { enAU } from 'date-fns/locale';
 // MUI Components
-import { Stepper, Step, StepLabel, Button, CircularProgress, Box } from '@mui/material';
-// Redux store
+import { Stepper, Step, StepLabel } from '@mui/material';
+// Redux
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { fetchUserInfo } from '../../../../store/slices/userSlice/userSlice';
 import {
   increaseStep,
   decreaseStep,
@@ -17,10 +17,9 @@ import {
 } from '../../../../store/slices/orderSlice/orderSlice';
 // Child Forms and model
 import { UserDetailsForm, ShippingAddressForm, PaymentForm, PaymentSuccess, CheckoutSummary } from '..';
+import FormBttnContainer from '../../../../components/FormBttnContainer/FormBttnContainer';
 import { validationSchema } from '../../data';
 import setInitialValue from '../../utils/setInitialValue';
-
-import { fetchUserInfo } from '../../../../store/slices/userSlice/userSlice';
 
 const steps = ['User Details', 'Shipping Address', 'Payment Details'];
 
@@ -34,17 +33,17 @@ const CheckoutForm = () => {
   const lastStep = steps.length - 1;
   const currentValidationSchema = validationSchema[currentStep];
 
-  const GoToNextStep = () => {
+  const goToNextStep = () => {
     dispatch(increaseStep());
   };
 
-  const GoToPrevStep = () => {
+  const goToPrevStep = () => {
     dispatch(decreaseStep());
   };
 
   const formSubmitHandler = async (values) => {
     if (currentStep !== lastStep) {
-      GoToNextStep();
+      goToNextStep();
       return;
     }
 
@@ -85,24 +84,20 @@ const CheckoutForm = () => {
             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enAU}>
               <Form>
                 {currentStep === 0 && <UserDetailsForm />}
-                {currentStep === 1 && <ShippingAddressForm />}
-                {currentStep === 2 && <PaymentForm />}
-                <Box sx={{ display: 'flex', justifyContent: 'center', columnGap: 3, position: 'relative' }}>
-                  {currentStep !== 0 && !isSubmitting && <Button onClick={GoToPrevStep}>Back</Button>}
 
-                  {!isLoading ? (
-                    <Button disabled={isSubmitting} type="submit">
-                      {currentStep !== lastStep ? 'Continue' : 'Confirm'}
-                    </Button>
-                  ) : (
-                    <CircularProgress
-                      size={50}
-                      sx={{
-                        color: 'primary.dark',
-                      }}
-                    />
-                  )}
-                </Box>
+                {currentStep === 1 && <ShippingAddressForm />}
+
+                {currentStep === 2 && <PaymentForm />}
+
+                <FormBttnContainer
+                  currentStep={currentStep}
+                  lastStep={lastStep}
+                  isLoading={isLoading}
+                  isSubmitting={isSubmitting}
+                  goToPrevStep={goToPrevStep}
+                  bttnText="Continue"
+                  bttnLastStepText="Confirm"
+                />
               </Form>
             </LocalizationProvider>
           )}
