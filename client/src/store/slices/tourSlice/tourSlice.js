@@ -1,14 +1,5 @@
-/* eslint-disable no-unused-vars */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import getProduct from '../../../api/getProduct';
-
-// export const { setTour } = tourSlice.actions;
-
-// export const fetchTour = (itemNo) => async (dispatch) => {
-//   const data = await getProduct(itemNo);
-
-//   dispatch(setTour(data));
-// };
 
 const initialState = {
   data: {},
