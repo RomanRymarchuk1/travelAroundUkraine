@@ -8,7 +8,6 @@ import { UserList, UserOrders } from '../../features/User/components';
 
 const containerSX = {
   marginTop: { xs: '120px', tablet: '180px' },
-  width: '75%',
   py: '20px !important',
   backgroundColor: grey.A100,
   borderRadius: '20px',

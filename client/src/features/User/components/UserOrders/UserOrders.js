@@ -12,15 +12,6 @@ const preloaderSX = {
   height: '100px !important',
 };
 
-const OrderListSX = {
-  listStyleType: 'none',
-  p: '5%',
-  overflowY: 'scroll',
-  height: 'auto',
-  maxHeight: '450px',
-  borderRadius: '20px',
-};
-
 const emptyOrderListSX = {
   display: 'flex',
   justifyContent: 'center',
@@ -60,23 +51,19 @@ const UserOrders = () => {
     </Paper>
   );
 
-  const orderList = (
-    <Paper component="ul" sx={OrderListSX}>
-      {orders &&
-        orders.map(({ date, orderNo, products, totalSum }) => (
-          <Order totalSum={totalSum} products={products} key={orderNo} date={date.split('T')[0]} orderNo={orderNo} />
-        ))}
-    </Paper>
-  );
+  const orderList =
+    orders &&
+    orders.map(({ date, orderNo, products, totalSum }) => (
+      <Order totalSum={totalSum} products={products} key={orderNo} date={date.split('T')[0]} orderNo={orderNo} />
+    ));
 
-  if (orders) return orders.length === 0 ? emptyOrderList : orderList;
+  if (isOrdersLoading) return <CircularProgress sx={preloaderSX} />;
 
-  return (
-    <>
-      {isOrdersLoading && <CircularProgress sx={preloaderSX} />}
-      {ordersError && <Typography>{ordersError}</Typography>}
-    </>
-  );
+  if (ordersError) return <Typography>{ordersError}</Typography>;
+
+  if (!orders || orders.length === 0) return emptyOrderList;
+
+  return orderList;
 };
 
 export default UserOrders;

@@ -21,10 +21,12 @@ const Order = ({ totalSum, orderNo, date, products }) => {
     </Box>
   );
 
+  const orderInfoTypographySX = { color: 'primary.main', fontSize: { tablet: '18px' } };
+
   const orderInfo = (
-    <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-      <Typography>Date: {date}</Typography>
-      <Typography>Total price: {totalSum}€</Typography>
+    <Box sx={{ display: 'flex', justifyContent: 'space-around', py: '3%' }}>
+      <Typography sx={orderInfoTypographySX}>Date: {date}</Typography>
+      <Typography sx={orderInfoTypographySX}>Total price: {totalSum}€</Typography>
     </Box>
   );
 
@@ -33,7 +35,7 @@ const Order = ({ totalSum, orderNo, date, products }) => {
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>Order №{orderNo}</Typography>
       </AccordionSummary>
-      <AccordionDetails>{productsList}</AccordionDetails>
+      <AccordionDetails sx={{ overflowY: 'scroll', maxHeight: '300px' }}>{productsList}</AccordionDetails>
       {orderInfo}
     </Accordion>
   );
