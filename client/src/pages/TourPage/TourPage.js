@@ -117,7 +117,10 @@ const TourPage = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [dialogRef, inView] = useInView({ root: null, rootMargin: '0px', threshold: 0.1 });
+  const [dialogRef, inView, entry] = useInView({ root: null, rootMargin: '0px', threshold: 0.1 });
+
+  // checks if dialog is in view and has positive y coordinate
+  const shouldBeVisible = !inView && entry?.boundingClientRect.y > 0;
 
   const handleOpenDialog = () => setIsOpen(true);
   const handleCloseDialog = () => setIsOpen(false);
@@ -260,7 +263,7 @@ const TourPage = () => {
         </Container>
 
         {!matchesMediaQuery ? (
-          <Slide in={!inView} direction="up" mountOnEnter unmountOnExit>
+          <Slide in={shouldBeVisible} direction="up" mountOnEnter unmountOnExit>
             <FloatingDialog>
               <Container>
                 <Stack direction="row" justifyContent="space-between" alignItems="center">
