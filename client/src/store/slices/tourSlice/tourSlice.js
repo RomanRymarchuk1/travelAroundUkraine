@@ -7,10 +7,9 @@ const initialState = {
   error: null,
 };
 
-export const fetchTour = createAsyncThunk('order/fetchTour', async (itemNo, { rejectWithValue }) => {
+export const fetchTour = createAsyncThunk('tour/fetchTour', async (itemNo, { rejectWithValue }) => {
   try {
-    const data = await getProduct(itemNo);
-    return data;
+    return await getProduct(itemNo);
   } catch (err) {
     return rejectWithValue('Something wrong happened, please reload the page or try again later.');
   }
