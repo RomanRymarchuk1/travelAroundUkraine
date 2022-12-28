@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Box, Container, Stack, styled, Typography } from '@mui/material';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCart } from '../../store/slices/cartSlice/cartSlice';
+import { fetchCart, setCartFromLocal } from '../../store/slices/cartSlice/cartSlice';
 
 import { CartItem, TotalInfoDialog } from '../../features/Cart/components';
 
@@ -30,7 +30,8 @@ const CartPage = () => {
   const cart = useSelector((store) => store.cart.data);
 
   useEffect(() => {
-    dispatch(fetchCart(isLogin));
+    // dispatching the thunk function without a payload wont work properly when receiving arguments in the createAsyncThunk, to be inspected later
+    isLogin ? dispatch(fetchCart('testLoad')) : dispatch(setCartFromLocal());
   }, []);
 
   return (
