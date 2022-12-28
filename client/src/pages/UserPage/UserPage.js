@@ -13,7 +13,6 @@ const containerSX = {
   borderRadius: '20px',
   marginBottom: '100px',
 };
-
 const preloaderSX = {
   display: 'block',
   m: '15% auto',
@@ -35,13 +34,10 @@ const buttonSX = {
 const UserPage = () => {
   const { userData, error, isLoading } = useSelector((store) => store.userReducer, shallowEqual);
   const [value, setValue] = useState('1');
-
   const dispatch = useDispatch();
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   useEffect(() => {
     if (!userData) dispatch(fetchUserInfo());
   }, []);
@@ -99,5 +95,4 @@ const UserPage = () => {
     </Container>
   );
 };
-
 export default UserPage;
