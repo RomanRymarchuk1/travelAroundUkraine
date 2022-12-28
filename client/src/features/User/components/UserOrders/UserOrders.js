@@ -26,7 +26,7 @@ const emptyOrderListMessageSX = {
 };
 
 const UserOrders = () => {
-  const { orders, ordersError, isOrdersLoading } = useSelector((store) => store.userReducer, shallowEqual);
+  const { orders, ordersError, isOrdersLoading } = useSelector((store) => store.user, shallowEqual);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
