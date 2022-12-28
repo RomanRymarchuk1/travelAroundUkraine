@@ -117,7 +117,10 @@ const TourPage = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [dialogRef, inView] = useInView({ root: null, rootMargin: '0px', threshold: 0.1 });
+  const [dialogRef, inView, entry] = useInView({ root: null, rootMargin: '0px', threshold: 0.1 });
+
+  // checks if dialog is in view and has positive y coordinate
+  const shouldBeVisible = !inView && entry?.boundingClientRect.y > 0;
 
   const handleOpenDialog = () => setIsOpen(true);
   const handleCloseDialog = () => setIsOpen(false);
