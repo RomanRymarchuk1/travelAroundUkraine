@@ -30,8 +30,7 @@ const CartPage = () => {
   const cart = useSelector((store) => store.cart.data);
 
   useEffect(() => {
-    // dispatching the thunk function without a payload wont work properly when receiving arguments in the createAsyncThunk, to be inspected later
-    isLogin ? dispatch(fetchCart('testLoad')) : dispatch(setCartFromLocal());
+    isLogin ? dispatch(fetchCart()) : dispatch(setCartFromLocal());
   }, []);
 
   // components saved into constants

@@ -15,7 +15,7 @@ const initialState = {
  * @param {string} testLoad - a test payload since the createAsyncThunk functions doesnt work properly if not supplied with payload, to be inspected later.
  * @returns an object which containts a products array
  */
-export const fetchCart = createAsyncThunk('cart/fetchCart', async (testLoad, { rejectWithValue }) => {
+export const fetchCart = createAsyncThunk('cart/fetchCart', async (_, { rejectWithValue }) => {
   try {
     const { data } = await axiosConfig('/cart');
     return data;
@@ -27,7 +27,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async (testLoad, { r
 
 /**
  * deletes online cart from DB
- * @returns nothing
+ * @returns void
  */
 
 export const deleteOnlineCart = createAsyncThunk('cart/deleteOnlineCart', async ({ rejectWithValue }) => {
@@ -128,10 +128,6 @@ const cartSlice = createSlice({
       const index = state.data.findIndex((item) => item.product._id === action.payload);
       state.data.splice(index, 1);
       writeToLocalStorage('cart', state.data);
-    },
-
-    setIsLoading: (state, action) => {
-      state.isLoading = action.payload;
     },
   },
 
