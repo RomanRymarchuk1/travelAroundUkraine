@@ -1,3 +1,4 @@
+/* eslint-disable no-unneeded-ternary */
 import {
   alpha,
   Box,
@@ -148,6 +149,8 @@ const TourPage = () => {
     _id,
   } = useSelector((store) => store.tour.data);
 
+  const error = useSelector((store) => store.tour.error);
+
   useEffect(() => {
     dispatch(fetchTour(itemNo));
   }, []);
@@ -240,7 +243,8 @@ const TourPage = () => {
               },
             }}
           >
-            {name}
+            {/* temporary UI which will revised after tour page refactor pull request is approved */}
+            {error ? error : name}
           </Typography>
           <Stack direction="row" justifyContent="center" alignItems="center" mb={3}>
             <Typography>{season} / </Typography>

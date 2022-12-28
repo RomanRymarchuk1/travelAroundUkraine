@@ -9,7 +9,7 @@ const getProduct = async (tourId) => {
     }
   } catch (err) {
     console.error(err.message);
-    return err;
+    throw err;
   }
 };
 
