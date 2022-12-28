@@ -205,7 +205,7 @@ const TourPage = () => {
   );
 
   const slideInfoBar = (
-    <Slide in={!inView} direction="up" mountOnEnter unmountOnExit>
+    <Slide in={shouldBeVisible} direction="up" mountOnEnter unmountOnExit>
       <FloatingDialog>
         <Container>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
