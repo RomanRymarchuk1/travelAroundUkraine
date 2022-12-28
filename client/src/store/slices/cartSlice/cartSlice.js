@@ -10,6 +10,11 @@ const initialState = {
   error: null,
 };
 
+/**
+ * fetches online cart from DB
+ * @param {string} testLoad - a test payload since the createAsyncThunk functions doesnt work properly if not supplied with payload, to be inspected later.
+ * @returns an object which containts a products array
+ */
 export const fetchCart = createAsyncThunk('cart/fetchCart', async (testLoad, { rejectWithValue }) => {
   try {
     const { data } = await axiosConfig('/cart');
@@ -20,6 +25,11 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async (testLoad, { r
   }
 });
 
+/**
+ * deletes online cart from DB
+ * @returns nothing
+ */
+
 export const deleteOnlineCart = createAsyncThunk('cart/deleteOnlineCart', async ({ rejectWithValue }) => {
   try {
     await axiosConfig.delete('/cart');
@@ -28,6 +38,12 @@ export const deleteOnlineCart = createAsyncThunk('cart/deleteOnlineCart', async 
     return rejectWithValue('Something went wrong. Please try again later.');
   }
 });
+
+/**
+ * fetches online cart from DB
+ * @param {string} productId - the product's unique id property.
+ * @returns an object which containts a products array after being updated with the product added or a products cartQuantity property increased.
+ */
 
 export const addProduct = createAsyncThunk('cart/addProduct', async (productId, { rejectWithValue }) => {
   try {
@@ -39,6 +55,12 @@ export const addProduct = createAsyncThunk('cart/addProduct', async (productId, 
   }
 });
 
+/**
+ * fetches online cart from DB
+ * @param {string} productId - the product's unique id property.
+ * @returns an object which containts a products array after being updated with the product quantity decreased.
+ */
+
 export const decreaseQuantity = createAsyncThunk('cart/decreaseQuantity', async (productId, { rejectWithValue }) => {
   try {
     const { data } = await axiosConfig.delete(`/cart/product/${productId}`);
@@ -48,6 +70,12 @@ export const decreaseQuantity = createAsyncThunk('cart/decreaseQuantity', async 
     return rejectWithValue('Something went wrong. Please try again later.');
   }
 });
+
+/**
+ * fetches online cart from DB
+ * @param {string} productId - the product's unique id property.
+ * @returns an object which containts a products array after being updated after a the product deletion.
+ */
 
 export const deleteProduct = createAsyncThunk('cart/deleteProduct', async (productId, { rejectWithValue }) => {
   try {
@@ -59,6 +87,7 @@ export const deleteProduct = createAsyncThunk('cart/deleteProduct', async (produ
   }
 });
 
+// migrate logic is blocked till the favorite migrte logic is completed
 export const migrateCart = createAsyncThunk('cart/migrateCart', async () => {});
 
 const cartSlice = createSlice({
@@ -180,11 +209,12 @@ const cartSlice = createSlice({
     });
 
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      // arg in this case is the product unique id which was passed as an argument to the thunk function
       const { arg } = action.meta;
       const { products } = action.payload;
-      console.log(products);
       const { _id } = products[0].product;
 
+      // the below condition states that if there is only one product in the products Array, and its id matches the unique id passed to the thunk function, that means that this is the last and only product in the products array and after deletion the cart will be empty.
       if (products.length === 1 && _id === arg) {
         state.data = [];
       } else state.data = products;
