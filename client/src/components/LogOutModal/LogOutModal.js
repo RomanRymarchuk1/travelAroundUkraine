@@ -6,7 +6,7 @@ import { clearUserData, setIsModalOpen, setIsLogin } from '../../store/slices/us
 import { deleteCart } from '../../store/slices/cartSlice/cartSlice';
 
 const LogOutModal = () => {
-  const { isModalOpen } = useSelector((store) => store.userReducer);
+  const { isModalOpen } = useSelector((store) => store.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

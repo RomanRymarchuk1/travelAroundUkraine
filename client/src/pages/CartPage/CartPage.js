@@ -26,13 +26,41 @@ const CartItemsList = styled((props) => <Stack component="ul" {...props} />)(({ 
 
 const CartPage = () => {
   const dispatch = useDispatch();
-  const isLogin = useSelector((store) => store.userReducer.isLogin);
+  const isLogin = useSelector((store) => store.user.isLogin);
   const cart = useSelector((store) => store.cart.data);
 
   useEffect(() => {
     // dispatching the thunk function without a payload wont work properly when receiving arguments in the createAsyncThunk, to be inspected later
     isLogin ? dispatch(fetchCart('testLoad')) : dispatch(setCartFromLocal());
   }, []);
+
+  // components saved into constants
+  const cartContentWrapper = (
+    <ContentWrapper>
+      <CartItemsList>
+        {cart.map(({ product: { imageUrls, name, currentPrice, duration, itemNo, _id }, cartQuantity }) => (
+          <li key={_id}>
+            <CartItem
+              imageUrls={imageUrls}
+              name={name}
+              currentPrice={currentPrice}
+              duration={duration}
+              cartQuantity={cartQuantity}
+              itemNo={itemNo}
+              id={_id}
+              isLogin={isLogin}
+            />
+          </li>
+        ))}
+        <li>
+          <CartItem />
+        </li>
+      </CartItemsList>
+      <Box flexGrow={1}>
+        <TotalInfoDialog cart={cart} />
+      </Box>
+    </ContentWrapper>
+  );
 
   return (
     <Box marginTop="100px" marginBottom="150px" component="section" paddingY={3}>
@@ -41,35 +69,12 @@ const CartPage = () => {
           Cart
         </Typography>
 
-        {!cart.length ? (
+        {cart.length ? (
+          cartContentWrapper
+        ) : (
           <Typography variant="h2" align="center">
             Your cart is empty!
           </Typography>
-        ) : (
-          <ContentWrapper>
-            <CartItemsList>
-              {cart.map(({ product: { imageUrls, name, currentPrice, duration, itemNo, _id }, cartQuantity }) => (
-                <li key={_id}>
-                  <CartItem
-                    imageUrls={imageUrls}
-                    name={name}
-                    currentPrice={currentPrice}
-                    duration={duration}
-                    cartQuantity={cartQuantity}
-                    itemNo={itemNo}
-                    id={_id}
-                    isLogin={isLogin}
-                  />
-                </li>
-              ))}
-              <li>
-                <CartItem />
-              </li>
-            </CartItemsList>
-            <Box flexGrow={1}>
-              <TotalInfoDialog cart={cart} />
-            </Box>
-          </ContentWrapper>
         )}
       </Container>
     </Box>

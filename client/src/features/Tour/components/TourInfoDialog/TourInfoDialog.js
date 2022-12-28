@@ -115,7 +115,7 @@ const TourInfoDialog = ({
   const [currency, setCurrency] = useState('eur');
   const included = convertData(professionalGuide, accommodation, meals, transferAlongTheRoute, travelInsurance);
   const dispatch = useDispatch();
-  const isLogin = useSelector((store) => store.userReducer.isLogin);
+  const isLogin = useSelector((store) => store.user.isLogin);
 
   const addBttnHandler = async () => {
     if (isLogin) {
