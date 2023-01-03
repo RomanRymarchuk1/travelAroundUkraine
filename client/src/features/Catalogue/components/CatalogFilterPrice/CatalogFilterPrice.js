@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { styled, alpha, Box, Slider, InputBase } from '@mui/material';
 import { FilterAccordion } from '..';
 import { setPrices } from '../../../../store/slices/filterSlice/filterSlice';
-// import { getProducts } from '../../../../store/slices/catalogueSlice/catalogueSlice';
+
 
 const FilterInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
@@ -37,25 +36,19 @@ const CatalogFilterPrice = () => {
   const prices = useSelector((store) => store.filter.prices);
   const [minPrice, maxPrice] = prices;
 
-  const getAllToursPrices = async () => {
-    try {
-      const { data } = await axios('/products');
-      const allPrices = data.map((tour) => tour.currentPrice);
+  const products = useSelector((state) => state.catalogue.products, shallowEqual);
+  const allPrices = products.map((el) => el.currentPrice);
+
+  useEffect(() => {
+    if (allPrices.length > 0) {
       minTourPrice = Math.min.apply(null, allPrices);
       maxTourPrice = Math.max.apply(null, allPrices);
       dispatch(setPrices([Math.max(minPrice, minTourPrice), Math.min(maxPrice, maxTourPrice)]));
       if (maxPrice === 0) {
         dispatch(setPrices([Math.max(minPrice, minTourPrice), maxTourPrice]));
       }
-      return allPrices;
-    } catch (err) {
-      return console.log(err);
     }
-  };
-
-  useEffect(() => {
-    getAllToursPrices();
-  }, []);
+  }, [products]);
 
   const handleChange = (event, newValue) => {
     dispatch(setPrices(newValue));
