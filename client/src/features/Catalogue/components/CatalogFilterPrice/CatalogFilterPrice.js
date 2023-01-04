@@ -4,7 +4,6 @@ import { styled, alpha, Box, Slider, InputBase } from '@mui/material';
 import { FilterAccordion } from '..';
 import { setPrices } from '../../../../store/slices/filterSlice/filterSlice';
 
-
 const FilterInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     borderRadius: 40,
@@ -86,6 +85,8 @@ const CatalogFilterPrice = () => {
           value={prices}
           onChange={handleChange}
           getAriaValueText={valuetext}
+          valueLabelDisplay="auto"
+          disableSwap
         />
       </Box>
     </FilterAccordion>
