@@ -231,7 +231,6 @@ export const {
   deleteCart,
   decreaseProductFromLocal,
   delProductFromLocal,
-  setIsLoading,
 } = cartSlice.actions;
 
 // export const migrateCart = () => async (dispatch) => {
