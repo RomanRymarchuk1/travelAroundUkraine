@@ -3,7 +3,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { Grid, Typography } from '@mui/material';
 import { CatalogTourCard } from '../../features/Catalogue/components';
 import { gettWishList } from '../../store/slices/inFavoritesSlice/inFavoritesSlice';
-import { setIsLoading, getProducts } from '../../store/slices/catalogueSlice/catalogueSlice';
+import { fetchCatalogue } from '../../store/slices/catalogueSlice/catalogueSlice';
 
 const FavoritesPage = () => {
   const dispatch = useDispatch();
@@ -12,9 +12,9 @@ const FavoritesPage = () => {
   const isLogin = useSelector((store) => store.user.isLogin);
   useEffect(() => {
     if (products.length <= 0) {
-      dispatch(setIsLoading(true));
-      dispatch(getProducts());
-      dispatch(setIsLoading(false));
+      // dispatch(setIsLoading(true));
+      dispatch(fetchCatalogue());
+      // dispatch(setIsLoading(false));
     }
   }, []);
   useEffect(() => {
