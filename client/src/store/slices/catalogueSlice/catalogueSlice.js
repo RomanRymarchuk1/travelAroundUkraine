@@ -9,26 +9,25 @@ export const fetchCatalogueProducts = createAsyncThunk(
   'products/fetchCatalogueProducts',
   async (page, { rejectWithValue }) => {
     try {
-      const { data, status } = await axiosConfig.get(`products/filter?perPage=5&startPage=${page}`);
-      if (status >= 200 && status <= 300) {
-        return data;
-      }
+      const { data } = await axiosConfig.get(`products/filter?perPage=5&startPage=${page}`);
+      return data;
     } catch (err) {
       return rejectWithValue(err);
     }
   }
 );
 
-export const fetchPopularProducts = createAsyncThunk('products/isPopular', async (_, {rejectWithValue}) => {
-  try {
-    const { status, data } = await axiosConfig('/products/filter?isPopular=true');
-    if (status >= 200 && status <= 300) {
+export const fetchPopularProducts = createAsyncThunk(
+  'products/fetchPopularProducts ',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosConfig('/products/filter?isPopular=true');
       return data.products;
+    } catch (err) {
+      return rejectWithValue(err);
     }
-  } catch (err) {
-    return rejectWithValue(err);
   }
-});
+);
 
 const catalogueSlice = createSlice({
   name: 'products',
@@ -41,9 +40,6 @@ const catalogueSlice = createSlice({
     currentPage: 1,
   },
   reducers: {
-    setPopular: (state, action) => {
-      state.popular = action.payload;
-    },
     setCurrentPage: (state, action) => {
       state.currentPage = Number(action.payload);
     },
