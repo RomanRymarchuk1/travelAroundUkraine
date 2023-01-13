@@ -13,7 +13,7 @@ const initialState = {
 /**
  * fetches online cart from DB
  * @param {string} testLoad - a test payload since the createAsyncThunk functions doesnt work properly if not supplied with payload, to be inspected later.
- * @returns an object which containts a products array
+ * @returns an object which contains a products array
  */
 export const fetchCart = createAsyncThunk('cart/fetchCart', async (_, { rejectWithValue }) => {
   try {
@@ -40,9 +40,9 @@ export const deleteOnlineCart = createAsyncThunk('cart/deleteOnlineCart', async 
 });
 
 /**
- * fetches online cart from DB
+ * adds product to online cart
  * @param {string} productId - the product's unique id property.
- * @returns an object which containts a products array after being updated with the product added or a products cartQuantity property increased.
+ * @returns an object which containts an updated products array after the product added or a products cartQuantity property increased.
  */
 
 export const addProduct = createAsyncThunk('cart/addProduct', async (productId, { rejectWithValue }) => {
@@ -56,9 +56,9 @@ export const addProduct = createAsyncThunk('cart/addProduct', async (productId, 
 });
 
 /**
- * fetches online cart from DB
+ * decreases product quantity in online cart
  * @param {string} productId - the product's unique id property.
- * @returns an object which containts a products array after being updated with the product quantity decreased.
+ * @returns an object which contains an updated products array after the product quantity decreased.
  */
 
 export const decreaseQuantity = createAsyncThunk('cart/decreaseQuantity', async (productId, { rejectWithValue }) => {
@@ -72,9 +72,9 @@ export const decreaseQuantity = createAsyncThunk('cart/decreaseQuantity', async 
 });
 
 /**
- * fetches online cart from DB
+ * deletes product from online cart
  * @param {string} productId - the product's unique id property.
- * @returns an object which containts a products array after being updated after a the product deletion.
+ * @returns an object which contains an updated products array after the product deletion.
  */
 
 export const deleteProduct = createAsyncThunk('cart/deleteProduct', async (productId, { rejectWithValue }) => {
