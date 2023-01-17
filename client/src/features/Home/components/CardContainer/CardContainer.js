@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { Typography, styled, Container } from '@mui/material';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { getPopularProducts } from '../../../../store/slices/catalogueSlice/catalogueSlice';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { fetchPopularProducts } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 import { CardItem } from '..';
 import { SliderButton } from '../../../../components';
 
@@ -43,7 +43,7 @@ const CardContainer = () => {
   const popularProducts = useSelector((state) => state.catalogue.popular, shallowEqual);
 
   useEffect(() => {
-    dispatch(getPopularProducts());
+    dispatch(fetchPopularProducts());
   }, []);
 
   return (

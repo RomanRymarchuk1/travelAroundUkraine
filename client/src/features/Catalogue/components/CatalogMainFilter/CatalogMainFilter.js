@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 // import axios from 'axios';
 import { styled, Button, Typography, Stack } from '@mui/material';
@@ -13,7 +13,7 @@ import {
   setAllSeasons,
   fetchFilteredTours,
 } from '../../../../store/slices/filterSlice/filterSlice';
-import { getProducts, setIsLoading } from '../../../../store/slices/catalogueSlice/catalogueSlice';
+// import { fetchCatalogue } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 
 const FilterWrapper = styled(Stack)(({ theme }) => ({
   margin: '0 auto',
@@ -77,9 +77,9 @@ const CatalogMainFilter = () => {
   const duration = useSelector((store) => store.filter.duration);
   const seasons = useSelector((store) => store.filter.seasons.map((el) => (el ? el.toLowerCase() : el)));
 
-  useEffect(() => {
-    dispatch(getProducts());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchCatalogue());
+  // }, []);
 
   const filterTours = async () => {
     const filterPrices = () => {
@@ -103,10 +103,8 @@ const CatalogMainFilter = () => {
       params.set('season', seasons.concat('all seasons'));
     }
 
-    dispatch(setIsLoading(true));
     dispatch(setIsFilter(true));
     await dispatch(fetchFilteredTours(params));
-    dispatch(setIsLoading(false));
   };
 
   const resetFilter = () => {
