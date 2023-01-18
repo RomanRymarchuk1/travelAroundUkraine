@@ -68,7 +68,7 @@ const CataloguePage = () => {
                       No results for your request
                     </Typography>
                   ) : (
-                    products.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => {
+                    filteredTours.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => {
                       const checkForFavorites = inFavorites.find((itemId) => _id === itemId);
                       return (
                         <CatalogTourCard
@@ -86,6 +86,24 @@ const CataloguePage = () => {
                       );
                     })
                   )}
+                  {!isFilter &&
+                    products.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => {
+                      const checkForFavorites = inFavorites.find((itemId) => _id === itemId);
+                      return (
+                        <CatalogTourCard
+                          key={_id}
+                          name={name}
+                          description={description}
+                          currentPrice={currentPrice}
+                          duration={duration}
+                          imageUrls={imageUrls}
+                          itemNo={itemNo}
+                          id={_id}
+                          inFavorites={checkForFavorites ? !!checkForFavorites : false}
+                          inFavoritesCounter={inFavorites.length - 1}
+                        />
+                      );
+                    })}
                 </Stack>
               </Grid>
             </Grid>
