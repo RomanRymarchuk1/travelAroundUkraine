@@ -4,6 +4,7 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { styled, Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
+import { useSearchParams } from 'react-router-dom';
 import { CatalogFilterPrice, CatalogFilterDuration, CatalogFilterSeason } from '..';
 import {
   setPrices,
@@ -77,34 +78,51 @@ const CatalogMainFilter = () => {
   const duration = useSelector((store) => store.filter.duration);
   const seasons = useSelector((store) => store.filter.seasons.map((el) => (el ? el.toLowerCase() : el)));
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   // useEffect(() => {
   //   dispatch(fetchCatalogue());
   // }, []);
 
   const filterTours = async () => {
-    const filterPrices = () => {
-      if (minPrice > maxPrice) {
-        const reversePrices = [...prices].reverse();
-        dispatch(setPrices(reversePrices));
-        const filterPricesValues = allPrices.filter((price) => price >= maxPrice && price <= minPrice);
-        return filterPricesValues;
-      }
-      const filterPricesValues = allPrices.filter((price) => price >= minPrice && price <= maxPrice);
-      return filterPricesValues;
-    };
-
-    const params = new URLSearchParams();
-
-    params.set('currentPrice', filterPrices());
     if (duration.length > 0) {
-      params.set('duration', duration);
-    }
-    if (seasons.length > 0) {
-      params.set('season', seasons.concat('all seasons'));
+      searchParams.set('duration', duration.join(','));
+      setSearchParams(searchParams, { replace: true });
+    } else {
+      searchParams.delete('duration');
     }
 
-    dispatch(setIsFilter(true));
-    await dispatch(fetchFilteredTours(params));
+    if (seasons.length > 0) {
+      searchParams.set('seasons', seasons.join(','));
+      setSearchParams(searchParams, { replace: true });
+    } else {
+      searchParams.delete('seasons');
+    }
+
+    searchParams.set('minPrice', minPrice);
+    searchParams.set('maxPrice', maxPrice);
+    setSearchParams(searchParams, { replace: true });
+
+    // const filterPrices = () => {
+    //   if (minPrice > maxPrice) {
+    //     const reversePrices = [...prices].reverse();
+    //     dispatch(setPrices(reversePrices));
+    //     const filterPricesValues = allPrices.filter((price) => price >= maxPrice && price <= minPrice);
+    //     return filterPricesValues;
+    //   }
+    //   const filterPricesValues = allPrices.filter((price) => price >= minPrice && price <= maxPrice);
+    //   return filterPricesValues;
+    // };
+    // const params = new URLSearchParams();
+    // params.set('currentPrice', filterPrices());
+    // if (duration.length > 0) {
+    //   params.set('duration', duration);
+    // }
+    // if (seasons.length > 0) {
+    //   params.set('season', seasons.concat('all seasons'));
+    // }
+    // dispatch(setIsFilter(true));
+    await dispatch(fetchFilteredTours(searchParams));
   };
 
   const resetFilter = () => {
@@ -114,6 +132,7 @@ const CatalogMainFilter = () => {
     dispatch(setClearDuration([]));
     dispatch(setClearDuration([]));
     dispatch(setAllSeasons([]));
+    setSearchParams('');
   };
 
   return (
