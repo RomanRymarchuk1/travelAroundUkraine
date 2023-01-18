@@ -1,5 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+
+export const fetchFilteredTours = createAsyncThunk('filter/fetchFilteredTours', async (params) => {
+  try {
+    const { data } = await axios(`/products/filter?${params}`);
+    return data.products;
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 const initialState = {
   tours: [],
@@ -44,23 +53,27 @@ const filterSlice = createSlice({
       state.seasons = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchFilteredTours.fulfilled, (state, action) => {
+      state.isFilter = true;
+      state.tours = action.payload;
+    });
+  },
 });
 
 export const { setFilteredTours, setPrices, setIsFilter, setDuration, setSeasons, setAllSeasons, setClearDuration } =
   filterSlice.actions;
 
+// export const fetchFilteredTours = (params) => async (dispatch) => {
+//   try {
+//     const { data, status } = await axios(`/products/filter?${params}`);
 
-  export const fetchFilteredTours = (params) => async (dispatch) => {
-    try {
-      const { data, status } = await axios(`/products/filter?${params}`);
-  
-      if (status) {
-        dispatch(setFilteredTours(data.products));
-      }
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-  
+//     if (status) {
+//       dispatch(setFilteredTours(data.products));
+//     }
+//   } catch (err) {
+//     console.error(err.message);
+//   }
+// };
 
 export default filterSlice.reducer;
