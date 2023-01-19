@@ -121,7 +121,8 @@ const CatalogMainFilter = () => {
     // if (seasons.length > 0) {
     //   params.set('season', seasons.concat('all seasons'));
     // }
-    // dispatch(setIsFilter(true));
+
+    dispatch(setIsFilter(true));
     await dispatch(fetchFilteredTours(searchParams));
   };
 
