@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { styled, alpha, Box, Slider, InputBase } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 import { FilterAccordion } from '..';
 import { setPrices } from '../../../../store/slices/filterSlice/filterSlice';
 // import { getProducts } from '../../../../store/slices/catalogueSlice/catalogueSlice';
@@ -34,6 +35,8 @@ function valuetext(value) {
 const CatalogFilterPrice = () => {
   const dispatch = useDispatch();
 
+  const [searchParams] = useSearchParams();
+
   const prices = useSelector((store) => store.filter.prices);
   const [minPrice, maxPrice] = prices;
 
@@ -43,7 +46,16 @@ const CatalogFilterPrice = () => {
       const allPrices = data.map((tour) => tour.currentPrice);
       minTourPrice = Math.min.apply(null, allPrices);
       maxTourPrice = Math.max.apply(null, allPrices);
-      dispatch(setPrices([Math.max(minPrice, minTourPrice), Math.min(maxPrice, maxTourPrice)]));
+
+      const minPriceParam = Number(searchParams.get('minPrice'));
+      const maxPriceParam = Number(searchParams.get('maxPrice'));
+
+      dispatch(
+        setPrices([
+          minPriceParam ?? Math.max(minPrice, minTourPrice),
+          maxPriceParam ?? Math.min(maxPrice, maxTourPrice),
+        ])
+      );
       if (maxPrice === 0) {
         dispatch(setPrices([Math.max(minPrice, minTourPrice), maxTourPrice]));
       }
