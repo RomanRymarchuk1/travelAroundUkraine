@@ -52,8 +52,8 @@ const CatalogFilterPrice = () => {
 
       dispatch(
         setPrices([
-          minPriceParam ?? Math.max(minPrice, minTourPrice),
-          maxPriceParam ?? Math.min(maxPrice, maxTourPrice),
+          minPriceParam || Math.max(minPrice, minTourPrice),
+          maxPriceParam || Math.min(maxPrice, maxTourPrice),
         ])
       );
       if (maxPrice === 0) {
