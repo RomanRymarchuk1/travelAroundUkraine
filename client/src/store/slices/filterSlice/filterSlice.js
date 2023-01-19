@@ -55,7 +55,6 @@ const filterSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchFilteredTours.fulfilled, (state, action) => {
-      state.isFilter = true;
       state.tours = action.payload;
     });
   },
