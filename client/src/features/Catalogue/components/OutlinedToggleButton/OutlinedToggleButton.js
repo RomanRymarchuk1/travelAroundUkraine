@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { styled, alpha, ToggleButton } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 import { setDuration } from '../../../../store/slices/filterSlice/filterSlice';
 
 const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
@@ -36,12 +38,20 @@ const OutlinedToggleButton = ({ value, children }) => {
   const dispatch = useDispatch();
   const filterDuration = useSelector((store) => store.filter.duration);
 
+  const [searchParams] = useSearchParams();
+  const durationParam = searchParams.get('duration')?.split(',');
+
   const [selected, setSelected] = useState(filterDuration.includes(value));
 
   useEffect(() => {
-    setSelected(filterDuration.includes(value))      
+    setSelected(filterDuration.includes(value));
   }, [filterDuration]);
 
+  useEffect(() => {
+    if (durationParam?.includes(value)) {
+      dispatch(setDuration(value));
+    }
+  }, []);
 
   const filterDurations = (duration) => {
     setSelected((prev) => !prev);
@@ -49,7 +59,7 @@ const OutlinedToggleButton = ({ value, children }) => {
   };
 
   return (
-    <StyledToggleButton value={value} selected={selected} onChange={() => filterDurations(value)}>
+    <StyledToggleButton value={value} selected={selected} onChange={(e) => filterDurations(e.currentTarget.value)}>
       {children}
     </StyledToggleButton>
   );
