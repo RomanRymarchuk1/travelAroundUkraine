@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { styled, Stack, Box, Container, Typography, Pagination } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
-import { getProducts, setIsLoading } from '../../store/slices/catalogueSlice/catalogueSlice';
+import { fetchCatalogueProducts, setCurrentPage } from '../../store/slices/catalogueSlice/catalogueSlice';
 import { gettWishList } from '../../store/slices/inFavoritesSlice/inFavoritesSlice';
 import scrollToTop from '../../layout/utils/scrollToTop';
 
@@ -19,50 +19,32 @@ const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ t
   },
 }));
 
+// TO DO: fix the routing logic, all pagination pages routes has to be catalogue/page/pageNO
+
 const CataloguePage = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const isLoading = useSelector((state) => state.catalogue.isLoading);
   const inFavorites = useSelector((state) => state.favorites.inFavorites);
   const isLogin = useSelector((store) => store.user.isLogin);
-  const [currentPage, setCurrentPage] = useState(1);
-  const countriesPerPage = 5;
-  let lastItemIndex = currentPage * countriesPerPage;
-  let firstItemIndex = lastItemIndex - countriesPerPage;
-  let currentItems = products.slice(firstItemIndex, lastItemIndex);
-
+  const pages = useSelector((store) => store.catalogue.totalPages);
+  const currentPage = useSelector((store) => store.catalogue.currentPage);
   const isFilter = useSelector((state) => state.filter.isFilter);
-  const filteredTours = useSelector((state) => state.filter.tours);
-
-  if (isFilter && filteredTours.length > 0) {
-    currentItems = filteredTours.slice(firstItemIndex, lastItemIndex);
-  }
+  const filteredTours = useSelector((state) => state.filter.tours, shallowEqual);
+  const countriesPerPage = 5;
+  const totalPages = Math.round(pages / countriesPerPage);
 
   useEffect(() => {
-    if (products.length <= 0) {
-      dispatch(setIsLoading(true));
-      dispatch(getProducts());
-      dispatch(setIsLoading(false));
-    }
-  }, []);
+    dispatch(fetchCatalogueProducts(currentPage));
+  }, [currentPage]);
 
-  const setCountPagination = () => {
-    let num = products.length / countriesPerPage;
-    if (isFilter) {
-      num = filteredTours.length / countriesPerPage;
-    }
-    if (Number.isInteger(num)) {
-      return num;
-    }
-    return Math.floor(num) + 1;
-  };
   useEffect(() => {
     dispatch(gettWishList(isLogin));
   }, [isLogin]);
 
   return (
     <>
-      {isLoading === false ? (
+      {!isLoading ? (
         <Box sx={{ backgroundColor: '#EDEDED', paddingBottom: '150px' }}>
           <CatalogMainSection />
           <Container>
@@ -86,7 +68,7 @@ const CataloguePage = () => {
                       No results for your request
                     </Typography>
                   ) : (
-                    currentItems.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => {
+                    products.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => {
                       const checkForFavorites = inFavorites.find((itemId) => _id === itemId);
                       return (
                         <CatalogTourCard
@@ -110,19 +92,11 @@ const CataloguePage = () => {
           </Container>
           <Box sx={{ display: 'flex', justifyContent: 'center', pt: '50px' }}>
             <Pagination
-              count={setCountPagination()}
+              count={totalPages}
               color="primary"
-              page={currentPage}
-              onChange={(_, num) => {
-                setCurrentPage(num);
-                lastItemIndex = currentPage * countriesPerPage;
-                firstItemIndex = lastItemIndex - countriesPerPage;
-                currentItems = () => {
-                  if (!isFilter) {
-                    return products.slice(firstItemIndex, lastItemIndex);
-                  }
-                  return filteredTours.slice(firstItemIndex, lastItemIndex);
-                };
+              page={Number(currentPage)}
+              onClick={(e) => {
+                dispatch(setCurrentPage(Number(e.target.closest('button').textContent)));
                 scrollToTop();
               }}
             />

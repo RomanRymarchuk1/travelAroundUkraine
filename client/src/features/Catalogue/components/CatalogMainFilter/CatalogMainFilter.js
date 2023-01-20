@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch,
-   shallowEqual
-   } from 'react-redux';
-import {
-  useLocation,
-  // useParams
-} from 'react-router-dom';
+import axios from 'axios';
+
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { styled, Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
@@ -17,9 +14,8 @@ import {
   fetchFilteredTours,
   setFilterParams,
 } from '../../../../store/slices/filterSlice/filterSlice';
-import { getProducts, setIsLoading, 
-  // setIsLoading
-} from '../../../../store/slices/catalogueSlice/catalogueSlice';
+// import axiosConfig from '../../../../axiosConfig';
+
 
 const FilterWrapper = styled(Stack)(({ theme }) => ({
   margin: '0 auto',
@@ -78,12 +74,12 @@ const CatalogMainFilter = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const allPrices = [...new Set(products.map((tour) => tour.currentPrice))].sort((a, b) => a - b);
-  
+
+
   // const duration = useSelector((store) => store.filter.duration);
   // const seasons = useSelector((store) => store.filter.seasons.map((el) => (el ? el.toLowerCase() : el)));
   const filterParams = useSelector((store) => store.filter.filterParams);
-  console.log(filterParams);
-  // const isLoading = useSelector((state) => state.catalogue.isLoading);
+  // console.log(filterParams);
   // const isFilter = useSelector((state) => state.filter.isFilter);
   const location = useLocation();
 
@@ -95,28 +91,24 @@ const CatalogMainFilter = () => {
     } else {
       dispatch(setIsFilter(false));
       dispatch(setFilterParams({}));
-
     }
   }, [location.search]);
 
-
   useEffect(() => {
-    getProducts();
+    // console.log(products)
     if (Object.keys(filterParams).length !== 0) {
       const queryString = new URLSearchParams(filterParams).toString();
       const newUrl = new URL(`?${queryString}`, window.location);
       if (window.location.href !== newUrl.href) {
-        window.location.assign(newUrl); 
-        dispatch(setIsLoading(true))
+        window.location.assign(newUrl);
+        
       }
     }
   }, [filterParams]);
 
-
   const filterTours = async () => {
     const params = new URLSearchParams();
     if (allPrices.length > 0 && location.search) {
-      
       const priceFrom = Number(filterParams.price_from);
       const priceTo = Number(filterParams.price_to);
 
@@ -125,24 +117,20 @@ const CatalogMainFilter = () => {
         params.set('currentPrice', filterPrices);
       }
     }
-    console.log(params.toString());
-    
+    // console.log(params.toString());
+
     if (params.toString()) {
-      // dispatch(setIsLoading(true));
+      
       dispatch(setIsFilter(true));
       await dispatch(fetchFilteredTours(params));
-      // dispatch(setIsLoading(false));
+      
     }
   };
 
-
   useEffect(() => {
-    
     filterTours();
-    
   }, [products, filterParams]);
 
-  
   // const filterTours = async () => {
   //   const params = new URLSearchParams();
   //   params.set('currentPrice', filterPrices());
@@ -183,7 +171,7 @@ const CatalogMainFilter = () => {
       </Grid>
 
       {/* <ShowButton onClick={filterTours}>Filter</ShowButton> */}
-      <ResetButton >Reset filter</ResetButton>
+      <ResetButton>Reset filter</ResetButton>
     </FilterWrapper>
   );
 };
