@@ -27,20 +27,35 @@ const CataloguePage = () => {
   const isLoading = useSelector((state) => state.catalogue.isLoading);
   const inFavorites = useSelector((state) => state.favorites.inFavorites);
   const isLogin = useSelector((store) => store.user.isLogin);
-  const pages = useSelector((store) => store.catalogue.totalPages);
+  // const pages = useSelector((store) => store.catalogue.totalPages);
   const currentPage = useSelector((store) => store.catalogue.currentPage);
   const isFilter = useSelector((state) => state.filter.isFilter);
-  const filteredTours = useSelector((state) => state.filter.tours, shallowEqual);
+  const filteredTours = useSelector((state) => state.filter.tours);
   const countriesPerPage = 5;
-  const totalPages = Math.round(pages / countriesPerPage);
+  
+  const currentItems = () => {
+    if(isFilter) {
+    return filteredTours
+    }
+    return products
+  }
+  
+  const pages = () => {
+    if(isFilter) {
+    return useSelector((store) => store.filter.toursQty);
+    }
+    return useSelector((store) => store.catalogue.totalPages);
+  }
+  const totalPages = Math.ceil(pages() / countriesPerPage)
 
-  useEffect(() => {
+ useEffect(() => {
     dispatch(fetchCatalogueProducts(currentPage));
   }, [currentPage]);
 
   useEffect(() => {
     dispatch(gettWishList(isLogin));
   }, [isLogin]);
+
 
   return (
     <>
@@ -68,7 +83,7 @@ const CataloguePage = () => {
                       No results for your request
                     </Typography>
                   ) : (
-                    products.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => {
+                    currentItems().map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => {
                       const checkForFavorites = inFavorites.find((itemId) => _id === itemId);
                       return (
                         <CatalogTourCard
@@ -91,7 +106,8 @@ const CataloguePage = () => {
             </Grid>
           </Container>
           <Box sx={{ display: 'flex', justifyContent: 'center', pt: '50px' }}>
-            <Pagination
+            {totalPages <= 1 ? null : 
+              <Pagination
               count={totalPages}
               color="primary"
               page={Number(currentPage)}
@@ -100,6 +116,7 @@ const CataloguePage = () => {
                 scrollToTop();
               }}
             />
+            }
           </Box>
         </Box>
       ) : (

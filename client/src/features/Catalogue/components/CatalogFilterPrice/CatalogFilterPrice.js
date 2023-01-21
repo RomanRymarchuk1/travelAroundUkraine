@@ -55,22 +55,13 @@ function valuetext(value) {
 
 const CatalogFilterPrice = () => {
   const dispatch = useDispatch();
-
-  // const prices = useSelector((store) => store.filter.prices);
   const [prices, setPrices] = useState([0, 0]);
   const [minPrice, maxPrice] = prices;
-
-  const products = useSelector((state) => state.catalogue.products, shallowEqual);
-  const allPrices = products.map((el) => el.currentPrice);
+  const allPrices = useSelector((state) => state.filter.allToursPrices, shallowEqual);
   const minTourPrice = Math.min.apply(null, allPrices);
   const maxTourPrice = Math.max.apply(null, allPrices);
-
   const filterParams = useSelector((store) => store.filter.filterParams);
-
   const location = useLocation();
-
-  // const isFilter = useSelector((state) => state.filter.isFilter);
-
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -78,7 +69,7 @@ const CatalogFilterPrice = () => {
       dispatch(setIsFilter(false));
       setPrices([minTourPrice, maxTourPrice]);
     }
-  }, [products]);
+  }, [allPrices]);
 
   useEffect(() => {
     if (location.search) {
@@ -104,17 +95,14 @@ const CatalogFilterPrice = () => {
   }, [prices]);
 
   const handleChange = (event, newValue) => {
-    // dispatch(setPrices(newValue));
     setPrices(newValue);
   };
 
   const changeMinPrice = (event) => {
     const newValue = Number(event.target.value);
     if (!Number.isNaN(newValue)) {
-      // dispatch(setPrices([newValue, maxPrice]));
       setPrices([newValue, maxPrice]);
     } else {
-      // dispatch(setPrices([minTourPrice, maxPrice]));
       setPrices([minTourPrice, maxPrice]);
     }
   };
@@ -122,10 +110,8 @@ const CatalogFilterPrice = () => {
   const changeMaxPrice = (event) => {
     const newValue = Number(event.target.value);
     if (!Number.isNaN(newValue)) {
-      // dispatch(setPrices([minPrice, newValue]));
       setPrices([minPrice, newValue]);
     } else {
-      // dispatch(setPrices([minPrice, maxTourPrice]));
       setPrices([minPrice, maxTourPrice]);
     }
   };
@@ -135,17 +121,6 @@ const CatalogFilterPrice = () => {
     dispatch(setIsFilter(true));
     dispatch(setMinPrice(minPrice));
     dispatch(setMaxPrice(maxPrice));
-
-    // const searchParams = () => {
-    //   const params = new URLSearchParams();
-    //   const filterPrices = allPrices.filter((price) => price >= minPrice && price <= maxPrice);
-    //   params.set('currentPrice', filterPrices);
-    //   console.log(params.toString())
-    //   return params;
-    // };
-
-    // await dispatch(fetchFilteredTours(searchParams()));
-    // dispatch(setIsLoading(false));
   };
 
   return (

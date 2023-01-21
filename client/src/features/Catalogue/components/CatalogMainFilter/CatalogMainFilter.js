@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
-
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import {
+  useSelector,
+  useDispatch,
+  // shallowEqual
+} from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { styled, Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -13,9 +15,10 @@ import {
   // setAllSeasons,
   fetchFilteredTours,
   setFilterParams,
+  setAllToursPrices,
 } from '../../../../store/slices/filterSlice/filterSlice';
-// import axiosConfig from '../../../../axiosConfig';
-
+import axiosConfig from '../../../../axiosConfig';
+// import { fetchCatalogue } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 
 const FilterWrapper = styled(Stack)(({ theme }) => ({
   margin: '0 auto',
@@ -30,13 +33,6 @@ const FilterWrapper = styled(Stack)(({ theme }) => ({
     width: 235,
   },
 }));
-
-// const ShowButton = styled(Button)(() => ({
-//   padding: '12px 85px',
-//   alignSelf: 'center',
-//   marginTop: 40,
-//   maxWidth: 200,
-// }));
 
 const ResetButton = styled((props) => (
   <Button
@@ -72,19 +68,40 @@ const ResetButton = styled((props) => (
 
 const CatalogMainFilter = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.catalogue.products, shallowEqual);
-  const allPrices = [...new Set(products.map((tour) => tour.currentPrice))].sort((a, b) => a - b);
-
-
+const allPrices = useSelector((state) => state.filter.allToursPrices);
   // const duration = useSelector((store) => store.filter.duration);
   // const seasons = useSelector((store) => store.filter.seasons.map((el) => (el ? el.toLowerCase() : el)));
   const filterParams = useSelector((store) => store.filter.filterParams);
   // console.log(filterParams);
   // const isFilter = useSelector((state) => state.filter.isFilter);
   const location = useLocation();
+  const currentPage = useSelector((store) => store.catalogue.currentPage);
+
+  const getProductsPrices = async () => {
+    try {
+      const { data, status } = await axiosConfig(`/products`);
+      if (status === 200) {
+        dispatch(setAllToursPrices([...new Set(data.map((tour) => tour.currentPrice))].sort((a, b) => a - b))) 
+      }
+    } catch (err) {
+      console.error(err.message);
+      throw err;
+    }
+  };
 
   useEffect(() => {
-    if (location.search && Object.keys(filterParams).length === 0) {
+    getProductsPrices();   
+  }, [])
+  
+  console.log(allPrices);
+
+  useEffect(() => {
+    dispatch(setAllToursPrices(allPrices))
+  }, []);
+  
+
+  useEffect(() => {
+    if (location.search) {
       dispatch(setIsFilter(true));
       const queryParams = new URLSearchParams(location.search).entries();
       dispatch(setFilterParams(Object.fromEntries(queryParams)));
@@ -95,65 +112,35 @@ const CatalogMainFilter = () => {
   }, [location.search]);
 
   useEffect(() => {
-    // console.log(products)
     if (Object.keys(filterParams).length !== 0) {
       const queryString = new URLSearchParams(filterParams).toString();
       const newUrl = new URL(`?${queryString}`, window.location);
       if (window.location.href !== newUrl.href) {
         window.location.assign(newUrl);
-        
       }
     }
-  }, [filterParams]);
 
-  const filterTours = async () => {
-    const params = new URLSearchParams();
-    if (allPrices.length > 0 && location.search) {
-      const priceFrom = Number(filterParams.price_from);
-      const priceTo = Number(filterParams.price_to);
+    const filterTours = async () => {
+      const params = new URLSearchParams();
+    
+      if (allPrices.length > 0 && location.search) {
+        const priceFrom = Number(filterParams.price_from);
+        const priceTo = Number(filterParams.price_to);
 
-      if (priceFrom && priceTo) {
-        const filterPrices = allPrices.filter((price) => price >= priceFrom && price <= priceTo);
-        params.set('currentPrice', filterPrices);
+        if (priceFrom && priceTo) {
+          const filterPrices = allPrices.filter((price) => price >= priceFrom && price <= priceTo);
+          params.set('currentPrice', filterPrices);
+        }
       }
-    }
-    // console.log(params.toString());
+      console.log(params.toString());
 
-    if (params.toString()) {
-      
-      dispatch(setIsFilter(true));
-      await dispatch(fetchFilteredTours(params));
-      
-    }
-  };
-
-  useEffect(() => {
+      if (params.toString()) {
+        dispatch(setIsFilter(true));
+        await dispatch(fetchFilteredTours(params, currentPage));
+      }
+    };
     filterTours();
-  }, [products, filterParams]);
-
-  // const filterTours = async () => {
-  //   const params = new URLSearchParams();
-  //   params.set('currentPrice', filterPrices());
-  //   if (duration.length > 0) {
-  //     params.set('duration', duration);
-  //   }
-  //   if (seasons.length > 0) {
-  //     params.set('season', seasons.concat('all seasons'));
-  //   }
-  //   dispatch(setIsLoading(true));
-  //   dispatch(setIsFilter(true));
-  //   await dispatch(fetchFilteredTours(params));
-  //   dispatch(setIsLoading(false));
-  // };
-
-  // const resetFilter = () => {
-  //   // dispatch(setIsFilter(false));
-  //   // dispatch(setFilteredTours([]));
-  //   // dispatch(setPrices([Math.min.apply(null, allPrices), Math.max.apply(null, allPrices)]));
-  //   // dispatch(setClearDuration([]));
-  //   // dispatch(setClearDuration([]));
-  //   // dispatch(setAllSeasons([]));
-  // };
+  }, [filterParams]);
 
   return (
     <FilterWrapper>
@@ -170,7 +157,6 @@ const CatalogMainFilter = () => {
         </Grid>
       </Grid>
 
-      {/* <ShowButton onClick={filterTours}>Filter</ShowButton> */}
       <ResetButton>Reset filter</ResetButton>
     </FilterWrapper>
   );
