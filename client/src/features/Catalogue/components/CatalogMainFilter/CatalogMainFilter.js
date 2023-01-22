@@ -12,7 +12,7 @@ import { CatalogFilterPrice, CatalogFilterDuration, CatalogFilterSeason } from '
 import {
   setIsFilter,
   // setClearDuration,
-  // setAllSeasons,
+  setAllSeasons,
   fetchFilteredTours,
   setFilterParams,
   setAllToursPrices,
@@ -68,9 +68,9 @@ const ResetButton = styled((props) => (
 
 const CatalogMainFilter = () => {
   const dispatch = useDispatch();
-const allPrices = useSelector((state) => state.filter.allToursPrices);
+  const allPrices = useSelector((state) => state.filter.allToursPrices);
   // const duration = useSelector((store) => store.filter.duration);
-  // const seasons = useSelector((store) => store.filter.seasons.map((el) => (el ? el.toLowerCase() : el)));
+  const seasons = useSelector((store) => store.filter.seasons);
   const filterParams = useSelector((store) => store.filter.filterParams);
   // console.log(filterParams);
   // const isFilter = useSelector((state) => state.filter.isFilter);
@@ -81,7 +81,7 @@ const allPrices = useSelector((state) => state.filter.allToursPrices);
     try {
       const { data, status } = await axiosConfig(`/products`);
       if (status === 200) {
-        dispatch(setAllToursPrices([...new Set(data.map((tour) => tour.currentPrice))].sort((a, b) => a - b))) 
+        dispatch(setAllToursPrices([...new Set(data.map((tour) => tour.currentPrice))].sort((a, b) => a - b)));
       }
     } catch (err) {
       console.error(err.message);
@@ -90,15 +90,12 @@ const allPrices = useSelector((state) => state.filter.allToursPrices);
   };
 
   useEffect(() => {
-    getProductsPrices();   
-  }, [])
-  
-  console.log(allPrices);
+    getProductsPrices();
+  }, []);
 
   useEffect(() => {
-    dispatch(setAllToursPrices(allPrices))
+    dispatch(setAllToursPrices(allPrices));
   }, []);
-  
 
   useEffect(() => {
     if (location.search) {
@@ -115,6 +112,7 @@ const allPrices = useSelector((state) => state.filter.allToursPrices);
     if (Object.keys(filterParams).length !== 0) {
       const queryString = new URLSearchParams(filterParams).toString();
       const newUrl = new URL(`?${queryString}`, window.location);
+
       if (window.location.href !== newUrl.href) {
         window.location.assign(newUrl);
       }
@@ -122,17 +120,29 @@ const allPrices = useSelector((state) => state.filter.allToursPrices);
 
     const filterTours = async () => {
       const params = new URLSearchParams();
-    
+
       if (allPrices.length > 0 && location.search) {
         const priceFrom = Number(filterParams.price_from);
         const priceTo = Number(filterParams.price_to);
+        const seasonsFromParams = filterParams.season;
 
         if (priceFrom && priceTo) {
           const filterPrices = allPrices.filter((price) => price >= priceFrom && price <= priceTo);
           params.set('currentPrice', filterPrices);
         }
+
+        if (seasonsFromParams && seasonsFromParams.length > 0) {
+          if (typeof seasonsFromParams === 'string') {
+            dispatch(setAllSeasons(seasonsFromParams.split(',')));
+          }
+        }
+
+        if (seasons.length > 0) {
+          params.set('season', seasons.concat('all seasons'));
+        }
       }
-      console.log(params.toString());
+
+      console.log(params.toString())
 
       if (params.toString()) {
         dispatch(setIsFilter(true));

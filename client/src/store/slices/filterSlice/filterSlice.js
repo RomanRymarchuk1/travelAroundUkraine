@@ -54,6 +54,12 @@ const filterSlice = createSlice({
     setIsFilter: (state, action) => {
       state.isFilter = action.payload;
     },
+    setSeasonsInParams: (state, action) => {
+      state.filterParams.season = action.payload;
+    },
+    removeSeasonsfromParams: (state) => {
+      delete state.filterParams.season;
+    },
 
 
     
@@ -93,6 +99,11 @@ export const {
   setFilterParams,
   setMinPrice,
   setMaxPrice,
+
+
+  setSeasonsInParams,
+  removeSeasonsfromParams,
+
 } = filterSlice.actions;
 
 export const fetchFilteredTours = (params, page) => async (dispatch) => {

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Checkbox, FormControlLabel } from '@mui/material';
 import { FilterAccordion } from '..';
-import { setSeasons, setAllSeasons } from '../../../../store/slices/filterSlice/filterSlice';
+import {
+  setSeasons,
+  setAllSeasons,
+  setSeasonsInParams,
+  removeSeasonsfromParams,
+} from '../../../../store/slices/filterSlice/filterSlice';
 
 const seasons = ['Summer', 'Autumn', 'Winter', 'Spring'];
 
@@ -16,10 +21,16 @@ const CatalogFilterSeason = () => {
       if (filterSeasons.length <= 0) {
         return Array(seasons.length).fill(false);
       }
-      return seasons.map((season) => filterSeasons.indexOf(season) !== -1);
+      return seasons.map((season) => filterSeasons.indexOf(season.toLowerCase()) !== -1);
     });
-  }, [filterSeasons]);
 
+    if (filterSeasons.length > 0) {
+      dispatch(setSeasonsInParams(filterSeasons))
+    } else {
+      dispatch(removeSeasonsfromParams())
+    }
+
+  }, [filterSeasons]);
 
   const isAllChecked = checked.every((el) => el === true);
 
@@ -28,7 +39,7 @@ const CatalogFilterSeason = () => {
       const newChecked = [...current];
       if (!isAllChecked) {
         newChecked.fill(true);
-        dispatch(setAllSeasons(seasons));
+        dispatch(setAllSeasons(seasons.map((el) => (el ? el.toLowerCase() : el))));
       } else {
         newChecked.fill(false);
         dispatch(setAllSeasons([]));
@@ -45,7 +56,7 @@ const CatalogFilterSeason = () => {
       newChecked[index] = !newChecked[index];
       return newChecked;
     });
-    dispatch(setSeasons(value));
+    dispatch(setSeasons(value.toLowerCase()));
   };
 
   const children = (
