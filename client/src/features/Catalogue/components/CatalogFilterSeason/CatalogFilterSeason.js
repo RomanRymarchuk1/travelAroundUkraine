@@ -4,7 +4,7 @@ import { Box, Checkbox, FormControlLabel } from '@mui/material';
 import { FilterAccordion } from '..';
 import { setSeasons, setAllSeasons } from '../../../../store/slices/filterSlice/filterSlice';
 
-const seasons = ['Summer', 'Autumn', 'Winter', 'Spring'];
+const seasons = ['summer', 'autumn', 'winter', 'spring'];
 
 const CatalogFilterSeason = () => {
   const [checked, setChecked] = useState(Array(seasons.length).fill(false));
