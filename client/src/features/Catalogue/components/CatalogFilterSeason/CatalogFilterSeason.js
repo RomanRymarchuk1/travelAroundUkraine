@@ -53,7 +53,7 @@ const CatalogFilterSeason = () => {
       {seasons.map((el) => (
         <FormControlLabel
           key={el}
-          label={el}
+          label={el.substring(0, 1).toUpperCase() + el.substring(1)}
           control={<Checkbox id={el} checked={checked[seasons.indexOf(el)]} onChange={handleChange} />}
         />
       ))}
