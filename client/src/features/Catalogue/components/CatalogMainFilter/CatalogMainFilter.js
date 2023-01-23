@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 // import axios from 'axios';
 import { styled, Button, Typography, Stack } from '@mui/material';
@@ -76,7 +76,7 @@ const CatalogMainFilter = () => {
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const allPrices = [...new Set(products.map((tour) => tour.currentPrice))].sort((a, b) => a - b);
   const duration = useSelector((store) => store.filter.duration);
-  const seasons = useSelector((store) => store.filter.seasons.map((el) => (el ? el.toLowerCase() : el)));
+  const seasons = useSelector((store) => store.filter.seasons);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -135,6 +135,13 @@ const CatalogMainFilter = () => {
     dispatch(setAllSeasons([]));
     setSearchParams('');
   };
+
+  useEffect(() => {
+    if (searchParams.toString()) {
+      dispatch(setIsFilter(true));
+      dispatch(fetchFilteredTours(searchParams));
+    }
+  }, []);
 
   return (
     <FilterWrapper>
