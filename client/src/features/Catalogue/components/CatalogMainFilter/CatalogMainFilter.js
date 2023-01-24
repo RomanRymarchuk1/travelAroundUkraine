@@ -133,22 +133,18 @@ const CatalogMainFilter = () => {
   }, [categories, seasons, prices]);
 
   
-
   return (
     <FilterWrapper>
       <Typography variant="h3">Filter</Typography>
-      
-      <Grid container columnSpacing={5} sx={{ p: 0 }}>
+        <Grid container columnSpacing={5} sx={{ p: 0 }}>
         <Grid spacing={4} item xs={12} tablet={6} laptop={12}>
           <CatalogFilterPrice />
           <CatalogFilterCategories />
         </Grid>
-
         <Grid item xs={12} tablet={6} laptop={12}>
           <CatalogFilterSeason />
         </Grid>
       </Grid>
-
     </FilterWrapper>
   );
 };
