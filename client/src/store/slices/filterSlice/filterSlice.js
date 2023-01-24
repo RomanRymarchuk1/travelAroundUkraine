@@ -1,9 +1,9 @@
-import { createSlice,
-  // createAsyncThunk 
+import {
+  createSlice,
+  // createAsyncThunk
 } from '@reduxjs/toolkit';
 // import axiosConfig from '../../../axiosConfig';
 import axios from 'axios';
-
 
 // export const fetchFilteredTours = createAsyncThunk(
 //   'products/fetchFilteredTours',
@@ -17,14 +17,14 @@ import axios from 'axios';
 //   }
 // );
 
-
 const initialState = {
   tours: [],
   toursQty: null,
   filterParams: {},
   isFilter: false,
   allToursPrices: [],
-  duration: [],
+  prices: [],
+  categories: [],
   seasons: [],
 };
 
@@ -39,39 +39,33 @@ const filterSlice = createSlice({
     setFilteredToursQty: (state, action) => {
       state.toursQty = action.payload;
     },
+    setIsFilter: (state, action) => {
+      state.isFilter = action.payload;
+    },
     setAllToursPrices: (state, action) => {
       state.allToursPrices = action.payload;
     },
     setMinPrice: (state, action) => {
-      state.filterParams.price_from = action.payload;
+      state.prices[0] = action.payload;
     },
     setMaxPrice: (state, action) => {
-      state.filterParams.price_to = action.payload;
+      state.prices[1] = action.payload;
     },
-    setFilterParams: (state, action) => {
-      state.filterParams = action.payload;
+    setPricesInFilterParams: (state, action) => {
+      state.filterParams.prices = action.payload;
     },
-    setIsFilter: (state, action) => {
-      state.isFilter = action.payload;
-    },
-    setSeasonsInParams: (state, action) => {
-      state.filterParams.season = action.payload;
-    },
-    removeSeasonsfromParams: (state) => {
-      delete state.filterParams.season;
-    },
-
-
-    
-    setDuration: (state, action) => {
-      if (state.duration.includes(action.payload)) {
-        state.duration = state.duration.filter((el) => el !== action.payload);
+    setCategories: (state, action) => {
+      if (state.categories.includes(action.payload)) {
+        state.categories = state.categories.filter((el) => el !== action.payload);
       } else {
-        state.duration.push(action.payload);
+        state.categories.push(action.payload);
       }
     },
-    setClearDuration: (state, action) => {
-      state.duration = action.payload;
+    setAllCategories: (state, action) => {
+      state.categories = action.payload;
+    },
+    setCategoriesInFilterParams: (state, action) => {
+      state.filterParams.categories = action.payload;
     },
     setSeasons: (state, action) => {
       if (state.seasons.includes(action.payload)) {
@@ -83,8 +77,10 @@ const filterSlice = createSlice({
     setAllSeasons: (state, action) => {
       state.seasons = action.payload;
     },
+    setSeasonsInFilterParams: (state, action) => {
+      state.filterParams.season = action.payload;
+    },
   },
-
 });
 
 export const {
@@ -92,18 +88,15 @@ export const {
   setFilteredToursQty,
   setIsFilter,
   setAllToursPrices,
-  setDuration,
-  setSeasons,
-  setAllSeasons,
-  setClearDuration,
-  setFilterParams,
   setMinPrice,
   setMaxPrice,
-
-
-  setSeasonsInParams,
-  removeSeasonsfromParams,
-
+  setPricesInFilterParams,
+  setCategories,
+  setAllCategories,
+  setCategoriesInFilterParams,
+  setSeasons,
+  setAllSeasons,
+  setSeasonsInFilterParams,
 } = filterSlice.actions;
 
 export const fetchFilteredTours = (params, page) => async (dispatch) => {

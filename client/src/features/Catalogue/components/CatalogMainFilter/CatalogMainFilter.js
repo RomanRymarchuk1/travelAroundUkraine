@@ -1,24 +1,20 @@
 import React, { useEffect } from 'react';
-import {
-  useSelector,
-  useDispatch,
-  // shallowEqual
-} from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { styled, Button, Typography, Stack } from '@mui/material';
+import { styled, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import CloseIcon from '@mui/icons-material/Close';
-import { CatalogFilterPrice, CatalogFilterDuration, CatalogFilterSeason } from '..';
+import { CatalogFilterPrice, CatalogFilterSeason, CatalogFilterCategories } from '..';
 import {
   setIsFilter,
-  // setClearDuration,
+  setMinPrice,
+  setMaxPrice,
+  setPricesInFilterParams,
+  setAllCategories,
+  setCategoriesInFilterParams,
   setAllSeasons,
+  setSeasonsInFilterParams,
   fetchFilteredTours,
-  setFilterParams,
-  setAllToursPrices,
 } from '../../../../store/slices/filterSlice/filterSlice';
-import axiosConfig from '../../../../axiosConfig';
-// import { fetchCatalogue } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 
 const FilterWrapper = styled(Stack)(({ theme }) => ({
   margin: '0 auto',
@@ -34,132 +30,118 @@ const FilterWrapper = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const ResetButton = styled((props) => (
-  <Button
-    variant="text"
-    startIcon={
-      <CloseIcon
-        sx={{
-          width: '14px',
-          height: '14px',
-          color: 'gray',
-        }}
-      />
-    }
-    {...props}
-  />
-))(({ theme }) => ({
-  padding: '5px 15px',
-  marginTop: '12px',
-  border: 'none',
-  background: 'none',
-  fontWeight: 500,
-  fontSize: 12,
-  textTransform: 'none',
-  color: theme.palette.text.primary,
-  alignSelf: 'center',
-
-  '&:hover': {
-    background: 'none',
-    filter: 'brightness(1.5)',
-    color: theme.palette.text.primary,
-  },
-}));
-
 const CatalogMainFilter = () => {
   const dispatch = useDispatch();
-  const allPrices = useSelector((state) => state.filter.allToursPrices);
-  // const duration = useSelector((store) => store.filter.duration);
+  const location = useLocation();
+  const baseCatalogueURL = new URL(location.pathname, window.location.origin);
+  // const isFilter = useSelector((state) => state.filter.isFilter);
+  const allPrices = useSelector((state) => state.filter.allToursPrices, shallowEqual);
+  const prices = useSelector((store) => store.filter.prices);
+  const categories = useSelector((store) => store.filter.categories);
   const seasons = useSelector((store) => store.filter.seasons);
   const filterParams = useSelector((store) => store.filter.filterParams);
-  // console.log(filterParams);
-  // const isFilter = useSelector((state) => state.filter.isFilter);
-  const location = useLocation();
   const currentPage = useSelector((store) => store.catalogue.currentPage);
 
-  const getProductsPrices = async () => {
-    try {
-      const { data, status } = await axiosConfig(`/products`);
-      if (status === 200) {
-        dispatch(setAllToursPrices([...new Set(data.map((tour) => tour.currentPrice))].sort((a, b) => a - b)));
-      }
-    } catch (err) {
-      console.error(err.message);
-      throw err;
-    }
-  };
-
   useEffect(() => {
-    getProductsPrices();
-  }, []);
-
-  useEffect(() => {
-    dispatch(setAllToursPrices(allPrices));
-  }, []);
-
-  useEffect(() => {
-    if (location.search) {
+    if (seasons.length > 0 || categories.length > 0) {
       dispatch(setIsFilter(true));
-      const queryParams = new URLSearchParams(location.search).entries();
-      dispatch(setFilterParams(Object.fromEntries(queryParams)));
     } else {
       dispatch(setIsFilter(false));
-      dispatch(setFilterParams({}));
     }
+    if (location.search) {
+      
+      if (
+        categories.length <= 0 &&
+        seasons.length <= 0 &&
+        categories.length <= 0 &&
+        Object.keys(filterParams).length <= 0
+      ) {
+        const paramsFromURL = new URLSearchParams(location.search);
+        const priceFrom = Number(paramsFromURL.get('price_from'));
+        const priceTo = Number(paramsFromURL.get('price_to'));
+        const categoriesFromParams = paramsFromURL.get('category');
+        const seasonsFromParams = paramsFromURL.get('season');
+
+        if (priceFrom && priceTo) {
+          dispatch(setMinPrice(priceFrom));
+          dispatch(setMaxPrice(priceTo));
+          dispatch(setPricesInFilterParams([priceFrom, priceTo]));
+        }
+        if (categoriesFromParams) {
+          dispatch(setAllCategories(categoriesFromParams.split(',')));
+          dispatch(setCategoriesInFilterParams(categoriesFromParams.split(',')));
+        }
+        if (seasonsFromParams) {
+          dispatch(setAllSeasons(seasonsFromParams.split(',')));
+          dispatch(setSeasonsInFilterParams(seasonsFromParams.split(',')));
+        }
+      }
+    }
+    
   }, [location.search]);
 
   useEffect(() => {
-    if (Object.keys(filterParams).length !== 0) {
-      const queryString = new URLSearchParams(filterParams).toString();
-      const newUrl = new URL(`?${queryString}`, window.location);
-
-      if (window.location.href !== newUrl.href) {
-        window.location.assign(newUrl);
-      }
+    if (prices.length <= 0 && categories.length <= 0 && seasons.length <= 0 && Object.keys(filterParams).length > 0) {
+      window.location.assign(baseCatalogueURL);
     }
 
+    if (prices.length > 0 || categories.length > 0 || seasons.length > 0) {
+      const newURLParams = new URLSearchParams();
+      if (prices.length > 0) {
+        newURLParams.set('price_from', prices[0]);
+        newURLParams.set('price_to', prices[1]);
+      }
+      if (categories.length > 0) {
+        newURLParams.set('category', categories);
+      }
+      if (seasons.length > 0) {
+        newURLParams.set('season', seasons);
+      }
+      const getNewURL = () => {
+        if (newURLParams.toString()) {
+          return new URL(`?${newURLParams}`, window.location);
+        }
+        return baseCatalogueURL;
+      };
+      const newURL = getNewURL();
+      if (window.location.href !== newURL.href) {
+        window.location.assign(newURL);
+      }
+    }
+   
     const filterTours = async () => {
-      const params = new URLSearchParams();
+      const searchParams = new URLSearchParams();
 
-      if (allPrices.length > 0 && location.search) {
-        const priceFrom = Number(filterParams.price_from);
-        const priceTo = Number(filterParams.price_to);
-        const seasonsFromParams = filterParams.season;
-
-        if (priceFrom && priceTo) {
-          const filterPrices = allPrices.filter((price) => price >= priceFrom && price <= priceTo);
-          params.set('currentPrice', filterPrices);
-        }
-
-        if (seasonsFromParams && seasonsFromParams.length > 0) {
-          if (typeof seasonsFromParams === 'string') {
-            dispatch(setAllSeasons(seasonsFromParams.split(',')));
-          }
-        }
-
-        if (seasons.length > 0) {
-          params.set('season', seasons.concat('all seasons'));
-        }
+      if (prices.length > 0) {
+        const filterPrices = allPrices.filter((el) => el >= prices[0] && el <= prices[1]);
+        searchParams.set('currentPrice', filterPrices);
       }
 
-      console.log(params.toString())
+      if (categories.length > 0) {
+        searchParams.set('categories', categories);
+      }
 
-      if (params.toString()) {
-        dispatch(setIsFilter(true));
-        await dispatch(fetchFilteredTours(params, currentPage));
+      if (seasons.length > 0) {
+        searchParams.set('season', seasons.concat('all seasons'));
+      }
+
+      if (searchParams.toString()) {
+        await dispatch(fetchFilteredTours(searchParams, currentPage));
       }
     };
     filterTours();
-  }, [filterParams]);
+  }, [categories, seasons, prices]);
+
+  
 
   return (
     <FilterWrapper>
       <Typography variant="h3">Filter</Typography>
-
+      
       <Grid container columnSpacing={5} sx={{ p: 0 }}>
         <Grid spacing={4} item xs={12} tablet={6} laptop={12}>
           <CatalogFilterPrice />
-          <CatalogFilterDuration />
+          <CatalogFilterCategories />
         </Grid>
 
         <Grid item xs={12} tablet={6} laptop={12}>
@@ -167,7 +149,6 @@ const CatalogMainFilter = () => {
         </Grid>
       </Grid>
 
-      <ResetButton>Reset filter</ResetButton>
     </FilterWrapper>
   );
 };

@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {
-  useLocation,
-  // useParams
-} from 'react-router-dom';
-
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { styled, alpha, Box, Slider, InputBase, Button } from '@mui/material';
 import { FilterAccordion } from '..';
-import {
-  setMinPrice,
-  setMaxPrice,
-  // setPrices,
-  // setFilterParams,
-  setIsFilter,
-  // fetchFilteredTours,
-} from '../../../../store/slices/filterSlice/filterSlice';
+import axiosConfig from '../../../../axiosConfig';
+import { setAllToursPrices, setMinPrice, setMaxPrice } from '../../../../store/slices/filterSlice/filterSlice';
 
 const FilterInput = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
@@ -46,9 +35,6 @@ const ConfirmButton = styled(Button)(() => ({
   },
 }));
 
-// let minTourPrice = 0;
-// let maxTourPrice = 0;
-
 function valuetext(value) {
   return `${value}`;
 }
@@ -58,36 +44,50 @@ const CatalogFilterPrice = () => {
   const [prices, setPrices] = useState([0, 0]);
   const [minPrice, maxPrice] = prices;
   const allPrices = useSelector((state) => state.filter.allToursPrices, shallowEqual);
+  const filterPrices = useSelector((state) => state.filter.prices, shallowEqual);
   const minTourPrice = Math.min.apply(null, allPrices);
   const maxTourPrice = Math.max.apply(null, allPrices);
-  const filterParams = useSelector((store) => store.filter.filterParams);
-  const location = useLocation();
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    if (allPrices.length > 0 && !location.search) {
-      dispatch(setIsFilter(false));
-      setPrices([minTourPrice, maxTourPrice]);
+  const getProductsPrices = async () => {
+    try {
+      const { data, status } = await axiosConfig(`/products`);
+      if (status === 200) {
+        // const toursCategories = [...new Set(data.map((tour) => tour.categories))].sort((a, b) => a - b)
+        // console.log(toursCategories)
+        dispatch(setAllToursPrices([...new Set(data.map((tour) => tour.currentPrice))].sort((a, b) => a - b)));
+      }
+    } catch (err) {
+      console.error(err.message);
+      throw err;
     }
-  }, [allPrices]);
+  };
 
   useEffect(() => {
-    if (location.search) {
-      const priceFrom = Number(filterParams.price_from);
-      const priceTo = Number(filterParams.price_to);
-      if (priceFrom && priceTo) {
-        dispatch(setMinPrice(priceFrom));
-        dispatch(setMaxPrice(priceTo));
-        setPrices([priceFrom, priceTo]);
-      };
-    } else if(!location.search && Object.keys(filterParams).length === 0){
+    getProductsPrices();
+  }, []);
+
+  useEffect(() => {
+    if (allPrices.length > 0) {
       setPrices([minTourPrice, maxTourPrice]);
     }
-  }, [filterParams]);
+    if (filterPrices.length > 0) {
+      setPrices([filterPrices[0], filterPrices[1]]);
+    }
+  }, []);
 
   useEffect(() => {
     setError(() => {
-      if (minPrice > maxPrice) {
+      if (
+        minPrice > maxPrice ||
+        minPrice < minTourPrice ||
+        minPrice > maxTourPrice ||
+        maxPrice > maxTourPrice ||
+        maxPrice < minTourPrice
+      ) {
+        return true;
+      }
+      if (typeof minPrice === 'string') {
         return true;
       }
       return false;
@@ -116,9 +116,7 @@ const CatalogFilterPrice = () => {
     }
   };
 
-
-  const setPriceFilter = async () => {
-    dispatch(setIsFilter(true));
+  const addPricesFilter = () => {
     dispatch(setMinPrice(minPrice));
     dispatch(setMaxPrice(maxPrice));
   };
@@ -127,19 +125,19 @@ const CatalogFilterPrice = () => {
     <FilterAccordion title="Price">
       <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: '5px' }}>
         <FilterInput
-          sx={error && { '& .MuiInputBase-input, & .MuiInputBase-input:focus': { borderColor: 'red' } }}
+          sx={error && { '& .MuiInputBase-input, & .MuiInputBase-input:focus': { borderColor: 'rgb(254,0,0,0.5)' } }}
           placeholder={String(minTourPrice)}
           value={minPrice}
           onChange={changeMinPrice}
         />
         <span style={{ color: '#c6c6c6', fontSize: '20px' }}>-</span>
         <FilterInput
-          sx={error && { '& .MuiInputBase-input, & .MuiInputBase-input:focus': { borderColor: 'red' } }}
+          sx={error && { '& .MuiInputBase-input, & .MuiInputBase-input:focus': { borderColor: 'rgb(254,0,0,0.5)' } }}
           placeholder={String(maxTourPrice)}
           value={maxPrice}
           onChange={changeMaxPrice}
         />
-        <ConfirmButton disabled={error} onClick={setPriceFilter}>
+        <ConfirmButton disabled={error} onClick={addPricesFilter}>
           OK
         </ConfirmButton>
       </Box>
