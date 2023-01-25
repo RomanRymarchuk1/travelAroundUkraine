@@ -12,7 +12,7 @@ const FavoritesPage = () => {
   const isLogin = useSelector((state) => state.user.isLogin);
   useEffect(() => {
     dispatch(fetchFavoriteProducts(isLogin));
-  }, [inFavorites]);
+  }, []);
   return (
     <>
       {inFavorites.length === 0 ? (
