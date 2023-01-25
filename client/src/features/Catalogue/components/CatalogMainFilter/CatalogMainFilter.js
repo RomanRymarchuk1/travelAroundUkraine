@@ -43,7 +43,7 @@ const CatalogMainFilter = () => {
   const currentPage = useSelector((store) => store.catalogue.currentPage);
 
   useEffect(() => {
-    if (seasons.length > 0 || categories.length > 0) {
+    if (seasons.length > 0 || categories.length > 0 || prices.length > 0) {
       dispatch(setIsFilter(true));
     } else {
       dispatch(setIsFilter(false));
@@ -111,7 +111,7 @@ const CatalogMainFilter = () => {
    
     const filterTours = async () => {
       const searchParams = new URLSearchParams();
-
+      
       if (prices.length > 0) {
         const filterPrices = allPrices.filter((el) => el >= prices[0] && el <= prices[1]);
         searchParams.set('currentPrice', filterPrices);
@@ -124,12 +124,16 @@ const CatalogMainFilter = () => {
       if (seasons.length > 0) {
         searchParams.set('season', seasons.concat('all seasons'));
       }
+      
 
       if (searchParams.toString()) {
         await dispatch(fetchFilteredTours(searchParams, currentPage));
       }
+      
     };
+    
     filterTours();
+    
   }, [categories, seasons, prices]);
 
   
