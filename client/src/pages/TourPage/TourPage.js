@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unneeded-ternary */
 import {
   alpha,
@@ -10,9 +11,10 @@ import {
   Stack,
   styled,
   Typography,
+  CircularProgress,
   useMediaQuery,
 } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, shallowEqual } from 'react';
 
 import { useInView } from 'react-intersection-observer';
 
@@ -128,7 +130,8 @@ const TourPage = () => {
 
   const dispatch = useDispatch();
   const { itemNo } = useParams();
-  // to be revised in future from re rendering and optimizing point of view, whether we pass needed data as props to components or useSelector directly in each component.
+  const { data, error, isLoading } = useSelector((store) => store.tour, shallowEqual);
+
   const {
     imageUrls,
     name,
@@ -147,9 +150,7 @@ const TourPage = () => {
     categories,
     season,
     _id,
-  } = useSelector((store) => store.tour.data);
-
-  const error = useSelector((store) => store.tour.error);
+  } = data;
 
   useEffect(() => {
     dispatch(fetchTour(itemNo));
@@ -227,7 +228,7 @@ const TourPage = () => {
     ));
   }
 
-  return (
+  const tour = (
     <>
       <HeaderContent>
         <Container>
@@ -243,14 +244,15 @@ const TourPage = () => {
               },
             }}
           >
-            {/* temporary UI which will revised after tour page refactor pull request is approved */}
-            {error ? error : name}
+            {name}
           </Typography>
+
           <Stack direction="row" justifyContent="center" alignItems="center" mb={3}>
             <Typography>{season} / </Typography>
             <Typography>{region} / </Typography>
             <Typography>{categories}</Typography>
           </Stack>
+
           <ImageGallery imageUrls={imageUrls} />
           <Nav>
             <LinksWrapper>
@@ -292,6 +294,30 @@ const TourPage = () => {
 
         {matchesMediaQuery ? null : slideInfoBar}
       </MainContent>
+    </>
+  );
+
+  const spinner = (
+    <Container>
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress size={150} sx={{ color: 'primary.dark', my: '30vh', mx: 'auto' }} />
+      </Box>
+    </Container>
+  );
+
+  if (error)
+    return (
+      <Container>
+        <Typography align="center" variant="h2" sx={{ color: 'error.main', marginTop: '30vh', marginBottom: '30vh' }}>
+          {error}
+        </Typography>
+      </Container>
+    );
+
+  return (
+    <>
+      {isLoading ? spinner : tour}
+      {}
     </>
   );
 };
