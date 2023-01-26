@@ -1,7 +1,8 @@
 /* eslint-disable arrow-body-style */
 import React from 'react';
-import { Box, Paper, MenuList, MenuItem, Typography, styled } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useSelector, shallowEqual } from 'react-redux';
+import { Box, Paper, MenuList, MenuItem, Typography, styled, ClickAwayListener } from '@mui/material';
 
 const ItemBox = styled(Box)({
   display: 'grid',
@@ -12,7 +13,7 @@ const ItemBox = styled(Box)({
   boxSizing: 'border-box',
 });
 
-const HeaderFilterItems = () => {
+const HeaderFilterItems = ({ closeSearchBar }) => {
   const { data, error } = useSelector((store) => store.searchBar, shallowEqual);
 
   const searchBarList = data.map(({ imageUrls, name, currentPrice, season }) => (
@@ -38,22 +39,28 @@ const HeaderFilterItems = () => {
   );
 
   return (
-    <Paper sx={{ borderRadius: '5px', position: 'absolute', minWidth: '200px', padding: '20px' }}>
-      {data.length ? searchResults : null}
+    <ClickAwayListener onClickAway={closeSearchBar}>
+      <Paper sx={{ borderRadius: '5px', position: 'absolute', minWidth: '200px', padding: '20px' }}>
+        {data.length ? searchResults : null}
 
-      {!data.length && !error && (
-        <Typography variant="h3" align="center" gutterBottom={false}>
-          No results found
-        </Typography>
-      )}
+        {!data.length && !error && (
+          <Typography variant="h3" align="center" gutterBottom={false}>
+            No results found
+          </Typography>
+        )}
 
-      {error && (
-        <Typography align="center" gutterBottom={false} sx={{ color: 'error.main' }}>
-          {error}
-        </Typography>
-      )}
-    </Paper>
+        {error && (
+          <Typography align="center" gutterBottom={false} sx={{ color: 'error.main' }}>
+            {error}
+          </Typography>
+        )}
+      </Paper>
+    </ClickAwayListener>
   );
+};
+
+HeaderFilterItems.propTypes = {
+  closeSearchBar: PropTypes.func.isRequired,
 };
 
 export default HeaderFilterItems;

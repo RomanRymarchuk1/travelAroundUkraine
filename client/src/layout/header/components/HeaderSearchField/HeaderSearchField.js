@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable  react/prop-types */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled, alpha, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -66,10 +66,6 @@ const HeaderSearchField = () => {
     dispatch(setIsSearchBarOpen(false));
   };
 
-  useEffect(() => {
-    document.addEventListener('click', closeSearchBar);
-  }, []);
-
   const handleInputChange = (event) => {
     if (event.target.value.length >= 2) {
       dispatch(setIsSearchBarOpen(true));
@@ -89,7 +85,7 @@ const HeaderSearchField = () => {
         placeholder="Search…"
         inputProps={{ 'aria-label': 'search' }}
       />
-      {isSearchBarOpen && <HeaderFilterItems />}
+      {isSearchBarOpen && <HeaderFilterItems closeSearchBar={closeSearchBar} />}
     </Search>
   );
 };
