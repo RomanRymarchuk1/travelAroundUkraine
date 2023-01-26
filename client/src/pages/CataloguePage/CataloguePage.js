@@ -3,8 +3,11 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { styled, Stack, Box, Container, Typography, Pagination } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
-import { fetchCatalogueProducts, setCurrentPage } from '../../store/slices/catalogueSlice/catalogueSlice';
-import { gettWishList } from '../../store/slices/inFavoritesSlice/inFavoritesSlice';
+import {
+  fetchCatalogueProducts,
+  setCurrentPage,
+  fetchFavoriteProducts,
+} from '../../store/slices/catalogueSlice/catalogueSlice';
 import scrollToTop from '../../layout/utils/scrollToTop';
 
 const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ theme }) => ({
@@ -13,7 +16,6 @@ const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ t
   boxShadow: '0px 0px 40px rgba(0, 0, 0, 0.05)',
   padding: '25px 0',
   height: 'fit-content',
-
   [theme.breakpoints.up('laptop')]: {
     width: 295,
   },
@@ -25,7 +27,7 @@ const CataloguePage = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const isLoading = useSelector((state) => state.catalogue.isLoading);
-  const inFavorites = useSelector((state) => state.favorites.inFavorites);
+  const inFavorites = useSelector((state) => state.catalogue.favorites);
   const isLogin = useSelector((store) => store.user.isLogin);
   const pages = useSelector((store) => store.catalogue.totalPages);
   const currentPage = useSelector((store) => store.catalogue.currentPage);
@@ -39,7 +41,7 @@ const CataloguePage = () => {
   }, [currentPage]);
 
   useEffect(() => {
-    dispatch(gettWishList(isLogin));
+    dispatch(fetchFavoriteProducts(isLogin));
   }, [isLogin]);
 
   return (
@@ -68,23 +70,26 @@ const CataloguePage = () => {
                       No results for your request
                     </Typography>
                   ) : (
-                    products.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }) => {
-                      const checkForFavorites = inFavorites.find((itemId) => _id === itemId);
-                      return (
-                        <CatalogTourCard
-                          key={_id}
-                          name={name}
-                          description={description}
-                          currentPrice={currentPrice}
-                          duration={duration}
-                          imageUrls={imageUrls}
-                          itemNo={itemNo}
-                          id={_id}
-                          inFavorites={checkForFavorites ? !!checkForFavorites : false}
-                          inFavoritesCounter={inFavorites.length - 1}
-                        />
-                      );
-                    })
+                    products.map(
+                      ({ name, currentPrice, duration, description, imageUrls, _id: IdNo, itemNo }, index) => {
+                        const inFavorite = inFavorites.find(({ _id }) => _id === IdNo);
+                        return (
+                          <CatalogTourCard
+                            key={IdNo}
+                            name={name}
+                            description={description}
+                            currentPrice={currentPrice}
+                            duration={duration}
+                            imageUrls={imageUrls}
+                            itemNo={itemNo}
+                            id={IdNo}
+                            isFavorite={!!inFavorite}
+                            lastItem={inFavorites.length === 1 && true}
+                            product={products[index]}
+                          />
+                        );
+                      }
+                    )
                   )}
                 </Stack>
               </Grid>
