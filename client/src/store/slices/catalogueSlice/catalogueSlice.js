@@ -3,7 +3,30 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axiosConfig from '../../../axiosConfig';
 
-export const fetchCatalogue = createAsyncThunk('products/fetchCatalogue', async () => {});
+export const fetchFavoriteProducts = createAsyncThunk(
+  'products/fetchFavoriteProducts ',
+  async (isLogin, { rejectWithValue }) => {
+    if (isLogin) {
+      try {
+        const { data } = await axiosConfig.get('/wishlist');
+        if (data === null) {
+          const { status } = await axiosConfig.post('/wishlist');
+          if (status >= 200 && status <= 300) {
+            return [];
+          }
+        }
+        return data.products;
+      } catch (err) {
+        return rejectWithValue(err);
+      }
+    } else {
+      let favorites = JSON.parse(localStorage.getItem('inFavorites'));
+      favorites === null ? (favorites = []) : null;
+      localStorage.setItem('inFavorites', JSON.stringify(favorites));
+      return favorites;
+    }
+  }
+);
 
 export const fetchCatalogueProducts = createAsyncThunk(
   'products/fetchCatalogueProducts',
@@ -29,6 +52,49 @@ export const fetchPopularProducts = createAsyncThunk(
   }
 );
 
+export const addWishList = createAsyncThunk(
+  'products/fetchAddItem',
+  async ({ isLogin, product, id }, { rejectWithValue }) => {
+    if (isLogin) {
+      try {
+        const { data } = await axiosConfig.put(`/wishlist/${id}`);
+        return data.products;
+      } catch (err) {
+        return rejectWithValue(err);
+      }
+    } else {
+      const favorites = JSON.parse(localStorage.getItem('inFavorites'));
+      favorites.push(product);
+      localStorage.setItem('inFavorites', JSON.stringify(favorites));
+      return favorites;
+    }
+  }
+);
+
+export const deleteFromWishList = createAsyncThunk(
+  'products/deleteFromFavorites',
+  async ({ isLogin, lastItem, id }, { rejectWithValue }) => {
+    if (isLogin) {
+      try {
+        if (lastItem) {
+          const { status } = await axiosConfig.delete('/wishlist');
+          if (status >= 200 && status <= 300) {
+            return [];
+          }
+        }
+        const { data } = await axiosConfig.delete(`wishlist/${id}`);
+        return data.products;
+      } catch (err) {
+        return rejectWithValue(err);
+      }
+    } else {
+      const favorites = JSON.parse(localStorage.getItem('inFavorites')).filter(({ _id }) => _id !== id);
+      localStorage.setItem('inFavorites', JSON.stringify(favorites));
+      return favorites;
+    }
+  }
+);
+
 const catalogueSlice = createSlice({
   name: 'products',
   initialState: {
@@ -38,6 +104,7 @@ const catalogueSlice = createSlice({
     error: null,
     totalPages: null,
     currentPage: 1,
+    favorites: [],
   },
   reducers: {
     setCurrentPage: (state, action) => {
@@ -64,6 +131,18 @@ const catalogueSlice = createSlice({
     });
     builder.addCase(fetchPopularProducts.rejected, (state, action) => {
       state.error = action.payload;
+    });
+    builder.addCase(fetchFavoriteProducts.rejected, (state, action) => {
+      state.error = action.payload;
+    });
+    builder.addCase(fetchFavoriteProducts.fulfilled, (state, action) => {
+      state.favorites = action.payload;
+    });
+    builder.addCase(addWishList.fulfilled, (state, action) => {
+      state.favorites = action.payload;
+    });
+    builder.addCase(deleteFromWishList.fulfilled, (state, action) => {
+      state.favorites = action.payload;
     });
   },
 });
