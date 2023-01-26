@@ -3,7 +3,7 @@
 /* eslint-disable  react/prop-types */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { styled, alpha, InputBase } from '@mui/material';
+import { styled, alpha, InputBase, ClickAwayListener } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import debounce from 'lodash.debounce';
 import appliedTheme from '../../../../theme/theme';
@@ -75,18 +75,27 @@ const HeaderSearchField = () => {
     }
   };
 
+  const handleInputFocus = (event) => {
+    if (event.target.value.length >= 2) {
+      dispatch(setIsSearchBarOpen(true));
+    }
+  };
+
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon sx={{ color: appliedTheme.palette.text.primary }} />
-      </SearchIconWrapper>
-      <StyledInputBase
-        onChange={debounce(handleInputChange, 750)}
-        placeholder="Search…"
-        inputProps={{ 'aria-label': 'search' }}
-      />
-      {isSearchBarOpen && <HeaderFilterItems closeSearchBar={closeSearchBar} />}
-    </Search>
+    <ClickAwayListener onClickAway={closeSearchBar}>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon sx={{ color: appliedTheme.palette.text.primary }} />
+        </SearchIconWrapper>
+        <StyledInputBase
+          onFocus={handleInputFocus}
+          onChange={debounce(handleInputChange, 750)}
+          placeholder="Search…"
+          inputProps={{ 'aria-label': 'search' }}
+        />
+        {isSearchBarOpen && <HeaderFilterItems closeSearchBar={closeSearchBar} />}
+      </Search>
+    </ClickAwayListener>
   );
 };
 
