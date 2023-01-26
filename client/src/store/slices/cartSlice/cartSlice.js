@@ -150,6 +150,10 @@ const cartSlice = createSlice({
     closeSnackBar: (state) => {
       state.snackBar.isSnackBarOpen = false;
     },
+
+    closeSnackBar: (state) => {
+      state.snackBar.isSnackBarOpen = false;
+    },
   },
 
   extraReducers: (builder) => {
