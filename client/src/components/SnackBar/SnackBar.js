@@ -19,7 +19,7 @@ const SnackBar = ({ severity, text, handleClose, isOpen }) => (
 SnackBar.propTypes = {
   severity: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  isOpen: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
 };
 
