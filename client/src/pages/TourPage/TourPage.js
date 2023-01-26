@@ -24,8 +24,10 @@ import { useParams } from 'react-router-dom';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTour } from '../../store/slices/tourSlice/tourSlice';
+import { closeSnackBar } from '../../store/slices/cartSlice/cartSlice';
 
 import { TourAccordion, TourInfoDialog, TourReasonToChoose, ImageGallery } from '../../features/Tour/components';
+import { SnackBar } from '../../components';
 
 const sections = [
   { title: 'About tour', link: '#about-tour' },
@@ -131,6 +133,9 @@ const TourPage = () => {
   const dispatch = useDispatch();
   const { itemNo } = useParams();
   const { data, error, isLoading } = useSelector((store) => store.tour, shallowEqual);
+  const { isSnackBarOpen, severity, text } = useSelector((store) => store.cart.snackBar);
+
+  const handleClose = () => dispatch(closeSnackBar());
 
   const {
     imageUrls,
@@ -317,7 +322,7 @@ const TourPage = () => {
   return (
     <>
       {isLoading ? spinner : tour}
-      {}
+      <SnackBar isOpen={isSnackBarOpen} handleClose={handleClose} severity={severity} text={text} />
     </>
   );
 };

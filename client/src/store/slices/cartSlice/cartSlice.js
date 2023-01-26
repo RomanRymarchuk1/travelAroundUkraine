@@ -8,6 +8,11 @@ const initialState = {
   data: [],
   isLoading: false,
   error: null,
+  snackBar: {
+    isSnackBarOpen: false,
+    severity: '',
+    text: '',
+  },
 };
 
 /**
@@ -112,6 +117,10 @@ const cartSlice = createSlice({
         state.data[index].cartQuantity += 1;
         writeToLocalStorage('cart', state.data);
       }
+
+      state.snackBar.isSnackBarOpen = true;
+      state.snackBar.text = 'Product added successfully';
+      state.snackBar.severity = 'success';
     },
 
     deleteCart: (state) => {
@@ -128,6 +137,10 @@ const cartSlice = createSlice({
       const index = state.data.findIndex((item) => item.product._id === action.payload);
       state.data.splice(index, 1);
       writeToLocalStorage('cart', state.data);
+    },
+
+    closeSnackBar: (state) => {
+      state.snackBar.isSnackBarOpen = false;
     },
   },
 
@@ -176,11 +189,17 @@ const cartSlice = createSlice({
         state.data = products;
       }
       state.isLoading = false;
+      state.snackBar.isSnackBarOpen = true;
+      state.snackBar.text = 'Product added successfully';
+      state.snackBar.severity = 'success';
     });
 
     builder.addCase(addProduct.rejected, (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
+      state.snackBar.isSnackBarOpen = true;
+      state.snackBar.text = 'Something went wrong';
+      state.snackBar.severity = 'error';
     });
 
     builder.addCase(decreaseQuantity.pending, (state) => {
@@ -231,6 +250,7 @@ export const {
   deleteCart,
   decreaseProductFromLocal,
   delProductFromLocal,
+  closeSnackBar,
 } = cartSlice.actions;
 
 // export const migrateCart = () => async (dispatch) => {
