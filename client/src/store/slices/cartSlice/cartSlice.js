@@ -1,7 +1,8 @@
+/* eslint-disable no-debugger */
 /* eslint-disable no-underscore-dangle */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axiosConfig from '../../../axiosConfig';
-// import updateCart from '../../../api/updateCart';
+import updateCart from '../../../api/updateCart';
 import writeToLocalStorage from '../../utils/writeToLocalStorage';
 
 const initialState = {
@@ -35,7 +36,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async (_, { rejectWi
  * @returns void
  */
 
-export const deleteOnlineCart = createAsyncThunk('cart/deleteOnlineCart', async ({ rejectWithValue }) => {
+export const deleteOnlineCart = createAsyncThunk('cart/deleteOnlineCart', async (_, { rejectWithValue }) => {
   try {
     await axiosConfig.delete('/cart');
   } catch (err) {
@@ -82,18 +83,62 @@ export const decreaseQuantity = createAsyncThunk('cart/decreaseQuantity', async 
  * @returns an object which contains an updated products array after the product deletion.
  */
 
-export const deleteProduct = createAsyncThunk('cart/deleteProduct', async (productId, { rejectWithValue }) => {
+export const deleteProduct = createAsyncThunk(
+  'cart/deleteProduct',
+  async (productId, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axiosConfig.delete(`/cart/${productId}`);
+      const { _id } = data.products[0].product;
+      if (data.products.length === 1 && _id === productId) {
+        dispatch(deleteOnlineCart());
+      }
+      return data;
+    } catch (err) {
+      console.error(err.message);
+      return rejectWithValue('Something went wrong. Please try again later.');
+    }
+  }
+);
+
+/**
+ * merge local with online cart
+ * @param {array} localCart - the local cart array saved in local storage
+ * @returns an updated products array after merging both local and online cart
+ */
+
+export const migrateCart = createAsyncThunk('cart/migrateCart', async (localCart, { getState, rejectWithValue }) => {
+  const state = getState();
+
   try {
-    const { data } = await axiosConfig.delete(`/cart/${productId}`);
-    return data;
+    let mergedCart;
+
+    if (state.cart.data.length) {
+      // the reduce method merges both online and local arrays, it iterates through the online cart and checks whether an object with the same unique id exists in the local cart, if not then it pushes this object into the local cart, it the object exists then it compares the cartQuantity value of both objects and updates the cartQuantity according to the highest value between both.
+      const combinedCarts = state.cart.data.reduce((localCartArray, onlineCartItem) => {
+        const existingItem = localCartArray.find(({ product }) => product._id === onlineCartItem.product._id);
+        if (existingItem) {
+          if (existingItem.cartQuantity < onlineCartItem.cartQuantity) {
+            existingItem.cartQuantity = onlineCartItem.cartQuantity;
+          }
+        } else {
+          localCartArray.push(onlineCartItem);
+        }
+
+        return localCartArray;
+      }, localCart);
+
+      mergedCart = combinedCarts;
+    } else {
+      mergedCart = localCart;
+    }
+
+    const { products } = await updateCart(mergedCart);
+    return products;
   } catch (err) {
     console.error(err.message);
     return rejectWithValue('Something went wrong. Please try again later.');
   }
 });
-
-// migrate logic is blocked till the favorite migrte logic is completed
-export const migrateCart = createAsyncThunk('cart/migrateCart', async () => {});
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -112,11 +157,11 @@ const cartSlice = createSlice({
 
       if (index === -1) {
         state.data.push({ product: { ...action.payload }, cartQuantity: 1 });
-        writeToLocalStorage('cart', state.data);
       } else {
         state.data[index].cartQuantity += 1;
-        writeToLocalStorage('cart', state.data);
       }
+
+      writeToLocalStorage('cart', state.data);
 
       state.snackBar.isSnackBarOpen = true;
       state.snackBar.text = 'Product added successfully';
@@ -145,10 +190,6 @@ const cartSlice = createSlice({
       state.snackBar.isSnackBarOpen = true;
       state.snackBar.text = 'Product deleted successfully';
       state.snackBar.severity = 'success';
-    },
-
-    closeSnackBar: (state) => {
-      state.snackBar.isSnackBarOpen = false;
     },
 
     closeSnackBar: (state) => {
@@ -266,6 +307,22 @@ const cartSlice = createSlice({
       state.snackBar.text = 'Something went wrong';
       state.snackBar.severity = 'error';
     });
+
+    builder.addCase(migrateCart.pending, (state) => {
+      state.error = null;
+      state.isLoading = true;
+    });
+
+    builder.addCase(migrateCart.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.isLoading = false;
+      localStorage.removeItem('cart');
+    });
+
+    builder.addCase(migrateCart.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    });
   },
 });
 
@@ -279,12 +336,3 @@ export const {
   delProductFromLocal,
   closeSnackBar,
 } = cartSlice.actions;
-
-// export const migrateCart = () => async (dispatch) => {
-//   const cart = JSON.parse(localStorage.getItem('cart'));
-//   if (cart) {
-//     const { products } = await updateCart(cart);
-//     dispatch(setCart(products));
-//     localStorage.removeItem('cart');
-//   }
-// };
