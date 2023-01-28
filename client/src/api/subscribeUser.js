@@ -1,5 +1,11 @@
 import axiosConfig from '../axiosConfig';
 
+/**
+ * subscribe user
+ * @param {object} email - the form value object with email key destructured
+ * @returns in case of successfull api call it returns a success object and in case of failure it returns an error object
+ */
+
 const subscribeUser = async ({ email }) => {
   const newSubscriber = {
     email,
