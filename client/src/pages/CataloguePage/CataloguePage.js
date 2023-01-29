@@ -38,6 +38,7 @@ const CataloguePage = () => {
 
   useEffect(() => {
     dispatch(fetchCatalogueProducts(currentPage));
+    scrollToTop();
   }, [currentPage]);
 
   useEffect(() => {
@@ -100,9 +101,8 @@ const CataloguePage = () => {
               count={totalPages}
               color="primary"
               page={Number(currentPage)}
-              onClick={(e) => {
-                dispatch(setCurrentPage(Number(e.target.closest('button').textContent)));
-                scrollToTop();
+              onChange={(_, num) => {
+                dispatch(setCurrentPage(Number(num)));
               }}
             />
           </Box>
