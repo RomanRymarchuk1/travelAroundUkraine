@@ -34,7 +34,6 @@ const CatalogMainFilter = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const baseCatalogueURL = new URL(location.pathname, window.location.origin);
-  // const isFilter = useSelector((state) => state.filter.isFilter);
   const allPrices = useSelector((state) => state.filter.allToursPrices, shallowEqual);
   const prices = useSelector((store) => store.filter.prices);
   const categories = useSelector((store) => store.filter.categories);
@@ -49,7 +48,6 @@ const CatalogMainFilter = () => {
       dispatch(setIsFilter(false));
     }
     if (location.search) {
-      
       if (
         categories.length <= 0 &&
         seasons.length <= 0 &&
@@ -77,7 +75,6 @@ const CatalogMainFilter = () => {
         }
       }
     }
-    
   }, [location.search]);
 
   useEffect(() => {
@@ -108,10 +105,10 @@ const CatalogMainFilter = () => {
         window.location.assign(newURL);
       }
     }
-   
+
     const filterTours = async () => {
       const searchParams = new URLSearchParams();
-      
+
       if (prices.length > 0) {
         const filterPrices = allPrices.filter((el) => el >= prices[0] && el <= prices[1]);
         searchParams.set('currentPrice', filterPrices);
@@ -124,23 +121,19 @@ const CatalogMainFilter = () => {
       if (seasons.length > 0) {
         searchParams.set('season', seasons.concat('all seasons'));
       }
-      
 
       if (searchParams.toString()) {
-        await dispatch(fetchFilteredTours(searchParams, currentPage));
+        await dispatch(fetchFilteredTours({ params: searchParams, page: currentPage }));
       }
-      
     };
-    
+
     filterTours();
-    
   }, [categories, seasons, prices]);
 
-  
   return (
     <FilterWrapper>
       <Typography variant="h3">Filter</Typography>
-        <Grid container columnSpacing={5} sx={{ p: 0 }}>
+      <Grid container columnSpacing={5} sx={{ p: 0 }}>
         <Grid spacing={4} item xs={12} tablet={6} laptop={12}>
           <CatalogFilterPrice />
           <CatalogFilterCategories />

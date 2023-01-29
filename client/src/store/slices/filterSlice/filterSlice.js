@@ -1,21 +1,17 @@
-import {
-  createSlice,
-  // createAsyncThunk
-} from '@reduxjs/toolkit';
-// import axiosConfig from '../../../axiosConfig';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axiosConfig from '../../../axiosConfig';
 
-// export const fetchFilteredTours = createAsyncThunk(
-//   'products/fetchFilteredTours',
-//   async (params, page, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axiosConfig(`/products/filter?${params}&perPage=5&startPage=${page}`);
-//       return data;
-//     } catch (err) {
-//       return rejectWithValue(err);
-//     }
-//   }
-// );
+export const fetchFilteredTours = createAsyncThunk(
+  'products/fetchFilteredTours',
+  async ({ params, page }, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosConfig(`/products/filter?${params}&perPage=5&startPage=${page}`);
+      return data;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
 
 const initialState = {
   tours: [],
@@ -26,6 +22,7 @@ const initialState = {
   prices: [],
   categories: [],
   seasons: [],
+  error: null,
 };
 
 const filterSlice = createSlice({
@@ -33,12 +30,6 @@ const filterSlice = createSlice({
   initialState,
 
   reducers: {
-    setFilteredTours: (state, action) => {
-      state.tours = action.payload;
-    },
-    setFilteredToursQty: (state, action) => {
-      state.toursQty = action.payload;
-    },
     setIsFilter: (state, action) => {
       state.isFilter = action.payload;
     },
@@ -81,11 +72,22 @@ const filterSlice = createSlice({
       state.filterParams.season = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchFilteredTours.pending, (state) => {
+      state.error = null;
+    });
+    builder.addCase(fetchFilteredTours.fulfilled, (state, action) => {
+      const { products, productsQuantity } = action.payload;
+      state.tours = products;
+      state.toursQty = productsQuantity;
+    });
+    builder.addCase(fetchFilteredTours.rejected, (state, action) => {
+      state.error = action.payload;
+    });
+  },
 });
 
 export const {
-  setFilteredTours,
-  setFilteredToursQty,
   setIsFilter,
   setAllToursPrices,
   setMinPrice,
@@ -98,18 +100,5 @@ export const {
   setAllSeasons,
   setSeasonsInFilterParams,
 } = filterSlice.actions;
-
-export const fetchFilteredTours = (params, page) => async (dispatch) => {
-  try {
-    const { data, status } = await axios(`/products/filter?${params}&perPage=5&startPage=${page}`);
-
-    if (status) {
-      dispatch(setFilteredToursQty(data.productsQuantity));
-      dispatch(setFilteredTours(data.products));
-    }
-  } catch (err) {
-    console.error(err.message);
-  }
-};
 
 export default filterSlice.reducer;
