@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import { TextField } from 'formik-mui';
@@ -14,7 +13,7 @@ const UserDetailsForm = () => {
         User Details
       </Typography>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={3} mb={3}>
         <Grid item xs={12} laptop={6}>
           <Field component={TextField} required name={firstName.name} label={firstName.label} fullWidth />
         </Grid>

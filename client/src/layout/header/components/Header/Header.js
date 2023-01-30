@@ -1,19 +1,12 @@
-/* eslint-disable  react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Container, useScrollTrigger, Slide } from '@mui/material';
-import { BurgerMenu, TabletMenu, LogoHeader, HeaderSearchField } from '..';
-
-const HideOnScroll = ({ children }) => {
-  const trigger = useScrollTrigger();
-  return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
-};
+import { NavLink } from 'react-router-dom';
+import { BurgerMenu, TabletMenu, HeaderSearchField } from '..';
+import { LogOutModal } from '../../../../components';
 
 const Header = () => {
   const [scrollY, setScrollY] = useState();
+  const trigger = useScrollTrigger();
 
   useEffect(() => {
     const handleScrollY = () => setScrollY(window.scrollY);
@@ -31,18 +24,21 @@ const Header = () => {
   };
 
   return (
-    <HideOnScroll>
+    <Slide appear={false} direction="down" in={!trigger}>
       <AppBar sx={appBarSX}>
         <Container>
           <Toolbar disableGutters>
-            <LogoHeader />
+            <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <img src="/assets/images/logo/logo.png" alt="logo" width="65" height="50" />
+            </NavLink>
             <HeaderSearchField />
             <BurgerMenu />
             <TabletMenu />
+            <LogOutModal />
           </Toolbar>
         </Container>
       </AppBar>
-    </HideOnScroll>
+    </Slide>
   );
 };
 

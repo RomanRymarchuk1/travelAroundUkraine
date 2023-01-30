@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { TextField } from 'formik-mui';
 import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import postLogIn from '../../../api/postLogIn';
-import { toggleIsLogin } from '../../../store/slices/userSlice';
+import { setIsLogin } from '../../../store/slices/userSlice/userSlice';
+import { migrateCart, fetchCart } from '../../../store/slices/cartSlice/cartSlice';
 
 const buttonSX = {
   width: { xs: '86px', mobile: '110px', tablet: '140px', laptop: '150px' },
@@ -31,6 +32,7 @@ const gridItemSx = {
 const LogInForm = () => {
   const [errorMassage, setErrorMassage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const cart = useSelector((store) => store.cart.data);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,7 +46,14 @@ const LogInForm = () => {
       localStorage.setItem('token', response.token);
       setErrorMassage(null);
       navigate('/');
-      dispatch(toggleIsLogin());
+      dispatch(setIsLogin(true));
+
+      dispatch(fetchCart())
+        .unwrap()
+        .then(() => {
+          const localCart = JSON.parse(localStorage.getItem('cart'));
+          localCart && dispatch(migrateCart(localCart));
+        });
     } else {
       setErrorMassage(response?.password || response?.loginOrEmail);
     }
@@ -62,7 +71,7 @@ const LogInForm = () => {
   };
 
   const validationSchema = yup.object().shape({
-    loginOrEmail: yup.string().email('It will be an valid email').required('Email is required'),
+    loginOrEmail: yup.string().required('Email or login are required'),
     password: yup.string().min(7, 'Password must have at least 7 characters').required('Password is required!'),
   });
 
@@ -82,7 +91,9 @@ const LogInForm = () => {
                   <Field component={TextField} type="password" name="password" label="Password" fullWidth />
                 </Grid>
               </Grid>
-              {errorMassage && <Typography sx={{ color: '#d32f2f', textAlign: 'center' }}>{errorMassage}</Typography>}
+              {errorMassage && (
+                <Typography sx={{ color: '#d32f2f', textAlign: 'center' }}>Password or login is not correct</Typography>
+              )}
               <Box sx={{ my: { xs: 1.5, laptop: 2.5 } }}>
                 <Button sx={buttonSX} onClick={handleClickSignUp}>
                   sign up

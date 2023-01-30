@@ -1,58 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { styled, alpha, ToggleButton } from '@mui/material';
+import { setCategories } from '../../../../store/slices/filterSlice/filterSlice';
 
 const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
-    borderRadius: 40,
-    border: '1px solid #EDEDED',
-    background: 'none',
-    fontWeight: 500,
-    fontSize: 12,
-    textTransform: 'none',
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    width: '100%',
-    color: theme.palette.text.primary,
-  
+  borderRadius: 40,
+  border: '1px solid #EDEDED',
+  background: 'none',
+  fontWeight: 500,
+  fontSize: 13,
+  textTransform: 'none',
+  padding: theme.spacing(0.5),
+  textAlign: 'center',
+  width: '100%',
+  color: theme.palette.text.primary,
+
+  '&:hover': {
+    boxShadow: `${alpha(theme.palette.primary.main, 0.15)} 0 0 0 0.12rem`,
+    borderColor: theme.palette.primary.main,
+    backgroundColor: `${alpha(theme.palette.primary.main, 0.05)}`,
+  },
+
+  '&.Mui-selected': {
+    backgroundColor: `${alpha(theme.palette.primary.main, 0.85)}`,
+    color: theme.palette.primary.contrastText,
+
     '&:hover': {
-      boxShadow: `${alpha(theme.palette.primary.main, 0.15)} 0 0 0 0.12rem`,
-      borderColor: theme.palette.primary.main,
-      backgroundColor: `${alpha(theme.palette.primary.main, 0.05)}`,
+      backgroundColor: `${alpha(theme.palette.primary.main, 0.85)}`,
     },
-  
-    '&.Mui-selected': {
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.primary.contrastText,
-  
-      '&:hover': {
-        backgroundColor: `${alpha(theme.palette.primary.main, 0.85)}`,
-      },
-    },
-  }));
-  
+  },
+}));
 
-  const OutlinedToggleButton = ({ value, children }) => {
-    const [selected, setSelected] = useState(false);
-  
-    return (
-      <StyledToggleButton
-        value={value}
-        selected={selected}
-        onChange={() => setSelected(prev => !prev)}
-      >
-        {children}
-      </StyledToggleButton>
-    );
+const OutlinedToggleButton = ({ value, children }) => {
+  const dispatch = useDispatch();
+  const filterCategories = useSelector((store) => store.filter.categories);
+
+  const [selected, setSelected] = useState(false);
+
+  useEffect(() => {
+    setSelected(filterCategories.includes(value.toLowerCase()));
+  }, [filterCategories]);
+
+  const setfilterCategory = (category) => {
+    setSelected((prev) => !prev);
+    dispatch(setCategories(category));
   };
 
-  OutlinedToggleButton.propTypes = {
-    children: PropTypes.any,
-    value: PropTypes.number,
-  };
-  
-  OutlinedToggleButton.defaultProps = {
-    children: '',
-    value: 0,
-  };
+  return (
+    <StyledToggleButton value={value} selected={selected} onChange={() => setfilterCategory(value.toLowerCase())}>
+      {children}
+    </StyledToggleButton>
+  );
+};
 
-  export default OutlinedToggleButton;
+OutlinedToggleButton.propTypes = {
+  children: PropTypes.any,
+  value: PropTypes.string,
+};
+
+OutlinedToggleButton.defaultProps = {
+  children: '',
+  value: '',
+};
+
+export default OutlinedToggleButton;

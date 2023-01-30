@@ -8,8 +8,11 @@ import TourPage from './TourPage/TourPage';
 import AppLayout from './AppLayout/AppLayout';
 import LogInPage from './LogInPage/LogInPage';
 import UserPage from './UserPage/UserPage';
+import ContactUsPage from './ContactUsPage/ContactUsPage'
+import FavoritesPage from './FavoritesPage/FavoritesPage';
 
 export {
+  ContactUsPage,
   UserPage,
   LogInPage,
   CartPage,
@@ -20,4 +23,5 @@ export {
   TourPage,
   AppLayout,
   SignupPage,
+  FavoritesPage,
 };

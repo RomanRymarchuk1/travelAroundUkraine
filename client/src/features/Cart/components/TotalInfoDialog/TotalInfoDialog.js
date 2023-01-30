@@ -1,31 +1,26 @@
-import React from 'react';
-
-import { Button, Stack, Box as MuiBox, Typography, styled } from '@mui/material';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-const BoxWrapper = styled(MuiBox)(({ theme }) => ({
-  position: 'sticky',
-  top: 90,
-  padding: '20px 20px 30px',
-  borderRadius: 5,
+// MUI
+import { Button, Stack, Box as MuiBox, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { BoxWrapper, Section, Title, Select, MenuItem } from '../../../../components';
 
-  border: `1px solid ${theme.palette.divider}`,
-}));
+// Utils & Data
+import calcToursQuantityAndPrice from '../../utils/calcToursQuantityAndPrice';
+import currencyConverter from '../../../Tour/utils/currencyConverter';
+import currencySymbols from '../../../data/currencySymbols';
 
-const Section = styled(MuiBox)(({ theme }) => ({
-  borderBottom: `1px solid ${theme.palette.divider}`,
-  paddingBottom: 15,
-  marginBottom: 20,
-}));
-
-const Title = styled((props) => <Typography variant="h3" color="text.primary" {...props} />)({
-  textTransform: 'uppercase',
-  fontWeight: 700,
-  marginBottom: 20,
-});
-
-const TotalInfoDialog = () => {
+const TotalInfoDialog = ({ cart }) => {
   const navigate = useNavigate();
+  const [currency, setCurrency] = useState('eur');
+
+  const { toursPrice, toursQuantity } = calcToursQuantityAndPrice(cart);
+
+  const onCurrencyChange = (e) => {
+    setCurrency(e.target.value);
+  };
 
   return (
     <BoxWrapper>
@@ -33,13 +28,28 @@ const TotalInfoDialog = () => {
         <Title>Total</Title>
         <Stack direction="row" justifyContent="space-between">
           <Typography>Tours amount:</Typography>
-          <Typography>3</Typography>
+          <Typography>{toursQuantity}</Typography>
         </Stack>
       </Section>
+
+      <Section>
+        <Title>Currency</Title>
+        <Select fullWidth value={currency} onChange={onCurrencyChange} IconComponent={ExpandMoreIcon}>
+          {Object.keys(currencySymbols).map((key) => (
+            <MenuItem key={key} value={key}>
+              {key.toUpperCase()}
+            </MenuItem>
+          ))}
+        </Select>
+      </Section>
+
       <Section>
         <Stack direction="row" justifyContent="space-between">
           <Typography>To be paid:</Typography>
-          <Typography fontSize={18}>2000 ₴</Typography>
+          <Typography fontSize={18}>
+            {currencySymbols[currency]}
+            {currencyConverter(toursPrice, currency)}
+          </Typography>
         </Stack>
       </Section>
 
@@ -52,6 +62,14 @@ const TotalInfoDialog = () => {
       </MuiBox>
     </BoxWrapper>
   );
+};
+
+TotalInfoDialog.propTypes = {
+  cart: PropTypes.array,
+};
+
+TotalInfoDialog.defaultProps = {
+  cart: [],
 };
 
 export default TotalInfoDialog;

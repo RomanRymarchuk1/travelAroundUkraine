@@ -1,10 +1,40 @@
 import React, { useState } from 'react';
-import { Box, MenuItem, Menu, IconButton, Typography } from '@mui/material';
+import { Box, MenuItem, Menu, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { setIsModalOpen } from '../../../../store/slices/userSlice/userSlice';
 
-const pages = [
+const loggedPages = [
+  {
+    name: 'home',
+    link: '/',
+    innerContent: 'Home',
+  },
+  {
+    name: 'catalogue',
+    link: '/catalogue',
+    innerContent: 'Catalogue',
+  },
+  {
+    name: 'account',
+    link: '/user',
+    innerContent: 'Account',
+  },
+  {
+    name: 'cart',
+    link: '/cart',
+    innerContent: 'Cart',
+  },
+  {
+    name: 'logOut',
+    link: null,
+    innerContent: 'LogOut',
+    onClick: (dispatch) => dispatch(setIsModalOpen(true)),
+  },
+];
+
+const unloggedPages = [
   {
     name: 'home',
     link: '/',
@@ -18,27 +48,19 @@ const pages = [
   {
     name: 'logIn',
     link: '/login',
-    innerContent: 'Log In',
-  },
-  {
-    name: 'account',
-    link: '/user',
-    innerContent: 'Account',
+    innerContent: 'LogIn',
   },
   {
     name: 'cart',
     link: '/cart',
     innerContent: 'Cart',
   },
+  {
+    name: 'favorites',
+    link: '/favorites',
+    innerContent: 'Favorites',
+  },
 ];
-
-const styleNavLink = {
-  display: 'block',
-  textDecoration: 'none',
-  color: 'text.primary',
-  width: '100%',
-  padding: '6px 16px',
-};
 
 const boxSX = {
   flexGrow: 1,
@@ -51,10 +73,12 @@ const menuSX = {
 };
 
 const menuItemSX = {
-  padding: 0,
+  padding: '6px 16px',
   width: '40vw',
   maxWidth: '200px',
   height: '50px',
+  color: 'text.primary',
+  textDecoration: 'none',
 };
 
 const anchorOrigin = {
@@ -69,7 +93,12 @@ const transformOrigin = {
 
 const BurgerMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const { isLogin } = useSelector((store) => store.userReducer);
+  const { isLogin } = useSelector((store) => store.user);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const currentPages = isLogin ? loggedPages : unloggedPages;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -102,22 +131,23 @@ const BurgerMenu = () => {
         onClose={handleCloseNavMenu}
         sx={menuSX}
       >
-        {pages.map(({ name, link, innerContent }) => {
-          if (name === 'logIn' && isLogin) {
-            return null;
-          }
-          if (name === 'account' && !isLogin) {
-            return null;
-          }
-
-          return (
-            <MenuItem key={name} onClick={handleCloseNavMenu} sx={menuItemSX}>
-              <Typography component={NavLink} to={link} key={name} sx={styleNavLink} end>
-                {innerContent}
-              </Typography>
-            </MenuItem>
-          );
-        })}
+        {currentPages.map(({ name, link, innerContent, onClick }) => (
+          <MenuItem
+            component={NavLink}
+            key={name}
+            onClick={() => {
+              if (onClick) {
+                onClick(dispatch, navigate);
+              }
+              handleCloseNavMenu();
+            }}
+            to={link}
+            sx={menuItemSX}
+            end
+          >
+            {innerContent}
+          </MenuItem>
+        ))}
       </Menu>
     </Box>
   );

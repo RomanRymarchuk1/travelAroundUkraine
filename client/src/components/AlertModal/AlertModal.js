@@ -1,3 +1,4 @@
+/* eslint-disable no-unneeded-ternary */
 import {
   Button as MuiButton,
   Dialog,
@@ -32,7 +33,7 @@ const AlertModal = ({ open, onClose, onSubmit, title, children, disableCancelBut
         </Button>
       )}
 
-      <Button onClick={onSubmit} success={success} disableElevation autoFocus>
+      <Button onClick={onSubmit} success={success === 'true' ? 'true' : null} disableElevation autoFocus>
         {submitButtonText}
       </Button>
     </DialogActions>
@@ -47,7 +48,7 @@ AlertModal.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   disableCancelButton: PropTypes.bool,
   submitButtonText: PropTypes.string,
-  success: PropTypes.bool,
+  success: PropTypes.string,
 };
 
 AlertModal.defaultProps = {

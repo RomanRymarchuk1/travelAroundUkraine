@@ -1,56 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { Typography, styled, Container } from '@mui/material';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { fetchPopularProducts } from '../../../../store/slices/catalogueSlice/catalogueSlice';
 import { CardItem } from '..';
 import { SliderButton } from '../../../../components';
 
 import 'swiper/swiper.min.css';
-
-const cards = [
-  {
-    name: 'Kyiv city walk',
-    region: 'Kyiv region',
-    id: 1,
-    url: '',
-  },
-  {
-    name: 'Lviv city walk',
-    region: 'Lviv region',
-    id: 2,
-  },
-  {
-    name: 'Donetsk city walk',
-    region: 'Donetsk region',
-    id: 3,
-  },
-  {
-    name: 'Odessa city walk',
-    region: 'Odessa region',
-    id: 4,
-  },
-  {
-    name: 'Dnepr city walk',
-    region: 'Dnepr region',
-    id: 5,
-  },
-  {
-    name: 'Chernivtsi city walk',
-    region: 'Chernivtsi region',
-    id: 6,
-  },
-  {
-    name: 'Ternopil city walk',
-    region: 'Ternopil region',
-    id: 7,
-  },
-  {
-    name: 'Lutsk city walk',
-    region: 'Lutsk region',
-    id: 8,
-  },
-];
 
 const CardContainerHeaderContainer = styled('div')({
   display: 'flex',
@@ -80,60 +38,77 @@ const CardContainerSwiperContainer = styled('div')({
   },
 });
 
-const CardContainer = () => (
-  <Container>
-    <CardContainerHeaderContainer>
-      <Typography variant="h2" sx={{ marginBottom: '0px' }}>
-        Popular tours
-      </Typography>
-      <Link to="/catalogue">
-        <Typography>View All</Typography>
-      </Link>
-    </CardContainerHeaderContainer>
-    <CardContainerSwiperContainer>
-      <SliderButton id="previous" position={{ top: '44%', left: '-30px', rotate: '180deg' }} />
-      <SliderButton id="next" position={{ top: '44%', right: '-30px' }} />
-      <Swiper
-        breakpoints={{
-          265: {
-            width: 265,
-            slidesPerView: 1,
-          },
-          768: {
-            width: 560,
-            slidesPerView: 2,
-          },
-          1024: {
-            width: 855,
-            slidesPerView: 3,
-          },
-          1360: {
-            width: 1150,
-            slidesPerView: 4,
-          },
-        }}
-        spaceBetween={30}
-        slidesPerGroup={1}
-        loop
-        loopFillGroupWithBlank
-        pagination={{
-          clickable: true,
-        }}
-        navigation={{
-          nextEl: '#next',
-          prevEl: '#previous',
-        }}
-        modules={[Navigation]}
-        className="mySwiper"
-      >
-        {cards.map(({ name, region, id }) => (
-          <SwiperSlide key={id}>
-            <CardItem name={name} region={region} id={id} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </CardContainerSwiperContainer>
-  </Container>
-);
+const CardContainer = () => {
+  const dispatch = useDispatch();
+  const popularProducts = useSelector((state) => state.catalogue.popular, shallowEqual);
+
+  useEffect(() => {
+    dispatch(fetchPopularProducts());
+  }, []);
+
+  return (
+    <Container>
+      <CardContainerHeaderContainer>
+        <Typography variant="h2" sx={{ marginBottom: '0px' }}>
+          Popular tours
+        </Typography>
+        <Link to="/catalogue">
+          <Typography>View All</Typography>
+        </Link>
+      </CardContainerHeaderContainer>
+      <CardContainerSwiperContainer>
+        <SliderButton id="previous" position={{ top: '44%', left: '-30px', rotate: '180deg' }} />
+        <SliderButton id="next" position={{ top: '44%', right: '-30px' }} />
+        <Swiper
+          breakpoints={{
+            265: {
+              width: 265,
+              slidesPerView: 1,
+            },
+            768: {
+              width: 560,
+              slidesPerView: 2,
+            },
+            1024: {
+              width: 855,
+              slidesPerView: 3,
+            },
+            1360: {
+              width: 1150,
+              slidesPerView: 4,
+            },
+          }}
+          spaceBetween={30}
+          slidesPerGroup={1}
+          loop
+          loopFillGroupWithBlank
+          pagination={{
+            clickable: true,
+          }}
+          navigation={{
+            nextEl: '#next',
+            prevEl: '#previous',
+          }}
+          modules={[Navigation]}
+          className="mySwiper"
+        >
+          {popularProducts &&
+            popularProducts.map(({ name, region, _id, imageUrls, currentPrice, itemNo }) => (
+              <SwiperSlide key={_id}>
+                <CardItem
+                  name={name}
+                  region={region}
+                  id={_id}
+                  imageUrls={imageUrls}
+                  currentPrice={currentPrice}
+                  itemNo={itemNo}
+                />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      </CardContainerSwiperContainer>
+    </Container>
+  );
+};
 
 export default CardContainer;

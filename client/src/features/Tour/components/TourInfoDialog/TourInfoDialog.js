@@ -1,11 +1,10 @@
 /* eslint-disable react/forbid-prop-types */
-
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { styled, alpha } from '@mui/material/styles';
-import MuiBox from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { Button, IconButton, MenuItem as MuiMenuItem, Select as MuiSelect, Stack } from '@mui/material';
+
+// MUI
+import { Box as MuiBox, Button, IconButton, Stack, Typography, styled } from '@mui/material';
+
 // Icons
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -14,44 +13,24 @@ import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import CloseIcon from '@mui/icons-material/Close';
 
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct, addProductToLocal } from '../../../../store/slices/cartSlice/cartSlice';
+import getProduct from '../../../../api/getProduct';
+
+// Utils & Data
 import formatTourDate from '../../utils/formatTourDate';
+import currencyConverter from '../../utils/currencyConverter';
+import convertData from '../../utils/convertData';
+import currencySymbols from '../../../data/currencySymbols';
 
-const currency = {
-  eur: '€',
-  usd: '$',
-  uah: '₴',
-};
+// Components
+import { BoxWrapper, Section, Title, Select, MenuItem } from '../../../../components';
 
-const BoxWrapper = styled(MuiBox)(({ theme }) => ({
-  position: 'sticky',
-  top: 20,
-  padding: '20px 20px 30px',
-  borderRadius: 5,
-
-  '@media (min-width: 1051px)': {
-    border: `1px solid ${theme.palette.divider}`,
-  },
-}));
-
-const Section = styled(MuiBox)(({ theme }) => ({
-  borderBottom: `1px solid ${theme.palette.divider}`,
-  paddingBottom: 15,
-  marginBottom: 20,
-}));
-
-const Title = styled((props) => <Typography variant="h3" color="text.primary" {...props} />)({
-  textTransform: 'uppercase',
-  fontWeight: 700,
-  marginBottom: 20,
-});
-
-const IncludedContentWrapper = styled((props) => <Stack direction="row" {...props} />)({
-  flexWrap: 'wrap',
-  gap: '12px',
-
-  '@media (min-width: 1051px)': {
-    justifyContent: 'space-between',
-  },
+const IncludedContentWrapper = styled(MuiBox)({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+  gap: '7px',
 });
 
 const Cost = styled(Typography)(({ theme }) => ({
@@ -62,53 +41,49 @@ const Cost = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
 }));
 
-const Select = styled(MuiSelect)(({ theme }) => ({
-  marginBottom: '10px',
-  fontWeight: 700,
-  '.MuiOutlinedInput-notchedOutline': {
-    borderColor: `${theme.palette.divider}`,
+const TourInfoDialog = ({
+  dates,
+  professionalGuide,
+  accommodation,
+  meals,
+  transferAlongTheRoute,
+  travelInsurance,
+  departs,
+  duration,
+  returns,
+  currentPrice,
+  id,
+  itemNo,
+  closeButton,
+  handleClose,
+}) => {
+  const [currency, setCurrency] = useState('eur');
+  const included = convertData(professionalGuide, accommodation, meals, transferAlongTheRoute, travelInsurance);
+  const dispatch = useDispatch();
+  const isLogin = useSelector((store) => store.user.isLogin);
 
-    transition: theme.transitions.create('border-color'),
-  },
-  '&:hover .MuiOutlinedInput-notchedOutline': {
-    borderColor: `${theme.palette.primary.main}`,
-  },
-  '.MuiSelect-icon': {
-    transition: theme.transitions.create('transform'),
-  },
-}));
-
-const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
-  transition: theme.transitions.create(['color', 'background-color']),
-
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.15),
-    color: theme.palette.primary.main,
-  },
-
-  '&.Mui-selected': {
-    color: theme.palette.primary.main,
-    fontWeight: 700,
-  },
-}));
-
-const DetailsText = styled((props) => <Typography gutterBottom={false} {...props} />)({});
-
-const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClose }) => {
-  const [costCurrency, setCostCurrency] = useState('eur');
+  const addBttnHandler = async () => {
+    if (isLogin) {
+      dispatch(addProduct(id));
+    } else {
+      // getProduct API function will be moved later to seperate folder within our store for refactoring purpose.
+      const product = await getProduct(itemNo);
+      dispatch(addProductToLocal(product));
+    }
+  };
 
   return (
     <BoxWrapper>
+      {closeButton && (
+        <IconButton sx={{ position: 'absolute', right: '10px', top: '10px' }} onClick={handleClose}>
+          <CloseIcon />
+        </IconButton>
+      )}
       <Section>
         <Title>Included</Title>
-        {closeButton && (
-          <IconButton sx={{ position: 'absolute', right: '10px', top: '10px' }} onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
-        )}
 
         <IncludedContentWrapper>
-          {included?.map(({ icon, service }) => (
+          {included.map(({ icon, service }) => (
             <Stack key={service} direction="row" gap="5px" alignItems="center">
               {icon}
               <Typography gutterBottom={false}>{service}</Typography>
@@ -130,30 +105,25 @@ const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClo
         <Stack gap="5px">
           <Stack direction="row" alignItems="center" gap="5px">
             <AccessTimeIcon color="primary" />
-            <DetailsText>Duration</DetailsText>
-            <DetailsText marginLeft="auto">{details.duration}</DetailsText>
+            <Typography gutterBottom={false}>Duration</Typography>
+            <Typography marginLeft="auto">{duration}</Typography>
           </Stack>
           <Stack direction="row" alignItems="center" gap="5px">
             <FlightTakeoffIcon color="primary" />
-            <DetailsText>Departs</DetailsText>
-            <DetailsText marginLeft="auto">{details.departs}</DetailsText>
+            <Typography gutterBottom={false}>Departs</Typography>
+            <Typography marginLeft="auto">{departs}</Typography>
           </Stack>
           <Stack direction="row" alignItems="center" gap="5px">
             <KeyboardReturnIcon color="primary" />
-            <DetailsText>Returns</DetailsText>
-            <DetailsText marginLeft="auto">{details.returns}</DetailsText>
+            <Typography gutterBottom={false}>Returns</Typography>
+            <Typography marginLeft="auto">{returns}</Typography>
           </Stack>
         </Stack>
       </Section>
       <Section>
         <Title>Currency</Title>
-        <Select
-          fullWidth
-          value={costCurrency}
-          onChange={(e) => setCostCurrency(e.target.value)}
-          IconComponent={ExpandMoreIcon}
-        >
-          {Object.keys(currency).map((key) => (
+        <Select fullWidth value={currency} onChange={(e) => setCurrency(e.target.value)} IconComponent={ExpandMoreIcon}>
+          {Object.keys(currencySymbols).map((key) => (
             <MenuItem key={key} value={key}>
               {key.toUpperCase()}
             </MenuItem>
@@ -164,10 +134,10 @@ const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClo
         <Title>Total</Title>
         <Stack direction="row" justifyContent="space-between" alignItems="center">
           <Cost>
-            {currency[costCurrency]}
-            {cost[costCurrency]}
+            {currencySymbols[currency]}
+            {currencyConverter(currentPrice, currency)}
           </Cost>
-          <Button sx={{ paddingInline: '30px' }} disableElevation>
+          <Button sx={{ paddingInline: '30px' }} disableElevation onClick={addBttnHandler}>
             Add to Cart
           </Button>
         </Stack>
@@ -177,10 +147,18 @@ const TourInfoDialog = ({ included, cost, dates, details, closeButton, handleClo
 };
 
 TourInfoDialog.propTypes = {
-  included: PropTypes.arrayOf(PropTypes.object).isRequired,
-  cost: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   dates: PropTypes.objectOf(PropTypes.instanceOf(Date)).isRequired,
-  details: PropTypes.objectOf(PropTypes.string).isRequired,
+  professionalGuide: PropTypes.bool,
+  accommodation: PropTypes.bool,
+  meals: PropTypes.bool,
+  transferAlongTheRoute: PropTypes.bool,
+  travelInsurance: PropTypes.bool,
+  duration: PropTypes.string,
+  departs: PropTypes.string,
+  returns: PropTypes.string,
+  currentPrice: PropTypes.number,
+  id: PropTypes.string,
+  itemNo: PropTypes.string,
   closeButton: PropTypes.bool,
   handleClose: PropTypes.func,
 };
@@ -188,6 +166,17 @@ TourInfoDialog.propTypes = {
 TourInfoDialog.defaultProps = {
   closeButton: false,
   handleClose: () => {},
+  professionalGuide: false,
+  accommodation: false,
+  meals: false,
+  transferAlongTheRoute: false,
+  travelInsurance: false,
+  duration: 'Unknown',
+  departs: 'Unknown',
+  returns: 'Unknown',
+  currentPrice: 0,
+  id: '',
+  itemNo: '',
 };
 
 export default TourInfoDialog;

@@ -10,7 +10,15 @@ jest.mock('@mui/material/CardContent', () => ({ children }) => <div>{children}</
 
 describe('CatalogTourCard snapshot test', () => {
   test('should CatalogTourCard match snapshot', () => {
-    const { asFragment } = render(<CatalogTourCard />);
+    const { asFragment } = render(
+      <CatalogTourCard
+        name="ItemName"
+        description="Itemdescription"
+        currentPrice={1}
+        duration="ItemDuration"
+        imageUrls={['ItemImage']}
+      />
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

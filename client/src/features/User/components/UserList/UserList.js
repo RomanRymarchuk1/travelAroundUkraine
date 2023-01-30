@@ -7,10 +7,9 @@ const ListSX = {
   flexDirection: 'column',
   borderRadius: '20px',
   maxWidth: '400px',
-  minWidth: '300px',
-  width: '60%',
+  minWidth: '250px',
   py: '20px',
-  px: { xs: '10px', laptop: '45px' },
+  px: 2,
   listStyleType: 'none',
   m: '2% auto',
 };
@@ -29,7 +28,7 @@ const listItemInnerTextSX = { my: '2px', fontSize: '18px', mx: { tablet: '20px' 
 const UserList = ({ userData: { firstName, email, telephone, gender } }) => (
   <Paper component="ul" sx={ListSX}>
     <Typography sx={{ m: '15px auto', fontSize: '24px' }} component="h3">
-      {`${firstName}'s info`}
+      {firstName}&apos;s info
     </Typography>
     <Box sx={listItemSX} component="li">
       <Typography sx={listItemTitleSX}>Email: </Typography>

@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-unneeded-ternary */
 import {
   alpha,
   Box,
@@ -9,51 +11,31 @@ import {
   Stack,
   styled,
   Typography,
+  CircularProgress,
   useMediaQuery,
 } from '@mui/material';
-import React, { useState, useEffect } from 'react';
-// Icons
-import BedIcon from '@mui/icons-material/Bed';
-import PersonIcon from '@mui/icons-material/Person';
+import React, { useState, useEffect, shallowEqual } from 'react';
 
 import { useInView } from 'react-intersection-observer';
+
+// React
+import { useParams } from 'react-router-dom';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTour } from '../../store/slices/tourSlice/tourSlice';
+import { closeSnackBar } from '../../store/slices/cartSlice/cartSlice';
 
 import { TourAccordion, TourInfoDialog, TourReasonToChoose, ImageGallery } from '../../features/Tour/components';
+import { SnackBar } from '../../components';
 
 const sections = [
-  { title: 'About us', link: '#about-tour' },
+  { title: 'About tour', link: '#about-tour' },
   { title: 'Reasons to choose', link: '#reasons-to-choose' },
-  { title: 'What is included?', link: '#included' },
 ];
 
-const currency = {
-  eur: '€',
-  usd: '$',
-  uah: '₴',
-};
-
-const included = [
-  { icon: <PersonIcon color="primary" />, service: 'Professional guide' },
-  { icon: <BedIcon color="primary" />, service: 'Accomodation' },
-];
-
-const cost = {
-  eur: 70,
-  usd: 70,
-  uah: 2584,
-};
-
+// TODO: make dates come from server instead of placeholders
 const dates = { beginDate: new Date('2022-02-01'), endDate: new Date('2022-02-25') };
-
-const details = {
-  duration: '3 days',
-  departs: 'First city',
-  returns: 'Second city',
-};
 
 const HeaderContent = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('laptop')]: {
@@ -140,27 +122,142 @@ const TourPage = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [dialogRef, inView] = useInView({ root: null, rootMargin: '0px', threshold: 0.1 });
+  const [dialogRef, inView, entry] = useInView({ root: null, rootMargin: '0px', threshold: 0.1 });
+
+  // checks if dialog is in view and has positive y coordinate
+  const shouldBeVisible = !inView && entry?.boundingClientRect.y > 0;
 
   const handleOpenDialog = () => setIsOpen(true);
   const handleCloseDialog = () => setIsOpen(false);
 
   const dispatch = useDispatch();
-  // to be revised in future from re rendering and optimizing point of view, whether we pass needed data as props to components or useSelector directly in each component.
-  const { imageUrls } = useSelector((store) => store.tour.data);
+  const { itemNo } = useParams();
+  const { data, error, isLoading } = useSelector((store) => store.tour, shallowEqual);
+  const { isSnackBarOpen, severity, text } = useSelector((store) => store.cart.snackBar);
+
+  const handleClose = () => dispatch(closeSnackBar());
+
+  const {
+    imageUrls,
+    name,
+    description,
+    reasons,
+    professionalGuide,
+    accommodation,
+    meals,
+    transferAlongTheRoute,
+    travelInsurance,
+    departs,
+    duration,
+    returns,
+    currentPrice,
+    region,
+    categories,
+    season,
+    _id,
+  } = data;
 
   useEffect(() => {
-    dispatch(fetchTour());
+    dispatch(fetchTour(itemNo));
   }, []);
 
-  return (
+  // components saved into constants
+  const asideTourInfoDialog = (
+    <Box component="aside" sx={{ maxWidth: '370px', width: '100%' }}>
+      <TourInfoDialog
+        dates={dates}
+        professionalGuide={professionalGuide}
+        accommodation={accommodation}
+        meals={meals}
+        transferAlongTheRoute={transferAlongTheRoute}
+        travelInsurance={travelInsurance}
+        departs={departs}
+        duration={duration}
+        returns={returns}
+        currentPrice={currentPrice}
+        id={_id}
+        itemNo={itemNo}
+      />
+    </Box>
+  );
+
+  const mobileTourInfoDialog = (
+    <MobileDialogWrapper ref={dialogRef}>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Cost>€{currentPrice}</Cost>
+        <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
+          More info
+        </Button>
+      </Stack>
+      <Dialog open={isOpen} onClose={handleCloseDialog} hideBackdrop fullScreen>
+        <TourInfoDialog
+          dates={dates}
+          professionalGuide={professionalGuide}
+          accommodation={accommodation}
+          meals={meals}
+          transferAlongTheRoute={transferAlongTheRoute}
+          travelInsurance={travelInsurance}
+          departs={departs}
+          duration={duration}
+          returns={returns}
+          currentPrice={currentPrice}
+          id={_id}
+          itemNo={itemNo}
+          closeButton
+          handleClose={handleCloseDialog}
+        />
+      </Dialog>
+    </MobileDialogWrapper>
+  );
+
+  const slideInfoBar = (
+    <Slide in={shouldBeVisible} direction="up" mountOnEnter unmountOnExit>
+      <FloatingDialog>
+        <Container>
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Cost>€{currentPrice}</Cost>
+            <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
+              More info
+            </Button>
+          </Stack>
+        </Container>
+      </FloatingDialog>
+    </Slide>
+  );
+
+  let reasonsToChooseArr;
+
+  if (reasons) {
+    reasonsToChooseArr = reasons.map((item, index) => (
+      <TourReasonToChoose description={item} number={index + 1} key={item} />
+    ));
+  }
+
+  const tour = (
     <>
       <HeaderContent>
         <Container>
-          <Typography align="center" variant="h1" mt={17} mb={5} fontSize="50px">
-            {/* to be edited later with tour name from fetched data */}
-            TOUR NAME
+          <Typography
+            align="center"
+            variant="h1"
+            mt={17}
+            mb={5}
+            fontSize="50px"
+            sx={{
+              ':first-letter': {
+                textTransform: 'capitalize',
+              },
+            }}
+          >
+            {name}
           </Typography>
+
+          <Stack direction="row" justifyContent="center" alignItems="center" mb={3}>
+            <Typography>{season} / </Typography>
+            <Typography>{region} / </Typography>
+            <Typography>{categories}</Typography>
+          </Stack>
+
           <ImageGallery imageUrls={imageUrls} />
           <Nav>
             <LinksWrapper>
@@ -177,112 +274,55 @@ const TourPage = () => {
       <MainContent>
         <Container>
           <ContentWrapper>
-            {matchesMediaQuery ? (
-              <Box component="aside" sx={{ maxWidth: '370px', width: '100%' }}>
-                <TourInfoDialog included={included} cost={cost} dates={dates} details={details} />
-              </Box>
-            ) : null}
+            {matchesMediaQuery ? asideTourInfoDialog : null}
 
             <Box sx={{ flex: 1 }}>
               <Section id="about-tour">
                 <Typography variant="h2">About tour</Typography>
                 <Box sx={{ paddingBottom: 3 }}>
-                  <Typography>
-                    Each medieval city is full of various legends and mystical stories. Lviv is no exception because
-                    more than 760 years of history simply could not help but leave mysterious legends.
-                  </Typography>
-                  <Typography>
-                    The guide will tell and show that Lviv legends can impress no less than Lviv architecture. This tour
-                    will be filled with incredible stories - unusual stories from the life of the Galician capital.
-                  </Typography>
-                  <Typography>
-                    How can one explain the black colour of one of the houses on Rynok Square? How did Adam Senyavsky
-                    marry his daughter? How did the first bulletin board appear in Lviv? Why did one Lviv lady make a
-                    not entirely decent offer to the tram? Are the legends about Lviv ghosts true? What do Lviv
-                    courtyards hide?
-                  </Typography>
-                  <Typography>All this and more you can learn during this tour.</Typography>
-                  <Typography>Looks like today. The program of individual excursions: at any hour.</Typography>
+                  <Typography>{description}</Typography>
                 </Box>
               </Section>
 
               <Section id="reasons-to-choose">
                 <TourAccordion id="reasons-to-choose" title="Reasons to choose our tour">
                   <Stack direction="row" gap={4} flexWrap="wrap" mt={2} pl={2}>
-                    <TourReasonToChoose
-                      number={1}
-                      description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi ducimus tenetur in aspernatur, asperiores."
-                    />
-                    <TourReasonToChoose
-                      number={2}
-                      description="Lorem ipsum dolor sit amet consectetur, adipisicing elit."
-                    />
-                    <TourReasonToChoose
-                      number={3}
-                      description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi ducimus tenetur in aspernatur, asperiores."
-                    />
-                  </Stack>
-                </TourAccordion>
-              </Section>
-
-              <Section id="included">
-                <TourAccordion title="What is included?">
-                  <Stack direction="row" gap="20px">
-                    {included.map(({ icon, service }) => (
-                      <Stack key={service} direction="row" gap="5px" alignItems="center" flexWrap="wrap">
-                        {icon}
-                        <Typography gutterBottom={false}>{service}</Typography>
-                      </Stack>
-                    ))}
+                    {reasons ? reasonsToChooseArr : null}
                   </Stack>
                 </TourAccordion>
               </Section>
             </Box>
           </ContentWrapper>
 
-          {!matchesMediaQuery ? (
-            <MobileDialogWrapper ref={dialogRef}>
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Cost>
-                  {currency.eur}
-                  {cost.eur}
-                </Cost>
-                <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
-                  More info
-                </Button>
-              </Stack>
-              <Dialog open={isOpen} onClose={handleCloseDialog} hideBackdrop fullScreen>
-                <TourInfoDialog
-                  included={included}
-                  cost={cost}
-                  dates={dates}
-                  details={details}
-                  closeButton
-                  handleClose={handleCloseDialog}
-                />
-              </Dialog>
-            </MobileDialogWrapper>
-          ) : null}
+          {matchesMediaQuery ? null : mobileTourInfoDialog}
         </Container>
 
-        {!matchesMediaQuery ? (
-          <Slide in={!inView} direction="up" mountOnEnter unmountOnExit>
-            <FloatingDialog>
-              <Container>
-                <Stack direction="row" justifyContent="space-between" alignItems="center">
-                  <Cost>
-                    {currency.eur}
-                    {cost.eur}
-                  </Cost>
-                  <Button sx={{ paddingInline: '30px' }} disableElevation onClick={handleOpenDialog}>
-                    More info
-                  </Button>
-                </Stack>
-              </Container>
-            </FloatingDialog>
-          </Slide>
-        ) : null}
+        {matchesMediaQuery ? null : slideInfoBar}
       </MainContent>
+    </>
+  );
+
+  const spinner = (
+    <Container>
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress size={150} sx={{ color: 'primary.dark', my: '30vh', mx: 'auto' }} />
+      </Box>
+    </Container>
+  );
+
+  if (error)
+    return (
+      <Container>
+        <Typography align="center" variant="h2" sx={{ color: 'error.main', marginTop: '30vh', marginBottom: '30vh' }}>
+          {error}
+        </Typography>
+      </Container>
+    );
+
+  return (
+    <>
+      {isLoading ? spinner : tour}
+      <SnackBar isOpen={isSnackBarOpen} handleClose={handleClose} severity={severity} text={text} />
     </>
   );
 };

@@ -1,8 +1,20 @@
-import React from 'react';
-import { styled, Button, Typography, Stack } from '@mui/material';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { styled, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import CloseIcon from '@mui/icons-material/Close';
-import { CatalogFilterPrice, CatalogFilterTourists, CatalogFilterRegion } from '..';
+import { CatalogFilterPrice, CatalogFilterSeason, CatalogFilterCategories } from '..';
+import {
+  setIsFilter,
+  setMinPrice,
+  setMaxPrice,
+  setPricesInFilterParams,
+  setAllCategories,
+  setCategoriesInFilterParams,
+  setAllSeasons,
+  setSeasonsInFilterParams,
+  fetchFilteredTours,
+} from '../../../../store/slices/filterSlice/filterSlice';
 
 const FilterWrapper = styled(Stack)(({ theme }) => ({
   margin: '0 auto',
@@ -18,63 +30,120 @@ const FilterWrapper = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const ShowButton = styled(Button)(() => ({
-  padding: '12px 85px',
-  alignSelf: 'center',
-  marginTop: 40,
-  maxWidth: 200,
-}));
+const CatalogMainFilter = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const baseCatalogueURL = new URL(location.pathname, window.location.origin);
+  const allPrices = useSelector((state) => state.filter.allToursPrices, shallowEqual);
+  const prices = useSelector((store) => store.filter.prices);
+  const categories = useSelector((store) => store.filter.categories);
+  const seasons = useSelector((store) => store.filter.seasons);
+  const filterParams = useSelector((store) => store.filter.filterParams);
+  const currentPage = useSelector((store) => store.catalogue.currentPage);
 
-const ResetButton = styled((props) => (
-  <Button
-    variant="text"
-    startIcon={
-      <CloseIcon
-        sx={{
-          width: '14px',
-          height: '14px',
-          color: 'gray',
-        }}
-      />
+  useEffect(() => {
+    if (seasons.length > 0 || categories.length > 0 || prices.length > 0) {
+      dispatch(setIsFilter(true));
+    } else {
+      dispatch(setIsFilter(false));
     }
-    {...props}
-  />
-))(({ theme }) => ({
-  padding: '5px 15px',
-  marginTop: '12px',
-  border: 'none',
-  background: 'none',
-  fontWeight: 500,
-  fontSize: 12,
-  textTransform: 'none',
-  color: theme.palette.text.primary,
-  alignSelf: 'center',
+    if (location.search) {
+      if (
+        categories.length <= 0 &&
+        seasons.length <= 0 &&
+        categories.length <= 0 &&
+        Object.keys(filterParams).length <= 0
+      ) {
+        const paramsFromURL = new URLSearchParams(location.search);
+        const priceFrom = Number(paramsFromURL.get('price_from'));
+        const priceTo = Number(paramsFromURL.get('price_to'));
+        const categoriesFromParams = paramsFromURL.get('category');
+        const seasonsFromParams = paramsFromURL.get('season');
 
-  '&:hover': {
-    background: 'none',
-    filter: 'brightness(1.5)',
-    color: theme.palette.text.primary,
-  },
-}));
+        if (priceFrom && priceTo) {
+          dispatch(setMinPrice(priceFrom));
+          dispatch(setMaxPrice(priceTo));
+          dispatch(setPricesInFilterParams([priceFrom, priceTo]));
+        }
+        if (categoriesFromParams) {
+          dispatch(setAllCategories(categoriesFromParams.split(',')));
+          dispatch(setCategoriesInFilterParams(categoriesFromParams.split(',')));
+        }
+        if (seasonsFromParams) {
+          dispatch(setAllSeasons(seasonsFromParams.split(',')));
+          dispatch(setSeasonsInFilterParams(seasonsFromParams.split(',')));
+        }
+      }
+    }
+  }, [location.search]);
 
-const CatalogMainFilter = () => (
-  <FilterWrapper>
-    <Typography variant="h3">Filter</Typography>
+  useEffect(() => {
+    if (prices.length <= 0 && categories.length <= 0 && seasons.length <= 0 && Object.keys(filterParams).length > 0) {
+      window.location.assign(baseCatalogueURL);
+    }
 
-    <Grid container columnSpacing={5} sx={{ p: 0 }}>
-      <Grid spacing={4} item xs={12} tablet={6} laptop={12}>
-        <CatalogFilterPrice />
-        <CatalogFilterTourists />
+    if (prices.length > 0 || categories.length > 0 || seasons.length > 0) {
+      const newURLParams = new URLSearchParams();
+      if (prices.length > 0) {
+        newURLParams.set('price_from', prices[0]);
+        newURLParams.set('price_to', prices[1]);
+      }
+      if (categories.length > 0) {
+        newURLParams.set('category', categories);
+      }
+      if (seasons.length > 0) {
+        newURLParams.set('season', seasons);
+      }
+      const getNewURL = () => {
+        if (newURLParams.toString()) {
+          return new URL(`?${newURLParams}`, window.location);
+        }
+        return baseCatalogueURL;
+      };
+      const newURL = getNewURL();
+      if (window.location.href !== newURL.href) {
+        window.location.assign(newURL);
+      }
+    }
+
+    const filterTours = async () => {
+      const searchParams = new URLSearchParams();
+
+      if (prices.length > 0) {
+        const filterPrices = allPrices.filter((el) => el >= prices[0] && el <= prices[1]);
+        searchParams.set('currentPrice', filterPrices);
+      }
+
+      if (categories.length > 0) {
+        searchParams.set('categories', categories);
+      }
+
+      if (seasons.length > 0) {
+        searchParams.set('season', seasons.concat('all seasons'));
+      }
+
+      if (searchParams.toString()) {
+        await dispatch(fetchFilteredTours({ params: searchParams, page: currentPage }));
+      }
+    };
+
+    filterTours();
+  }, [categories, seasons, prices]);
+
+  return (
+    <FilterWrapper>
+      <Typography variant="h3">Filter</Typography>
+      <Grid container columnSpacing={5} sx={{ p: 0 }}>
+        <Grid spacing={4} item xs={12} tablet={6} laptop={12}>
+          <CatalogFilterPrice />
+          <CatalogFilterCategories />
+        </Grid>
+        <Grid item xs={12} tablet={6} laptop={12}>
+          <CatalogFilterSeason />
+        </Grid>
       </Grid>
-
-      <Grid item xs={12} tablet={6} laptop={12}>
-        <CatalogFilterRegion />
-      </Grid>
-    </Grid>
-
-    <ShowButton>Filter</ShowButton>
-    <ResetButton>Reset filter</ResetButton>
-  </FilterWrapper>
-);
+    </FilterWrapper>
+  );
+};
 
 export default CatalogMainFilter;
