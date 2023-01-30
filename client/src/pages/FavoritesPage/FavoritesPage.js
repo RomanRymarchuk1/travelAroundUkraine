@@ -23,7 +23,7 @@ const FavoritesPage = () => {
         <Grid container sx={{ mt: '60px', gap: '40px', p: 5, justifyContent: 'center' }}>
           {inFavorites.map(({ name, currentPrice, duration, description, imageUrls, _id, itemNo }, index) => (
             <CatalogTourCard
-              key={itemNo}
+              key={_id}
               id={_id}
               name={name}
               description={description}

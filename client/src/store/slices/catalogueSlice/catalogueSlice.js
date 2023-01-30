@@ -1,26 +1,51 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-param-reassign */
+/* eslint no-underscore-dangle: 0 */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axiosConfig from '../../../axiosConfig';
 
 export const fetchFavoriteProducts = createAsyncThunk(
   'products/fetchFavoriteProducts ',
   async (isLogin, { rejectWithValue }) => {
+    let favorites = JSON.parse(localStorage.getItem('inFavorites'));
     if (isLogin) {
       try {
         const { data } = await axiosConfig.get('/wishlist');
+        const missedItems = [];
+        favorites.forEach((item) => {
+          let flag = false;
+          data?.products.forEach((item2) => {
+            if (item._id === item2._id) {
+              return (flag = true);
+            }
+          });
+          return !flag && missedItems.push(item);
+        });
+        missedItems.forEach((el) =>
+          (async () => {
+            const { status } = await axiosConfig.put(`/wishlist/${el._id}`);
+            return status;
+          })()
+        );
         if (data === null) {
           const { status } = await axiosConfig.post('/wishlist');
+          const newWishList = [];
+          favorites && newWishList.push(...favorites);
           if (status >= 200 && status <= 300) {
-            return [];
+            localStorage.setItem('inFavorites', JSON.stringify(newWishList));
+            return newWishList;
           }
         }
-        return data.products;
+        data?.products.push(...favorites);
+        const uniqFavoritesArray = data.products.filter(
+          (element, index, array) => array.map((mapObj) => mapObj._id).indexOf(element._id) === index
+        );
+        localStorage.setItem('inFavorites', JSON.stringify(uniqFavoritesArray));
+        return uniqFavoritesArray;
       } catch (err) {
         return rejectWithValue(err);
       }
     } else {
-      let favorites = JSON.parse(localStorage.getItem('inFavorites'));
       favorites === null ? (favorites = []) : null;
       localStorage.setItem('inFavorites', JSON.stringify(favorites));
       return favorites;
@@ -58,6 +83,7 @@ export const addWishList = createAsyncThunk(
     if (isLogin) {
       try {
         const { data } = await axiosConfig.put(`/wishlist/${id}`);
+        localStorage.setItem('inFavorites', JSON.stringify(data.products));
         return data.products;
       } catch (err) {
         return rejectWithValue(err);
@@ -78,11 +104,13 @@ export const deleteFromWishList = createAsyncThunk(
       try {
         if (lastItem) {
           const { status } = await axiosConfig.delete('/wishlist');
+          localStorage.setItem('inFavorites', JSON.stringify([]));
           if (status >= 200 && status <= 300) {
             return [];
           }
         }
         const { data } = await axiosConfig.delete(`wishlist/${id}`);
+        localStorage.setItem('inFavorites', JSON.stringify(data.products));
         return data.products;
       } catch (err) {
         return rejectWithValue(err);
