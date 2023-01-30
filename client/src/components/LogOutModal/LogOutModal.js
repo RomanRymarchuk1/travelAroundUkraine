@@ -31,7 +31,6 @@ const LogOutModal = () => {
       onClose={closeModal}
       title="Confirm your actions"
       submitButtonText="Log Out"
-      success="true"
     >
       Are you sure you want to log out of your account?
     </AlertModal>
