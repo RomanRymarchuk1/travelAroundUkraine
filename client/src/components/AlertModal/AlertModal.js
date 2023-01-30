@@ -48,7 +48,7 @@ AlertModal.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   disableCancelButton: PropTypes.bool,
   submitButtonText: PropTypes.string,
-  success: PropTypes.string,
+  success: PropTypes.bool,
 };
 
 AlertModal.defaultProps = {
