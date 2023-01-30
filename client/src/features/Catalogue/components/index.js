@@ -3,7 +3,7 @@ import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
 import CatalogMainFilter from './CatalogMainFilter/CatalogMainFilter';
 import CatalogFilterPrice from './CatalogFilterPrice/CatalogFilterPrice';
 import CatalogFilterSeason from './CatalogFilterSeason/CatalogFilterSeason';
-import CatalogFilterDuration from './CatalogFilterDuration/CatalogFilterDuration';
+import CatalogFilterCategories from './CatalogFilterCategories/CatalogFilterCategories';
 import FilterAccordion from './FilterAccordion/FilterAccordion';
 import OutlinedToggleButton from './OutlinedToggleButton/OutlinedToggleButton';
 
@@ -13,7 +13,7 @@ export {
   CatalogMainFilter,
   CatalogFilterPrice,
   CatalogFilterSeason,
-  CatalogFilterDuration,
+  CatalogFilterCategories,
   FilterAccordion,
   OutlinedToggleButton,
 };
