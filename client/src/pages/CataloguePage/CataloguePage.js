@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { styled, Stack, Box, Container, Typography, Pagination } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import { styled, Stack, Box, Container, Typography, Pagination, Button } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
+import CloseIcon from '@mui/icons-material/Close';
 import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
 import {
   fetchCatalogueProducts,
@@ -21,20 +23,67 @@ const FilterContainer = styled((props) => <Grid item xs={12} {...props} />)(({ t
   },
 }));
 
+const ResetButton = styled((props) => (
+  <Button
+    variant="text"
+    startIcon={
+      <CloseIcon
+        sx={{
+          width: '14px',
+          height: '14px',
+          color: 'gray',
+        }}
+      />
+    }
+    {...props}
+  />
+))(({ theme }) => ({
+  padding: '7px 20px',
+  marginBottom: '12px',
+  border: '1px solid lightgrey',
+  background: 'none',
+  fontWeight: 500,
+  fontSize: 12,
+  textTransform: 'none',
+  color: theme.palette.text.primary,
+  alignSelf: 'center',
+
+  '&:hover': {
+    background: 'none',
+    filter: 'brightness(1.3)',
+    color: theme.palette.text.primary,
+  },
+}));
+
 // TO DO: fix the routing logic, all pagination pages routes has to be catalogue/page/pageNO
 
 const CataloguePage = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const products = useSelector((state) => state.catalogue.products, shallowEqual);
   const isLoading = useSelector((state) => state.catalogue.isLoading);
   const inFavorites = useSelector((state) => state.catalogue.favorites);
   const isLogin = useSelector((store) => store.user.isLogin);
-  const pages = useSelector((store) => store.catalogue.totalPages);
+  // const pages = useSelector((store) => store.catalogue.totalPages);
   const currentPage = useSelector((store) => store.catalogue.currentPage);
   const isFilter = useSelector((state) => state.filter.isFilter);
-  const filteredTours = useSelector((state) => state.filter.tours, shallowEqual);
+  const filteredTours = useSelector((state) => state.filter.tours);
   const countriesPerPage = 5;
-  const totalPages = Math.round(pages / countriesPerPage);
+
+  const currentItems = () => {
+    if (isFilter) {
+      return filteredTours;
+    }
+    return products;
+  };
+
+  const pages = () => {
+    if (isFilter) {
+      return useSelector((store) => store.filter.toursQty);
+    }
+    return useSelector((store) => store.catalogue.totalPages);
+  };
+  const totalPages = Math.ceil(pages() / countriesPerPage);
 
   useEffect(() => {
     dispatch(fetchCatalogueProducts(currentPage));
@@ -44,6 +93,11 @@ const CataloguePage = () => {
   useEffect(() => {
     dispatch(fetchFavoriteProducts(isLogin));
   }, [isLogin]);
+
+  const resetFilter = () => {
+    const baseCatalogueURL = new URL(location.pathname, window.location.origin);
+    window.location.assign(baseCatalogueURL);
+  };
 
   return (
     <>
@@ -55,42 +109,49 @@ const CataloguePage = () => {
               <FilterContainer>
                 <CatalogMainFilter />
               </FilterContainer>
+
               <Grid item xs={12} laptop sx={{ p: 0 }}>
-                {isFilter && filteredTours.length > 0 ? (
-                  <Typography variant="h2" sx={{ mb: '25px' }}>
-                    Results for your request
-                  </Typography>
-                ) : (
+                {!isFilter && (
                   <Typography variant="h2" sx={{ textTransform: 'uppercase', mb: '25px' }}>
                     Tours
                   </Typography>
                 )}
+
+                {isFilter && (
+                  <>
+                    {filteredTours.length > 0 ? (
+                      <Typography variant="h2" sx={{ mb: '12px' }}>
+                        Results for your request
+                      </Typography>
+                    ) : (
+                      <Typography variant="h2" sx={{ mb: '12px' }}>
+                        No results for your request
+                      </Typography>
+                    )}
+                    <ResetButton onClick={resetFilter}>reset filter</ResetButton>
+                  </>
+                )}
+
                 <Stack spacing={2}>
-                  {isFilter && filteredTours.length === 0 ? (
-                    <Typography variant="h2" sx={{ paddingTop: '400px', paddingBottom: '400px', textAlign: 'center' }}>
-                      No results for your request
-                    </Typography>
-                  ) : (
-                    products.map(
-                      ({ name, currentPrice, duration, description, imageUrls, _id: IdNo, itemNo }, index) => {
-                        const inFavorite = inFavorites.find(({ _id }) => _id === IdNo);
-                        return (
-                          <CatalogTourCard
-                            key={IdNo}
-                            name={name}
-                            description={description}
-                            currentPrice={currentPrice}
-                            duration={duration}
-                            imageUrls={imageUrls}
-                            itemNo={itemNo}
-                            id={IdNo}
-                            isFavorite={!!inFavorite}
-                            lastItem={inFavorites.length === 1 && true}
-                            product={products[index]}
-                          />
-                        );
-                      }
-                    )
+                  {currentItems().map(
+                    ({ name, currentPrice, duration, description, imageUrls, _id: IdNo, itemNo }, index) => {
+                      const inFavorite = inFavorites.find(({ _id }) => _id === IdNo);
+                      return (
+                        <CatalogTourCard
+                          key={IdNo}
+                          name={name}
+                          description={description}
+                          currentPrice={currentPrice}
+                          duration={duration}
+                          imageUrls={imageUrls}
+                          itemNo={itemNo}
+                          id={IdNo}
+                          isFavorite={!!inFavorite}
+                          lastItem={inFavorites.length === 1 && true}
+                          product={products[index]}
+                        />
+                      );
+                    }
                   )}
                 </Stack>
               </Grid>
