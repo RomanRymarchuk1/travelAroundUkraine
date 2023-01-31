@@ -15,6 +15,7 @@ const ItemBox = styled(Box)({
 const HeaderFilterItems = () => {
   const { data, error } = useSelector((store) => store.searchBar, shallowEqual);
 
+  //  TO DO ItemBox responsivness/adaptivness
   const searchBarList = data.map(({ imageUrls, name, currentPrice, season }) => (
     <MenuItem key={name}>
       <ItemBox>
@@ -38,7 +39,15 @@ const HeaderFilterItems = () => {
   );
 
   return (
-    <Paper sx={{ borderRadius: '5px', position: 'absolute', minWidth: '200px', padding: '20px' }}>
+    <Paper
+      sx={{
+        borderRadius: '5px',
+        position: 'absolute',
+        minWidth: '200px',
+        padding: '20px',
+        maxHeight: '60vh',
+      }}
+    >
       {data.length ? searchResults : null}
 
       {!data.length && !error && (
