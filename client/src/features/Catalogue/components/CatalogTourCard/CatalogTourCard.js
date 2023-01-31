@@ -77,9 +77,15 @@ const CatalogTourCard = ({
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <CardTitle>{name}</CardTitle>
           {isFavorite === false ? (
-            <FavoriteBorderSharpIcon onClick={() => dispatch(addWishList({ isLogin, product, id }))} />
+            <FavoriteBorderSharpIcon
+              sx={{ cursor: 'pointer' }}
+              onClick={() => dispatch(addWishList({ isLogin, product, id }))}
+            />
           ) : (
-            <FavoriteSharpIcon onClick={() => dispatch(deleteFromWishList({ isLogin, lastItem, id }))} />
+            <FavoriteSharpIcon
+              sx={{ cursor: 'pointer' }}
+              onClick={() => dispatch(deleteFromWishList({ isLogin, lastItem, id }))}
+            />
           )}
         </Box>
         <Stack direction="row" spacing={3} alignItems="center" sx={{ mb: '20px' }}>
