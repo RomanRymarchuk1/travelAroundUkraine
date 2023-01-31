@@ -1,5 +1,5 @@
 import CatalogTourCard from './CatalogTourCard/CatalogTourCard';
-import CatalogMainSection from './CatalogMainSection/CatalogMainSection';
+import CatalogHeroSection from './CatalogHeroSection/CatalogHeroSection';
 import CatalogMainFilter from './CatalogMainFilter/CatalogMainFilter';
 import CatalogFilterPrice from './CatalogFilterPrice/CatalogFilterPrice';
 import CatalogFilterSeason from './CatalogFilterSeason/CatalogFilterSeason';
@@ -9,7 +9,7 @@ import OutlinedToggleButton from './OutlinedToggleButton/OutlinedToggleButton';
 
 export {
   CatalogTourCard,
-  CatalogMainSection,
+  CatalogHeroSection,
   CatalogMainFilter,
   CatalogFilterPrice,
   CatalogFilterSeason,

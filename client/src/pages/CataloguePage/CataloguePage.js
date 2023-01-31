@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { styled, Stack, Box, Container, Typography, Pagination, Button } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import CloseIcon from '@mui/icons-material/Close';
-import { CatalogTourCard, CatalogMainSection, CatalogMainFilter } from '../../features/Catalogue/components';
+import { CatalogTourCard, CatalogHeroSection, CatalogMainFilter } from '../../features/Catalogue/components';
 import {
   fetchCatalogueProducts,
   setCurrentPage,
@@ -60,19 +60,14 @@ const ResetButton = styled((props) => (
 const CataloguePage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const products = useSelector((state) => state.catalogue.products, shallowEqual);
-  const isLoading = useSelector((state) => state.catalogue.isLoading);
-  const inFavorites = useSelector((state) => state.catalogue.favorites);
+  const { products, isLoading, favorites, currentPage } = useSelector((store) => store.catalogue, shallowEqual);
   const isLogin = useSelector((store) => store.user.isLogin);
-  // const pages = useSelector((store) => store.catalogue.totalPages);
-  const currentPage = useSelector((store) => store.catalogue.currentPage);
-  const isFilter = useSelector((state) => state.filter.isFilter);
-  const filteredTours = useSelector((state) => state.filter.tours);
+  const { isFilter, tours } = useSelector((state) => state.filter, shallowEqual);
   const countriesPerPage = 5;
 
   const currentItems = () => {
     if (isFilter) {
-      return filteredTours;
+      return tours;
     }
     return products;
   };
@@ -99,83 +94,101 @@ const CataloguePage = () => {
     window.location.assign(baseCatalogueURL);
   };
 
-  return (
-    <>
-      {!isLoading ? (
-        <Box sx={{ backgroundColor: '#EDEDED', paddingBottom: '150px' }}>
-          <CatalogMainSection />
-          <Container>
-            <Grid container sx={{ mt: '60px', gap: '40px' }}>
-              <FilterContainer>
-                <CatalogMainFilter />
-              </FilterContainer>
+  // JSX saved in constants
+  const loader = (
+    <Typography variant="h2" sx={{ paddingTop: '400px', paddingBottom: '400px', textAlign: 'center' }}>
+      Loading...
+    </Typography>
+  );
 
-              <Grid item xs={12} laptop sx={{ p: 0 }}>
-                {!isFilter && (
-                  <Typography variant="h2" sx={{ textTransform: 'uppercase', mb: '25px' }}>
-                    Tours
-                  </Typography>
-                )}
+  const paginationBox = (
+    <Box sx={{ display: 'flex', justifyContent: 'center', pt: '50px' }}>
+      <Pagination
+        count={totalPages}
+        color="primary"
+        page={Number(currentPage)}
+        onChange={(_, num) => {
+          dispatch(setCurrentPage(Number(num)));
+        }}
+      />
+    </Box>
+  );
 
-                {isFilter && (
-                  <>
-                    {filteredTours.length > 0 ? (
-                      <Typography variant="h2" sx={{ mb: '12px' }}>
-                        Results for your request
-                      </Typography>
-                    ) : (
-                      <Typography variant="h2" sx={{ mb: '12px' }}>
-                        No results for your request
-                      </Typography>
-                    )}
-                    <ResetButton onClick={resetFilter}>reset filter</ResetButton>
-                  </>
-                )}
+  const filter = (
+    <FilterContainer>
+      <CatalogMainFilter />
+    </FilterContainer>
+  );
 
-                <Stack spacing={2}>
-                  {currentItems().map(
-                    ({ name, currentPrice, duration, description, imageUrls, _id: IdNo, itemNo }, index) => {
-                      const inFavorite = inFavorites.find(({ _id }) => _id === IdNo);
-                      return (
-                        <CatalogTourCard
-                          key={IdNo}
-                          name={name}
-                          description={description}
-                          currentPrice={currentPrice}
-                          duration={duration}
-                          imageUrls={imageUrls}
-                          itemNo={itemNo}
-                          id={IdNo}
-                          isFavorite={!!inFavorite}
-                          lastItem={inFavorites.length === 1 && true}
-                          product={products[index]}
-                        />
-                      );
-                    }
-                  )}
-                </Stack>
-              </Grid>
-            </Grid>
-          </Container>
-          <Box sx={{ display: 'flex', justifyContent: 'center', pt: '50px' }}>
-            <Pagination
-              count={totalPages}
-              color="primary"
-              page={Number(currentPage)}
-              onChange={(_, num) => {
-                dispatch(setCurrentPage(Number(num)));
-              }}
-            />
-          </Box>
-        </Box>
-      ) : (
-        <Typography variant="h2" sx={{ paddingTop: '400px', paddingBottom: '400px', textAlign: 'center' }}>
-          Loading...
+  const cardStack = (
+    <Stack spacing={2}>
+      {currentItems().map(({ name, currentPrice, duration, description, imageUrls, _id: IdNo, itemNo }, index) => {
+        const inFavorite = favorites.find(({ _id }) => _id === IdNo);
+        return (
+          <CatalogTourCard
+            key={IdNo}
+            name={name}
+            description={description}
+            currentPrice={currentPrice}
+            duration={duration}
+            imageUrls={imageUrls}
+            itemNo={itemNo}
+            id={IdNo}
+            isFavorite={!!inFavorite}
+            lastItem={favorites.length === 1 && true}
+            product={products[index]}
+          />
+        );
+      })}
+    </Stack>
+  );
+
+  const mainSectionBody = (
+    <Grid item xs={12} laptop sx={{ p: 0 }}>
+      {!isFilter && (
+        <Typography variant="h2" sx={{ textTransform: 'uppercase', mb: '25px' }}>
+          Tours
         </Typography>
       )}
-      {}
-    </>
+
+      {isFilter && (
+        <>
+          {tours.length > 0 ? (
+            <Typography variant="h2" sx={{ mb: '12px' }}>
+              Results for your request
+            </Typography>
+          ) : (
+            <Typography variant="h2" sx={{ mb: '12px' }}>
+              No results for your request
+            </Typography>
+          )}
+          <ResetButton onClick={resetFilter}>reset filter</ResetButton>
+        </>
+      )}
+
+      {cardStack}
+    </Grid>
   );
+
+  const mainSectionContainer = (
+    <Container>
+      <Grid container sx={{ mt: '60px', gap: '40px' }}>
+        {filter}
+        {mainSectionBody}
+      </Grid>
+    </Container>
+  );
+
+  const pageContent = (
+    <Box sx={{ backgroundColor: '#EDEDED', paddingBottom: '150px' }}>
+      <CatalogHeroSection />
+
+      {mainSectionContainer}
+      {paginationBox}
+    </Box>
+  );
+
+  return <> {isLoading ? loader : pageContent}</>;
 };
 
 export default CataloguePage;
