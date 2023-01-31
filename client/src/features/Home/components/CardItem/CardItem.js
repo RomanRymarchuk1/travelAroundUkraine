@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Typography, Box, styled } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -111,4 +111,4 @@ CardItem.propTypes = {
   itemNo: PropTypes.string.isRequired,
 };
 
-export default CardItem;
+export default memo(CardItem);
