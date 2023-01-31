@@ -92,7 +92,7 @@ const CardContainer = () => {
           modules={[Navigation]}
           className="mySwiper"
         >
-          {popularProducts &&
+          {popularProducts.length &&
             popularProducts.map(({ name, region, _id, imageUrls, currentPrice, itemNo }) => (
               <SwiperSlide key={_id}>
                 <CardItem
