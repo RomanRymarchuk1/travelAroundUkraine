@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { styled, Typography, Stack } from '@mui/material';
@@ -146,4 +146,4 @@ const CatalogMainFilter = () => {
   );
 };
 
-export default CatalogMainFilter;
+export default memo(CatalogMainFilter);

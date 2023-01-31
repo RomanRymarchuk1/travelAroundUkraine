@@ -1,5 +1,5 @@
 /* eslint-disable arrow-body-style */
-import React from 'react';
+import React, { memo } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import { Box, Paper, MenuList, MenuItem, Typography, styled } from '@mui/material';
 
@@ -56,4 +56,4 @@ const HeaderFilterItems = () => {
   );
 };
 
-export default HeaderFilterItems;
+export default memo(HeaderFilterItems);

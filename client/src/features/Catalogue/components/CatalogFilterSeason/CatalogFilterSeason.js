@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Checkbox, FormControlLabel } from '@mui/material';
 import { FilterAccordion } from '..';
@@ -67,4 +67,4 @@ const CatalogFilterSeason = () => {
   );
 };
 
-export default CatalogFilterSeason;
+export default memo(CatalogFilterSeason);

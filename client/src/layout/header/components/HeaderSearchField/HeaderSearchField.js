@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable  react/prop-types */
-import React from 'react';
+import React, { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled, alpha, InputBase, ClickAwayListener } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -99,4 +99,4 @@ const HeaderSearchField = () => {
   );
 };
 
-export default HeaderSearchField;
+export default memo(HeaderSearchField);

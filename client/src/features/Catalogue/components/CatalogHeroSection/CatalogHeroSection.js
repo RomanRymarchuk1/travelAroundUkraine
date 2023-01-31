@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { styled, Box, Container, Typography } from '@mui/material';
 
 const MainSectionWrapper = styled(Box)(({ theme }) => ({
@@ -44,4 +44,4 @@ const CatalogHeroSection = () => (
   </MainSectionWrapper>
 );
 
-export default CatalogHeroSection;
+export default memo(CatalogHeroSection);
