@@ -76,13 +76,15 @@ const CardItemText = styled(Typography)(({ theme }) => ({
 
 const CardItem = ({ name, region, currentPrice, imageUrls, itemNo }) => {
   const navigate = useNavigate();
+  const url = imageUrls[0];
+  //   console.log(url);
 
   return (
     <CardItemWrapper
       onClick={() => navigate(`/tour/${+itemNo}`)}
       sx={{
         height: '400px',
-        backgroundImage: `url(${imageUrls[0]})`,
+        backgroundImage: `url(${url})`,
       }}
     >
       <CardItemPrice>{currentPrice} $</CardItemPrice>

@@ -179,4 +179,4 @@ TourInfoDialog.defaultProps = {
   itemNo: '',
 };
 
-export default memo;
+export default memo(TourInfoDialog);
