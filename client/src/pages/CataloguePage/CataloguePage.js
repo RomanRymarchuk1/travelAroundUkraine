@@ -87,6 +87,7 @@ const CataloguePage = () => {
 
   useEffect(() => {
     dispatch(fetchCatalogueProducts(currentPage));
+    scrollToTop();
   }, [currentPage]);
 
   useEffect(() => {
@@ -94,9 +95,9 @@ const CataloguePage = () => {
   }, [isLogin]);
 
   const resetFilter = () => {
-    const baseCatalogueURL = new URL(location.pathname, window.location.origin)
-    window.location.assign(baseCatalogueURL)
-  }
+    const baseCatalogueURL = new URL(location.pathname, window.location.origin);
+    window.location.assign(baseCatalogueURL);
+  };
 
   return (
     <>
@@ -133,41 +134,38 @@ const CataloguePage = () => {
 
                 <Stack spacing={2}>
                   {currentItems().map(
-                      ({ name, currentPrice, duration, description, imageUrls, _id: IdNo, itemNo }, index) => {
-                        const inFavorite = inFavorites.find(({ _id }) => _id === IdNo);
-                        return (
-                          <CatalogTourCard
-                            key={IdNo}
-                            name={name}
-                            description={description}
-                            currentPrice={currentPrice}
-                            duration={duration}
-                            imageUrls={imageUrls}
-                            itemNo={itemNo}
-                            id={IdNo}
-                            isFavorite={!!inFavorite}
-                            lastItem={inFavorites.length === 1 && true}
-                            product={products[index]}
-                          />
-                        );
-                      }
-                    )}
+                    ({ name, currentPrice, duration, description, imageUrls, _id: IdNo, itemNo }, index) => {
+                      const inFavorite = inFavorites.find(({ _id }) => _id === IdNo);
+                      return (
+                        <CatalogTourCard
+                          key={IdNo}
+                          name={name}
+                          description={description}
+                          currentPrice={currentPrice}
+                          duration={duration}
+                          imageUrls={imageUrls}
+                          itemNo={itemNo}
+                          id={IdNo}
+                          isFavorite={!!inFavorite}
+                          lastItem={inFavorites.length === 1 && true}
+                          product={products[index]}
+                        />
+                      );
+                    }
+                  )}
                 </Stack>
               </Grid>
             </Grid>
           </Container>
           <Box sx={{ display: 'flex', justifyContent: 'center', pt: '50px' }}>
-            {totalPages <= 1 ? null : (
-              <Pagination
-                count={totalPages}
-                color="primary"
-                page={Number(currentPage)}
-                onClick={(e) => {
-                  dispatch(setCurrentPage(Number(e.target.closest('button').textContent)));
-                  scrollToTop();
-                }}
-              />
-            )}
+            <Pagination
+              count={totalPages}
+              color="primary"
+              page={Number(currentPage)}
+              onChange={(_, num) => {
+                dispatch(setCurrentPage(Number(num)));
+              }}
+            />
           </Box>
         </Box>
       ) : (
