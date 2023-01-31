@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
@@ -92,7 +92,7 @@ const CardContainer = () => {
           modules={[Navigation]}
           className="mySwiper"
         >
-          {popularProducts &&
+          {popularProducts.length &&
             popularProducts.map(({ name, region, _id, imageUrls, currentPrice, itemNo }) => (
               <SwiperSlide key={_id}>
                 <CardItem
@@ -111,4 +111,4 @@ const CardContainer = () => {
   );
 };
 
-export default CardContainer;
+export default memo(CardContainer);

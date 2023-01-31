@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,8 +15,11 @@ import currencySymbols from '../../../data/currencySymbols';
 const TotalInfoDialog = ({ cart }) => {
   const navigate = useNavigate();
   const [currency, setCurrency] = useState('eur');
+  let toursPriceAndQuantity;
 
-  const { toursPrice, toursQuantity } = calcToursQuantityAndPrice(cart);
+  if (cart.length) {
+    toursPriceAndQuantity = calcToursQuantityAndPrice(cart);
+  }
 
   const onCurrencyChange = (e) => {
     setCurrency(e.target.value);
@@ -28,7 +31,7 @@ const TotalInfoDialog = ({ cart }) => {
         <Title>Total</Title>
         <Stack direction="row" justifyContent="space-between">
           <Typography>Tours amount:</Typography>
-          <Typography>{toursQuantity}</Typography>
+          <Typography>{toursPriceAndQuantity?.toursQuantity}</Typography>
         </Stack>
       </Section>
 
@@ -48,7 +51,7 @@ const TotalInfoDialog = ({ cart }) => {
           <Typography>To be paid:</Typography>
           <Typography fontSize={18}>
             {currencySymbols[currency]}
-            {currencyConverter(toursPrice, currency)}
+            {currencyConverter(toursPriceAndQuantity?.toursPrice, currency)}
           </Typography>
         </Stack>
       </Section>
@@ -72,4 +75,4 @@ TotalInfoDialog.defaultProps = {
   cart: [],
 };
 
-export default TotalInfoDialog;
+export default memo(TotalInfoDialog);

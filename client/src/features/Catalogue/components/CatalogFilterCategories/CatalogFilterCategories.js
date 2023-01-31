@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import { FilterAccordion, OutlinedToggleButton } from '..';
 
@@ -16,4 +16,4 @@ const CatalogFilterCategories = () => (
   </FilterAccordion>
 );
 
-export default CatalogFilterCategories;
+export default memo(CatalogFilterCategories);

@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import PropTypes from 'prop-types';
 
 // MUI
@@ -179,4 +179,4 @@ TourInfoDialog.defaultProps = {
   itemNo: '',
 };
 
-export default TourInfoDialog;
+export default memo(TourInfoDialog);

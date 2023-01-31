@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { styled, alpha, Box, Slider, InputBase, Button } from '@mui/material';
 import { FilterAccordion } from '..';
@@ -158,4 +158,4 @@ const CatalogFilterPrice = () => {
   );
 };
 
-export default CatalogFilterPrice;
+export default memo(CatalogFilterPrice);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import Grid from '@mui/material/Unstable_Grid2';
 import { FilterAccordion, OutlinedToggleButton } from '..';
@@ -41,4 +41,4 @@ const CatalogFilterDuration = () => {
   );
 };
 
-export default CatalogFilterDuration;
+export default memo(CatalogFilterDuration);
