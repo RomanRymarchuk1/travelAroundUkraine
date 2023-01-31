@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { styled, alpha, ToggleButton } from '@mui/material';
@@ -64,4 +64,4 @@ OutlinedToggleButton.defaultProps = {
   value: '',
 };
 
-export default OutlinedToggleButton;
+export default memo(OutlinedToggleButton);

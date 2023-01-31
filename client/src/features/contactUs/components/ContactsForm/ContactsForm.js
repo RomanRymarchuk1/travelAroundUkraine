@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Button, styled, Typography } from '@mui/material';
 import { TextField } from 'formik-mui';
 import { Formik, Form, Field } from 'formik';
@@ -75,4 +75,4 @@ const ContactsForm = () => {
   );
 };
 
-export default ContactsForm;
+export default memo(ContactsForm);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
@@ -72,4 +72,4 @@ TotalInfoDialog.defaultProps = {
   cart: [],
 };
 
-export default TotalInfoDialog;
+export default memo(TotalInfoDialog);

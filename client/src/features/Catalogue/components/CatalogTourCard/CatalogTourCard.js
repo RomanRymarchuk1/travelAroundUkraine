@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import { styled, Stack, CardActions, CardMedia, Button, Typography, CardContent, Box } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PropTypes from 'prop-types';
@@ -123,4 +123,4 @@ CatalogTourCard.defaultProps = {
   lastItem: false,
 };
 
-export default CatalogTourCard;
+export default memo(CatalogTourCard);
