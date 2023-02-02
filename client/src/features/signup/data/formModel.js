@@ -39,7 +39,9 @@ export default {
 
   telephone: {
     name: 'telephone',
-    label: 'Phone',
+    label: 'Phone +380123456789',
+    requiredErrorMsg: 'Phone is required',
+    invalidErrorMsg: 'Phone number is invalid, please enter a Ukranian phone number',
   },
 
   birthdate: {
