@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosConfig = axios.create({
-    baseURL: 'https://travelaroundukraine-production-0c05.up.railway.app',
+    baseURL: 'https://travelaroundukraine-production-5098.up.railway.app',
 });
 
 axiosConfig.interceptors.request.use(
